@@ -1,7 +1,7 @@
 # Phase 1.3 Final Report: Legacy Parity Regression Baseline
 
 **Date:** 2026-08-26  
-**Commit:** ce7d30d (baseline) → to be determined  
+**Commit:** ce7d30d (baseline) → 0aefebd  
 **Status:** COMPLETE
 
 ---
@@ -20,7 +20,7 @@
 | Mypy | clean |
 | Protobuf | generated |
 | Endpoint classifications | 27 |
-| Legacy SHA-256 manifest | 145 files |
+| Legacy SHA-256 manifest | 9 fixture files (from LEGACY_SOURCE_SHA256.txt: 145 total project files) |
 
 ## 2. Legacy Route Inventory
 
@@ -174,7 +174,7 @@
 | SCHEMA_SYNTHETIC | 11 |
 | ROUTE_SMOKE/STATUS_ONLY | reduced |
 | MOCK_DOMINATED | 9 |
-| REAL_DATABASE_REQUIRED | 21 (skipped) |
+| REAL_DATABASE_REQUIRED | 22 (skipped) |
 | REAL_CAPTURE_REQUIRED | 0 |
 
 ## 14. Coverage by Active Scope
@@ -336,7 +336,7 @@ git log --oneline -5
 
 ## 26. Git Commit
 
-**To be determined** — Commit message:
+**Commit:** 0aefebd — Commit message:
 
 ```
 test: establish legacy parity regression baseline

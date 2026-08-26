@@ -49,6 +49,7 @@ markers = [
     "api: API endpoint tests",
     "protocol: Protocol codec tests",
     "integration: Integration tests requiring database",
+    "db: Database integration tests (require TEST_DATABASE_URL)",
     "synthetic: Tests using synthetic fixtures (not real captures)",
     "legacy_reference: Tests based on legacy JavaScript behavior",
     "legacy_regression: TRUE legacy regression tests with fixture evidence",
