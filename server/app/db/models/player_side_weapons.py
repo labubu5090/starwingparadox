@@ -1,6 +1,6 @@
 """Player side weapon model."""
 
-from sqlalchemy import Integer, UniqueConstraint
+from sqlalchemy import Integer, UniqueConstraint, text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -13,6 +13,6 @@ class PlayerSideWeapon(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     player_id: Mapped[int] = mapped_column(Integer)
     side_weapon_id: Mapped[int] = mapped_column(Integer)
-    use_count: Mapped[int] = mapped_column(Integer, default=0)
-    use_time: Mapped[int] = mapped_column(Integer, default=0)
-    status: Mapped[int] = mapped_column(Integer, default=0)
+    use_count: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    use_time: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    status: Mapped[int] = mapped_column(Integer, server_default=text("0"))

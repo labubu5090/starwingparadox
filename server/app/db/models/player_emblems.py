@@ -1,6 +1,6 @@
 """Player emblem model."""
 
-from sqlalchemy import Boolean, Integer, UniqueConstraint
+from sqlalchemy import Boolean, Integer, UniqueConstraint, text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -14,35 +14,26 @@ class PlayerEmblem(Base):
     player_id: Mapped[int] = mapped_column(Integer)
     emblem_id: Mapped[int] = mapped_column(Integer)
 
-    outline_type: Mapped[int] = mapped_column(Integer, default=0)
-    outline_color_r: Mapped[int] = mapped_column(Integer, default=0)
-    outline_color_g: Mapped[int] = mapped_column(Integer, default=0)
-    outline_color_b: Mapped[int] = mapped_column(Integer, default=0)
-    outline_color_a: Mapped[int] = mapped_column(Integer, default=0)
-    outline_size: Mapped[int] = mapped_column(Integer, default=0)
-    outline_rot: Mapped[int] = mapped_column(Integer, default=0)
-    outline_pos_x: Mapped[int] = mapped_column(Integer, default=0)
-    outline_pos_y: Mapped[int] = mapped_column(Integer, default=0)
+    outline_part_id: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    outline_offset_x: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    outline_offset_y: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    outline_scale_x: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    outline_scale_y: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    outline_angle: Mapped[int] = mapped_column(Integer, server_default=text("0"))
 
-    main_design_type: Mapped[int] = mapped_column(Integer, default=0)
-    main_design_color_r: Mapped[int] = mapped_column(Integer, default=0)
-    main_design_color_g: Mapped[int] = mapped_column(Integer, default=0)
-    main_design_color_b: Mapped[int] = mapped_column(Integer, default=0)
-    main_design_color_a: Mapped[int] = mapped_column(Integer, default=0)
-    main_design_size: Mapped[int] = mapped_column(Integer, default=0)
-    main_design_rot: Mapped[int] = mapped_column(Integer, default=0)
-    main_design_pos_x: Mapped[int] = mapped_column(Integer, default=0)
-    main_design_pos_y: Mapped[int] = mapped_column(Integer, default=0)
+    main_design_part_id: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    main_design_offset_x: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    main_design_offset_y: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    main_design_scale_x: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    main_design_scale_y: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    main_design_angle: Mapped[int] = mapped_column(Integer, server_default=text("0"))
 
-    sub_design_type: Mapped[int] = mapped_column(Integer, default=0)
-    sub_design_color_r: Mapped[int] = mapped_column(Integer, default=0)
-    sub_design_color_g: Mapped[int] = mapped_column(Integer, default=0)
-    sub_design_color_b: Mapped[int] = mapped_column(Integer, default=0)
-    sub_design_color_a: Mapped[int] = mapped_column(Integer, default=0)
-    sub_design_size: Mapped[int] = mapped_column(Integer, default=0)
-    sub_design_rot: Mapped[int] = mapped_column(Integer, default=0)
-    sub_design_pos_x: Mapped[int] = mapped_column(Integer, default=0)
-    sub_design_pos_y: Mapped[int] = mapped_column(Integer, default=0)
+    sub_design_part_id: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    sub_design_offset_x: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    sub_design_offset_y: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    sub_design_scale_x: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    sub_design_scale_y: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    sub_design_angle: Mapped[int] = mapped_column(Integer, server_default=text("0"))
 
-    status: Mapped[int] = mapped_column(Integer, default=0)
-    editable: Mapped[bool] = mapped_column(Boolean, default=False)
+    status: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    editable: Mapped[bool] = mapped_column(Boolean, server_default=text("0"))

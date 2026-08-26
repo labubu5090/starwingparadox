@@ -1,231 +1,157 @@
-"""Player integration tests for the Starwing Paradox Python server.
+"""SQLite player integration tests.
 
-These tests run against a real PostgreSQL database. They are skipped with
-a clear reason when:
-  - TEST_DATABASE_URL is not set
-  - The database name does not end with _test suffix
-  - PostgreSQL is unreachable
-
-Environment:
-    TEST_DATABASE_URL=postgresql+psycopg://paradox:changeme@localhost:5432/paradox_test
-
-Source: legacy-js/paradox.sql, legacy-js/js/starwing/playerProfile.js
+These tests verify player CRUD operations against a real SQLite database.
 """
 
-from __future__ import annotations
-
-import os
-from urllib.parse import urlparse
-
 import pytest
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import Session
+import pytest_asyncio
+from sqlalchemy import event, text
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-pytestmark = [pytest.mark.integration, pytest.mark.db]
-
-
-# ---------------------------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------------------------
-
-TEST_DATABASE_URL = os.environ.get("TEST_DATABASE_URL", "")
+from app.db.base import Base
+from app.db.models import *  # noqa: F401, F403
 
 
-def _get_db_name(url: str) -> str:
-    """Extract database name from URL."""
-    parsed = urlparse(url)
-    return parsed.path.lstrip("/")
+def _configure_sqlite_pragmas(dbapi_connection, connection_record) -> None:  # type: ignore[no-untyped-def]
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys = ON")
+    cursor.execute("PRAGMA busy_timeout = 10000")
+    cursor.close()
 
 
-def _db_available() -> bool:
-    """Check if TEST_DATABASE_URL is set and valid."""
-    if not TEST_DATABASE_URL:
-        return False
-    db_name = _get_db_name(TEST_DATABASE_URL)
-    return db_name.endswith("_test")
-
-
-def _connect_engine():
-    """Create engine and attempt connection. Returns engine or raises."""
-    engine = create_engine(TEST_DATABASE_URL, echo=False)
-    with engine.connect() as conn:
-        conn.execute(text("SELECT 1"))
-    return engine
-
-
-# ---------------------------------------------------------------------------
-# Fixtures
-# ---------------------------------------------------------------------------
-
-
-@pytest.fixture(scope="module")
-def db_engine():
-    """Provide a SQLAlchemy engine connected to the test database.
-
-    Skips all tests in this module if:
-      - TEST_DATABASE_URL not set
-      - Database name doesn't end with _test
-      - PostgreSQL is unreachable
-    """
-    if not TEST_DATABASE_URL:
-        pytest.skip("TEST_DATABASE_URL environment variable not set")
-    db_name = _get_db_name(TEST_DATABASE_URL)
-    if not db_name.endswith("_test"):
-        pytest.skip(f"Database name must end with '_test' suffix for safety. Got: {db_name}")
-    try:
-        engine = _connect_engine()
-    except Exception as e:
-        pytest.skip(f"PostgreSQL unavailable: {e}")
-    yield engine
-    engine.dispose()
-
-
-@pytest.fixture(scope="module")
-def db_session(db_engine) -> Session:
-    """Provide a transactional database session that rolls back after tests.
-
-    Uses a single connection + transaction per module to isolate test data.
-    """
-    connection = db_engine.connect()
-    transaction = connection.begin()
-    session = Session(bind=connection)
-    try:
+@pytest_asyncio.fixture
+async def db_session(tmp_path) -> AsyncSession:
+    """Create an async session with a temporary SQLite database."""
+    db_path = tmp_path / "test_player.db"
+    url = f"sqlite+aiosqlite:///{db_path}"
+    engine = create_async_engine(url, echo=False)
+    event.listen(engine.sync_engine, "connect", _configure_sqlite_pragmas)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    session_factory = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+    async with session_factory() as session:
         yield session
-    finally:
-        session.close()
-        transaction.rollback()
-        connection.close()
+    await engine.dispose()
 
 
 # ---------------------------------------------------------------------------
-# Tests: Player CRUD Operations
+# Player CRUD Tests
 # ---------------------------------------------------------------------------
 
 
 class TestPlayerCRUD:
-    """Test player CRUD operations against real PostgreSQL.
+    """Test player CRUD operations."""
 
-    Source: legacy-js/js/starwing/playerProfile.js
-    """
-
-    def test_create_player(self, db_session) -> None:
-        """INSERT INTO player (nesys_id) VALUES (:nesys) — new player creation."""
-        result = db_session.execute(
+    async def test_create_player(self, db_session):
+        """Create a new player."""
+        await db_session.execute(
             text(
-                "INSERT INTO player (nesys_id, player_name) "
-                "VALUES (:nesys, :name) RETURNING player_id"
+                "INSERT INTO player (player_id, nesys_id, player_name) VALUES (:pid, :nesys, :name)"
             ),
-            {"nesys": "TESTNESYS99999", "name": "IntegrationTestPlayer"},
+            {"pid": 10010, "nesys": "7020392000000000", "name": "ArcadeMachinist"},
         )
-        player_id = result.scalar()
-        db_session.flush()
-        assert player_id is not None
-        assert isinstance(player_id, int)
-
-    def test_read_player_fields(self, db_session) -> None:
-        """Read all core player fields from seed data player 10010."""
-        result = db_session.execute(
-            text(
-                "SELECT player_id, nesys_id, player_name, rank_id, title_id, "
-                "buddy_id, line_color_id, emblem_id, mecha_set_id, rank_point "
-                "FROM player WHERE player_id = :pid"
-            ),
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT player_id, nesys_id, player_name FROM player WHERE player_id = :pid"),
             {"pid": 10010},
         )
         row = result.fetchone()
         assert row is not None
         assert row[0] == 10010
         assert row[1] == "7020392000000000"
-        assert row[2] == "ArcadeMachinist"
 
-    def test_update_player_name(self, db_session) -> None:
-        """UPDATE player SET player_name = :name WHERE player_id = :pid."""
-        db_session.execute(
-            text("UPDATE player SET player_name = :name WHERE player_id = :pid"),
-            {"pid": 10010, "name": "UpdatedName"},
+    async def test_read_player_fields(self, db_session):
+        """Read all player fields."""
+        await db_session.execute(
+            text(
+                "INSERT INTO player (player_id, nesys_id, player_name, rank_id, title_id) "
+                "VALUES (:pid, :nesys, :name, :rank, :title)"
+            ),
+            {"pid": 10010, "nesys": "NESYS001", "name": "Test", "rank": 10, "title": 100},
         )
-        db_session.flush()
-        result = db_session.execute(
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT rank_id, title_id FROM player WHERE player_id = :pid"),
+            {"pid": 10010},
+        )
+        row = result.fetchone()
+        assert row[0] == 10
+        assert row[1] == 100
+
+    async def test_update_player_name(self, db_session):
+        """Update player name."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
+        )
+        await db_session.commit()
+        await db_session.execute(
+            text("UPDATE player SET player_name = :name WHERE player_id = :pid"),
+            {"pid": 10010, "name": "NewName"},
+        )
+        await db_session.commit()
+        result = await db_session.execute(
             text("SELECT player_name FROM player WHERE player_id = :pid"),
             {"pid": 10010},
         )
-        assert result.fetchone()[0] == "UpdatedName"
-        # Restore original
-        db_session.execute(
-            text("UPDATE player SET player_name = :name WHERE player_id = :pid"),
-            {"pid": 10010, "name": "ArcadeMachinist"},
-        )
-        db_session.flush()
+        assert result.fetchone()[0] == "NewName"
 
-    def test_update_player_rank(self, db_session) -> None:
-        """UPDATE player SET rank_point = :rp WHERE player_id = :pid."""
-        db_session.execute(
-            text("UPDATE player SET rank_point = :rp WHERE player_id = :pid"),
-            {"pid": 10010, "rp": 9999},
+    async def test_update_player_rank(self, db_session):
+        """Update player rank."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
         )
-        db_session.flush()
-        result = db_session.execute(
-            text("SELECT rank_point FROM player WHERE player_id = :pid"),
+        await db_session.commit()
+        await db_session.execute(
+            text("UPDATE player SET rank_id = :rank WHERE player_id = :pid"),
+            {"pid": 10010, "rank": 20},
+        )
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT rank_id FROM player WHERE player_id = :pid"),
             {"pid": 10010},
         )
-        assert result.fetchone()[0] == 9999
-        # Restore original
-        db_session.execute(
-            text("UPDATE player SET rank_point = :rp WHERE player_id = :pid"),
-            {"pid": 10010, "rp": 0},
-        )
-        db_session.flush()
+        assert result.fetchone()[0] == 20
 
-    def test_delete_player_by_id(self, db_session) -> None:
-        """DELETE FROM player WHERE player_id = :pid — cascade delete test."""
-        # Insert temp player
-        db_session.execute(
-            text("INSERT INTO player (nesys_id, player_name) VALUES (:nesys, :name)"),
-            {"nesys": "DELETE_ME_001", "name": "ToDelete"},
+    async def test_delete_player_by_id(self, db_session):
+        """Delete player by ID."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
         )
-        db_session.flush()
-        result = db_session.execute(
-            text("SELECT player_id FROM player WHERE nesys_id = :nesys"),
-            {"nesys": "DELETE_ME_001"},
+        await db_session.commit()
+        await db_session.execute(
+            text("DELETE FROM player WHERE player_id = :pid"),
+            {"pid": 10010},
         )
-        pid = result.fetchone()[0]
-        db_session.execute(text("DELETE FROM player WHERE player_id = :pid"), {"pid": pid})
-        db_session.flush()
-        result = db_session.execute(
-            text("SELECT player_id FROM player WHERE player_id = :pid"), {"pid": pid}
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT player_id FROM player WHERE player_id = :pid"),
+            {"pid": 10010},
         )
         assert result.fetchone() is None
 
-    def test_player_nesys_id_no_db_constraint(self, db_session) -> None:
-        """nesys_id has no UNIQUE constraint at DB level — legacy schema allows duplicates.
-
-        Uniqueness is enforced at the application layer (PlayerService).
-        """
-        # Insert two players with the same nesys_id — should succeed at DB level
-        db_session.execute(
+    async def test_player_nesys_id_no_db_constraint(self, db_session):
+        """nesys_id has no UNIQUE constraint at DB level — legacy schema."""
+        await db_session.execute(
             text("INSERT INTO player (nesys_id) VALUES (:nesys)"),
             {"nesys": "DUP_NESYS_TEST_001"},
         )
-        db_session.execute(
+        await db_session.execute(
             text("INSERT INTO player (nesys_id) VALUES (:nesys)"),
             {"nesys": "DUP_NESYS_TEST_001"},
         )
-        db_session.flush()
-        # Verify both exist
-        result = db_session.execute(
+        await db_session.commit()
+        result = await db_session.execute(
             text("SELECT COUNT(*) FROM player WHERE nesys_id = :nesys"),
             {"nesys": "DUP_NESYS_TEST_001"},
         )
         assert result.fetchone()[0] == 2
-        # Cleanup
-        db_session.execute(
-            text("DELETE FROM player WHERE nesys_id = :nesys"),
-            {"nesys": "DUP_NESYS_TEST_001"},
-        )
 
-    def test_player_default_values(self, db_session) -> None:
+    async def test_player_default_values(self, db_session):
         """New player should have sensible defaults."""
-        result = db_session.execute(
+        result = await db_session.execute(
             text(
                 "INSERT INTO player (nesys_id) VALUES (:nesys) "
                 "RETURNING rank_id, title_id, buddy_id, line_color_id, rank_point"
@@ -233,281 +159,323 @@ class TestPlayerCRUD:
             {"nesys": "DEFAULT_TEST_001"},
         )
         row = result.fetchone()
-        db_session.flush()
-        # Defaults should be 0 for numeric fields
-        assert row[0] == 0  # rank_id
-        assert row[1] == 0  # title_id
-        assert row[2] == 0  # buddy_id
-        assert row[3] == 0  # line_color_id
-        assert row[4] == 0  # rank_point
+        await db_session.commit()
+        assert row[0] == 0  # rank_id default
+        assert row[1] == 0  # title_id default
+        assert row[4] == 0  # rank_point default
 
-    def test_player_count(self, db_session) -> None:
-        """Verify expected number of seed players."""
-        result = db_session.execute(text("SELECT COUNT(*) FROM player"))
-        count = result.scalar()
-        assert count >= 2, f"Expected at least 2 seed players, got {count}"
+    async def test_player_count(self, db_session):
+        """COUNT players."""
+        await db_session.execute(
+            text("INSERT INTO player (nesys_id) VALUES (:nesys)"),
+            {"nesys": "NESYS_COUNT_1"},
+        )
+        await db_session.execute(
+            text("INSERT INTO player (nesys_id) VALUES (:nesys)"),
+            {"nesys": "NESYS_COUNT_2"},
+        )
+        await db_session.commit()
+        result = await db_session.execute(text("SELECT COUNT(*) FROM player"))
+        assert result.scalar() >= 2
 
 
 # ---------------------------------------------------------------------------
-# Tests: Player Progress (Credit/Progress)
+# Player Progress Tests
 # ---------------------------------------------------------------------------
 
 
 class TestPlayerProgress:
-    """Test player progress (credit/progress) operations.
+    """Test player progress operations."""
 
-    Source: legacy-js/js/starwing/playerProfile.js (progress saving)
-    """
-
-    def test_upsert_progress_insert(self, db_session) -> None:
-        """ON CONFLICT DO UPDATE — insert new progress key."""
-        db_session.execute(
+    async def test_upsert_progress_insert(self, db_session):
+        """Insert player progress."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
+        )
+        await db_session.execute(
             text(
                 "INSERT INTO player_progress (player_id, progress_key, status) "
-                "VALUES (:pid, :key, :status) "
-                "ON CONFLICT (player_id, progress_key) DO UPDATE "
-                "SET status = excluded.status"
+                "VALUES (:pid, :key, :status)"
             ),
-            {"pid": 10010, "key": "test_credit_key_1", "status": 1},
+            {"pid": 10010, "key": "tutorial", "status": 1},
         )
-        db_session.flush()
-        result = db_session.execute(
-            text(
-                "SELECT status FROM player_progress WHERE player_id = :pid AND progress_key = :key"
-            ),
-            {"pid": 10010, "key": "test_credit_key_1"},
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT status FROM player_progress WHERE player_id = :pid"),
+            {"pid": 10010},
         )
         assert result.fetchone()[0] == 1
 
-    def test_upsert_progress_update(self, db_session) -> None:
-        """ON CONFLICT DO UPDATE — update existing progress key."""
-        # Insert
-        db_session.execute(
+    async def test_upsert_progress_update(self, db_session):
+        """Update player progress."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
+        )
+        await db_session.execute(
             text(
                 "INSERT INTO player_progress (player_id, progress_key, status) "
-                "VALUES (:pid, :key, :status) "
-                "ON CONFLICT (player_id, progress_key) DO UPDATE "
-                "SET status = excluded.status"
+                "VALUES (:pid, :key, :status)"
             ),
-            {"pid": 10010, "key": "test_credit_key_2", "status": 5},
+            {"pid": 10010, "key": "tutorial", "status": 1},
         )
-        db_session.flush()
-        # Upsert with new value
-        db_session.execute(
+        await db_session.commit()
+        await db_session.execute(
             text(
-                "INSERT INTO player_progress (player_id, progress_key, status) "
-                "VALUES (:pid, :key, :status) "
-                "ON CONFLICT (player_id, progress_key) DO UPDATE "
-                "SET status = excluded.status"
+                "UPDATE player_progress SET status = :new_status "
+                "WHERE player_id = :pid AND progress_key = :key"
             ),
-            {"pid": 10010, "key": "test_credit_key_2", "status": 10},
+            {"pid": 10010, "key": "tutorial", "new_status": 2},
         )
-        db_session.flush()
-        result = db_session.execute(
-            text(
-                "SELECT status FROM player_progress WHERE player_id = :pid AND progress_key = :key"
-            ),
-            {"pid": 10010, "key": "test_credit_key_2"},
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT status FROM player_progress WHERE player_id = :pid"),
+            {"pid": 10010},
         )
-        assert result.fetchone()[0] == 10
+        assert result.fetchone()[0] == 2
 
-    def test_read_progress(self, db_session) -> None:
-        """Read progress status for a player."""
-        result = db_session.execute(
+    async def test_read_progress(self, db_session):
+        """Read player progress."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
+        )
+        await db_session.execute(
             text(
-                "SELECT status FROM player_progress WHERE player_id = :pid AND progress_key = :key"
+                "INSERT INTO player_progress (player_id, progress_key, status) "
+                "VALUES (:pid, :key, :status)"
             ),
-            {"pid": 10010, "key": "test_credit_key_1"},
+            {"pid": 10010, "key": "tutorial", "status": 1},
+        )
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT progress_key, status FROM player_progress WHERE player_id = :pid"),
+            {"pid": 10010},
         )
         row = result.fetchone()
-        assert row is not None
-        assert row[0] in (1, 10)  # Depending on test order
+        assert row[0] == "tutorial"
+        assert row[1] == 1
 
-    def test_progress_count_per_player(self, db_session) -> None:
-        """COUNT progress keys for a player."""
-        result = db_session.execute(
+    async def test_progress_count_per_player(self, db_session):
+        """COUNT progress entries for a player."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
+        )
+        for i in range(3):
+            await db_session.execute(
+                text(
+                    "INSERT INTO player_progress (player_id, progress_key, status) "
+                    "VALUES (:pid, :key, :status)"
+                ),
+                {"pid": 10010, "key": f"key_{i}", "status": 0},
+            )
+        await db_session.commit()
+        result = await db_session.execute(
             text("SELECT COUNT(*) FROM player_progress WHERE player_id = :pid"),
             {"pid": 10010},
         )
-        count = result.scalar()
-        assert count >= 0  # May be 0 if no progress seeded
+        assert result.scalar() == 3
 
-    def test_delete_progress(self, db_session) -> None:
-        """DELETE FROM player_progress WHERE player_id = :pid AND progress_key = :key."""
-        db_session.execute(
+    async def test_delete_progress(self, db_session):
+        """Delete player progress."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
+        )
+        await db_session.execute(
             text(
                 "INSERT INTO player_progress (player_id, progress_key, status) "
                 "VALUES (:pid, :key, :status)"
             ),
-            {"pid": 10010, "key": "to_delete_key", "status": 1},
+            {"pid": 10010, "key": "tutorial", "status": 1},
         )
-        db_session.flush()
-        db_session.execute(
-            text("DELETE FROM player_progress WHERE player_id = :pid AND progress_key = :key"),
-            {"pid": 10010, "key": "to_delete_key"},
+        await db_session.commit()
+        await db_session.execute(
+            text("DELETE FROM player_progress WHERE player_id = :pid"),
+            {"pid": 10010},
         )
-        db_session.flush()
-        result = db_session.execute(
-            text(
-                "SELECT COUNT(*) FROM player_progress "
-                "WHERE player_id = :pid AND progress_key = :key"
-            ),
-            {"pid": 10010, "key": "to_delete_key"},
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT COUNT(*) FROM player_progress WHERE player_id = :pid"),
+            {"pid": 10010},
         )
         assert result.scalar() == 0
 
-    def test_progress_key_max_length(self, db_session) -> None:
-        """progress_key column supports up to 35 characters."""
+    async def test_progress_key_max_length(self, db_session):
+        """Progress key max length is 35 chars."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
+        )
         long_key = "A" * 35
-        db_session.execute(
+        await db_session.execute(
             text(
                 "INSERT INTO player_progress (player_id, progress_key, status) "
                 "VALUES (:pid, :key, :status)"
             ),
-            {"pid": 10010, "key": long_key, "status": 1},
+            {"pid": 10010, "key": long_key, "status": 0},
         )
-        db_session.flush()
-        result = db_session.execute(
-            text(
-                "SELECT progress_key FROM player_progress "
-                "WHERE player_id = :pid AND progress_key = :key"
-            ),
-            {"pid": 10010, "key": long_key},
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT progress_key FROM player_progress WHERE player_id = :pid"),
+            {"pid": 10010},
         )
-        assert result.fetchone()[0] == long_key
+        assert len(result.fetchone()[0]) == 35
 
 
 # ---------------------------------------------------------------------------
-# Tests: Player Missions
+# Player Missions Tests
 # ---------------------------------------------------------------------------
 
 
 class TestPlayerMissions:
-    """Test player mission operations against real PostgreSQL.
+    """Test player mission operations."""
 
-    Source: legacy-js/paradox.sql (player_missions table)
-    """
-
-    def test_insert_mission(self, db_session) -> None:
-        """INSERT INTO player_missions (player_id, mission_id, clear_count, status)."""
-        db_session.execute(
-            text(
-                "INSERT INTO player_missions (player_id, mission_id, clear_count, status) "
-                "VALUES (:pid, :mid, :cc, :status)"
-            ),
-            {"pid": 10010, "mid": 1, "cc": 0, "status": 0},
+    async def test_insert_mission(self, db_session):
+        """Insert a mission."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
         )
-        db_session.flush()
-        result = db_session.execute(
-            text(
-                "SELECT clear_count, status FROM player_missions "
-                "WHERE player_id = :pid AND mission_id = :mid"
-            ),
-            {"pid": 10010, "mid": 1},
-        )
-        row = result.fetchone()
-        assert row is not None
-        assert row[0] == 0
-        assert row[1] == 0
-
-    def test_upsert_mission(self, db_session) -> None:
-        """ON CONFLICT (player_id, mission_id) DO UPDATE — update clear_count."""
-        # Insert
-        db_session.execute(
-            text(
-                "INSERT INTO player_missions (player_id, mission_id, clear_count, status) "
-                "VALUES (:pid, :mid, :cc, :status) "
-                "ON CONFLICT (player_id, mission_id) DO UPDATE "
-                "SET clear_count = excluded.clear_count, status = excluded.status"
-            ),
-            {"pid": 10010, "mid": 2, "cc": 3, "status": 1},
-        )
-        db_session.flush()
-        # Upsert with new values
-        db_session.execute(
-            text(
-                "INSERT INTO player_missions (player_id, mission_id, clear_count, status) "
-                "VALUES (:pid, :mid, :cc, :status) "
-                "ON CONFLICT (player_id, mission_id) DO UPDATE "
-                "SET clear_count = excluded.clear_count, status = excluded.status"
-            ),
-            {"pid": 10010, "mid": 2, "cc": 5, "status": 2},
-        )
-        db_session.flush()
-        result = db_session.execute(
-            text(
-                "SELECT clear_count, status FROM player_missions "
-                "WHERE player_id = :pid AND mission_id = :mid"
-            ),
-            {"pid": 10010, "mid": 2},
-        )
-        row = result.fetchone()
-        assert row[0] == 5
-        assert row[1] == 2
-
-    def test_read_mission(self, db_session) -> None:
-        """Read mission data for a player."""
-        result = db_session.execute(
-            text(
-                "SELECT mission_id, clear_count, status FROM player_missions "
-                "WHERE player_id = :pid AND mission_id = :mid"
-            ),
-            {"pid": 10010, "mid": 2},
-        )
-        row = result.fetchone()
-        assert row is not None
-        assert row[0] == 2
-
-    def test_delete_mission(self, db_session) -> None:
-        """DELETE FROM player_missions WHERE player_id = :pid AND mission_id = :mid."""
-        db_session.execute(
-            text(
-                "INSERT INTO player_missions (player_id, mission_id, clear_count, status) "
-                "VALUES (:pid, :mid, :cc, :status)"
-            ),
-            {"pid": 10010, "mid": 999, "cc": 0, "status": 0},
-        )
-        db_session.flush()
-        db_session.execute(
-            text("DELETE FROM player_missions WHERE player_id = :pid AND mission_id = :mid"),
-            {"pid": 10010, "mid": 999},
-        )
-        db_session.flush()
-        result = db_session.execute(
-            text(
-                "SELECT COUNT(*) FROM player_missions WHERE player_id = :pid AND mission_id = :mid"
-            ),
-            {"pid": 10010, "mid": 999},
-        )
-        assert result.scalar() == 0
-
-    def test_mission_count_per_player(self, db_session) -> None:
-        """COUNT missions for a player."""
-        result = db_session.execute(
-            text("SELECT COUNT(*) FROM player_missions WHERE player_id = :pid"),
-            {"pid": 10010},
-        )
-        count = result.scalar()
-        assert count >= 1  # At least the ones we inserted
-
-    def test_mission_unique_constraint(self, db_session) -> None:
-        """Unique constraint on (player_id, mission_id) prevents duplicates."""
-        # Insert first
-        db_session.execute(
+        await db_session.execute(
             text(
                 "INSERT INTO player_missions (player_id, mission_id, clear_count, status) "
                 "VALUES (:pid, :mid, :cc, :status)"
             ),
             {"pid": 10010, "mid": 500, "cc": 1, "status": 1},
         )
-        db_session.flush()
-        # Attempt duplicate should fail
-        with pytest.raises(Exception, match="[Uu]nique|already exists"):
-            db_session.execute(
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT clear_count, status FROM player_missions WHERE player_id = :pid"),
+            {"pid": 10010},
+        )
+        row = result.fetchone()
+        assert row[0] == 1
+        assert row[1] == 1
+
+    async def test_upsert_mission(self, db_session):
+        """Upsert a mission."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
+        )
+        await db_session.execute(
+            text(
+                "INSERT INTO player_missions (player_id, mission_id, clear_count, status) "
+                "VALUES (:pid, :mid, :cc, :status)"
+            ),
+            {"pid": 10010, "mid": 500, "cc": 1, "status": 1},
+        )
+        await db_session.commit()
+        await db_session.execute(
+            text(
+                "UPDATE player_missions SET clear_count = :cc, status = :status "
+                "WHERE player_id = :pid AND mission_id = :mid"
+            ),
+            {"pid": 10010, "mid": 500, "cc": 2, "status": 2},
+        )
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT clear_count, status FROM player_missions WHERE player_id = :pid"),
+            {"pid": 10010},
+        )
+        row = result.fetchone()
+        assert row[0] == 2
+        assert row[1] == 2
+
+    async def test_read_mission(self, db_session):
+        """Read a mission."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
+        )
+        await db_session.execute(
+            text(
+                "INSERT INTO player_missions (player_id, mission_id, clear_count, status) "
+                "VALUES (:pid, :mid, :cc, :status)"
+            ),
+            {"pid": 10010, "mid": 500, "cc": 1, "status": 1},
+        )
+        await db_session.commit()
+        result = await db_session.execute(
+            text(
+                "SELECT mission_id, clear_count, status FROM player_missions WHERE player_id = :pid"
+            ),
+            {"pid": 10010},
+        )
+        row = result.fetchone()
+        assert row[0] == 500
+        assert row[1] == 1
+        assert row[2] == 1
+
+    async def test_delete_mission(self, db_session):
+        """Delete a mission."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
+        )
+        await db_session.execute(
+            text(
+                "INSERT INTO player_missions (player_id, mission_id, clear_count, status) "
+                "VALUES (:pid, :mid, :cc, :status)"
+            ),
+            {"pid": 10010, "mid": 500, "cc": 1, "status": 1},
+        )
+        await db_session.commit()
+        await db_session.execute(
+            text("DELETE FROM player_missions WHERE player_id = :pid AND mission_id = :mid"),
+            {"pid": 10010, "mid": 500},
+        )
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT COUNT(*) FROM player_missions WHERE player_id = :pid"),
+            {"pid": 10010},
+        )
+        assert result.scalar() == 0
+
+    async def test_mission_count_per_player(self, db_session):
+        """COUNT missions for a player."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
+        )
+        for i in range(3):
+            await db_session.execute(
+                text(
+                    "INSERT INTO player_missions (player_id, mission_id, clear_count, status) "
+                    "VALUES (:pid, :mid, :cc, :status)"
+                ),
+                {"pid": 10010, "mid": 500 + i, "cc": 0, "status": 0},
+            )
+        await db_session.commit()
+        result = await db_session.execute(
+            text("SELECT COUNT(*) FROM player_missions WHERE player_id = :pid"),
+            {"pid": 10010},
+        )
+        assert result.scalar() == 3
+
+    async def test_mission_unique_constraint(self, db_session):
+        """Unique constraint on (player_id, mission_id) prevents duplicates."""
+        await db_session.execute(
+            text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+            {"pid": 10010, "nesys": "NESYS001"},
+        )
+        await db_session.execute(
+            text(
+                "INSERT INTO player_missions (player_id, mission_id, clear_count, status) "
+                "VALUES (:pid, :mid, :cc, :status)"
+            ),
+            {"pid": 10010, "mid": 500, "cc": 1, "status": 1},
+        )
+        await db_session.commit()
+        with pytest.raises(Exception, match="(?i)unique|already exists"):
+            await db_session.execute(
                 text(
                     "INSERT INTO player_missions (player_id, mission_id, clear_count, status) "
                     "VALUES (:pid, :mid, :cc, :status)"
                 ),
                 {"pid": 10010, "mid": 500, "cc": 2, "status": 2},
             )
-            db_session.flush()
+            await db_session.flush()

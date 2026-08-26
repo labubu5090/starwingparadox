@@ -1,6 +1,6 @@
 """Player weapon set slot model."""
 
-from sqlalchemy import Integer, UniqueConstraint
+from sqlalchemy import Integer, UniqueConstraint, text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -15,5 +15,5 @@ class PlayerWeaponSetSlot(Base):
     weapon_set_id: Mapped[int] = mapped_column(Integer)
     slot_id: Mapped[int] = mapped_column(Integer)
     weapon_id: Mapped[int] = mapped_column(Integer)
-    use_count: Mapped[int] = mapped_column(Integer, default=0)
-    use_time: Mapped[int] = mapped_column(Integer, default=0)
+    use_count: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    use_time: Mapped[int] = mapped_column(Integer, server_default=text("0"))

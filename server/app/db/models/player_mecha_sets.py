@@ -1,6 +1,6 @@
 """Player mecha set model."""
 
-from sqlalchemy import Boolean, Integer, UniqueConstraint
+from sqlalchemy import Boolean, Integer, UniqueConstraint, text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -15,10 +15,10 @@ class PlayerMechaSet(Base):
     mecha_set_id: Mapped[int] = mapped_column(Integer)
     mecha_setbonus_id: Mapped[int] = mapped_column(Integer)
     weapon_set_id: Mapped[int] = mapped_column(Integer)
-    is_decal: Mapped[bool] = mapped_column(Boolean, default=False)
-    favorite: Mapped[bool] = mapped_column(Boolean, default=False)
-    use_count: Mapped[int] = mapped_column(Integer, default=0)
-    use_time: Mapped[int] = mapped_column(Integer, default=0)
-    status: Mapped[int] = mapped_column(Integer, default=0)
-    win_count: Mapped[int | None] = mapped_column(Integer, nullable=True)
-    winning_streaks: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    is_decal: Mapped[bool] = mapped_column(Boolean, server_default=text("0"))
+    favorite: Mapped[bool] = mapped_column(Boolean, server_default=text("0"))
+    use_count: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    use_time: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    status: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    win_count: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    winning_streaks: Mapped[int] = mapped_column(Integer, server_default=text("0"))

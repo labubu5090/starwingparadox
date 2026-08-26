@@ -30,12 +30,13 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     setup_logging(level=settings.log_level, json_format=settings.app_env == "production")
     logger.info("Starting Starwing Paradox server env=%s", settings.app_env)
+
+    from app.dependencies import dispose_database, init_database
+
+    await init_database()
     yield
     logger.info("Shutting down – disposing DB pool")
-    from app.dependencies import _engine
-
-    if _engine is not None:
-        await _engine.dispose()
+    await dispose_database()
 
 
 app = FastAPI(

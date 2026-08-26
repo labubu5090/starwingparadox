@@ -1,6 +1,6 @@
 """Player mecha set part model."""
 
-from sqlalchemy import Integer, UniqueConstraint
+from sqlalchemy import Integer, UniqueConstraint, text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -15,5 +15,5 @@ class PlayerMechaSetPart(Base):
     mecha_set_id: Mapped[int] = mapped_column(Integer)
     part_id: Mapped[int] = mapped_column(Integer)
     mecha_id: Mapped[int] = mapped_column(Integer)
-    design_id: Mapped[int] = mapped_column(Integer, default=0)
-    color_id: Mapped[int] = mapped_column(Integer, default=0)
+    design_id: Mapped[int] = mapped_column(Integer, server_default=text("0"))
+    color_id: Mapped[int] = mapped_column(Integer, server_default=text("0"))

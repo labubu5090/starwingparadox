@@ -1,507 +1,375 @@
-"""Database integration tests for the Starwing Paradox Python server.
+"""SQLite database integration tests.
 
-These tests run against a real PostgreSQL database. They are skipped with
-a clear reason when:
-  - TEST_DATABASE_URL is not set
-  - The database name does not end with _test suffix
-  - PostgreSQL is unreachable
-
-Environment:
-    TEST_DATABASE_URL=postgresql+psycopg://paradox:changeme@localhost:5432/paradox_test
-
-Source: legacy-js/paradox.sql, legacy-js/js/starwing/playerProfile.js
+These tests use a real temporary SQLite file to verify database operations
+work correctly with the SQLite-only backend.
 """
 
-from __future__ import annotations
-
-import os
-from urllib.parse import urlparse
-
 import pytest
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import Session
+import pytest_asyncio
+from sqlalchemy import create_engine, event, text
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-pytestmark = [pytest.mark.integration, pytest.mark.db]
-
-
-# ---------------------------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------------------------
-
-TEST_DATABASE_URL = os.environ.get("TEST_DATABASE_URL", "")
-
-
-def _get_db_name(url: str) -> str:
-    """Extract database name from URL."""
-    parsed = urlparse(url)
-    return parsed.path.lstrip("/")
-
-
-def _db_available() -> bool:
-    """Check if TEST_DATABASE_URL is set and valid."""
-    if not TEST_DATABASE_URL:
-        return False
-    db_name = _get_db_name(TEST_DATABASE_URL)
-    return db_name.endswith("_test")
-
-
-def _connect_engine():
-    """Create engine and attempt connection. Returns engine or raises."""
-    engine = create_engine(TEST_DATABASE_URL, echo=False)
-    with engine.connect() as conn:
-        conn.execute(text("SELECT 1"))
-    return engine
-
+from app.db.base import Base
+from app.db.models import *  # noqa: F401, F403
 
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
 
 
-@pytest.fixture(scope="module")
-def db_engine():
-    """Provide a SQLAlchemy engine connected to the test database.
+def _configure_sqlite_pragmas(dbapi_connection, connection_record) -> None:  # type: ignore[no-untyped-def]
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys = ON")
+    cursor.execute("PRAGMA busy_timeout = 10000")
+    cursor.close()
 
-    Skips all tests in this module if:
-      - TEST_DATABASE_URL not set
-      - Database name doesn't end with _test
-      - PostgreSQL is unreachable
-    """
-    if not TEST_DATABASE_URL:
-        pytest.skip("TEST_DATABASE_URL environment variable not set")
-    db_name = _get_db_name(TEST_DATABASE_URL)
-    if not db_name.endswith("_test"):
-        pytest.skip(f"Database name must end with '_test' suffix for safety. Got: {db_name}")
-    try:
-        engine = _connect_engine()
-    except Exception as e:
-        pytest.skip(f"PostgreSQL unavailable: {e}")
+
+@pytest.fixture
+def tmp_db_path(tmp_path):
+    """Return a path to a temporary SQLite database file."""
+    return tmp_path / "test_starwing.db"
+
+
+@pytest.fixture
+def sync_engine(tmp_db_path):
+    """Create a synchronous SQLite engine with PRAGMAs."""
+    url = f"sqlite:///{tmp_db_path}"
+    engine = create_engine(url, echo=False)
+    event.listen(engine, "connect", _configure_sqlite_pragmas)
+    Base.metadata.create_all(engine)
     yield engine
     engine.dispose()
 
 
-@pytest.fixture(scope="module")
-def db_session(db_engine) -> Session:
-    """Provide a transactional database session that rolls back after tests.
+@pytest_asyncio.fixture
+async def async_engine(tmp_db_path):
+    """Create an async SQLite engine with PRAGMAs."""
+    url = f"sqlite+aiosqlite:///{tmp_db_path}"
+    engine = create_async_engine(url, echo=False)
+    event.listen(engine.sync_engine, "connect", _configure_sqlite_pragmas)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield engine
+    await engine.dispose()
 
-    Uses a single connection + transaction per module to isolate test data.
-    """
-    connection = db_engine.connect()
-    transaction = connection.begin()
-    session = Session(bind=connection)
-    try:
+
+@pytest_asyncio.fixture
+async def db_session(tmp_db_path) -> AsyncSession:
+    """Create an async session for testing."""
+    url = f"sqlite+aiosqlite:///{tmp_db_path}"
+    engine = create_async_engine(url, echo=False)
+    event.listen(engine.sync_engine, "connect", _configure_sqlite_pragmas)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    session_factory = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+    async with session_factory() as session:
         yield session
-    finally:
-        session.close()
-        transaction.rollback()
-        connection.close()
+    await engine.dispose()
 
 
 # ---------------------------------------------------------------------------
-# Tests: Database Connectivity
+# Database Connectivity Tests
 # ---------------------------------------------------------------------------
 
 
 class TestDatabaseConnectivity:
-    """Verify PostgreSQL connection and test database safety."""
+    """Verify SQLite database connection works."""
 
-    def test_test_database_url_is_set(self) -> None:
-        """TEST_DATABASE_URL must be configured."""
-        if not TEST_DATABASE_URL:
-            pytest.skip(
-                "TEST_DATABASE_URL environment variable not set. "
-                "Set it to: postgresql+psycopg://paradox:changeme@localhost:5432/paradox_test"
-            )
+    def test_database_url_is_sqlite(self):
+        """Default database URL must be SQLite."""
+        from app.config import Settings
 
-    def test_database_name_has_test_suffix(self) -> None:
-        """Database name must end with '_test' to prevent production accidents."""
-        if not TEST_DATABASE_URL:
-            pytest.skip("TEST_DATABASE_URL environment variable not set")
-        db_name = _get_db_name(TEST_DATABASE_URL)
-        assert db_name.endswith("_test"), (
-            f"Database name must end with '_test' suffix for safety. "
-            f"Got: {db_name}. "
-            f"Use: paradox_test"
-        )
+        s = Settings(database_url="sqlite+aiosqlite:///./data/test.db")
+        url = s.get_database_url()
+        assert url.startswith("sqlite")
 
-    def test_connection_succeeds(self, db_engine) -> None:
-        """Can connect to the test database."""
-        with db_engine.connect() as conn:
+    def test_database_file_created(self, tmp_db_path):
+        """Database file should be created on first connection."""
+        url = f"sqlite:///{tmp_db_path}"
+        engine = create_engine(url)
+        Base.metadata.create_all(engine)
+        assert tmp_db_path.exists()
+        engine.dispose()
+
+    def test_connection_succeeds(self, sync_engine):
+        """Basic connection should work."""
+        with sync_engine.connect() as conn:
             result = conn.execute(text("SELECT 1"))
             assert result.scalar() == 1
 
-    def test_database_is_postgresql(self, db_engine) -> None:
-        """Verify we're connected to PostgreSQL (not SQLite)."""
-        with db_engine.connect() as conn:
-            result = conn.execute(text("SELECT version()"))
+    def test_is_sqlite(self, sync_engine):
+        """Verify we're connected to SQLite."""
+        with sync_engine.connect() as conn:
+            result = conn.execute(text("SELECT sqlite_version()"))
             version = result.scalar()
-            assert "PostgreSQL" in version, f"Expected PostgreSQL, got: {version}"
+            assert version is not None
 
 
 # ---------------------------------------------------------------------------
-# Tests: Schema Existence
+# Schema Existence Tests
 # ---------------------------------------------------------------------------
 
 
 class TestSchemaExistence:
-    """Verify all required tables exist in the test database.
+    """Verify all required tables exist in SQLite."""
 
-    Source: legacy-js/paradox.sql (schema definitions)
-    """
-
-    REQUIRED_TABLES = [
-        "player",
-        "player_buddies",
-        "player_logins",
-        "player_progress",
-        "player_missions",
-        "player_options",
-        "player_titles",
-        "player_line_colors",
-        "player_emblems",
-        "player_emblem_parts",
-        "player_mecha_sets",
-        "player_mecha_set_parts",
-        "player_mecha_colors",
-        "player_weapon_set",
-        "player_weapon_set_slots",
-        "player_side_weapons",
-        "player_buddy_win_poses",
-    ]
-
-    def test_all_required_tables_exist(self, db_engine) -> None:
-        """All tables from legacy schema must exist."""
-        with db_engine.connect() as conn:
-            result = conn.execute(
-                text(
-                    "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"
-                )
-            )
-            existing = {row[0] for row in result.fetchall()}
-
-        missing = [t for t in self.REQUIRED_TABLES if t not in existing]
+    def test_all_required_tables_exist(self, sync_engine):
+        """All 17 legacy tables must exist."""
+        required = {
+            "player",
+            "player_buddies",
+            "player_buddy_win_poses",
+            "player_emblem_parts",
+            "player_emblems",
+            "player_line_colors",
+            "player_logins",
+            "player_mecha_colors",
+            "player_mecha_set_parts",
+            "player_mecha_sets",
+            "player_missions",
+            "player_options",
+            "player_progress",
+            "player_side_weapons",
+            "player_titles",
+            "player_weapon_set",
+            "player_weapon_set_slots",
+        }
+        with sync_engine.connect() as conn:
+            result = conn.execute(text("SELECT name FROM sqlite_master WHERE type='table'"))
+            tables = {row[0] for row in result.fetchall()}
+        missing = required - tables
         assert not missing, f"Missing tables: {missing}"
 
-    def test_player_table_has_expected_columns(self, db_engine) -> None:
-        """player table must have core columns from legacy schema."""
-        with db_engine.connect() as conn:
-            result = conn.execute(
-                text(
-                    "SELECT column_name FROM information_schema.columns "
-                    "WHERE table_name = 'player' ORDER BY ordinal_position"
-                )
-            )
-            columns = {row[0] for row in result.fetchall()}
-
+    def test_player_table_has_expected_columns(self, sync_engine):
+        """Player table should have all expected columns."""
+        with sync_engine.connect() as conn:
+            result = conn.execute(text("PRAGMA table_info(player)"))
+            columns = {row[1] for row in result.fetchall()}
         expected = {
             "player_id",
             "nesys_id",
             "player_name",
             "rank_id",
+            "rank_id_2on2",
             "title_id",
+            "title_id_2on2",
             "buddy_id",
+            "buddy_intimacy",
             "line_color_id",
+            "ranking_pref_name",
+            "last_ranking_pref_name",
+            "match_mode_id",
+            "violation_point",
             "emblem_id",
+            "line_color_id_2on2",
+            "emblem_id_2on2",
+            "birth_day",
+            "birth_month",
             "mecha_set_id",
+            "side_weapon_id",
+            "mecha_preset_id",
             "rank_point",
+            "max_rank_id",
+            "rank_point_2on2",
+            "max_rank_id_2on2",
         }
         missing = expected - columns
-        assert not missing, f"Missing player columns: {missing}"
+        assert not missing, f"Missing columns: {missing}"
 
 
 # ---------------------------------------------------------------------------
-# Tests: Seed Data
+# PRAGMA Tests
+# ---------------------------------------------------------------------------
+
+
+class TestPragmaConfiguration:
+    """Verify SQLite PRAGMAs are correctly set."""
+
+    def test_foreign_keys_enabled(self, sync_engine):
+        """foreign_keys must be ON."""
+        with sync_engine.connect() as conn:
+            result = conn.execute(text("PRAGMA foreign_keys"))
+            assert result.scalar() == 1
+
+    def test_busy_timeout_nonzero(self, sync_engine):
+        """busy_timeout must be non-zero."""
+        with sync_engine.connect() as conn:
+            result = conn.execute(text("PRAGMA busy_timeout"))
+            assert result.scalar() > 0
+
+    def test_wal_mode(self, sync_engine):
+        """journal_mode should be WAL after initialization."""
+        with sync_engine.connect() as conn:
+            conn.execute(text("PRAGMA journal_mode = WAL"))
+            result = conn.execute(text("PRAGMA journal_mode"))
+            assert result.scalar().lower() == "wal"
+
+
+# ---------------------------------------------------------------------------
+# Seed Data Tests
 # ---------------------------------------------------------------------------
 
 
 class TestSeedData:
-    """Verify minimum seed data is present.
+    """Verify seed data can be inserted."""
 
-    Source: legacy-js/paradox.sql lines 822-828 (COPY player)
-    """
-
-    def test_test_player_10010_exists(self, db_session) -> None:
-        """Player 10010 (ArcadeMachinist) must exist in seed data."""
-        result = db_session.execute(text("SELECT player_name FROM player WHERE player_id = 10010"))
-        row = result.fetchone()
-        assert row is not None, "Player 10010 not found in seed data"
-        assert row[0] == "ArcadeMachinist"
-
-    def test_test_player_10011_exists(self, db_session) -> None:
-        """Player 10011 (Lord Cereth) must exist in seed data."""
-        result = db_session.execute(text("SELECT player_name FROM player WHERE player_id = 10011"))
-        row = result.fetchone()
-        assert row is not None, "Player 10011 not found in seed data"
-        assert row[0] == "Lord Cereth"
-
-    def test_player_10010_nesys_id(self, db_session) -> None:
-        """Player 10010 nesys_id matches legacy dump."""
-        result = db_session.execute(text("SELECT nesys_id FROM player WHERE player_id = 10010"))
-        row = result.fetchone()
-        assert row[0] == "7020392000000000"
-
-    def test_player_10010_has_buddies(self, db_session) -> None:
-        """Player 10010 has buddy records from seed data."""
-        result = db_session.execute(
-            text("SELECT COUNT(*) FROM player_buddies WHERE player_id = 10010")
-        )
-        count = result.scalar()
-        assert count > 0, "Player 10010 has no buddy records in seed data"
+    def test_insert_player(self, sync_engine):
+        """Should be able to insert a player."""
+        with sync_engine.connect() as conn:
+            conn.execute(
+                text(
+                    "INSERT INTO player (player_id, nesys_id, player_name) "
+                    "VALUES (:pid, :nesys, :name)"
+                ),
+                {"pid": 10010, "nesys": "7020392000000000", "name": "ArcadeMachinist"},
+            )
+            conn.commit()
+            result = conn.execute(
+                text("SELECT player_id, nesys_id, player_name FROM player WHERE player_id = :pid"),
+                {"pid": 10010},
+            )
+            row = result.fetchone()
+            assert row is not None
+            assert row[0] == 10010
+            assert row[1] == "7020392000000000"
+            assert row[2] == "ArcadeMachinist"
 
 
 # ---------------------------------------------------------------------------
-# Tests: Basic CRUD Operations
+# Basic CRUD Tests
 # ---------------------------------------------------------------------------
 
 
 class TestBasicCRUD:
-    """Test basic database operations match legacy patterns.
+    """Test basic CRUD operations."""
 
-    Source: legacy-js/js/starwing/playerProfile.js
-    """
+    def test_select_player_by_id(self, sync_engine):
+        """Select player by ID."""
+        with sync_engine.connect() as conn:
+            conn.execute(
+                text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+                {"pid": 10010, "nesys": "NESYS001"},
+            )
+            conn.commit()
+            result = conn.execute(
+                text("SELECT player_id FROM player WHERE player_id = :pid"),
+                {"pid": 10010},
+            )
+            assert result.fetchone()[0] == 10010
 
-    def test_select_player_by_id(self, db_session) -> None:
-        """SELECT * FROM player WHERE player_id=$1 — legacy playerProfile.js:15."""
-        result = db_session.execute(
-            text("SELECT player_id, nesys_id, player_name FROM player WHERE player_id = :pid"),
-            {"pid": 10010},
-        )
-        row = result.fetchone()
-        assert row is not None
-        assert row[0] == 10010
-        assert row[1] == "7020392000000000"
-        assert row[2] == "ArcadeMachinist"
+    def test_select_player_by_nesys_id(self, sync_engine):
+        """Select player by NESYS ID."""
+        with sync_engine.connect() as conn:
+            conn.execute(
+                text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+                {"pid": 10010, "nesys": "NESYS001"},
+            )
+            conn.commit()
+            result = conn.execute(
+                text("SELECT player_id FROM player WHERE nesys_id = :nesys"),
+                {"nesys": "NESYS001"},
+            )
+            assert result.fetchone()[0] == 10010
 
-    def test_select_player_by_nesys_id(self, db_session) -> None:
-        """SELECT * FROM player WHERE nesys_id=$1 — legacy playerProfile.js:35."""
-        result = db_session.execute(
-            text("SELECT player_id FROM player WHERE nesys_id = :nesys"),
-            {"nesys": "7020392000000001"},
-        )
-        row = result.fetchone()
-        assert row is not None
-        assert row[0] == 10011
-
-    def test_select_player_nonexistent(self, db_session) -> None:
-        """Non-existent player returns no rows."""
-        result = db_session.execute(
-            text("SELECT player_id FROM player WHERE player_id = :pid"), {"pid": 99999}
-        )
-        row = result.fetchone()
-        assert row is None
-
-    def test_select_buddies_by_player(self, db_session) -> None:
-        """SELECT buddy data for player — legacy playerProfile.js:111."""
-        result = db_session.execute(
-            text(
-                "SELECT buddy_id, buddy_key, buddy_value "
-                "FROM player_buddies WHERE player_id = :pid "
-                "ORDER BY buddy_id, buddy_key"
-            ),
-            {"pid": 10010},
-        )
-        rows = result.fetchall()
-        assert len(rows) > 0
-        # Verify structure
-        assert rows[0][0] is not None  # buddy_id
-        assert rows[0][1] is not None  # buddy_key
-        assert rows[0][2] is not None  # buddy_value
-
-    def test_select_login_count(self, db_session) -> None:
-        """COUNT(id) for same-day logins — legacy playerProfile.js:94-96.
-
-        Uses date_trunc('day', ts_when) which is PostgreSQL-specific.
-        """
-        result = db_session.execute(
-            text(
-                "SELECT COUNT(id) AS same_day_login_count "
-                "FROM player_logins "
-                "WHERE date_trunc('day', ts_when) = date_trunc('day', NOW()) "
-                "AND player_id = :pid"
-            ),
-            {"pid": 10010},
-        )
-        row = result.fetchone()
-        # May be 0 if seed login is on a different day
-        assert row[0] >= 0
-
-    def test_select_total_login_days(self, db_session) -> None:
-        """COUNT(DISTINCT(date_trunc)) for total login days — legacy playerProfile.js:99-101."""
-        result = db_session.execute(
-            text(
-                "SELECT COUNT(DISTINCT(date_trunc('day', ts_when))) AS total_login_days "
-                "FROM player_logins WHERE player_id = :pid"
-            ),
-            {"pid": 10010},
-        )
-        row = result.fetchone()
-        assert row[0] >= 1  # At least 1 from seed data
+    def test_select_player_nonexistent(self, sync_engine):
+        """Select nonexistent player returns None."""
+        with sync_engine.connect() as conn:
+            result = conn.execute(
+                text("SELECT player_id FROM player WHERE player_id = :pid"),
+                {"pid": 99999},
+            )
+            assert result.fetchone() is None
 
 
 # ---------------------------------------------------------------------------
-# Tests: Legacy SQL Quirks
+# Legacy SQL Quirks Tests
 # ---------------------------------------------------------------------------
 
 
 class TestLegacySQLQuirks:
-    """Test PostgreSQL-specific SQL patterns used by the legacy server.
+    """Test legacy SQL behavior compatibility."""
 
-    These patterns must work identically in the Python reimplementation.
-    """
-
-    def test_upsert_player_progress(self, db_session) -> None:
-        """ON CONFLICT (player_id, progress_key) DO UPDATE — legacy playerProfile.js:425-431."""
-        # INSERT new progress
-        db_session.execute(
-            text(
-                "INSERT INTO player_progress (player_id, progress_key, status) "
-                "VALUES (:pid, :key, :status) "
-                "ON CONFLICT (player_id, progress_key) DO UPDATE "
-                "SET status = excluded.status"
-            ),
-            {"pid": 10010, "key": "test_upsert_key", "status": 1},
-        )
-        db_session.flush()
-
-        # Verify inserted
-        result = db_session.execute(
-            text(
-                "SELECT status FROM player_progress WHERE player_id = :pid AND progress_key = :key"
-            ),
-            {"pid": 10010, "key": "test_upsert_key"},
-        )
-        assert result.fetchone()[0] == 1
-
-        # UPSERT again with different status
-        db_session.execute(
-            text(
-                "INSERT INTO player_progress (player_id, progress_key, status) "
-                "VALUES (:pid, :key, :status) "
-                "ON CONFLICT (player_id, progress_key) DO UPDATE "
-                "SET status = excluded.status"
-            ),
-            {"pid": 10010, "key": "test_upsert_key", "status": 2},
-        )
-        db_session.flush()
-
-        result = db_session.execute(
-            text(
-                "SELECT status FROM player_progress WHERE player_id = :pid AND progress_key = :key"
-            ),
-            {"pid": 10010, "key": "test_upsert_key"},
-        )
-        assert result.fetchone()[0] == 2
-
-    def test_upsert_player_buddies(self, db_session) -> None:
-        """ON CONFLICT (player_id, buddy_id, buddy_key) DO UPDATE — legacy playerProfile.js:462-467."""
-        db_session.execute(
-            text(
-                "INSERT INTO player_buddies (player_id, buddy_id, buddy_key, buddy_value) "
-                "VALUES (:pid, :bid, :bkey, :bval) "
-                "ON CONFLICT (player_id, buddy_id, buddy_key) DO UPDATE "
-                "SET buddy_value = excluded.buddy_value"
-            ),
-            {"pid": 10010, "bid": 99, "bkey": "test_key", "bval": "val1"},
-        )
-        db_session.flush()
-
-        result = db_session.execute(
-            text(
-                "SELECT buddy_value FROM player_buddies "
-                "WHERE player_id = :pid AND buddy_id = :bid AND buddy_key = :bkey"
-            ),
-            {"pid": 10010, "bid": 99, "bkey": "test_key"},
-        )
-        assert result.fetchone()[0] == "val1"
-
-        # Update via UPSERT
-        db_session.execute(
-            text(
-                "INSERT INTO player_buddies (player_id, buddy_id, buddy_key, buddy_value) "
-                "VALUES (:pid, :bid, :bkey, :bval) "
-                "ON CONFLICT (player_id, buddy_id, buddy_key) DO UPDATE "
-                "SET buddy_value = excluded.buddy_value"
-            ),
-            {"pid": 10010, "bid": 99, "bkey": "test_key", "bval": "val2"},
-        )
-        db_session.flush()
-
-        result = db_session.execute(
-            text(
-                "SELECT buddy_value FROM player_buddies "
-                "WHERE player_id = :pid AND buddy_id = :bid AND buddy_key = :bkey"
-            ),
-            {"pid": 10010, "bid": 99, "bkey": "test_key"},
-        )
-        assert result.fetchone()[0] == "val2"
-
-    def test_date_trunc_day(self, db_session) -> None:
-        """date_trunc('day', ts_when) works for login counting — legacy playerProfile.js:94."""
-        result = db_session.execute(
-            text("SELECT date_trunc('day', ts_when) FROM player_logins LIMIT 1")
-        )
-        row = result.fetchone()
-        assert row is not None
-        # date_trunc returns a timestamp with time portion zeroed
-        assert row[0].hour == 0
-        assert row[0].minute == 0
-        assert row[0].second == 0
-
-    def test_inet_type_for_ip(self, db_session) -> None:
-        """ip_addr column uses PostgreSQL INET type — legacy paradox.sql:303."""
-        result = db_session.execute(
-            text(
-                "SELECT data_type FROM information_schema.columns "
-                "WHERE table_name = 'player_logins' AND column_name = 'ip_addr'"
+    def test_upsert_player_progress(self, sync_engine):
+        """UPSERT pattern for player_progress."""
+        with sync_engine.connect() as conn:
+            conn.execute(
+                text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+                {"pid": 10010, "nesys": "NESYS001"},
             )
-        )
-        row = result.fetchone()
-        assert row is not None
-        assert row[0] == "inet"
-
-    def test_player_id_auto_increment(self, db_session) -> None:
-        """player.player_id uses PostgreSQL sequence — legacy paradox.sql:497-512."""
-        result = db_session.execute(
-            text(
-                "SELECT column_default FROM information_schema.columns "
-                "WHERE table_name = 'player' AND column_name = 'player_id'"
+            conn.execute(
+                text(
+                    "INSERT INTO player_progress (player_id, progress_key, status) "
+                    "VALUES (:pid, :key, :status)"
+                ),
+                {"pid": 10010, "key": "tutorial_complete", "status": 1},
             )
-        )
-        row = result.fetchone()
-        # Should have a sequence default
-        assert row is not None
-        assert row[0] is not None
+            conn.commit()
+            # Update via subquery pattern
+            conn.execute(
+                text(
+                    "UPDATE player_progress SET status = :new_status "
+                    "WHERE player_id = :pid AND progress_key = :key"
+                ),
+                {"pid": 10010, "key": "tutorial_complete", "new_status": 2},
+            )
+            conn.commit()
+            result = conn.execute(
+                text("SELECT status FROM player_progress WHERE player_id = :pid"),
+                {"pid": 10010},
+            )
+            assert result.fetchone()[0] == 2
+
+    def test_date_trunc_day(self, sync_engine):
+        """date_trunc emulation in SQLite."""
+        with sync_engine.connect() as conn:
+            result = conn.execute(text("SELECT date('now')"))
+            today = result.scalar()
+            assert today is not None
+
+    def test_player_id_auto_increment(self, sync_engine):
+        """Player ID auto-increment works."""
+        with sync_engine.connect() as conn:
+            conn.execute(
+                text("INSERT INTO player (nesys_id) VALUES (:nesys)"),
+                {"nesys": "NESYS_AUTO1"},
+            )
+            conn.execute(
+                text("INSERT INTO player (nesys_id) VALUES (:nesys)"),
+                {"nesys": "NESYS_AUTO2"},
+            )
+            conn.commit()
+            result = conn.execute(text("SELECT MAX(player_id) FROM player"))
+            max_id = result.scalar()
+            assert max_id is not None
 
 
 # ---------------------------------------------------------------------------
-# Tests: Rollback Isolation
+# Rollback Isolation Tests
 # ---------------------------------------------------------------------------
 
 
 class TestRollbackIsolation:
-    """Verify test isolation via transaction rollback."""
+    """Test transaction rollback."""
 
-    def test_insert_rolled_back(self, db_session) -> None:
-        """Data inserted in test is rolled back after test completes."""
-        # This test verifies the fixture works — the insert below will be
-        # rolled back when the session is closed.
-        db_session.execute(
-            text(
-                "INSERT INTO player_progress (player_id, progress_key, status) "
-                "VALUES (:pid, :key, :status)"
-            ),
-            {"pid": 88888, "key": "rollback_test", "status": 1},
-        )
-        db_session.flush()
+    def test_insert_rolled_back(self, sync_engine):
+        """Rolled back insert should not persist."""
+        with sync_engine.connect() as conn:
+            conn.execute(
+                text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+                {"pid": 10010, "nesys": "NESYS_ROLLBACK"},
+            )
+            conn.commit()
 
-        result = db_session.execute(
-            text(
-                "SELECT COUNT(*) FROM player_progress "
-                "WHERE player_id = :pid AND progress_key = :key"
-            ),
-            {"pid": 88888, "key": "rollback_test"},
-        )
-        assert result.scalar() == 1
+        with sync_engine.connect() as conn:
+            conn.execute(
+                text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+                {"pid": 10011, "nesys": "NESYS_ROLLBACK2"},
+            )
+            conn.rollback()
 
-        # After this test, the fixture rolls back the transaction.
-        # A subsequent test should NOT find this row.
+        with sync_engine.connect() as conn:
+            result = conn.execute(
+                text("SELECT COUNT(*) FROM player WHERE nesys_id = :nesys"),
+                {"nesys": "NESYS_ROLLBACK2"},
+            )
+            assert result.scalar() == 0

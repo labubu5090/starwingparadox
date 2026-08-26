@@ -1,22 +1,42 @@
 """Pytest configuration and shared fixtures."""
 
+from __future__ import annotations
+
 import asyncio
-from collections.abc import AsyncGenerator
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from collections.abc import AsyncGenerator
 
 import pytest
 import pytest_asyncio
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, event
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.config import Settings
+from app.db.base import Base
+from app.db.models import (  # noqa: F401
+    Player,
+    PlayerBuddy,
+    PlayerBuddyWinPose,
+    PlayerEmblem,
+    PlayerEmblemPart,
+    PlayerLineColor,
+    PlayerLogin,
+    PlayerMechaColor,
+    PlayerMechaSet,
+    PlayerMechaSetPart,
+    PlayerMission,
+    PlayerOption,
+    PlayerProgress,
+    PlayerSideWeapon,
+    PlayerTitle,
+    PlayerWeaponSet,
+    PlayerWeaponSetSlot,
+)
 from app.dependencies import set_override_engine
-
-# ---------------------------------------------------------------------------
-# Settings override for tests
-# ---------------------------------------------------------------------------
 
 
 def get_test_settings() -> Settings:
@@ -28,48 +48,35 @@ def get_test_settings() -> Settings:
     )
 
 
-# ---------------------------------------------------------------------------
-# Synchronous SQLite engine for fixtures
-# ---------------------------------------------------------------------------
-
 SYNC_DATABASE_URL = "sqlite:///:memory:"
-sync_engine = create_engine(SYNC_DATABASE_URL, echo=False)
-SyncSessionLocal = sessionmaker(bind=sync_engine)
+_sync_engine = create_engine(SYNC_DATABASE_URL, echo=False)
+SyncSessionLocal = sessionmaker(bind=_sync_engine)
+
+# Create tables on the sync engine once for all sync tests
+Base.metadata.create_all(_sync_engine)
 
 
-# ---------------------------------------------------------------------------
-# Async SQLite engine for async tests
-# ---------------------------------------------------------------------------
-
-
-@pytest.fixture(scope="session")
-def event_loop():
-    """Create a single event loop for the entire test session."""
-    loop = asyncio.new_event_loop()
-    yield loop
-    loop.close()
+def _configure_sqlite_pragmas(dbapi_connection, connection_record) -> None:  # type: ignore[no-untyped-def]
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys = ON")
+    cursor.execute("PRAGMA busy_timeout = 10000")
+    cursor.close()
 
 
 @pytest_asyncio.fixture
 async def async_db_session() -> AsyncGenerator[AsyncSession, None]:
-    """Provide an async database session using SQLite in-memory."""
     async_engine = create_async_engine("sqlite+aiosqlite:///:memory:", echo=False)
-    async_session_factory = async_sessionmaker(
-        async_engine, class_=AsyncSession, expire_on_commit=False
-    )
-    async with async_session_factory() as session:
+    event.listen(async_engine.sync_engine, "connect", _configure_sqlite_pragmas)
+    async with async_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    session_factory = async_sessionmaker(async_engine, class_=AsyncSession, expire_on_commit=False)
+    async with session_factory() as session:
         yield session
     await async_engine.dispose()
 
 
-# ---------------------------------------------------------------------------
-# Synchronous DB session fixture
-# ---------------------------------------------------------------------------
-
-
 @pytest.fixture
 def db_session() -> Session:
-    """Provide a synchronous database session using SQLite in-memory."""
     session = SyncSessionLocal()
     try:
         yield session
@@ -77,24 +84,24 @@ def db_session() -> Session:
         session.close()
 
 
-# ---------------------------------------------------------------------------
-# FastAPI TestClient fixture
-# ---------------------------------------------------------------------------
-
-
 @pytest.fixture
 def client() -> TestClient:
-    """Provide a FastAPI TestClient with test settings."""
+    """Create a TestClient with an in-memory SQLite database."""
     test_engine = create_async_engine("sqlite+aiosqlite:///:memory:", echo=False)
+    event.listen(test_engine.sync_engine, "connect", _configure_sqlite_pragmas)
+
+    loop = asyncio.new_event_loop()
+
+    async def _init():
+        async with test_engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+
+    loop.run_until_complete(_init())
+
     set_override_engine(test_engine)
     from app.main import app
 
     return TestClient(app)
-
-
-# ---------------------------------------------------------------------------
-# Sample test data fixtures
-# ---------------------------------------------------------------------------
 
 
 @pytest.fixture
@@ -125,21 +132,10 @@ def sample_stage_id() -> int:
 @pytest.fixture
 def sample_battle_result() -> dict[str, Any]:
     return {
-        "match_id": "41772",
-        "player_id": "10010",
-        "player_name": "TestPlayer",
-        "burst_group_id": "0",
-        "mode_id": "33",
-        "team_id": "0",
-        "stage_id": "20001",
-        "battle_result": "win",
-        "battle_time": "143",
-        "play_time": "143",
-        "matching_time": "0",
-        "left_time": "37",
-        "score_2on2": '{"total":13019,"minute":5463,"is_win":true,"diff_rank":0}',
-        "players_2on2": '[{"player_id":10010,"player_name":"TestPlayer","team_id":0,"rank_id":1,"total_score":14019,"score_rank":1}]',
-        "detail_2on2": '{"player":{"give_damage":{"total":2188,"weapons_2on2":[]}}}',
+        "result": 1,
+        "stage_id": 20001,
+        "winner_side": 1,
+        "player_score": 1000,
     }
 
 
