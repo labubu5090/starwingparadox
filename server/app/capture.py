@@ -56,8 +56,9 @@ def enable_capture(capture_dir: Path | None = None) -> Path:
 
 
 def disable_capture() -> None:
-    global _ENABLED
+    global _ENABLED, _CAPTURE_DIR
     _ENABLED = False
+    _CAPTURE_DIR = None
     logger.warning("Capture DISABLED")
 
 

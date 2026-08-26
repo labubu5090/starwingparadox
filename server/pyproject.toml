@@ -51,6 +51,7 @@ markers = [
     "integration: Integration tests requiring database",
     "db: Database integration tests (require TEST_DATABASE_URL)",
     "synthetic: Tests using synthetic fixtures (not real captures)",
+    "synthetic_capture_test: Synthetic capture system validation tests",
     "legacy_reference: Tests based on legacy JavaScript behavior",
     "legacy_regression: TRUE legacy regression tests with fixture evidence",
 ]
