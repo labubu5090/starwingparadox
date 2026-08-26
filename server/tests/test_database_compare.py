@@ -300,8 +300,9 @@ class TestCaptureSnapshot:
         assert snapshot.available
         assert "test_table" in snapshot.tables
 
-    def test_capture_without_engine(self):
-        """Capture snapshot without engine falls back to env."""
+    def test_capture_without_engine(self, monkeypatch):
+        """Capture snapshot without engine falls back to env; unset env to test unavailable path."""
+        monkeypatch.delenv("TEST_DATABASE_URL", raising=False)
         snapshot = capture_snapshot(tables=["test_table"])
         # Without TEST_DATABASE_URL, should be unavailable
         assert not snapshot.available

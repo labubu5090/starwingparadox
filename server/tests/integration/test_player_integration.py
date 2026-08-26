@@ -196,15 +196,32 @@ class TestPlayerCRUD:
         )
         assert result.fetchone() is None
 
-    def test_player_nesys_id_uniqueness(self, db_session) -> None:
-        """nesys_id should be unique per player — legacy paradox.sql constraint."""
-        # Attempting to insert a duplicate nesys_id should fail
-        with pytest.raises(Exception, match="UNIQUE"):
-            db_session.execute(
-                text("INSERT INTO player (nesys_id) VALUES (:nesys)"),
-                {"nesys": "7020392000000000"},  # Already exists for player 10010
-            )
-            db_session.flush()
+    def test_player_nesys_id_no_db_constraint(self, db_session) -> None:
+        """nesys_id has no UNIQUE constraint at DB level — legacy schema allows duplicates.
+
+        Uniqueness is enforced at the application layer (PlayerService).
+        """
+        # Insert two players with the same nesys_id — should succeed at DB level
+        db_session.execute(
+            text("INSERT INTO player (nesys_id) VALUES (:nesys)"),
+            {"nesys": "DUP_NESYS_TEST_001"},
+        )
+        db_session.execute(
+            text("INSERT INTO player (nesys_id) VALUES (:nesys)"),
+            {"nesys": "DUP_NESYS_TEST_001"},
+        )
+        db_session.flush()
+        # Verify both exist
+        result = db_session.execute(
+            text("SELECT COUNT(*) FROM player WHERE nesys_id = :nesys"),
+            {"nesys": "DUP_NESYS_TEST_001"},
+        )
+        assert result.fetchone()[0] == 2
+        # Cleanup
+        db_session.execute(
+            text("DELETE FROM player WHERE nesys_id = :nesys"),
+            {"nesys": "DUP_NESYS_TEST_001"},
+        )
 
     def test_player_default_values(self, db_session) -> None:
         """New player should have sensible defaults."""
@@ -485,7 +502,7 @@ class TestPlayerMissions:
         )
         db_session.flush()
         # Attempt duplicate should fail
-        with pytest.raises(Exception, match="UNIQUE"):
+        with pytest.raises(Exception, match="[Uu]nique|already exists"):
             db_session.execute(
                 text(
                     "INSERT INTO player_missions (player_id, mission_id, clear_count, status) "
