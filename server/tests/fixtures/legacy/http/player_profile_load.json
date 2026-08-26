@@ -1,0 +1,70 @@
+{
+  "fixture_id": "player-profile-load",
+  "provenance": "LEGACY_SOURCE_DERIVED",
+  "source": {
+    "file": "legacy-js/js/starwing.js",
+    "line_start": 488,
+    "line_end": 507,
+    "description": "POST /player/profile/load handler - queries player by nesys_id, returns profile object"
+  },
+  "endpoint": "/player/profile/load",
+  "method": "POST",
+  "request": {
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": {
+      "nesys_id": "TESTNESYS00001"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api": "player/profile",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body_structure": {
+      "player_id": "integer",
+      "nesys_id": "string",
+      "name": "string",
+      "same_day_login_count": "integer",
+      "total_login_days": "integer",
+      "consecutive_login_days": "integer",
+      "emblem": {
+        "outline": {"part_id": 0, "offset": [0, 0], "scale": [1, 1], "angle": 0},
+        "main_design": {"part_id": 0, "offset": [0, 0], "scale": [1, 1], "angle": 0},
+        "sub_design": {"part_id": 0, "offset": [0, 0], "scale": [1, 1], "angle": 0}
+      },
+      "progresses": "array",
+      "last_pref_ranking_order_id": 0,
+      "pref_ranking_top_player_count": 0,
+      "official_player_type_id": 0
+    }
+  },
+  "deterministic_fields": [
+    "emblem.outline.part_id",
+    "emblem.outline.offset",
+    "emblem.outline.scale",
+    "emblem.outline.angle",
+    "emblem.main_design.part_id",
+    "emblem.main_design.offset",
+    "emblem.main_design.scale",
+    "emblem.main_design.angle",
+    "emblem.sub_design.part_id",
+    "emblem.sub_design.offset",
+    "emblem.sub_design.scale",
+    "emblem.sub_design.angle",
+    "last_pref_ranking_order_id",
+    "pref_ranking_top_player_count",
+    "official_player_type_id"
+  ],
+  "dynamic_fields": ["x-galaxy-api-id", "player_id", "same_day_login_count", "total_login_days", "consecutive_login_days", "progresses"],
+  "database_requirements": [
+    "player table must have row with matching nesys_id",
+    "player_logins table for login count queries",
+    "player_progress table for progress data"
+  ],
+  "notes": "Legacy x-galaxy-api header is 'player/profile' (not '*/*'). Emblem structure is hardcoded with zeros. Login counts are computed from player_logins table."
+}

@@ -14,10 +14,13 @@ logger = logging.getLogger(__name__)
 
 
 def _not_implemented(endpoint: str, headers: dict[str, Any] | None = None) -> JSONResponse:
+    resp_headers = {"x-legacy-compat": "false"}
+    if headers:
+        resp_headers.update(headers)
     return JSONResponse(
         status_code=501,
         content={"error": "not_implemented", "endpoint": endpoint, "corrid": str(uuid.uuid4())},
-        headers=headers,
+        headers=resp_headers,
     )
 
 
@@ -35,9 +38,7 @@ async def battle_record_2on2(
     x_galaxy_api_id: str = Header(default=""),
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
-    if not settings.legacy_compatibility_mode:
-        return _not_implemented("/battle/record_2on2", headers)
-    return JSONResponse(content={"result": 1}, headers=headers)
+    return _not_implemented("/battle/record_2on2", headers)
 
 
 @router.post("/{path:path}")

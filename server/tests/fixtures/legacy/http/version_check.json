@@ -1,0 +1,32 @@
+{
+  "fixture_id": "version-check",
+  "provenance": "LEGACY_SOURCE_DERIVED",
+  "source": {
+    "file": "legacy-js/js/starwing.js",
+    "line_start": 407,
+    "line_end": 426,
+    "description": "POST /version handler - returns version_main and version_data as strings, empty stage_ids"
+  },
+  "endpoint": "/version",
+  "method": "POST",
+  "request": {
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": {}
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api": "*/*",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": "{\n\t\"client_version\": \"70571\",\n\t\"data_version\": \"70571\",\n\t\"stage_ids\": []}"
+  },
+  "deterministic_fields": ["client_version", "data_version", "stage_ids"],
+  "dynamic_fields": ["x-galaxy-api-id"],
+  "database_requirements": [],
+  "notes": "Legacy returns version numbers as strings (quoted), not integers. The legacy source concatenates them into the JSON string directly."
+}

@@ -1,0 +1,39 @@
+{
+  "fixture_id": "game-data-load-mission",
+  "provenance": "LEGACY_SOURCE_DERIVED",
+  "source": {
+    "file": "legacy-js/js/starwing.js",
+    "line_start": 653,
+    "line_end": 676,
+    "description": "POST /game_data/load/mission handler - loads only mission data for a player"
+  },
+  "endpoint": "/game_data/load/mission",
+  "method": "POST",
+  "request": {
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": {
+      "player_id": "10010"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api": "game_data/load",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body_structure": {
+      "missions": "array of {mission_id, clear_count, clear_num, status, mission_status}"
+    }
+  },
+  "deterministic_fields": [],
+  "dynamic_fields": ["x-galaxy-api-id", "missions"],
+  "database_requirements": [
+    "player table for player_id lookup",
+    "player_missions table for mission data"
+  ],
+  "notes": "Legacy x-galaxy-api header is 'game_data/load' (same as /game_data/load). Returns only missions array. JSON is formatted with 4-space indent."
+}

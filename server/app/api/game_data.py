@@ -13,15 +13,14 @@ router = APIRouter(tags=["game_data"], prefix="/game_data")
 logger = logging.getLogger(__name__)
 
 
-def _ok(**extra: Any) -> dict[str, Any]:
-    return {"result": 1, **extra}
-
-
 def _not_implemented(endpoint: str, headers: dict[str, Any] | None = None) -> JSONResponse:
+    resp_headers = {"x-legacy-compat": "false"}
+    if headers:
+        resp_headers.update(headers)
     return JSONResponse(
         status_code=501,
         content={"error": "not_implemented", "endpoint": endpoint, "corrid": str(uuid.uuid4())},
-        headers=headers,
+        headers=resp_headers,
     )
 
 
@@ -39,9 +38,7 @@ async def game_data_load(
     x_galaxy_api_id: str = Header(default=""),
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
-    if not settings.legacy_compatibility_mode:
-        return _not_implemented("/game_data/load", headers)
-    return JSONResponse(content=_ok(game_data={}), headers=headers)
+    return _not_implemented("/game_data/load", headers)
 
 
 @router.post("/load/mission")
@@ -51,9 +48,7 @@ async def game_data_load_mission(
     x_galaxy_api_id: str = Header(default=""),
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
-    if not settings.legacy_compatibility_mode:
-        return _not_implemented("/game_data/load/mission", headers)
-    return JSONResponse(content=_ok(missions=[]), headers=headers)
+    return _not_implemented("/game_data/load/mission", headers)
 
 
 @router.post("/save")
@@ -63,9 +58,7 @@ async def game_data_save(
     x_galaxy_api_id: str = Header(default=""),
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
-    if not settings.legacy_compatibility_mode:
-        return _not_implemented("/game_data/save", headers)
-    return JSONResponse(content=_ok(), headers=headers)
+    return _not_implemented("/game_data/save", headers)
 
 
 @router.post("/{path:path}")
@@ -79,4 +72,4 @@ async def game_data_fallback(
     logger.debug("Unimplemented game_data endpoint: /game_data/%s", path)
     if not settings.legacy_compatibility_mode:
         return _not_implemented(f"/game_data/{path}", headers)
-    return JSONResponse(content=_ok(), headers=headers)
+    return JSONResponse(content={"result": 1}, headers=headers)

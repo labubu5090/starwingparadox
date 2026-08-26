@@ -182,3 +182,33 @@ A raw TCP server **was part of the legacy system**. The original Node.js server 
 | Max frame size (1 MiB) | **EXPERIMENTAL** (not in legacy source) |
 | IP authorization | **NOT_IMPLEMENTED** (present in legacy) |
 | `activeGameServers` tracking | **NOT_IMPLEMENTED** (present in legacy) |
+
+---
+
+## 7. Legacy Regression Test Coverage
+
+**Test file:** `server/tests/legacy_regression/test_tcp_legacy.py`
+
+| Test Class | Evidence | What It Verifies |
+|------------|----------|-----------------|
+| TestLengthPrefixEncode | E6, E9, E10 | 4-byte LE length prefix encoding matches legacy `writeUInt32LE` |
+| TestLengthPrefixDecode | E7, E8, E11 | 4-byte LE length prefix decoding matches legacy `readUIntLE` |
+| TestOneFrameRequestHandling | tcp_server.py:103-157 | Complete frame processing pipeline |
+| TestResponseFraming | E6 (starwing.js:62-78) | Response is 4-byte LE prefix + protobuf bytes |
+| TestConnectionCloseBehavior | E23-E27 | writer.close() in finally block, EOF handling, error handling |
+| TestMultipleFramesPerConnection | tcp_server.py:103-131 | Incremental buffering handles multiple/partial frames |
+| TestProposedProtections | §4.2-4.5 of audit | Timeout (30s), max frame (1 MiB), no IP allowlist |
+| TestPortAndBindAddress | E14-E18 | Default port 6666, bind 0.0.0.0 |
+| TestHandlerDispatch | E32-E36 | Registry pattern matches legacy switch/case |
+
+### Proposed Protections (Python Hardening, NOT Legacy Parity)
+
+These tests verify Python hardening measures documented in §4.2-4.5 of this audit:
+
+| Protection | Test | Legacy Status |
+|------------|------|---------------|
+| Timeout (30s configurable) | TestProposedProtections.test_timeout_exists_in_python | EXPERIMENTAL — legacy `socket.setTimeout()` never called |
+| Max frame size (1 MiB) | TestProposedProtections.test_max_frame_size_limit | EXPERIMENTAL — no legacy limit |
+| Max frame exceeded error | TestProposedProtections.test_max_frame_size_exceeded_raises | EXPERIMENTAL — new safety constraint |
+| IP allowlist not implemented | TestProposedProtections.test_ip_allowlist_not_implemented | NOT_IMPLEMENTED — security gap documented |
+| Read chunk size (65536) | TestProposedProtections.test_read_chunk_size | FUNCTIONAL_PARITY — equivalent to OS buffer delivery |

@@ -1,0 +1,84 @@
+{
+  "fixture_id": "battle-record-2on2",
+  "provenance": "LEGACY_SOURCE_DERIVED",
+  "source": {
+    "file": "legacy-js/js/starwing.js",
+    "line_start": 739,
+    "line_end": 759,
+    "description": "POST /battle/record_2on2 handler - records 2on2 battle result via BattleRecorder"
+  },
+  "endpoint": "/battle/record_2on2",
+  "method": "POST",
+  "request": {
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": {
+      "player_id": "10010",
+      "stage_id": "20001",
+      "match_id": "12345",
+      "battle_result": "win"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api": "*/*",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body_structure": {
+      "winning_streaks_2on2": 1,
+      "rank_point_2on2": 10000,
+      "ranking_score_2on2": 500,
+      "ranking_high_score_2on2": 1000,
+      "gained_ranking_score_2on2": 200,
+      "is_update_rank_point_2on2": true,
+      "is_update_ranking_score_2on2": true,
+      "is_up_ranking_score_2on2": true,
+      "is_new_record_ranking_score_2on2": true,
+      "update_items": {
+        "game_moneys": [{"game_money_id": 1, "count": 50}]
+      },
+      "battle_reward_ids": [1],
+      "rank_up_reward_ids": [2],
+      "rank_point_reward_ids": [3],
+      "intimacy_up_reward_ids": [4],
+      "avg_minute_score": {
+        "stage_id": "from_request",
+        "rank_id": 1,
+        "avg_minute_score": 44
+      },
+      "missions": "array from player_missions table"
+    }
+  },
+  "deterministic_fields": [
+    "winning_streaks_2on2",
+    "rank_point_2on2",
+    "ranking_score_2on2",
+    "ranking_high_score_2on2",
+    "gained_ranking_score_2on2",
+    "is_update_rank_point_2on2",
+    "is_update_ranking_score_2on2",
+    "is_up_ranking_score_2on2",
+    "is_new_record_ranking_score_2on2",
+    "update_items.game_moneys[0].game_money_id",
+    "update_items.game_moneys[0].count",
+    "battle_reward_ids",
+    "rank_up_reward_ids",
+    "rank_point_reward_ids",
+    "intimacy_up_reward_ids",
+    "avg_minute_score.rank_id",
+    "avg_minute_score.avg_minute_score"
+  ],
+  "dynamic_fields": [
+    "x-galaxy-api-id",
+    "avg_minute_score.stage_id",
+    "missions"
+  ],
+  "database_requirements": [
+    "player_missions table for mission data"
+  ],
+  "notes": "Legacy BattleRecorder returns hardcoded reward arrays and stat values. avg_minute_score.stage_id echoes the request body's stage_id. JSON formatted with 4-space indent."
+}

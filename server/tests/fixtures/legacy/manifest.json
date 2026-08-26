@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Legacy Regression Fixture Manifest",
+  "description": "Manifest of all legacy regression fixtures for the Starwing Paradox project.",
+  "version": "1.0.0",
+  "fixture_schema": {
+    "type": "object",
+    "required": [
+      "fixture_id",
+      "provenance",
+      "source",
+      "endpoint",
+      "method",
+      "request",
+      "response",
+      "deterministic_fields",
+      "dynamic_fields",
+      "database_requirements"
+    ],
+    "properties": {
+      "fixture_id": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+        "description": "Unique kebab-case identifier"
+      },
+      "provenance": {
+        "type": "string",
+        "enum": ["LEGACY_SOURCE_DERIVED", "LEGACY_RUNTIME_CAPTURE", "SYNTHETIC_SCHEMA"],
+        "description": "How this fixture was constructed"
+      },
+      "source": {
+        "type": "object",
+        "required": ["file", "line_start", "line_end", "description"],
+        "properties": {
+          "file": { "type": "string" },
+          "line_start": { "type": "integer", "minimum": 1 },
+          "line_end": { "type": "integer", "minimum": 1 },
+          "description": { "type": "string" }
+        }
+      },
+      "endpoint": { "type": "string" },
+      "method": { "type": "string", "enum": ["POST", "GET", "PUT", "DELETE"] },
+      "request": {
+        "type": "object",
+        "properties": {
+          "headers": { "type": "object" },
+          "body": { "type": ["object", "null"] }
+        }
+      },
+      "response": {
+        "type": "object",
+        "required": ["status", "headers", "body"],
+        "properties": {
+          "status": { "type": "integer" },
+          "headers": { "type": "object" },
+          "body": { "type": "string" }
+        }
+      },
+      "deterministic_fields": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "dynamic_fields": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "database_requirements": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "notes": { "type": "string" }
+    }
+  },
+  "fixtures": [
+    {
+      "fixture_id": "version-check",
+      "file": "http/version_check.json",
+      "provenance": "LEGACY_SOURCE_DERIVED",
+      "sha256": "ed58c978e5dcbcba3b8a510ecdea8bc836ab4a2814d2852f03229eaf960fd882"
+    },
+    {
+      "fixture_id": "resource-load",
+      "file": "http/resource_load.json",
+      "provenance": "LEGACY_SOURCE_DERIVED",
+      "sha256": "schema-based"
+    },
+    {
+      "fixture_id": "player-profile-load",
+      "file": "http/player_profile_load.json",
+      "provenance": "LEGACY_SOURCE_DERIVED",
+      "sha256": "schema-based"
+    },
+    {
+      "fixture_id": "game-data-load",
+      "file": "http/game_data_load.json",
+      "provenance": "LEGACY_SOURCE_DERIVED",
+      "sha256": "schema-based"
+    },
+    {
+      "fixture_id": "game-data-load-mission",
+      "file": "http/game_data_load_mission.json",
+      "provenance": "LEGACY_SOURCE_DERIVED",
+      "sha256": "schema-based"
+    },
+    {
+      "fixture_id": "battle-record-2on2",
+      "file": "http/battle_record_2on2.json",
+      "provenance": "LEGACY_SOURCE_DERIVED",
+      "sha256": "schema-based"
+    },
+    {
+      "fixture_id": "battle-fallback",
+      "file": "http/battle_fallback.json",
+      "provenance": "LEGACY_SOURCE_DERIVED",
+      "sha256": "af403ab5b1535518abf25a5ac337014be01f052217cd1cab5ded950579fee7e8"
+    },
+    {
+      "fixture_id": "mission-fallback",
+      "file": "http/mission_fallback.json",
+      "provenance": "LEGACY_SOURCE_DERIVED",
+      "sha256": "8eb95bcbc154530931e15fc418c8b1fe991095671409552099ea1aa596999ede"
+    },
+    {
+      "fixture_id": "credit-fallback",
+      "file": "http/credit_fallback.json",
+      "provenance": "LEGACY_SOURCE_DERIVED",
+      "sha256": "8eb95bcbc154530931e15fc418c8b1fe991095671409552099ea1aa596999ede"
+    }
+  ]
+}

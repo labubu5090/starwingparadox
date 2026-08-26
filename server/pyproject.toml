@@ -51,4 +51,5 @@ markers = [
     "integration: Integration tests requiring database",
     "synthetic: Tests using synthetic fixtures (not real captures)",
     "legacy_reference: Tests based on legacy JavaScript behavior",
+    "legacy_regression: TRUE legacy regression tests with fixture evidence",
 ]

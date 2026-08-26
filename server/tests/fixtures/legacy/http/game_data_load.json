@@ -1,0 +1,94 @@
+{
+  "fixture_id": "game-data-load",
+  "provenance": "LEGACY_SOURCE_DERIVED",
+  "source": {
+    "file": "legacy-js/js/starwing.js",
+    "line_start": 677,
+    "line_end": 698,
+    "description": "POST /game_data/load handler - loads all game data for a player via playerLoadGameData()"
+  },
+  "endpoint": "/game_data/load",
+  "method": "POST",
+  "request": {
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": {
+      "player_id": "10010"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api": "game_data/load",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body_structure": {
+      "player": "object with all player fields plus computed stats",
+      "buddies": "array",
+      "progresses": "array",
+      "options": "array",
+      "missions": "array",
+      "buddy_skills": "[]",
+      "buddy_win_poses": "array",
+      "emblems": "array",
+      "emblem_parts": "array",
+      "titles": "array",
+      "line_colors": "array",
+      "mecha_sets": "array",
+      "mecha_set_parts": "array",
+      "mecha_colors": "array",
+      "weapon_set": "array",
+      "weapon_set_slots": "array",
+      "side_weapons": "array",
+      "violation_point": 0,
+      "winning_streaks_2on2": 1
+    }
+  },
+  "deterministic_fields": [
+    "buddy_skills",
+    "violation_point",
+    "winning_streaks_2on2"
+  ],
+  "dynamic_fields": [
+    "x-galaxy-api-id",
+    "player.*",
+    "buddies",
+    "progresses",
+    "options",
+    "missions",
+    "buddy_win_poses",
+    "emblems",
+    "emblem_parts",
+    "titles",
+    "line_colors",
+    "mecha_sets",
+    "mecha_set_parts",
+    "mecha_colors",
+    "weapon_set",
+    "weapon_set_slots",
+    "side_weapons"
+  ],
+  "database_requirements": [
+    "player table for base player data",
+    "player_logins table for same_day_login_count and total_login_days",
+    "player_buddies table",
+    "player_progress table",
+    "player_options table",
+    "player_missions table",
+    "player_buddy_win_poses table",
+    "player_emblems table",
+    "player_emblem_parts table",
+    "player_titles table",
+    "player_line_colors table",
+    "player_mecha_sets table",
+    "player_mecha_set_parts table",
+    "player_mecha_colors table",
+    "player_weapon_set table",
+    "player_weapon_set_slots table",
+    "player_side_weapons table"
+  ],
+  "notes": "Legacy x-galaxy-api header is 'game_data/load'. Player object includes computed fields: same_day_login_count, total_login_days, consecutive_login_days, last_pref_ranking_order_id=0, pref_ranking_top_player_count=0, official_player_type_id=0. JSON is formatted with 4-space indent."
+}

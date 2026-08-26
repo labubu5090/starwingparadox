@@ -13,15 +13,14 @@ router = APIRouter(tags=["ranking"], prefix="/ranking")
 logger = logging.getLogger(__name__)
 
 
-def _ok(**extra: Any) -> dict[str, Any]:
-    return {"result": 1, **extra}
-
-
 def _not_implemented(endpoint: str, headers: dict[str, Any] | None = None) -> JSONResponse:
+    resp_headers = {"x-legacy-compat": "false"}
+    if headers:
+        resp_headers.update(headers)
     return JSONResponse(
         status_code=501,
         content={"error": "not_implemented", "endpoint": endpoint, "corrid": str(uuid.uuid4())},
-        headers=headers,
+        headers=resp_headers,
     )
 
 
@@ -39,9 +38,7 @@ async def ranking_national(
     x_galaxy_api_id: str = Header(default=""),
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
-    if not settings.legacy_compatibility_mode:
-        return _not_implemented("/ranking/national", headers)
-    return JSONResponse(content=_ok(ranking=[]), headers=headers)
+    return _not_implemented("/ranking/national", headers)
 
 
 @router.post("/location")
@@ -51,9 +48,7 @@ async def ranking_location(
     x_galaxy_api_id: str = Header(default=""),
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
-    if not settings.legacy_compatibility_mode:
-        return _not_implemented("/ranking/location", headers)
-    return JSONResponse(content=_ok(ranking=[]), headers=headers)
+    return _not_implemented("/ranking/location", headers)
 
 
 @router.post("/prefecture")
@@ -63,9 +58,7 @@ async def ranking_prefecture(
     x_galaxy_api_id: str = Header(default=""),
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
-    if not settings.legacy_compatibility_mode:
-        return _not_implemented("/ranking/prefecture", headers)
-    return JSONResponse(content=_ok(ranking=[]), headers=headers)
+    return _not_implemented("/ranking/prefecture", headers)
 
 
 @router.post("/event")
@@ -75,9 +68,7 @@ async def ranking_event(
     x_galaxy_api_id: str = Header(default=""),
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
-    if not settings.legacy_compatibility_mode:
-        return _not_implemented("/ranking/event", headers)
-    return JSONResponse(content=_ok(ranking=[]), headers=headers)
+    return _not_implemented("/ranking/event", headers)
 
 
 @router.post("/weapon")
@@ -87,9 +78,7 @@ async def ranking_weapon(
     x_galaxy_api_id: str = Header(default=""),
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
-    if not settings.legacy_compatibility_mode:
-        return _not_implemented("/ranking/weapon", headers)
-    return JSONResponse(content=_ok(ranking=[]), headers=headers)
+    return _not_implemented("/ranking/weapon", headers)
 
 
 @router.post("/{path:path}")
@@ -103,4 +92,4 @@ async def ranking_fallback(
     logger.debug("Unimplemented ranking endpoint: /ranking/%s", path)
     if not settings.legacy_compatibility_mode:
         return _not_implemented(f"/ranking/{path}", headers)
-    return JSONResponse(content=_ok(), headers=headers)
+    return JSONResponse(content={}, headers=headers)

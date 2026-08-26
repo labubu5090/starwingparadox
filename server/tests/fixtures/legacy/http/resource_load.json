@@ -1,0 +1,37 @@
+{
+  "fixture_id": "resource-load",
+  "provenance": "LEGACY_SOURCE_DERIVED",
+  "source": {
+    "file": "legacy-js/js/starwing.js",
+    "line_start": 779,
+    "line_end": 789,
+    "description": "POST /resource handler - reads and returns c_resource.json file contents"
+  },
+  "endpoint": "/resource",
+  "method": "POST",
+  "request": {
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": {}
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api": "*/*",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body_file": "legacy-js/js/starwing/c_resource.json",
+    "body_structure": {
+      "version": "70571",
+      "data": "ARRAY_OF_CSV_URLS"
+    },
+    "body_field_count": 162
+  },
+  "deterministic_fields": ["version", "data"],
+  "dynamic_fields": ["x-galaxy-api-id"],
+  "database_requirements": [],
+  "notes": "Legacy reads c_resource.json from disk via fs.readFileSync. The response is the raw file content. The 'data' array contains 162 CSV URL strings."
+}

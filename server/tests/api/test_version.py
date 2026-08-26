@@ -9,6 +9,9 @@ class TestVersionEndpoint:
     def test_version_returns_200(self, client: TestClient):
         response = client.post("/version", json={})
         assert response.status_code == 200
+        data = response.json()
+        assert isinstance(data, dict)
+        assert set(data.keys()) == {"client_version", "data_version", "stage_ids"}
 
     def test_version_returns_json(self, client: TestClient):
         response = client.post("/version", json={})
@@ -18,17 +21,20 @@ class TestVersionEndpoint:
         response = client.post("/version", json={})
         data = response.json()
         assert "client_version" in data
+        assert data["client_version"] == "70571"
 
     def test_version_has_data_version(self, client: TestClient):
         response = client.post("/version", json={})
         data = response.json()
         assert "data_version" in data
+        assert data["data_version"] == "70571"
 
     def test_version_has_stage_ids(self, client: TestClient):
         response = client.post("/version", json={})
         data = response.json()
         assert "stage_ids" in data
         assert isinstance(data["stage_ids"], list)
+        assert data["stage_ids"] == []
 
     def test_version_client_version_is_string(self, client: TestClient):
         response = client.post("/version", json={})
@@ -43,6 +49,7 @@ class TestVersionEndpoint:
     def test_version_x_galaxy_api_header(self, client: TestClient):
         response = client.post("/version", json={})
         assert "x-galaxy-api" in response.headers
+        assert response.headers.get("x-galaxy-api") == "*/*"
 
     def test_version_x_galaxy_api_id_header(self, client: TestClient):
         response = client.post(

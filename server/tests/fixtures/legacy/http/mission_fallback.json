@@ -1,0 +1,32 @@
+{
+  "fixture_id": "mission-fallback",
+  "provenance": "LEGACY_SOURCE_DERIVED",
+  "source": {
+    "file": "legacy-js/js/starwing.js",
+    "line_start": 595,
+    "line_end": 614,
+    "description": "POST /mission/* fallback handler - returns empty JSON {} for any mission sub-path"
+  },
+  "endpoint": "/mission/{path}",
+  "method": "POST",
+  "request": {
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": {}
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api": "*/*",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": "{\n}"
+  },
+  "deterministic_fields": [],
+  "dynamic_fields": ["x-galaxy-api-id"],
+  "database_requirements": [],
+  "notes": "Legacy mission/* fallback always returns empty JSON {} with status 200. Note: mission/reward/get expects intimacy_reward_ids:[], update_items:{}, update_missions:[] but the fallback returns {}."
+}

@@ -12,6 +12,9 @@ class TestPlayerProfileLoad:
             json={"nesys_id": "TESTNESYS00001"},
         )
         assert response.status_code == 200
+        data = response.json()
+        assert isinstance(data, dict)
+        assert "result" in data
 
     def test_profile_load_returns_json(self, client: TestClient):
         response = client.post(
@@ -26,6 +29,7 @@ class TestPlayerProfileLoad:
             json={"nesys_id": "TESTNESYS00001"},
         )
         assert "x-galaxy-api" in response.headers
+        assert response.headers.get("x-galaxy-api") == "*/*"
 
 
 class TestPlayerLogin:
@@ -37,6 +41,9 @@ class TestPlayerLogin:
             json={"player_id": "10010"},
         )
         assert response.status_code == 200
+        data = response.json()
+        assert isinstance(data, dict)
+        assert "result" in data
 
     def test_login_returns_json(self, client: TestClient):
         response = client.post(
@@ -51,6 +58,7 @@ class TestPlayerLogin:
             json={"player_id": "10010"},
         )
         assert "x-galaxy-api" in response.headers
+        assert response.headers.get("x-galaxy-api") == "*/*"
 
 
 class TestPlayerRegister:
@@ -62,6 +70,10 @@ class TestPlayerRegister:
             json={"player_id": "10010"},
         )
         assert response.status_code == 200
+        data = response.json()
+        assert isinstance(data, dict)
+        assert "result" in data
+        assert response.headers["content-type"] == "application/json"
 
     def test_register_returns_result(self, client: TestClient):
         response = client.post(
@@ -81,6 +93,10 @@ class TestPlayerLoginBonus:
             json={"player_id": "10010"},
         )
         assert response.status_code == 200
+        data = response.json()
+        assert isinstance(data, dict)
+        assert "result" in data
+        assert response.headers["content-type"] == "application/json"
 
     def test_login_bonus_has_result(self, client: TestClient):
         response = client.post(
@@ -100,6 +116,9 @@ class TestPlayerFallback:
             json={},
         )
         assert response.status_code == 200
+        data = response.json()
+        assert isinstance(data, dict)
+        assert "result" in data
 
     def test_unknown_player_endpoint_returns_result(self, client: TestClient):
         response = client.post(

@@ -22,10 +22,13 @@ def _ok(result: int = 1, **extra: Any) -> dict[str, Any]:
 
 
 def _not_implemented(endpoint: str, headers: dict[str, Any] | None = None) -> JSONResponse:
+    resp_headers = {"x-legacy-compat": "false"}
+    if headers:
+        resp_headers.update(headers)
     return JSONResponse(
         status_code=501,
         content={"error": "not_implemented", "endpoint": endpoint, "corrid": str(uuid.uuid4())},
-        headers=headers,
+        headers=resp_headers,
     )
 
 

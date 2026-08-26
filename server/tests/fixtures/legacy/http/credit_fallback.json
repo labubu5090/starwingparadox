@@ -1,0 +1,32 @@
+{
+  "fixture_id": "credit-fallback",
+  "provenance": "LEGACY_SOURCE_DERIVED",
+  "source": {
+    "file": "legacy-js/js/starwing.js",
+    "line_start": 616,
+    "line_end": 631,
+    "description": "POST /credit/* fallback handler - returns empty JSON {} for any credit sub-path"
+  },
+  "endpoint": "/credit/{path}",
+  "method": "POST",
+  "request": {
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": {}
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api": "*/*",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": "{\n}"
+  },
+  "deterministic_fields": [],
+  "dynamic_fields": ["x-galaxy-api-id"],
+  "database_requirements": [],
+  "notes": "Legacy credit/* fallback always returns empty JSON {} with status 200."
+}

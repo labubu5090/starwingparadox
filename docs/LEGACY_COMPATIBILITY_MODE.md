@@ -28,15 +28,15 @@ Set via `.env` file or environment variable. Pydantic parses `"true"/"false"/"1"
   ```json
   {"error": "not_implemented", "endpoint": "/path", "corrid": "uuid"}
   ```
+- All 501 responses include header `x-legacy-compat: false`
 - Real endpoints function normally
 - Recommended for development and new integrations
 
 ### `LEGACY_COMPATIBILITY_MODE=true` (Legacy Mode, DEFAULT)
 
-- Stub endpoints return **HTTP 200** with mock success bodies
+- Stub endpoints return **HTTP 200** with legacy-compatible mock bodies
 - Real endpoints function normally
 - Use only for backward-compatibility testing with legacy clients
-- **WARNING**: Many mock responses differ from actual legacy server behavior (see Reality Check)
 
 ### Setting Absent (env var unset)
 
@@ -64,78 +64,66 @@ These endpoints bypass the compatibility flag entirely:
 
 ---
 
-## Stub Endpoints (Gated)
+## Stub Endpoints (Gated by legacy_compatibility_mode)
 
-### Returns `{"result":1,"login_bonuses":[],"update_items":{}}`
-- POST /player/login_bonus
+### Legacy-compatible responses (when mode=true)
 
-### Returns `{"result":1}`
-- POST /player/{fallback}
-- POST /matching/{fallback}
-- POST /ranking/{fallback}
-- POST /game_data/{fallback}
-- POST /battle/{fallback}
-- POST /tutorial/{fallback}
+| Route | Response | Legacy Source |
+|-------|----------|---------------|
+| POST /matching/server | `{"ip_addr":"<matcher>:<pb_port>"}` | starwing.js:365-368 |
+| POST /matching/match_id/generate | `{"match_id":<random_int>}` | starwing.js:435-436 |
+| POST /matching/* fallback | `{}` | starwing.js:447 |
+| POST /player/login_bonus | `{"result":1,"login_bonuses":[],"update_items":{}}` | starwing.js:547-551 |
+| POST /player/* fallback | `{"result":1}` | starwing.js:588-590 |
+| POST /ranking/* fallback | `{}` | starwing.js:483 (deafult) |
+| POST /game_data/* fallback | `{"result":1}` | starwing.js:734-736 |
+| POST /battle/* fallback | `{"result":1}` | starwing.js:773-775 |
+| POST /mission/* fallback | `{}` | starwing.js:611-612 |
+| POST /credit/* fallback | `{}` | starwing.js:628-629 |
+| POST /tutorial/* fallback | `{"result":1}` | starwing.js:646-648 |
 
-### Returns `{"result":1,...}` (custom shapes)
-- POST /matching/server → `{"result":1,"servers":[]}`
-- POST /matching/match_id/generate → `{"result":1,"match_id":""}`
-- POST /ranking/national → `{"result":1,"ranking":[]}`
-- POST /ranking/location → `{"result":1,"ranking":[]}`
-- POST /ranking/prefecture → `{"result":1,"ranking":[]}`
-- POST /ranking/event → `{"result":1,"ranking":[]}`
-- POST /ranking/weapon → `{"result":1,"ranking":[]}`
-- POST /game_data/load → `{"result":1,"game_data":{}}`
-- POST /game_data/load/mission → `{"result":1,"missions":[]}`
-- POST /game_data/save → `{"result":1}`
-- POST /battle/record_2on2 → `{"result":1}`
+### Always 501 (regardless of legacy mode)
 
-### Returns `{}`
-- POST /mission/{fallback}
-- POST /credit/{fallback}
+These endpoints cannot produce the real legacy response without DB/file implementations:
 
----
+| Route | Reason | Legacy Source |
+|-------|--------|---------------|
+| POST /ranking/national | Requires c_rankingNational.json | starwing.js:460 |
+| POST /ranking/location | Requires c_rankingStore.json | starwing.js:464 |
+| POST /ranking/prefecture | Requires c_rankingPrefecture.json | starwing.js:468 |
+| POST /ranking/event | Requires c_rankingEvent.json | starwing.js:472 |
+| POST /ranking/weapon | Requires c_rankingWeapon_r*.json | starwing.js:477 |
+| POST /game_data/load | Complex DB query (15+ tables) | playerProfile.js:87-296 |
+| POST /game_data/load/mission | DB query result | playerProfile.js:74-86 |
+| POST /game_data/save | Complex DB writes (15+ UPSERTs) | playerProfile.js:438-722 |
+| POST /battle/record_2on2 | Complex ranking/reward object | battleRecorder.js:5-44 |
 
-## Legacy Parity Gaps
-
-**These stub responses DO NOT match the actual legacy JavaScript server.** See `LEGACY_COMPATIBILITY_REALITY_CHECK.md` for full evidence.
-
-Key discrepancies:
-
-| Route | Legacy Returns | Python Returns (mode=true) |
-|-------|---------------|---------------------------|
-| /matching/server | `{"ip_addr":"paradox.yourdomain.com:6666"}` | `{"result":1,"servers":[]}` |
-| /matching/match_id/generate | `{"match_id":42381}` (random int) | `{"result":1,"match_id":""}` |
-| /matching/* | `{}` | `{"result":1}` |
-| /ranking/* | File contents (e.g., `c_rankingNational.json`) | `{"result":1,"ranking":[]}` |
-| /ranking/* | `{}` (default) | `{"result":1}` |
-| /game_data/load | 15+ table query result | `{"result":1,"game_data":{}}` |
-| /game_data/load/mission | player_missions query result | `{"result":1,"missions":[]}` |
-| /game_data/save | `{result:1, missions:[...]}` (after 15+ UPSERTs) | `{"result":1}` |
-| /battle/record_2on2 | Complex object with ranking/rewards | `{"result":1}` |
-| /mission/* | `{}` | `{}` ✓ |
-| /credit/* | `{}` | `{}` ✓ |
+All 501 responses include:
+- Status: 501
+- Header: `x-legacy-compat: false`
+- Body: `{"error":"not_implemented","endpoint":"...","corrid":"uuid"}`
 
 ---
 
-## Header Differences
+## False Successes Removed
 
-All Python endpoints set `x-galaxy-api: */\*` via `_galaxy_headers()`. Legacy JS uses route-specific values for these endpoints:
+This audit removed all semantically false `{"result":1}` responses where the legacy source returns something different:
 
-| Route | Legacy `x-galaxy-api` value |
-|-------|-----------------------------|
-| /ranking/national | `ranking/national` |
-| /ranking/location | `ranking/location` |
-| /ranking/prefecture | `ranking/prefecture` |
-| /ranking/event | `ranking/event` |
-| /ranking/weapon | `ranking/event` (bug in legacy) |
-| /player/profile/load | `player/profile` |
-| /player/login | `player/login` |
-| /player/login_bonus | `player/login` |
-| /player/register | `player/register` |
-| /game_data/load/mission | `game_data/load` |
-| /game_data/load | `game_data/load` |
-| /game_data/save | `game_data/save` |
+| Route | Previous (False) | Correct (Legacy) |
+|-------|------------------|-------------------|
+| /matching/server | `{"result":1,"servers":[]}` | `{"ip_addr":"paradox.yourdomain.com:6666"}` |
+| /matching/match_id/generate | `{"result":1,"match_id":""}` | `{"match_id":42381}` (random int) |
+| /matching/* fallback | `{"result":1}` | `{}` |
+| /ranking/national | `{"result":1,"ranking":[]}` | 501 (requires file) |
+| /ranking/location | `{"result":1,"ranking":[]}` | 501 (requires file) |
+| /ranking/prefecture | `{"result":1,"ranking":[]}` | 501 (requires file) |
+| /ranking/event | `{"result":1,"ranking":[]}` | 501 (requires file) |
+| /ranking/weapon | `{"result":1,"ranking":[]}` | 501 (requires file) |
+| /ranking/* fallback | `{"result":1}` | `{}` |
+| /game_data/load | `{"result":1,"game_data":{}}` | 501 (requires DB) |
+| /game_data/load/mission | `{"result":1,"missions":[]}` | 501 (requires DB) |
+| /game_data/save | `{"result":1}` | 501 (requires DB) |
+| /battle/record_2on2 | `{"result":1}` | 501 (requires DB) |
 
 ---
 
@@ -150,8 +138,7 @@ These routes exist in legacy JS but have no Python equivalent:
 
 ## Recommendations
 
-1. **Do not rely on `LEGACY_COMPATIBILITY_MODE=true` for production legacy client compatibility.** The mock responses have wrong shapes for 9 of 20 stub endpoints.
-2. **Implement actual file-based responses** for /ranking/* and /resource endpoints.
-3. **Implement DB-backed stubs** for /game_data/load, /game_data/load/mission, /game_data/save, /battle/record_2on2.
-4. **Fix response shapes** for /matching/server (`ip_addr` field) and /matching/match_id/generate (random int).
-5. **Replicate route-specific `x-galaxy-api` header values** if legacy client validation depends on them.
+1. **Implement file-based responses** for /ranking/* endpoints using the c_ranking*.json files.
+2. **Implement DB-backed handlers** for /game_data/load, /game_data/load/mission, /game_data/save.
+3. **Implement battle recording** for /battle/record_2on2.
+4. **Replicate route-specific `x-galaxy-api` header values** if legacy client validation depends on them.

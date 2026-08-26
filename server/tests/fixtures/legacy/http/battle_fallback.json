@@ -1,0 +1,32 @@
+{
+  "fixture_id": "battle-fallback",
+  "provenance": "LEGACY_SOURCE_DERIVED",
+  "source": {
+    "file": "legacy-js/js/starwing.js",
+    "line_start": 761,
+    "line_end": 777,
+    "description": "POST /battle/* fallback handler - returns {result: 1} for any battle sub-path"
+  },
+  "endpoint": "/battle/{path}",
+  "method": "POST",
+  "request": {
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": {}
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "x-galaxy-api": "*/*",
+      "x-galaxy-api-id": "test-api-id"
+    },
+    "body": "{\n\t\"result\": 1\n}"
+  },
+  "deterministic_fields": ["result"],
+  "dynamic_fields": ["x-galaxy-api-id"],
+  "database_requirements": [],
+  "notes": "Legacy battle/* fallback always returns {result: 1} with status 200, regardless of input. This is the catch-all for unimplemented battle endpoints."
+}
