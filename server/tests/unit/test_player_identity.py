@@ -353,7 +353,7 @@ class TestInvalidNesysId:
         db.add(player)
         db.commit()
         db.refresh(player)
-        # SQLite stores it (no length enforcement), but PostgreSQL would truncate/error
+        # SQLite stores it (no length enforcement)
         assert len(player.nesys_id) == 30
 
 

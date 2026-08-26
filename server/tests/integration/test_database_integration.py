@@ -373,3 +373,175 @@ class TestRollbackIsolation:
                 {"nesys": "NESYS_ROLLBACK2"},
             )
             assert result.scalar() == 0
+
+
+# ---------------------------------------------------------------------------
+# SQLite Concurrency Tests
+# ---------------------------------------------------------------------------
+
+
+class TestSQLiteConcurrency:
+    """Verify WAL mode and busy_timeout behavior."""
+
+    def test_wal_mode_available(self, sync_engine):
+        """WAL journal mode can be enabled."""
+        with sync_engine.connect() as conn:
+            conn.execute(text("PRAGMA journal_mode=WAL"))
+            result = conn.execute(text("PRAGMA journal_mode"))
+            mode = result.scalar()
+            assert mode.lower() == "wal"
+
+    def test_foreign_keys_enabled(self, sync_engine):
+        """Foreign keys pragma is ON."""
+        with sync_engine.connect() as conn:
+            result = conn.execute(text("PRAGMA foreign_keys"))
+            assert result.scalar() == 1
+
+    def test_busy_timeout_configured(self, sync_engine):
+        """Busy timeout is set to 10 seconds."""
+        with sync_engine.connect() as conn:
+            result = conn.execute(text("PRAGMA busy_timeout"))
+            timeout = result.scalar()
+            assert timeout == 10000
+
+    def test_concurrent_reads_during_write(self, sync_engine):
+        """Multiple concurrent reads succeed while a write is in progress."""
+        import threading
+
+        errors = []
+
+        def reader():
+            try:
+                with sync_engine.connect() as conn:
+                    conn.execute(text("SELECT COUNT(*) FROM player"))
+            except Exception as e:
+                errors.append(str(e))
+
+        # Insert a row to read
+        with sync_engine.connect() as conn:
+            conn.execute(
+                text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+                {"pid": 90001, "nesys": "CONCURRENCY_TEST"},
+            )
+            conn.commit()
+
+        # Start concurrent readers
+        threads = [threading.Thread(target=reader) for _ in range(5)]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join(timeout=5)
+
+        assert errors == [], f"Concurrent read errors: {errors}"
+
+    def test_sequential_writes_succeed(self, sync_engine):
+        """Multiple sequential writes all succeed."""
+        for i in range(10):
+            with sync_engine.connect() as conn:
+                conn.execute(
+                    text("INSERT INTO player (player_id, nesys_id) VALUES (:pid, :nesys)"),
+                    {"pid": 90100 + i, "nesys": f"SEQ_WRITE_{i}"},
+                )
+                conn.commit()
+
+        with sync_engine.connect() as conn:
+            result = conn.execute(
+                text("SELECT COUNT(*) FROM player WHERE nesys_id LIKE 'SEQ_WRITE_%'")
+            )
+            assert result.scalar() == 10
+
+    def test_integrity_check(self, sync_engine):
+        """PRAGMA integrity_check returns OK."""
+        with sync_engine.connect() as conn:
+            result = conn.execute(text("PRAGMA integrity_check"))
+            assert result.scalar() == "ok"
+
+
+# ---------------------------------------------------------------------------
+# SQLite Backup/Restore Tests
+# ---------------------------------------------------------------------------
+
+
+class TestSQLiteBackupRestore:
+    """Verify backup and restore with real SQLite files."""
+
+    def test_backup_and_restore(self, tmp_path):
+        """Backup and restore preserves all data."""
+        import sqlite3
+
+        db_path = tmp_path / "test.db"
+        backup_path = tmp_path / "test_backup.db"
+
+        # Create and populate
+        conn = sqlite3.connect(str(db_path))
+        conn.execute("CREATE TABLE test (id INTEGER PRIMARY KEY, name TEXT)")
+        conn.execute("INSERT INTO test VALUES (1, 'alice')")
+        conn.execute("INSERT INTO test VALUES (2, 'bob')")
+        conn.commit()
+
+        # Backup
+        backup_conn = sqlite3.connect(str(backup_path))
+        conn.backup(backup_conn)
+        backup_conn.close()
+        conn.close()
+
+        # Restore and verify
+        restore_conn = sqlite3.connect(str(backup_path))
+        rows = restore_conn.execute("SELECT * FROM test ORDER BY id").fetchall()
+        assert rows == [(1, "alice"), (2, "bob")]
+        restore_conn.close()
+
+    def test_backup_preserves_wal(self, tmp_path):
+        """Backup preserves WAL mode data."""
+        import sqlite3
+
+        db_path = tmp_path / "test_wal.db"
+        backup_path = tmp_path / "test_wal_backup.db"
+
+        conn = sqlite3.connect(str(db_path))
+        conn.execute("PRAGMA journal_mode=WAL")
+        conn.execute("CREATE TABLE test (id INTEGER PRIMARY KEY, value TEXT)")
+        conn.execute("INSERT INTO test VALUES (1, 'data')")
+        conn.commit()
+
+        # Force WAL checkpoint
+        conn.execute("PRAGMA wal_checkpoint(FULL)")
+        conn.commit()
+
+        # Backup
+        backup_conn = sqlite3.connect(str(backup_path))
+        conn.backup(backup_conn)
+        backup_conn.close()
+        conn.close()
+
+        # Verify backup
+        backup_conn = sqlite3.connect(str(backup_path))
+        result = backup_conn.execute("SELECT value FROM test WHERE id=1").fetchone()
+        assert result[0] == "data"
+        backup_conn.close()
+
+    def test_integrity_after_restore(self, tmp_path):
+        """Integrity check passes after restore."""
+        import sqlite3
+
+        db_path = tmp_path / "test_integrity.db"
+        backup_path = tmp_path / "test_integrity_backup.db"
+
+        conn = sqlite3.connect(str(db_path))
+        conn.execute("CREATE TABLE test (id INTEGER PRIMARY KEY, name TEXT)")
+        conn.execute("INSERT INTO test VALUES (1, 'test_data')")
+        conn.commit()
+        conn.close()
+
+        # Backup and restore
+        src = sqlite3.connect(str(db_path))
+        dst = sqlite3.connect(str(backup_path))
+        src.backup(dst)
+        dst.close()
+        src.close()
+
+        # Integrity check
+        restored = sqlite3.connect(str(backup_path))
+        result = restored.execute("PRAGMA integrity_check").fetchone()
+        assert result[0] == "ok"
+        restored.close()

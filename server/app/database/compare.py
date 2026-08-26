@@ -1,8 +1,8 @@
 """Database comparison framework for Starwing Paradox.
 
-Provides snapshot-based comparison of PostgreSQL database state
-before and after request handling. Used to verify that the Python
-server produces identical database effects to the legacy JavaScript server.
+Provides snapshot-based comparison of database state before and after
+request handling. Used to verify that the Python server produces identical
+database effects to the legacy JavaScript server.
 """
 
 from __future__ import annotations
@@ -298,12 +298,12 @@ def compare_snapshots(
     - SEMANTIC_DATABASE_MATCH: Row counts match but order may differ
     - DATABASE_MISMATCH: Rows added/removed/modified
     - TRANSACTION_MISMATCH: Different tables affected
-    - DATABASE_NOT_AVAILABLE: PostgreSQL not reachable
+    - DATABASE_NOT_AVAILABLE: Database not reachable
     """
     if not before.available or not after.available:
         return ComparisonResult(
             classification=DatabaseComparisonResult.DATABASE_NOT_AVAILABLE,
-            details=["One or both snapshots are unavailable (PostgreSQL not reachable)"],
+            details=["One or both snapshots are unavailable (database not reachable)"],
         )
 
     # Check if same tables were captured

@@ -1,7 +1,6 @@
 """Unit tests for the database comparison framework.
 
 Tests the comparison logic using in-memory SQLite databases.
-No PostgreSQL connection required.
 """
 
 from __future__ import annotations
