@@ -1,0 +1,42 @@
+"""Credit endpoints (POST /credit/*) – PLACEHOLDER."""
+
+import logging
+import uuid
+from typing import Any
+
+from fastapi import APIRouter, Header, Request, Response
+from fastapi.responses import JSONResponse
+
+from app.config import settings
+
+router = APIRouter(tags=["credit"], prefix="/credit")
+logger = logging.getLogger(__name__)
+
+
+def _not_implemented(endpoint: str, headers: dict[str, Any] | None = None) -> JSONResponse:
+    return JSONResponse(
+        status_code=501,
+        content={"error": "not_implemented", "endpoint": endpoint, "corrid": str(uuid.uuid4())},
+        headers=headers,
+    )
+
+
+def _galaxy_headers(x_galaxy_api_id: str) -> dict[str, str]:
+    headers = {"x-galaxy-api": "*/*"}
+    if x_galaxy_api_id:
+        headers["x-galaxy-api-id"] = x_galaxy_api_id
+    return headers
+
+
+@router.post("/{path:path}")
+async def credit_fallback(
+    path: str,
+    request: Request,
+    response: Response,
+    x_galaxy_api_id: str = Header(default=""),
+) -> Response:
+    headers = _galaxy_headers(x_galaxy_api_id)
+    logger.debug("Unimplemented credit endpoint: /credit/%s", path)
+    if not settings.legacy_compatibility_mode:
+        return _not_implemented(f"/credit/{path}", headers)
+    return JSONResponse(content={}, headers=headers)

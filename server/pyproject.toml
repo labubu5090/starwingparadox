@@ -1,0 +1,54 @@
+[project]
+name = "starwing-paradox-server"
+version = "0.1.0"
+description = "Starwing Paradox arcade game server - Python rewrite"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.34.0",
+    "sqlalchemy[asyncio]>=2.0.36",
+    "psycopg[binary]>=3.2.0",
+    "alembic>=1.14.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.7.0",
+    "grpcio-tools>=1.69.0",
+    "httpx>=0.28.0",
+    "redis>=5.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.25.0",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.8.0",
+    "mypy>=1.14.0",
+    "httpx>=0.28.0",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "A", "C4", "SIM", "TCH"]
+ignore = ["E501", "B008", "N818", "TC002"]
+
+[tool.ruff.lint.per-file-ignores]
+"app/protocol/generated/*" = ["N999", "UP009"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "unit: Unit tests",
+    "api: API endpoint tests",
+    "protocol: Protocol codec tests",
+    "integration: Integration tests requiring database",
+    "synthetic: Tests using synthetic fixtures (not real captures)",
+    "legacy_reference: Tests based on legacy JavaScript behavior",
+]
