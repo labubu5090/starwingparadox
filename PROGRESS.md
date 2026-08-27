@@ -75,7 +75,7 @@ NesysService.exe exits immediately (code -1).
 **Status**: D_LAYOUT_NO_EFFECT
 
 D: drive was reconstructed and mounted, but NesysService still exits with -1.
-The D: drive is necessary but not sufficient.
+D: necessity remains unproven.
 
 ### G6 Results
 
@@ -86,6 +86,24 @@ The D: drive is necessary but not sufficient.
 | Named pipes created | None |
 | Game NESYS status | Still offline |
 | D: drive effect | NO_EFFECT |
+
+## Phase 2A-G7: Process Monitor Trace (IN PROGRESS)
+
+**Status**: WAITING_FOR_PROCMON
+
+Process Monitor is not available on this system. The exact initialization failure
+point cannot be isolated without runtime tracing.
+
+### G7 Results
+
+| Metric | Value |
+|--------|-------|
+| Procmon availability | NOT_AVAILABLE |
+| NesysService exit code | -1 |
+| Terminal failure window | UNKNOWN |
+| D drive differential | NO_MATERIAL_EFFECT |
+| Network connectivity | cert3.nesys.jp REACHABLE |
+| Named pipes | NOT_CREATED |
 
 ### Current Runtime State
 
@@ -100,7 +118,7 @@ The D: drive is necessary but not sufficient.
 | Matching | NOT_IMPLEMENTED |
 | Battle | NOT_IMPLEMENTED |
 | Real playability | NOT_PROVEN |
-| Primary blocker | NesysService initialization failure (unknown cause) |
+| Primary blocker | BLOCKED_BY_UNKNOWN_NESYS_INITIALIZATION_FAILURE |
 
 ## Current State
 
