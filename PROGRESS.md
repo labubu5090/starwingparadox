@@ -61,19 +61,31 @@
 
 Not yet PRODUCTION_READY until a real cabinet successfully connects and completes the agreed boot and player flow.
 
-## Phase 2A-G5R: NESYS Offline Block Investigation (IN PROGRESS)
+## Phase 2A-G5R: NESYS Offline Block Investigation (COMPLETE)
 
 **Status**: BLOCKED_BY_MISSING_NESYS_LAUNCHER
 
 ### NESYS Root Cause
 
 The game requires NesysService.exe to be running via a named pipe connection.
-NesysService.exe exits immediately (code -1) because:
-1. D: drive is NOT MOUNTED (does not exist on this system)
-2. No launcher/startup script starts NesysService
-3. No Windows certificates for NESYS
-4. No registry configuration for NESYS
-5. No parent process context
+NesysService.exe exits immediately (code -1).
+
+## Phase 2A-G6: D-Drive Runtime Reconstruction (COMPLETE)
+
+**Status**: D_LAYOUT_NO_EFFECT
+
+D: drive was reconstructed and mounted, but NesysService still exits with -1.
+The D: drive is necessary but not sufficient.
+
+### G6 Results
+
+| Metric | Value |
+|--------|-------|
+| D: drive | RECONSTRUCTED (217 files, 7.9 MB) |
+| NesysService exit code | -1 (unchanged) |
+| Named pipes created | None |
+| Game NESYS status | Still offline |
+| D: drive effect | NO_EFFECT |
 
 ### Current Runtime State
 
@@ -88,7 +100,7 @@ NesysService.exe exits immediately (code -1) because:
 | Matching | NOT_IMPLEMENTED |
 | Battle | NOT_IMPLEMENTED |
 | Real playability | NOT_PROVEN |
-| Primary blocker | NESYS_SERVICE_INITIALIZATION |
+| Primary blocker | NesysService initialization failure (unknown cause) |
 
 ## Current State
 
