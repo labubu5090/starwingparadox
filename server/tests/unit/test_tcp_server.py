@@ -103,7 +103,8 @@ class TestMaxFrameSize:
 class TestHandlerDispatch:
     @pytest.mark.asyncio
     async def test_dispatch_calls_correct_handler(self):
-        from app.protocol.generated import starwingMessage_pb2 as pb_mod
+        from app.protocol.codec import encode_length_prefix
+        from app.protocol.registry import MESSAGE_TYPE_MAP
 
         called_with = {}
 
@@ -112,15 +113,13 @@ class TestHandlerDispatch:
             called_with["message_type"] = message_type
             return b"response"
 
-        register_handler(0x77, spy_handler)
+        TEST_MSG_TYPE = 0x77
+        register_handler(TEST_MSG_TYPE, spy_handler)
+        # Temporarily add to registry so raw decoder can parse it
+        MESSAGE_TYPE_MAP[TEST_MSG_TYPE] = "TestDispatchType"
         try:
-            from app.protocol.codec import encode_length_prefix
-
-            msg = pb_mod.PbMessage()
-            msg.packetId = 1
-            msg.messageType = 0x77
-            msg.Ping.SetInParent()
-            inner = msg.SerializeToString()
+            # Construct valid protobuf bytes: field 1 (packetId)=1, field 2 (messageType)=0x77
+            inner = b"\x08\x01\x10" + bytes([TEST_MSG_TYPE])
             framed = encode_length_prefix(inner)
 
             reader = asyncio.StreamReader()
@@ -134,18 +133,20 @@ class TestHandlerDispatch:
 
             await _handle_client(reader, writer)
 
-            assert called_with["message_type"] == 0x77
+            assert called_with["message_type"] == TEST_MSG_TYPE
             writer.write.assert_called_once()
             written = writer.write.call_args[0][0]
             assert written == b"response"
         finally:
-            del _handlers[0x77]
+            del _handlers[TEST_MSG_TYPE]
+            del MESSAGE_TYPE_MAP[TEST_MSG_TYPE]
 
     @pytest.mark.asyncio
     async def test_unknown_type_gets_default_handler(self):
         from app.protocol.codec import encode_length_prefix
 
-        inner = b"\x08\x01\x10\xff"
+        # Valid protobuf with unknown messageType=0x77 (not in MESSAGE_TYPE_MAP)
+        inner = b"\x08\x01\x10\x77"
         framed = encode_length_prefix(inner)
 
         reader = asyncio.StreamReader()

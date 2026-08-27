@@ -65,3 +65,9 @@ tmp/
 
 # Capture sessions
 data/captures/
+
+# External diagnostic tools
+tools/external/
+
+# Runtime trace data (Procmon PML files)
+runtime/

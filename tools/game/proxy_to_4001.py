@@ -5,16 +5,13 @@ Binds only to 127.0.0.1.
 Logs all requests and responses for observation.
 """
 
-import http.server
 import json
 import logging
-import sys
 import threading
-import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
 BACKEND = "http://127.0.0.1:4001"
@@ -44,7 +41,7 @@ def log_request(method, path, headers, body_len, status, resp_headers, resp_body
         LOG_DIR.mkdir(parents=True, exist_ok=True)
         with open(LOG_FILE, "a") as f:
             f.write(json.dumps(entry) + "\n")
-    except Exception:
+    except OSError:
         pass
 
 
@@ -88,7 +85,7 @@ class ProxyHandler(BaseHTTPRequestHandler):
             resp_status = e.code
             resp_headers = dict(e.headers)
             resp_body = e.read()
-        except Exception as e:
+        except (urllib.error.URLError, OSError) as e:
             resp_status = 502
             resp_headers = {}
             resp_body = json.dumps({"error": str(e)}).encode()
@@ -144,7 +141,7 @@ class ThreadedHTTPServer(HTTPServer):
     def _handle_request_thread(self, request, client_address):
         try:
             self.finish_request(request, client_address)
-        except Exception:
+        except Exception:  # noqa: BLE001 — standard http.server error handler pattern
             self.handle_error(request, client_address)
         finally:
             self.shutdown_request(request)

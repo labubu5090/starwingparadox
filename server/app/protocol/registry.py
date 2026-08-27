@@ -3,6 +3,7 @@
 MESSAGE_TYPE_MAP: dict[int, str] = {
     0x65: "NotifyPushMessage",
     0x66: "Ping",
+    0x67: "PingResponse",
     200: "RequestEntryMatching",
     201: "ResponseEntryMatching",
     0xCA: "RequestCancelMatching",  # 202

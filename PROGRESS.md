@@ -87,38 +87,77 @@ D: necessity remains unproven.
 | Game NESYS status | Still offline |
 | D: drive effect | NO_EFFECT |
 
-## Phase 2A-G7: Process Monitor Trace (IN PROGRESS)
+## Phase 2A-G7: Process Monitor Trace (COMPLETE)
 
-**Status**: WAITING_FOR_PROCMON
-
-Process Monitor is not available on this system. The exact initialization failure
-point cannot be isolated without runtime tracing.
+**Status**: COMPLETE
 
 ### G7 Results
 
 | Metric | Value |
 |--------|-------|
-| Procmon availability | NOT_AVAILABLE |
+| Procmon availability | AVAILABLE (v4.1) |
 | NesysService exit code | -1 |
 | Terminal failure window | UNKNOWN |
 | D drive differential | NO_MATERIAL_EFFECT |
 | Network connectivity | cert3.nesys.jp REACHABLE |
 | Named pipes | NOT_CREATED |
 
-### Current Runtime State
+## Phase 2A-G8: TCP Runtime Differential Analysis (COMPLETE)
+
+**Status**: COMPLETE
+
+### Key Findings
+
+- Run A (01:21) and Run B (01:41) had **identical game-level TCP behavior**
+- Both runs: first TCP attempt fails (race condition), subsequent attempts succeed at transport level
+- Both runs: `bGameConnect` never restores to 1 after first failure
+- Both runs: NESYS offline
+- Run B TCP server console showed zero connections (game log shows connections) — **UNEXPLAINED**
+
+### Correction Note (2026-08-28)
+
+**RENDERING_CRASH_STATUS**: NOT_CONFIRMED_AS_SPONTANEOUS
+
+The operator previously stated that the apparent game crash occurred when the operator forcibly closed the game. The rendering crash (FRCPassPostProcessAA::Process) is NOT confirmed as spontaneous. Do not classify as a current blocker. Do not use operator-forced closure as renderer-failure evidence.
+
+**messageType 103 (0x67)**: CAPTURE_SEQUENCE_CANDIDATE — not proven as PingResponse. Only one capture sequence exists. The legacy JS code (starwing.js:121) shows 0x67 as a reply to 0x66, but the proto file has no separate PingResponse message type.
+
+**Current primary hypothesis**: First-connection startup timing / server readiness race.
+
+### Runtime State
 
 | Metric | Value |
 |--------|-------|
-| HTTP server discovery | VERIFIED_WORKING |
-| Matching server response | VERIFIED_RECEIVED |
+| HTTP connection | CONFIRMED |
+| Matching server response | CONFIRMED (identical both runs) |
+| TCP listener | RUNNING |
+| TCP connection (game log) | BOTH RUNS |
+| TCP connection (server console) | Run A: YES, Run B: NO |
 | NESYS status | OFFLINE |
-| Card play | BLOCKED_BY_NESYS_OFFLINE |
-| Normal game flow | NOT_REACHED |
-| Coin/start validation | NOT_YET_VALID |
+| Card play | BLOCKED |
 | Matching | NOT_IMPLEMENTED |
 | Battle | NOT_IMPLEMENTED |
 | Real playability | NOT_PROVEN |
-| Primary blocker | BLOCKED_BY_UNKNOWN_NESYS_INITIALIZATION_FAILURE |
+| Primary blocker | NESYS_OFFLINE → bGameConnect_never_restores |
+| Runtime difference | TCP_CONNECTION_STATE_DEPENDS_ON_GAME_FLOW |
+
+## Phase 2A-G9: Cold-Boot Server Readiness and First-Ping Race Validation (IN_PROGRESS)
+
+**Status**: IN_PROGRESS
+
+### G9 Objectives
+
+- Determine whether first Ping failure is caused by server startup order / TCP readiness timing
+- Test three controlled startup delays (0s, 5s, 15s)
+- Create cold-boot validation procedure
+- Verify true TCP accept readiness
+- Capture first game connection precisely
+
+### G9 Environment
+
+- Mypy: version 2.3.1, 0 errors on 64 source files
+- Ruff: 0 errors
+- Tests: 796 passed, 6 skipped, 0 failed
 
 ## Current State
 

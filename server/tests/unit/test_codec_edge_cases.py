@@ -158,7 +158,9 @@ class TestDecodeRequestEdgeCases:
 
         if HAS_GENERATED:
             pytest.skip("Generated protobuf loaded; raw mode not active")
-        inner = b"\x08\x01\x10\xff"
+        # Valid protobuf: field 1 (packetId)=1, field 2 (messageType)=0x77 (119)
+        # 0x77 is not in MESSAGE_TYPE_MAP, so UnknownMessageType is raised.
+        inner = b"\x08\x01\x10\x77"
         framed = encode_length_prefix(inner)
         with pytest.raises(UnknownMessageType):
             decode_request(framed)
