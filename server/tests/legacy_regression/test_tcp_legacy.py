@@ -358,8 +358,12 @@ class TestResponseFraming:
         from app.tcp_server import _handle_ping
 
         payload = _build_ping_payload(packet_id=1)
-        # Ping handler returns framed bytes
-        result = asyncio.get_event_loop().run_until_complete(_handle_ping(1, 0x66, "Ping", payload))
+        # Use a fresh event loop to avoid conflicts with pytest-asyncio loop management
+        loop = asyncio.new_event_loop()
+        try:
+            result = loop.run_until_complete(_handle_ping(1, 0x66, "Ping", payload))
+        finally:
+            loop.close()
         assert result is not None
         # Result should be a framed response
         header_val = struct.unpack_from("<I", result, 0)[0]

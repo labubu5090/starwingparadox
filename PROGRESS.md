@@ -7,56 +7,91 @@
 
 ## SQLite-Only Migration (COMPLETE)
 
-**Commit**: `881abf2` (docs) / `970828d` (code)
+**Commit**: `970828d` (code) / `881abf2` (docs)
 **Status**: Complete - SQLite is the only supported database backend
+
+## Phase 2A.0: Pre-Cabinet Reliability Gate (COMPLETE)
+
+**Commit**: TBD
+**Status**: COMPLETE - All exit criteria met
+
+### Phase 2A.0 Results
+
+| Metric | Value |
+|--------|-------|
+| Tests collected | 823 |
+| Tests passed | 822 |
+| Tests failed | 0 |
+| Tests skipped | 1 |
+| Ruff errors | 0 |
+| Mypy errors | 0 |
+| TCP individual stress | 100/100 |
+| TCP module stress | 50/50 |
+| Full suite repeatability | 3/3 |
+| Fresh SQLite provisioning | 15/15 checks |
+| Protocol regression | 185/185 passed |
+
+### Deployment Status
+
+**SINGLE_CABINET_DEPLOYMENT_CANDIDATE**
+
+Not yet PRODUCTION_READY until a real cabinet successfully connects and completes the agreed boot and player flow.
 
 ## Current State
 
 | Metric | Value |
 |--------|-------|
-| Tests passed | 821 |
-| Tests failed | 0 (1 flaky TCP test) |
+| Tests collected | 823 |
+| Tests passed | 822 |
+| Tests failed | 0 |
 | Tests skipped | 1 |
 | Ruff errors | 0 |
 | Mypy errors | 0 |
 | Database | SQLite-only |
-
-## PostgreSQL References
-
-- Config validation: Rejected (correct behavior)
-- Test rejection tests: Present (correct behavior)
-- compare.py: Updated (docstrings cleaned)
-- Archived: All tools in `archive/postgresql/`
+| TCP flaky test | FIXED |
+| Deployment status | SINGLE_CABINET_DEPLOYMENT_CANDIDATE |
 
 ## SQLite Architecture
 
 - **Backend**: aiosqlite + SQLAlchemy 2.0
 - **Default URL**: `sqlite+aiosqlite:///./data/starwing.db`
-- **PRAGMAs**: foreign_keys=ON, busy_timeout=10000
-- **WAL mode**: Configured in `init_database()`
-- **Schema**: 17 tables, Alembic migrations
+- **PRAGMAs**: foreign_keys=ON, busy_timeout=10000 (per-connection via event listener)
+- **WAL mode**: Persisted in database file
+- **Schema**: 17 tables + alembic_version, managed by Alembic
 
-## Exit Criteria Met
+## Exit Criteria Met (Phase 2A.0)
 
-- [x] SQLite is only active backend
-- [x] PostgreSQL not a runtime requirement
-- [x] psycopg removed from dependencies
-- [x] Alembic upgrade succeeds
-- [x] WAL mode enabled
-- [x] Foreign keys enabled
+- [x] Flaky TCP test root-caused and fixed
+- [x] No rerun mechanism required
+- [x] Individual TCP stress 100/100
+- [x] TCP module stress 50/50
+- [x] Full suite 3/3
+- [x] Remaining skip classified (OPTIONAL_EXTERNAL_TOOL)
+- [x] Clean SQLite provisions successfully
+- [x] Alembic reaches head
+- [x] Required schema exists
+- [x] WAL active
+- [x] foreign_keys enabled
 - [x] busy_timeout enabled
-- [x] Player identity works
-- [x] Profile load works
-- [x] Transactions/rollback work
-- [x] Concurrency validated
-- [x] Backup/restore validated
+- [x] Integrity check passes
+- [x] Player data persists after restart
+- [x] Backup and restore pass
+- [x] Protocol regression tests pass
+- [x] Matching NOT_IMPLEMENTED
+- [x] Battle NOT_IMPLEMENTED
+- [x] Capture disabled by default
 - [x] Ruff 0 errors
 - [x] Mypy 0 errors
-- [x] No active PostgreSQL dependency
+- [x] Documentation uses SINGLE_CABINET_DEPLOYMENT_CANDIDATE
+- [x] Real cabinet compatibility not claimed
 
 ## Remaining Unknowns
 
 - 6 computed player profile fields
-- Real cabinet wire compatibility
-- Matching implementation
-- Battle implementation
+- Real cabinet wire compatibility (no captures exist)
+- Matching implementation (guarded, NOT_IMPLEMENTED)
+- Battle implementation (guarded, NOT_IMPLEMENTED)
+
+## Recommended Next Phase
+
+Phase 2B: Player profile implementation with SQLite persistence
