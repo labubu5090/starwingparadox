@@ -64,7 +64,17 @@ Layer 1: USBIO Custom Arcade IO
 | ENTER | Menu confirmation |
 | COIN | Credit input |
 
-## 5. Sensor Inputs
+## 5. Runtime Observation (Phase 2A-G2)
+
+| Input | Runtime Status |
+|-------|----------------|
+| XInput | Loaded by bootstrap (XINPUT1_3.dll) — OPERATOR_TEST_REQUIRED |
+| Keyboard | UE4 default fallback — OPERATOR_TEST_REQUIRED |
+| USBIO | NOT_DETECTED — NESYS service never started |
+
+**Note**: The game did not report any input errors. Default UE4 input configuration was accepted.
+
+## 6. Sensor Inputs
 
 | Sensor | Purpose |
 |--------|---------|

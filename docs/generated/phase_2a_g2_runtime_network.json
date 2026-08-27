@@ -1,0 +1,38 @@
+{
+    "nesys_error":  "ENesysNetworkServerMessage[CertError] - repeating every ~16ms",
+    "preloader_progress":  "5132/7553 assets loaded when killed at t=60s",
+    "port_4001":  {
+                      "status":  "NOT_CONTACTED",
+                      "note":  "Game did not connect to localhost:4001 (our server)"
+                  },
+    "timestamp":  "2026-08-27T12:27:44.712Z",
+    "port_4000":  {
+                      "status":  "NOT_CONTACTED",
+                      "note":  "Game did not connect to localhost:4000"
+                  },
+    "game_connections":  [
+                             {
+                                 "pid":  10480,
+                                 "state":  "ESTABLISHED",
+                                 "process":  "AcrGame-Win64-Shipping.exe",
+                                 "description":  "Shipping binary external HTTPS connection",
+                                 "remote":  "44.213.205.183:443",
+                                 "protocol":  "HTTPS",
+                                 "classification":  "EXTERNAL_OFFICIAL_ENDPOINT",
+                                 "local":  "10.0.4.99:38391"
+                             },
+                             {
+                                 "description":  "Shipping binary listening socket",
+                                 "process":  "AcrGame-Win64-Shipping.exe",
+                                 "remote":  "N/A",
+                                 "classification":  "GAME_LISTENER",
+                                 "local":  "0.0.0.0:38391",
+                                 "state":  "LISTEN",
+                                 "pid":  10480
+                             }
+                         ],
+    "port_6666":  {
+                      "status":  "NOT_CONTACTED",
+                      "note":  "NESYS service never started"
+                  }
+}
