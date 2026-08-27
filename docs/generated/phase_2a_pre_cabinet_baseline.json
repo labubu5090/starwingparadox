@@ -1,0 +1,57 @@
+{
+  "phase": "2A",
+  "created_at": "20260827T032919Z",
+  "git_commit": "acca2c669f15324059422952399d38bd653ed87e",
+  "alembic_revision": "001_initial",
+  "source_database": {
+    "path": "data\\starwing.db",
+    "sha256": "c7f2c47965ca2f9c738aa4886fe74eaad8a6b271d19cccf8c4e8396f15d75041"
+  },
+  "backup": {
+    "path": "data\\backups\\pre_cabinet_20260827T032919Z.db",
+    "sha256": "648aedd9ce41a8f3a2117945cde61eed86774760398bb739fcec2345c2f3c024",
+    "integrity": "ok"
+  },
+  "schema": {
+    "tables": [
+      "player",
+      "player_buddies",
+      "player_buddy_win_poses",
+      "player_emblem_parts",
+      "player_emblems",
+      "player_line_colors",
+      "player_logins",
+      "player_mecha_colors",
+      "player_mecha_set_parts",
+      "player_mecha_sets",
+      "player_missions",
+      "player_options",
+      "player_progress",
+      "player_side_weapons",
+      "player_titles",
+      "player_weapon_set",
+      "player_weapon_set_slots"
+    ],
+    "row_counts": {
+      "player": 2,
+      "player_buddies": 0,
+      "player_buddy_win_poses": 0,
+      "player_emblem_parts": 0,
+      "player_emblems": 0,
+      "player_line_colors": 0,
+      "player_logins": 0,
+      "player_mecha_colors": 0,
+      "player_mecha_set_parts": 0,
+      "player_mecha_sets": 0,
+      "player_missions": 0,
+      "player_options": 0,
+      "player_progress": 0,
+      "player_side_weapons": 0,
+      "player_titles": 0,
+      "player_weapon_set": 0,
+      "player_weapon_set_slots": 0
+    }
+  },
+  "matching_active": false,
+  "battle_active": false
+}

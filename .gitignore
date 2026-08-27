@@ -34,8 +34,11 @@ coverage.xml
 
 # Database
 *.db
+*.db-wal
+*.db-shm
 *.sqlite
 *.sqlite3
+data/backups/
 
 # Logs
 *.log
@@ -59,3 +62,6 @@ Thumbs.db
 temp/
 tmp/
 *.tmp
+
+# Capture sessions
+data/captures/

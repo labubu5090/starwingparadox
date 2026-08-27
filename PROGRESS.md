@@ -12,8 +12,32 @@
 
 ## Phase 2A.0: Pre-Cabinet Reliability Gate (COMPLETE)
 
-**Commit**: TBD
+**Commit**: `acca2c6`
 **Status**: COMPLETE - All exit criteria met
+
+## Phase 2A: Controlled Single-Cabinet Bring-Up (WAITING_FOR_CABINET)
+
+**Commit**: TBD
+**Status**: WAITING_FOR_CABINET - Preflight and capture tooling ready
+
+### Phase 2A Readiness Results
+
+| Metric | Value |
+|--------|-------|
+| Tests collected | 835 |
+| Tests passed | 834 |
+| Tests failed | 0 |
+| Tests skipped | 1 |
+| Ruff errors | 0 |
+| Mypy errors | 0 |
+| Capture infrastructure | 12/12 tests pass |
+| Preflight script | READY (0 blocking) |
+| Cabinet profile | Created |
+| Capture session tools | Created |
+
+### Deployment Status
+
+**WAITING_FOR_CABINET** - Ready for controlled cabinet connection
 
 ### Phase 2A.0 Results
 
