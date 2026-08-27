@@ -39,9 +39,24 @@ The following earlier port assumptions are superseded by G4 runtime evidence:
 2. ~~Port 4001 is required for boot~~ → Not needed for title screen
 3. ~~Port 4000 is needed for boot~~ → Unused in observed boot
 
-## Recommendation
+## G5R Update: NESYS is the Primary Blocker
 
-1. Python HTTP server → port 4001 (keep for future use)
-2. Do NOT start Python TCP server on 6666 (NesysService uses pipes)
-3. Do NOT implement port 4000 unless evidence requires it
-4. Focus on rendering crash resolution before NESYS investigation
+The NESYS offline block is the primary issue, not rendering crashes.
+
+### What Works
+- HTTP routing chain: dev.starwing.jp → 127.0.0.1:80 → 127.0.0.1:4001
+- Matching-server discovery: `{"ip_addr":"127.0.0.1:6666"}`
+- Game receives the response (`_IsSuccess[1]`)
+
+### What Fails
+- NesysService.exe not running (exits immediately, code -1)
+- Named pipe `\\.\pipe\nesys_games\...` does not exist
+- D: drive NOT MOUNTED (game hardcodes D:\ paths)
+- NESYS status: offline (Nesys:0)
+- Card play: BLOCKED_BY_NESYS_OFFLINE
+
+### Recommendation
+1. **PRIMARY**: Determine how to start NesysService.exe (needs launcher, D: drive, certificates)
+2. Keep Python HTTP server on 4001 (proven working)
+3. Keep Python TCP server on 6666 (for when matching is needed)
+4. Rendering crash is secondary to NESYS investigation

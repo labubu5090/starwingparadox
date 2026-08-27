@@ -61,6 +61,35 @@
 
 Not yet PRODUCTION_READY until a real cabinet successfully connects and completes the agreed boot and player flow.
 
+## Phase 2A-G5R: NESYS Offline Block Investigation (IN PROGRESS)
+
+**Status**: BLOCKED_BY_MISSING_NESYS_LAUNCHER
+
+### NESYS Root Cause
+
+The game requires NesysService.exe to be running via a named pipe connection.
+NesysService.exe exits immediately (code -1) because:
+1. D: drive is NOT MOUNTED (does not exist on this system)
+2. No launcher/startup script starts NesysService
+3. No Windows certificates for NESYS
+4. No registry configuration for NESYS
+5. No parent process context
+
+### Current Runtime State
+
+| Metric | Value |
+|--------|-------|
+| HTTP server discovery | VERIFIED_WORKING |
+| Matching server response | VERIFIED_RECEIVED |
+| NESYS status | OFFLINE |
+| Card play | BLOCKED_BY_NESYS_OFFLINE |
+| Normal game flow | NOT_REACHED |
+| Coin/start validation | NOT_YET_VALID |
+| Matching | NOT_IMPLEMENTED |
+| Battle | NOT_IMPLEMENTED |
+| Real playability | NOT_PROVEN |
+| Primary blocker | NESYS_SERVICE_INITIALIZATION |
+
 ## Current State
 
 | Metric | Value |
@@ -74,6 +103,8 @@ Not yet PRODUCTION_READY until a real cabinet successfully connects and complete
 | Database | SQLite-only |
 | TCP flaky test | FIXED |
 | Deployment status | SINGLE_CABINET_DEPLOYMENT_CANDIDATE |
+| NESYS | OFFLINE (pipe does not exist) |
+| D: drive | NOT MOUNTED |
 
 ## SQLite Architecture
 

@@ -62,7 +62,13 @@ async def readiness_check(db: AsyncSession = Depends(get_db_session)) -> dict[st
             engine = get_active_engine()
             url_str = str(engine.url)
             parsed = urlparse(url_str)
-            db_path = Path(unquote(parsed.path))
+            raw_path = unquote(parsed.path)
+            # On Windows, urlparse produces /C:/... which Path treats as relative
+            # Strip leading slash to get a valid Windows absolute path
+            import sys
+            if sys.platform == "win32" and raw_path.startswith("/") and len(raw_path) > 2 and raw_path[2] == ":":
+                raw_path = raw_path[1:]
+            db_path = Path(raw_path)
             if not db_path.exists():
                 errors.append("database_file_missing")
             elif not os.access(db_path, os.R_OK | os.W_OK):

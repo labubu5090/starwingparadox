@@ -1,0 +1,14 @@
+{
+  "total_files": 37334,
+  "total_size": 40006313952,
+  "categories": {
+    "DLL": 21,
+    "CONFIGURATION": 114,
+    "UNKNOWN": 1180,
+    "DATA": 489,
+    "LOG": 1,
+    "EXECUTABLE": 3,
+    "UE4_ASSET": 35521,
+    "NETWORK_OR_SERVER": 5
+  }
+}

@@ -1,35 +1,90 @@
-# Starwing Boot Dependency Graph
+# Starwing Paradox Boot Dependency Graph (Corrected)
+
+## Date: 2026-08-27
 
 ## Boot Sequence
 
-| Step | Dependency | Status | Evidence |
-|------|------------|--------|----------|
-| 1. Bootstrap launch | User action | COMPLETED | AcrGame.exe started |
-| 2. Shipping process launch | Bootstrap creates | COMPLETED | AcrGame-Win64-Shipping.exe spawned |
-| 3. D3D11 renderer init | Shipping process | COMPLETED | RTX 5090, 1920x1080 |
-| 4. NESYS plugin init | Shipping process | COMPLETED | NesysClientPlugin loaded at frame 2 |
-| 5. NESYS service detection | NesysService running | FAILED | NesysService not started |
-| 6. Pipe creation | NesysService | NOT_STARTED | No pipe server created |
-| 7. Pipe connection | Game client → pipe | NOT_STARTED | No pipe to connect to |
-| 8. NESYS initialization | Pipe connected | COMPLETED (partial) | Setup Completed at frame 2 |
-| 9. Certificate status | NESYS server | FAILED | CertError (status[4]) |
-| 10. CertError retry loop | Certificate failure | COMPLETED | 7557 retries, frames 4-560 |
-| 11. Asset preloading | Independent of NESYS | COMPLETED | Reached title screen |
-| 12. Title screen load | Assets loaded | COMPLETED | SL_Title activated at frame 909 |
-| 13. OpenKey load | D: drive | FAILED | LoadKeyFile error |
-| 14. NESYS event check | OpenKey | FAILED | NESYS Event error |
-| 15. Game-server init | NESYS + OpenKey | NOT_STARTED | Blocked by NESYS stage |
-| 16. Port-4001 connection | Game-server init | NOT_STARTED | BLOCKED_BY_PREVIOUS_STAGE |
-| 17. Rendering | Title screen | FAILED | EXCEPTION_ACCESS_VIOLATION |
+```
+1. AcrGame.exe (Bootstrap)
+   Status: COMPLETED
+   
+2. Shipping executable (AcrGame-Win64-Shipping.exe)
+   Status: COMPLETED
+   
+3. D3D11 initialization, GPU detection
+   Status: COMPLETED (RTX 5090 detected)
+   
+4. Asset preloading (5132/7553 assets)
+   Status: COMPLETED
+   
+5. NESYS Client Plugin (NesysClient) initializes
+   Status: FAILED
+   
+6. NESYS Client attempts named pipe connection
+   Pipe: \\.\pipe\nesys_games\...
+   Status: FAILED (pipe does not exist)
+   
+7. NESYS status: offline (Nesys:0)
+   Status: FAILED (offline)
+   
+8. CertError reported
+   Status: FAILED (NESYS offline)
+   
+9. Game continues in offline/testmode
+   Status: COMPLETED (fallback to offline)
+   
+10. SystemDataCheck runs
+    Detects NESYS offline
+    Status: COMPLETED (error displayed)
+    
+11. "offline, cannot check" message displayed
+    Status: COMPLETED (operator observes this)
+    
+12. Card-based gameplay blocked
+    Status: BLOCKED_BY_NESYS_OFFLINE
+    
+13. PromotionMovie plays
+    Status: COMPLETED
+    
+14. InsertStart widget visible
+    Status: COMPLETED (but overlaid by NESYS error)
+    
+15. HTTP matching-server discovery
+    Request: dev.starwing.jp/mock/matching/server
+    Response: {"ip_addr":"127.0.0.1:6666"}
+    Status: VERIFIED_WORKING
+    
+16. "Error No MatchingServer so initialize Nesys before."
+    Status: COMPLETED (game requires NESYS first)
+    
+17. Normal title flow (menu, card, gameplay)
+    Status: NOT_REACHED (blocked by NESYS offline)
+```
 
-## Key Findings
+## Dependency Summary
 
-1. **CertError is NOT blocking** — Game progresses past CertError loop to title screen
-2. **Asset preloading completes** — Given enough time (~3.5 min), all assets load
-3. **D: drive failures are non-blocking** — Game boots without OpenKey.json
-4. **Port 4001 is NOT reached** — Game never attempts HTTP connection to local server
-5. **Crash is rendering-related** — Null pointer in post-process AA, not NESYS
+| Stage | Status | Blocker |
+|-------|--------|---------|
+| Bootstrap | COMPLETED | — |
+| D3D11 | COMPLETED | — |
+| Assets | COMPLETED | — |
+| NESYS pipe | FAILED | No pipe exists |
+| NESYS status | FAILED | Offline |
+| SystemDataCheck | COMPLETED | Error shown |
+| Card play | BLOCKED | NESYS offline |
+| Normal flow | NOT_REACHED | NESYS offline |
+| HTTP discovery | WORKING | — |
+| Matching TCP | NOT_STARTED | NESYS offline |
+| Battle | NOT_IMPLEMENTED | — |
 
-## Status
+## Root Cause
+**NesysService.exe is not running.** The game's NESYS client plugin attempts to connect to a named pipe that does not exist. Without NESYS initialization, the game stays in offline mode permanently.
 
-**BOOT_PROGRESS_IMPROVED** — Game reached title screen despite NESYS failure.
+## What Would Fix This
+1. Mount D: drive with correct directory structure
+2. Start NesysService.exe with correct launcher/arguments
+3. Configure valid NESYS certificates
+4. Configure correct registry keys
+5. Provide network access to TAITO NESYS servers
+
+**This requires the original cabinet launcher or equivalent startup context.**

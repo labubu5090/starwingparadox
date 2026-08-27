@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     protocol_raw_logging: bool = False
     protocol_hash_logging: bool = True
     legacy_compatibility_mode: bool = True
-    matcher_hostname: str = "paradox.yourdomain.com"
+    matcher_hostname: str = "127.0.0.1"
     version_main: int = 70571
     version_data: int = 70571
 
@@ -49,6 +49,16 @@ class Settings(BaseSettings):
                 file=sys.stderr,
             )
             sys.exit(1)
+        # Fix Windows path resolution for sqlite:/// relative paths
+        # urlparse on Windows turns sqlite:///./data/x.db into path=/./data/x.db
+        # which resolves to C:\data\x.db instead of CWD/data/x.db
+        from pathlib import Path
+        from urllib.parse import unquote
+        raw_path = unquote(parsed.path)
+        if raw_path and not Path(raw_path).is_absolute():
+            abs_path = (Path.cwd() / raw_path.lstrip("/\\")).resolve()
+            # Rebuild URL: scheme:///absolute_path
+            url = f"{parsed.scheme}:///{abs_path.as_posix()}"
         return url
 
 
