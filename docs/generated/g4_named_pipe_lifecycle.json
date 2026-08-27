@@ -1,0 +1,13 @@
+{
+  "baseline_pipes": [],
+  "new_pipes_observed": [],
+  "nesys_pipe_pattern": "\\\\.\\pipe\\nesys_games",
+  "pipe_found": false,
+  "system_pipes_observed": [
+    "\\\\.\\pipe\\InitShutdown",
+    "\\\\.\\pipe\\lsass",
+    "\\\\.\\pipe\\ntsvcs",
+    "\\\\.\\pipe\\epmapper",
+    "\\\\.\\pipe\\eventlog"
+  ]
+}

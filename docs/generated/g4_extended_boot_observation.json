@@ -1,0 +1,46 @@
+{
+  "observation_start": "2026-08-27T14:11:15",
+  "observation_duration_sec": 360,
+  "bootstrap_pid": "unknown",
+  "boot_progress": "TITLE_SCREEN_REACHED",
+  "crash": "EXCEPTION_ACCESS_VIOLATION in FRCPassPostProcessAA::Process() at title screen",
+  "crash_location": "postprocessaa.cpp:289",
+  "title_screen_level": "/Game/Stage/OutGame/MainMenu/SL_Title",
+  "cert_errors": {
+    "total": 7557,
+    "first_frame": 4,
+    "last_frame": 560,
+    "stopped_before_title": true
+  },
+  "nesys_service_started": false,
+  "named_pipe_created": false,
+  "nesys_setup_completed": true,
+  "nesys_setup_frame": 2,
+  "online_observer_state": {
+    "Revival": 1,
+    "Death": 1,
+    "WebServer": 0,
+    "Nesys": 0,
+    "Reception": 1,
+    "Game": 1,
+    "Testmode": 1,
+    "GameConnect": 0,
+    "HttpSuccess": 0
+  },
+  "openkey_load_result": "LoadKeyFile error",
+  "openkey_update_result": "NESYS Event error",
+  "d_drive_paths_attempted": [
+    "D:/Saved/ACRSaved/SaveData/OpenKey.json",
+    "D:/Saved/ACRSaved/Debug/DebugSetting.json",
+    "D:/Saved/ACRSaved/Ranking/RankingData.json",
+    "D:/Saved/ACRSaved/SendLog",
+    "D:/Saved/ACRSaved/TestMode/BookKeeping/Old"
+  ],
+  "asset_preload": "completed (reached title screen)",
+  "server_port_4001": "no connections observed",
+  "port_4000": "unused",
+  "port_6666": "unused",
+  "external_connections": "none observed",
+  "game_state": "Offline/Testmode (NESYS not connected)",
+  "crash_report": "UE4CC-Windows-F96B45C54EA0E2FCDD3D018633A5CA92_0000"
+}

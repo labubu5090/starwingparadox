@@ -1,0 +1,44 @@
+{
+  "file_lookups": [
+    {
+      "process": "AcrGame-Win64-Shipping.exe",
+      "path": "D:/Saved/ACRSaved/SaveData/OpenKey.json",
+      "operation": "LoadJsonFile",
+      "result": "LoadKeyFile error",
+      "found": false,
+      "impact": "Non-blocking"
+    },
+    {
+      "process": "AcrGame-Win64-Shipping.exe",
+      "path": "D:/Saved/ACRSaved/Debug/DebugSetting.json",
+      "operation": "LoadJsonFile",
+      "result": "Load error",
+      "found": false,
+      "impact": "Non-blocking"
+    },
+    {
+      "process": "AcrGame-Win64-Shipping.exe",
+      "path": "D:/Saved/ACRSaved/Ranking/RankingData.json",
+      "operation": "LoadClient",
+      "result": "LoadFileToString error",
+      "found": false,
+      "impact": "Non-blocking"
+    },
+    {
+      "process": "AcrGame-Win64-Shipping.exe",
+      "path": "D:/Saved/ACRSaved/SendLog",
+      "operation": "CreateDirectory",
+      "result": "Create error",
+      "found": false,
+      "impact": "Non-blocking"
+    },
+    {
+      "process": "AcrGame-Win64-Shipping.exe",
+      "path": "D:/Saved/ACRSaved/TestMode/BookKeeping/Old",
+      "operation": "CreateDirectory",
+      "result": "Create error",
+      "found": false,
+      "impact": "Non-blocking"
+    }
+  ]
+}

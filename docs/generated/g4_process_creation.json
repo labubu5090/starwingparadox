@@ -1,0 +1,28 @@
+{
+  "bootstrap_pid": "unknown",
+  "shipping_pid": "unknown",
+  "nesys_attempted": false,
+  "shipping_launched_by_bootstrap": true,
+  "nesys_launched_by_game": false,
+  "process_chain": [
+    {
+      "process": "AcrGame.exe",
+      "parent": "User",
+      "role": "Bootstrap",
+      "status": "Running"
+    },
+    {
+      "process": "AcrGame-Win64-Shipping.exe",
+      "parent": "AcrGame.exe",
+      "role": "Main game",
+      "status": "Crashed",
+      "crash": "EXCEPTION_ACCESS_VIOLATION in post-process AA"
+    },
+    {
+      "process": "NesysService.exe",
+      "parent": "None",
+      "role": "NESYS service",
+      "status": "Never started"
+    }
+  ]
+}
