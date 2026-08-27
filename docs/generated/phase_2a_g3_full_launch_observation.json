@@ -1,0 +1,863 @@
+{
+  "phase": "2A-G3",
+  "git_commit": "9dabca9",
+  "launch_time": "2026-08-27T04:48:02.018659+00:00",
+  "final_time": "2026-08-27T04:50:30.379397+00:00",
+  "bootstrap_pid": 27960,
+  "bootstrap_exe": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe",
+  "working_dir": "X:\\StarwingParadox\\WindowsNoEditor",
+  "server_port": 4001,
+  "pre_launch": {
+    "processes": [],
+    "listeners": [
+      {
+        "LocalPort": 49681,
+        "OwningProcess": 4488
+      },
+      {
+        "LocalPort": 49677,
+        "OwningProcess": 1704
+      },
+      {
+        "LocalPort": 49668,
+        "OwningProcess": 5264
+      },
+      {
+        "LocalPort": 49667,
+        "OwningProcess": 3720
+      },
+      {
+        "LocalPort": 49666,
+        "OwningProcess": 3632
+      },
+      {
+        "LocalPort": 49665,
+        "OwningProcess": 1632
+      },
+      {
+        "LocalPort": 49664,
+        "OwningProcess": 1776
+      },
+      {
+        "LocalPort": 42050,
+        "OwningProcess": 33616
+      },
+      {
+        "LocalPort": 7679,
+        "OwningProcess": 5192
+      },
+      {
+        "LocalPort": 2869,
+        "OwningProcess": 4
+      },
+      {
+        "LocalPort": 2179,
+        "OwningProcess": 3164
+      },
+      {
+        "LocalPort": 1462,
+        "OwningProcess": 4
+      },
+      {
+        "LocalPort": 445,
+        "OwningProcess": 4
+      },
+      {
+        "LocalPort": 135,
+        "OwningProcess": 988
+      },
+      {
+        "LocalPort": 50912,
+        "OwningProcess": 6128
+      },
+      {
+        "LocalPort": 50911,
+        "OwningProcess": 6288
+      },
+      {
+        "LocalPort": 49681,
+        "OwningProcess": 4488
+      },
+      {
+        "LocalPort": 49677,
+        "OwningProcess": 1704
+      },
+      {
+        "LocalPort": 49668,
+        "OwningProcess": 5264
+      },
+      {
+        "LocalPort": 49667,
+        "OwningProcess": 3720
+      },
+      {
+        "LocalPort": 49666,
+        "OwningProcess": 3632
+      },
+      {
+        "LocalPort": 49665,
+        "OwningProcess": 1632
+      },
+      {
+        "LocalPort": 49664,
+        "OwningProcess": 1776
+      },
+      {
+        "LocalPort": 37114,
+        "OwningProcess": 6296
+      },
+      {
+        "LocalPort": 37014,
+        "OwningProcess": 6296
+      },
+      {
+        "LocalPort": 33683,
+        "OwningProcess": 5844
+      },
+      {
+        "LocalPort": 32683,
+        "OwningProcess": 5844
+      },
+      {
+        "LocalPort": 27060,
+        "OwningProcess": 28640
+      },
+      {
+        "LocalPort": 27036,
+        "OwningProcess": 28640
+      },
+      {
+        "LocalPort": 27015,
+        "OwningProcess": 5912
+      },
+      {
+        "LocalPort": 26822,
+        "OwningProcess": 23140
+      },
+      {
+        "LocalPort": 20676,
+        "OwningProcess": 6232
+      },
+      {
+        "LocalPort": 14023,
+        "OwningProcess": 25380
+      },
+      {
+        "LocalPort": 14022,
+        "OwningProcess": 25380
+      },
+      {
+        "LocalPort": 14019,
+        "OwningProcess": 25380
+      },
+      {
+        "LocalPort": 14016,
+        "OwningProcess": 25380
+      },
+      {
+        "LocalPort": 14013,
+        "OwningProcess": 25380
+      },
+      {
+        "LocalPort": 10007,
+        "OwningProcess": 2916
+      },
+      {
+        "LocalPort": 9506,
+        "OwningProcess": 6312
+      },
+      {
+        "LocalPort": 9247,
+        "OwningProcess": 5308
+      },
+      {
+        "LocalPort": 9014,
+        "OwningProcess": 20592
+      },
+      {
+        "LocalPort": 9013,
+        "OwningProcess": 18844
+      },
+      {
+        "LocalPort": 9012,
+        "OwningProcess": 18844
+      },
+      {
+        "LocalPort": 8470,
+        "OwningProcess": 28640
+      },
+      {
+        "LocalPort": 8468,
+        "OwningProcess": 28640
+      },
+      {
+        "LocalPort": 6463,
+        "OwningProcess": 3884
+      },
+      {
+        "LocalPort": 6110,
+        "OwningProcess": 6312
+      },
+      {
+        "LocalPort": 5939,
+        "OwningProcess": 6296
+      },
+      {
+        "LocalPort": 5835,
+        "OwningProcess": 6280
+      },
+      {
+        "LocalPort": 5233,
+        "OwningProcess": 40956
+      },
+      {
+        "LocalPort": 5060,
+        "OwningProcess": 26320
+      },
+      {
+        "LocalPort": 5040,
+        "OwningProcess": 14104
+      },
+      {
+        "LocalPort": 4001,
+        "OwningProcess": 45664
+      },
+      {
+        "LocalPort": 2179,
+        "OwningProcess": 3164
+      },
+      {
+        "LocalPort": 139,
+        "OwningProcess": 4
+      },
+      {
+        "LocalPort": 139,
+        "OwningProcess": 4
+      },
+      {
+        "LocalPort": 139,
+        "OwningProcess": 4
+      },
+      {
+        "LocalPort": 135,
+        "OwningProcess": 988
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "time": "2026-08-27T04:48:12.023484+00:00",
+      "elapsed": 10,
+      "processes": [
+        {
+          "Name": "AcrGame",
+          "Id": 27960,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+        },
+        {
+          "Name": "AcrGame-Win64-Shipping",
+          "Id": 38472,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+        }
+      ],
+      "game_connections": [],
+      "nesys_running": false
+    },
+    {
+      "time": "2026-08-27T04:48:24.071755+00:00",
+      "elapsed": 20,
+      "processes": [
+        {
+          "Name": "AcrGame",
+          "Id": 27960,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+        },
+        {
+          "Name": "AcrGame-Win64-Shipping",
+          "Id": 38472,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+        }
+      ],
+      "game_connections": [],
+      "nesys_running": false
+    },
+    {
+      "time": "2026-08-27T04:48:36.147089+00:00",
+      "elapsed": 30,
+      "processes": [
+        {
+          "Name": "AcrGame",
+          "Id": 27960,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+        },
+        {
+          "Name": "AcrGame-Win64-Shipping",
+          "Id": 38472,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+        }
+      ],
+      "game_connections": [],
+      "nesys_running": false
+    },
+    {
+      "time": "2026-08-27T04:48:48.190549+00:00",
+      "elapsed": 40,
+      "processes": [
+        {
+          "Name": "AcrGame",
+          "Id": 27960,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+        },
+        {
+          "Name": "AcrGame-Win64-Shipping",
+          "Id": 38472,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+        }
+      ],
+      "game_connections": [],
+      "nesys_running": false
+    },
+    {
+      "time": "2026-08-27T04:49:00.226741+00:00",
+      "elapsed": 50,
+      "processes": [
+        {
+          "Name": "AcrGame",
+          "Id": 27960,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+        },
+        {
+          "Name": "AcrGame-Win64-Shipping",
+          "Id": 38472,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+        }
+      ],
+      "game_connections": [],
+      "nesys_running": false
+    },
+    {
+      "time": "2026-08-27T04:49:12.267771+00:00",
+      "elapsed": 60,
+      "processes": [
+        {
+          "Name": "AcrGame",
+          "Id": 27960,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+        },
+        {
+          "Name": "AcrGame-Win64-Shipping",
+          "Id": 38472,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+        }
+      ],
+      "game_connections": [
+        {
+          "LocalAddress": "0.0.0.0",
+          "LocalPort": 61900,
+          "RemoteAddress": "0.0.0.0",
+          "RemotePort": 0,
+          "State": 100,
+          "OwningProcess": 38472
+        },
+        {
+          "LocalAddress": "10.0.4.99",
+          "LocalPort": 61900,
+          "RemoteAddress": "100.25.160.95",
+          "RemotePort": 443,
+          "State": 5,
+          "OwningProcess": 38472
+        }
+      ],
+      "nesys_running": false
+    },
+    {
+      "time": "2026-08-27T04:49:24.307677+00:00",
+      "elapsed": 70,
+      "processes": [
+        {
+          "Name": "AcrGame",
+          "Id": 27960,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+        },
+        {
+          "Name": "AcrGame-Win64-Shipping",
+          "Id": 38472,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+        }
+      ],
+      "game_connections": [
+        {
+          "LocalAddress": "0.0.0.0",
+          "LocalPort": 61900,
+          "RemoteAddress": "0.0.0.0",
+          "RemotePort": 0,
+          "State": 100,
+          "OwningProcess": 38472
+        },
+        {
+          "LocalAddress": "10.0.4.99",
+          "LocalPort": 61900,
+          "RemoteAddress": "100.25.160.95",
+          "RemotePort": 443,
+          "State": 5,
+          "OwningProcess": 38472
+        }
+      ],
+      "nesys_running": false
+    },
+    {
+      "time": "2026-08-27T04:49:36.347805+00:00",
+      "elapsed": 80,
+      "processes": [
+        {
+          "Name": "AcrGame",
+          "Id": 27960,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+        },
+        {
+          "Name": "AcrGame-Win64-Shipping",
+          "Id": 38472,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+        }
+      ],
+      "game_connections": [
+        {
+          "LocalAddress": "0.0.0.0",
+          "LocalPort": 61900,
+          "RemoteAddress": "0.0.0.0",
+          "RemotePort": 0,
+          "State": 100,
+          "OwningProcess": 38472
+        },
+        {
+          "LocalAddress": "10.0.4.99",
+          "LocalPort": 61900,
+          "RemoteAddress": "100.25.160.95",
+          "RemotePort": 443,
+          "State": 5,
+          "OwningProcess": 38472
+        }
+      ],
+      "nesys_running": false
+    },
+    {
+      "time": "2026-08-27T04:49:48.390305+00:00",
+      "elapsed": 90,
+      "processes": [
+        {
+          "Name": "AcrGame",
+          "Id": 27960,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+        },
+        {
+          "Name": "AcrGame-Win64-Shipping",
+          "Id": 38472,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+        }
+      ],
+      "game_connections": [
+        {
+          "LocalAddress": "0.0.0.0",
+          "LocalPort": 61900,
+          "RemoteAddress": "0.0.0.0",
+          "RemotePort": 0,
+          "State": 100,
+          "OwningProcess": 38472
+        },
+        {
+          "LocalAddress": "10.0.4.99",
+          "LocalPort": 61900,
+          "RemoteAddress": "100.25.160.95",
+          "RemotePort": 443,
+          "State": 5,
+          "OwningProcess": 38472
+        }
+      ],
+      "nesys_running": false
+    },
+    {
+      "time": "2026-08-27T04:50:00.427213+00:00",
+      "elapsed": 100,
+      "processes": [
+        {
+          "Name": "AcrGame",
+          "Id": 27960,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+        },
+        {
+          "Name": "AcrGame-Win64-Shipping",
+          "Id": 38472,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+        }
+      ],
+      "game_connections": [
+        {
+          "LocalAddress": "0.0.0.0",
+          "LocalPort": 61900,
+          "RemoteAddress": "0.0.0.0",
+          "RemotePort": 0,
+          "State": 100,
+          "OwningProcess": 38472
+        },
+        {
+          "LocalAddress": "10.0.4.99",
+          "LocalPort": 61900,
+          "RemoteAddress": "100.25.160.95",
+          "RemotePort": 443,
+          "State": 5,
+          "OwningProcess": 38472
+        }
+      ],
+      "nesys_running": false
+    },
+    {
+      "time": "2026-08-27T04:50:12.477789+00:00",
+      "elapsed": 110,
+      "processes": [
+        {
+          "Name": "AcrGame",
+          "Id": 27960,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+        },
+        {
+          "Name": "AcrGame-Win64-Shipping",
+          "Id": 38472,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+        }
+      ],
+      "game_connections": [
+        {
+          "LocalAddress": "0.0.0.0",
+          "LocalPort": 61900,
+          "RemoteAddress": "0.0.0.0",
+          "RemotePort": 0,
+          "State": 100,
+          "OwningProcess": 38472
+        },
+        {
+          "LocalAddress": "10.0.4.99",
+          "LocalPort": 61900,
+          "RemoteAddress": "100.25.160.95",
+          "RemotePort": 443,
+          "State": 8,
+          "OwningProcess": 38472
+        }
+      ],
+      "nesys_running": false
+    },
+    {
+      "time": "2026-08-27T04:50:24.524037+00:00",
+      "elapsed": 120,
+      "processes": [
+        {
+          "Name": "AcrGame",
+          "Id": 27960,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+        },
+        {
+          "Name": "AcrGame-Win64-Shipping",
+          "Id": 38472,
+          "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+        }
+      ],
+      "game_connections": [
+        {
+          "LocalAddress": "0.0.0.0",
+          "LocalPort": 61900,
+          "RemoteAddress": "0.0.0.0",
+          "RemotePort": 0,
+          "State": 100,
+          "OwningProcess": 38472
+        },
+        {
+          "LocalAddress": "10.0.4.99",
+          "LocalPort": 61900,
+          "RemoteAddress": "100.25.160.95",
+          "RemotePort": 443,
+          "State": 8,
+          "OwningProcess": 38472
+        }
+      ],
+      "nesys_running": false
+    }
+  ],
+  "final_snapshot": {
+    "processes": [
+      {
+        "Name": "AcrGame",
+        "Id": 27960,
+        "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe"
+      },
+      {
+        "Name": "AcrGame-Win64-Shipping",
+        "Id": 38472,
+        "Path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe"
+      }
+    ],
+    "connections": [
+      {
+        "LocalAddress": "0.0.0.0",
+        "LocalPort": 61900,
+        "RemoteAddress": "0.0.0.0",
+        "RemotePort": 0,
+        "State": 100,
+        "OwningProcess": 38472
+      },
+      {
+        "LocalAddress": "10.0.4.99",
+        "LocalPort": 61900,
+        "RemoteAddress": "100.25.160.95",
+        "RemotePort": 443,
+        "State": 8,
+        "OwningProcess": 38472
+      }
+    ],
+    "listeners": [
+      {
+        "LocalPort": 49681,
+        "OwningProcess": 4488
+      },
+      {
+        "LocalPort": 49677,
+        "OwningProcess": 1704
+      },
+      {
+        "LocalPort": 49668,
+        "OwningProcess": 5264
+      },
+      {
+        "LocalPort": 49667,
+        "OwningProcess": 3720
+      },
+      {
+        "LocalPort": 49666,
+        "OwningProcess": 3632
+      },
+      {
+        "LocalPort": 49665,
+        "OwningProcess": 1632
+      },
+      {
+        "LocalPort": 49664,
+        "OwningProcess": 1776
+      },
+      {
+        "LocalPort": 42050,
+        "OwningProcess": 33616
+      },
+      {
+        "LocalPort": 7679,
+        "OwningProcess": 5192
+      },
+      {
+        "LocalPort": 2869,
+        "OwningProcess": 4
+      },
+      {
+        "LocalPort": 2179,
+        "OwningProcess": 3164
+      },
+      {
+        "LocalPort": 1462,
+        "OwningProcess": 4
+      },
+      {
+        "LocalPort": 445,
+        "OwningProcess": 4
+      },
+      {
+        "LocalPort": 135,
+        "OwningProcess": 988
+      },
+      {
+        "LocalPort": 50912,
+        "OwningProcess": 6128
+      },
+      {
+        "LocalPort": 50911,
+        "OwningProcess": 6288
+      },
+      {
+        "LocalPort": 49681,
+        "OwningProcess": 4488
+      },
+      {
+        "LocalPort": 49677,
+        "OwningProcess": 1704
+      },
+      {
+        "LocalPort": 49668,
+        "OwningProcess": 5264
+      },
+      {
+        "LocalPort": 49667,
+        "OwningProcess": 3720
+      },
+      {
+        "LocalPort": 49666,
+        "OwningProcess": 3632
+      },
+      {
+        "LocalPort": 49665,
+        "OwningProcess": 1632
+      },
+      {
+        "LocalPort": 49664,
+        "OwningProcess": 1776
+      },
+      {
+        "LocalPort": 37114,
+        "OwningProcess": 6296
+      },
+      {
+        "LocalPort": 37014,
+        "OwningProcess": 6296
+      },
+      {
+        "LocalPort": 33683,
+        "OwningProcess": 5844
+      },
+      {
+        "LocalPort": 32683,
+        "OwningProcess": 5844
+      },
+      {
+        "LocalPort": 27060,
+        "OwningProcess": 28640
+      },
+      {
+        "LocalPort": 27036,
+        "OwningProcess": 28640
+      },
+      {
+        "LocalPort": 27015,
+        "OwningProcess": 5912
+      },
+      {
+        "LocalPort": 26822,
+        "OwningProcess": 23140
+      },
+      {
+        "LocalPort": 20676,
+        "OwningProcess": 6232
+      },
+      {
+        "LocalPort": 14023,
+        "OwningProcess": 25380
+      },
+      {
+        "LocalPort": 14022,
+        "OwningProcess": 25380
+      },
+      {
+        "LocalPort": 14019,
+        "OwningProcess": 25380
+      },
+      {
+        "LocalPort": 14016,
+        "OwningProcess": 25380
+      },
+      {
+        "LocalPort": 14013,
+        "OwningProcess": 25380
+      },
+      {
+        "LocalPort": 10007,
+        "OwningProcess": 2916
+      },
+      {
+        "LocalPort": 9506,
+        "OwningProcess": 6312
+      },
+      {
+        "LocalPort": 9247,
+        "OwningProcess": 5308
+      },
+      {
+        "LocalPort": 9014,
+        "OwningProcess": 20592
+      },
+      {
+        "LocalPort": 9013,
+        "OwningProcess": 18844
+      },
+      {
+        "LocalPort": 9012,
+        "OwningProcess": 18844
+      },
+      {
+        "LocalPort": 8470,
+        "OwningProcess": 28640
+      },
+      {
+        "LocalPort": 8468,
+        "OwningProcess": 28640
+      },
+      {
+        "LocalPort": 6463,
+        "OwningProcess": 3884
+      },
+      {
+        "LocalPort": 6110,
+        "OwningProcess": 6312
+      },
+      {
+        "LocalPort": 5939,
+        "OwningProcess": 6296
+      },
+      {
+        "LocalPort": 5835,
+        "OwningProcess": 6280
+      },
+      {
+        "LocalPort": 5233,
+        "OwningProcess": 40956
+      },
+      {
+        "LocalPort": 5060,
+        "OwningProcess": 26320
+      },
+      {
+        "LocalPort": 5040,
+        "OwningProcess": 14104
+      },
+      {
+        "LocalPort": 4001,
+        "OwningProcess": 45664
+      },
+      {
+        "LocalPort": 2179,
+        "OwningProcess": 3164
+      },
+      {
+        "LocalPort": 139,
+        "OwningProcess": 4
+      },
+      {
+        "LocalPort": 139,
+        "OwningProcess": 4
+      },
+      {
+        "LocalPort": 139,
+        "OwningProcess": 4
+      },
+      {
+        "LocalPort": 135,
+        "OwningProcess": 988
+      }
+    ]
+  },
+  "server_connections": [],
+  "external_connections": [
+    {
+      "LocalAddress": "10.0.4.99",
+      "LocalPort": 61900,
+      "RemoteAddress": "100.25.160.95",
+      "RemotePort": 443,
+      "State": 8,
+      "OwningProcess": 38472
+    }
+  ],
+  "nesys_observed": false,
+  "boot_progress": "NO_CHANGE_FROM_G2"
+}

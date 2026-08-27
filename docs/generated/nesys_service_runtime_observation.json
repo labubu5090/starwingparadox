@@ -1,0 +1,16 @@
+{
+  "launch_time": "2026-08-27T04:37:57.976268+00:00",
+  "pid": 7204,
+  "exe": "X:\\StarwingParadox\\D DRIVE CONTENTS\\system\\Service\\NesysService.exe",
+  "cwd": "X:\\StarwingParadox\\D DRIVE CONTENTS\\system\\Service",
+  "final_running": false,
+  "exit_code": 4294967295,
+  "timeline": [
+    {
+      "elapsed": 5,
+      "running": false,
+      "nesys_listeners": [],
+      "nesys_connections": []
+    }
+  ]
+}
