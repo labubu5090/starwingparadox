@@ -1,0 +1,787 @@
+{
+  "executables": [
+    {
+      "rel_path": "D DRIVE CONTENTS\\system\\Service\\NesysService.exe",
+      "name": "NesysService.exe",
+      "size": 548352,
+      "imports": [],
+      "has_xinput": false,
+      "has_dinput": false,
+      "has_ws2": false,
+      "has_winsock": false
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame.exe",
+      "name": "AcrGame.exe",
+      "size": 161280,
+      "imports": [],
+      "has_xinput": false,
+      "has_dinput": false,
+      "has_ws2": false,
+      "has_winsock": false
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe",
+      "name": "AcrGame-Win64-Shipping.exe",
+      "size": 163119104,
+      "imports": [],
+      "has_xinput": false,
+      "has_dinput": false,
+      "has_ws2": false,
+      "has_winsock": false
+    }
+  ],
+  "configs": [
+    {
+      "rel_path": "NoHDDUnload.ini",
+      "name": "NoHDDUnload.ini",
+      "ext": ".ini",
+      "size": 31
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\Ranking\\RankingData.json",
+      "name": "RankingData.json",
+      "ext": ".json",
+      "size": 67903
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\SaveData\\OpenKey.json",
+      "name": "OpenKey.json",
+      "ext": ".json",
+      "size": 96
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\SaveData\\SaveData.json",
+      "name": "SaveData.json",
+      "ext": ".json",
+      "size": 3771
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\BookKeepingVer20210814150446.json",
+      "name": "BookKeepingVer20210814150446.json",
+      "ext": ".json",
+      "size": 12855
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\BookKeepingVer20210814150451.json",
+      "name": "BookKeepingVer20210814150451.json",
+      "ext": ".json",
+      "size": 12855
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\BookKeepingVer20210814150456.json",
+      "name": "BookKeepingVer20210814150456.json",
+      "ext": ".json",
+      "size": 12855
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\BookKeepingVer20210814150501.json",
+      "name": "BookKeepingVer20210814150501.json",
+      "ext": ".json",
+      "size": 12855
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\BookKeepingVer20210814150506.json",
+      "name": "BookKeepingVer20210814150506.json",
+      "ext": ".json",
+      "size": 12855
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\BookKeepingVer20210814150511.json",
+      "name": "BookKeepingVer20210814150511.json",
+      "ext": ".json",
+      "size": 12855
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\BookKeepingVer20210814150516.json",
+      "name": "BookKeepingVer20210814150516.json",
+      "ext": ".json",
+      "size": 12855
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\BookKeepingVer20210814150521.json",
+      "name": "BookKeepingVer20210814150521.json",
+      "ext": ".json",
+      "size": 12855
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\BookKeepingVer20210814150526.json",
+      "name": "BookKeepingVer20210814150526.json",
+      "ext": ".json",
+      "size": 12855
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\BookKeepingVer20210814150531.json",
+      "name": "BookKeepingVer20210814150531.json",
+      "ext": ".json",
+      "size": 12855
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\Old\\BookKeeping20190529000045.json",
+      "name": "BookKeeping20190529000045.json",
+      "ext": ".json",
+      "size": 12748
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\Old\\BookKeeping20190529000050.json",
+      "name": "BookKeeping20190529000050.json",
+      "ext": ".json",
+      "size": 12748
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\Old\\BookKeeping20190529000055.json",
+      "name": "BookKeeping20190529000055.json",
+      "ext": ".json",
+      "size": 12748
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\Old\\BookKeeping20190529000100.json",
+      "name": "BookKeeping20190529000100.json",
+      "ext": ".json",
+      "size": 12748
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\Old\\BookKeeping20190529000105.json",
+      "name": "BookKeeping20190529000105.json",
+      "ext": ".json",
+      "size": 12748
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\Old\\BookKeeping20190529000110.json",
+      "name": "BookKeeping20190529000110.json",
+      "ext": ".json",
+      "size": 12748
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\Old\\BookKeeping20190529000115.json",
+      "name": "BookKeeping20190529000115.json",
+      "ext": ".json",
+      "size": 12748
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\Old\\BookKeeping20190529000120.json",
+      "name": "BookKeeping20190529000120.json",
+      "ext": ".json",
+      "size": 12748
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\Old\\BookKeeping20190529000125.json",
+      "name": "BookKeeping20190529000125.json",
+      "ext": ".json",
+      "size": 12748
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\Old\\BookKeeping20190529000130.json",
+      "name": "BookKeeping20190529000130.json",
+      "ext": ".json",
+      "size": 12748
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\BookKeeping\\Old\\BookKeepingEnd.json",
+      "name": "BookKeepingEnd.json",
+      "ext": ".json",
+      "size": 37
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\Game\\Game.json",
+      "name": "Game.json",
+      "ext": ".json",
+      "size": 198
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\NesicaTime\\NesicaTime.json",
+      "name": "NesicaTime.json",
+      "ext": ".json",
+      "size": 81
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\OnePlayFree\\OnePlayFree.json",
+      "name": "OnePlayFree.json",
+      "ext": ".json",
+      "size": 23
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\Setting\\test_mode_setting.json",
+      "name": "test_mode_setting.json",
+      "ext": ".json",
+      "size": 3802
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\Sound\\Sound.json",
+      "name": "Sound.json",
+      "ext": ".json",
+      "size": 49
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\Stick\\StickData.json",
+      "name": "StickData.json",
+      "ext": ".json",
+      "size": 263
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\ACRSaved\\TestMode\\System\\System.json",
+      "name": "System.json",
+      "ext": ".json",
+      "size": 56
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\GalaxySaved\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-3D902C7E42512C6896BC77AE3CA8CD64\\CrashReportClient.ini",
+      "name": "CrashReportClient.ini",
+      "ext": ".ini",
+      "size": 114
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\GalaxySaved\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Compat.ini",
+      "name": "Compat.ini",
+      "ext": ".ini",
+      "size": 2
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\GalaxySaved\\AcrGame\\Saved\\Config\\WindowsNoEditor\\DeviceProfiles.ini",
+      "name": "DeviceProfiles.ini",
+      "ext": ".ini",
+      "size": 2
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\GalaxySaved\\AcrGame\\Saved\\Config\\WindowsNoEditor\\EditorPerProjectUserSettings.ini",
+      "name": "EditorPerProjectUserSettings.ini",
+      "ext": ".ini",
+      "size": 2
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\GalaxySaved\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Engine.ini",
+      "name": "Engine.ini",
+      "ext": ".ini",
+      "size": 524
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\GalaxySaved\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Game.ini",
+      "name": "Game.ini",
+      "ext": ".ini",
+      "size": 2
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\GalaxySaved\\AcrGame\\Saved\\Config\\WindowsNoEditor\\GameUserSettings.ini",
+      "name": "GameUserSettings.ini",
+      "ext": ".ini",
+      "size": 875
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\GalaxySaved\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Hardware.ini",
+      "name": "Hardware.ini",
+      "ext": ".ini",
+      "size": 2
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\GalaxySaved\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Input.ini",
+      "name": "Input.ini",
+      "ext": ".ini",
+      "size": 2
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\GalaxySaved\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Lightmass.ini",
+      "name": "Lightmass.ini",
+      "ext": ".ini",
+      "size": 2
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\GalaxySaved\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Scalability.ini",
+      "name": "Scalability.ini",
+      "ext": ".ini",
+      "size": 2
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\Saved\\GalaxySaved\\UnrealEngine\\4.16\\Saved\\Config\\WindowsNoEditor\\Manifest.ini",
+      "name": "Manifest.ini",
+      "ext": ".ini",
+      "size": 27
+    },
+    {
+      "rel_path": "D DRIVE CONTENTS\\system\\DUA\\event\\OpenKeyEvent_Galaxy.json",
+      "name": "OpenKeyEvent_Galaxy.json",
+      "ext": ".json",
+      "size": 80
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Config\\DefaultEditor.ini",
+      "name": "DefaultEditor.ini",
+      "ext": ".ini",
+      "size": 35440
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Config\\DefaultEditorPerProjectUserSettings.ini",
+      "name": "DefaultEditorPerProjectUserSettings.ini",
+      "ext": ".ini",
+      "size": 79
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Config\\DefaultEngine.ini",
+      "name": "DefaultEngine.ini",
+      "ext": ".ini",
+      "size": 58580
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Config\\DefaultGame.ini",
+      "name": "DefaultGame.ini",
+      "ext": ".ini",
+      "size": 6550
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Config\\DefaultInput - Copy.ini",
+      "name": "DefaultInput - Copy.ini",
+      "ext": ".ini",
+      "size": 11705
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Config\\DefaultInput.ini",
+      "name": "DefaultInput.ini",
+      "ext": ".ini",
+      "size": 11705
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Config\\DefaultScalability.ini",
+      "name": "DefaultScalability.ini",
+      "ext": ".ini",
+      "size": 125
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Config\\GameUserSettings2on2.ini",
+      "name": "GameUserSettings2on2.ini",
+      "ext": ".ini",
+      "size": 214
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Config\\GameUserSettingsDefault.ini",
+      "name": "GameUserSettingsDefault.ini",
+      "ext": ".ini",
+      "size": 214
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\GameData\\Ranking\\RankingDefault.json",
+      "name": "RankingDefault.json",
+      "ext": ".json",
+      "size": 70020
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_book_keeping.json",
+      "name": "tm_book_keeping.json",
+      "ext": ".json",
+      "size": 28016
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_book_keeping_old.json",
+      "name": "tm_book_keeping_old.json",
+      "ext": ".json",
+      "size": 12302
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_ccd.json",
+      "name": "tm_ccd.json",
+      "ext": ".json",
+      "size": 1684
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_data_reset.json",
+      "name": "tm_data_reset.json",
+      "ext": ".json",
+      "size": 1524
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_device.json",
+      "name": "tm_device.json",
+      "ext": ".json",
+      "size": 3686
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_game.json",
+      "name": "tm_game.json",
+      "ext": ".json",
+      "size": 6374
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_infrared.json",
+      "name": "tm_infrared.json",
+      "ext": ".json",
+      "size": 2029
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_lamp.json",
+      "name": "tm_lamp.json",
+      "ext": ".json",
+      "size": 29328
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_main.json",
+      "name": "tm_main.json",
+      "ext": ".json",
+      "size": 11508
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_main_debug.json",
+      "name": "tm_main_debug.json",
+      "ext": ".json",
+      "size": 12317
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_monitor.json",
+      "name": "tm_monitor.json",
+      "ext": ".json",
+      "size": 6769
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_nesica.json",
+      "name": "tm_nesica.json",
+      "ext": ".json",
+      "size": 2196
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_nesica_time.json",
+      "name": "tm_nesica_time.json",
+      "ext": ".json",
+      "size": 2407
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_network.json",
+      "name": "tm_network.json",
+      "ext": ".json",
+      "size": 6863
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_one_play_free.json",
+      "name": "tm_one_play_free.json",
+      "ext": ".json",
+      "size": 1639
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_save.json",
+      "name": "tm_save.json",
+      "ext": ".json",
+      "size": 1100
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_save_game.json",
+      "name": "tm_save_game.json",
+      "ext": ".json",
+      "size": 1168
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_save_nesica_time.json",
+      "name": "tm_save_nesica_time.json",
+      "ext": ".json",
+      "size": 1217
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_save_one_play_free.json",
+      "name": "tm_save_one_play_free.json",
+      "ext": ".json",
+      "size": 1213
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_save_sound.json",
+      "name": "tm_save_sound.json",
+      "ext": ".json",
+      "size": 1178
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_save_system.json",
+      "name": "tm_save_system.json",
+      "ext": ".json",
+      "size": 1179
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_seat.json",
+      "name": "tm_seat.json",
+      "ext": ".json",
+      "size": 13264
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_setting_init.json",
+      "name": "tm_setting_init.json",
+      "ext": ".json",
+      "size": 1199
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_sound.json",
+      "name": "tm_sound.json",
+      "ext": ".json",
+      "size": 6334
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_stick_vibration.json",
+      "name": "tm_stick_vibration.json",
+      "ext": ".json",
+      "size": 2932
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_switch.json",
+      "name": "tm_switch.json",
+      "ext": ".json",
+      "size": 2040
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_system.json",
+      "name": "tm_system.json",
+      "ext": ".json",
+      "size": 1577
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_touch_panel.json",
+      "name": "tm_touch_panel.json",
+      "ext": ".json",
+      "size": 877
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\TestMode\\SettingFile\\tm_version.json",
+      "name": "tm_version.json",
+      "ext": ".json",
+      "size": 2935
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\WwiseAudio\\Windows\\PluginInfo.xml",
+      "name": "PluginInfo.xml",
+      "ext": ".xml",
+      "size": 578
+    },
+    {
+      "rel_path": "WindowsNoEditor\\AcrGame\\Content\\WwiseAudio\\Windows\\SoundbanksInfo.xml",
+      "name": "SoundbanksInfo.xml",
+      "ext": ".xml",
+      "size": 9123460
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Base.ini",
+      "name": "Base.ini",
+      "ext": ".ini",
+      "size": 33
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseCompat.ini",
+      "name": "BaseCompat.ini",
+      "ext": ".ini",
+      "size": 16732
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseDeviceProfiles.ini",
+      "name": "BaseDeviceProfiles.ini",
+      "ext": ".ini",
+      "size": 20638
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseEditor.ini",
+      "name": "BaseEditor.ini",
+      "ext": ".ini",
+      "size": 59581
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseEditorKeyBindings.ini",
+      "name": "BaseEditorKeyBindings.ini",
+      "ext": ".ini",
+      "size": 5389
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseEditorLayout.ini",
+      "name": "BaseEditorLayout.ini",
+      "ext": ".ini",
+      "size": 0
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseEditorPerProjectUserSettings.ini",
+      "name": "BaseEditorPerProjectUserSettings.ini",
+      "ext": ".ini",
+      "size": 32436
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseEditorSettings.ini",
+      "name": "BaseEditorSettings.ini",
+      "ext": ".ini",
+      "size": 6219
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseEngine.ini",
+      "name": "BaseEngine.ini",
+      "ext": ".ini",
+      "size": 98901
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseGame.ini",
+      "name": "BaseGame.ini",
+      "ext": ".ini",
+      "size": 3721
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseHardware.ini",
+      "name": "BaseHardware.ini",
+      "ext": ".ini",
+      "size": 3745
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseInput.ini",
+      "name": "BaseInput.ini",
+      "ext": ".ini",
+      "size": 16643
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseLightmass.ini",
+      "name": "BaseLightmass.ini",
+      "ext": ".ini",
+      "size": 9257
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\BaseScalability.ini",
+      "name": "BaseScalability.ini",
+      "ext": ".ini",
+      "size": 11190
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\ConsoleVariables.ini",
+      "name": "ConsoleVariables.ini",
+      "ext": ".ini",
+      "size": 2679
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Localization\\Category.ini",
+      "name": "Category.ini",
+      "ext": ".ini",
+      "size": 1640
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Localization\\Editor.ini",
+      "name": "Editor.ini",
+      "ext": ".ini",
+      "size": 1835
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Localization\\EditorTutorials.ini",
+      "name": "EditorTutorials.ini",
+      "ext": ".ini",
+      "size": 1988
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Localization\\Engine.ini",
+      "name": "Engine.ini",
+      "ext": ".ini",
+      "size": 2292
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Localization\\Keywords.ini",
+      "name": "Keywords.ini",
+      "ext": ".ini",
+      "size": 1640
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Localization\\PortableObjectExport.ini",
+      "name": "PortableObjectExport.ini",
+      "ext": ".ini",
+      "size": 1500
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Localization\\PortableObjectImport.ini",
+      "name": "PortableObjectImport.ini",
+      "ext": ".ini",
+      "size": 1500
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Localization\\PropertyNames.ini",
+      "name": "PropertyNames.ini",
+      "ext": ".ini",
+      "size": 1683
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Localization\\RepairData.ini",
+      "name": "RepairData.ini",
+      "ext": ".ini",
+      "size": 2670
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Localization\\ResourceFileGen.ini",
+      "name": "ResourceFileGen.ini",
+      "ext": ".ini",
+      "size": 1577
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Localization\\ToolTips.ini",
+      "name": "ToolTips.ini",
+      "ext": ".ini",
+      "size": 1790
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Localization\\WordCount.ini",
+      "name": "WordCount.ini",
+      "ext": ".ini",
+      "size": 1877
+    },
+    {
+      "rel_path": "WindowsNoEditor\\Engine\\Config\\Windows\\WindowsEngine.ini",
+      "name": "WindowsEngine.ini",
+      "ext": ".ini",
+      "size": 813
+    }
+  ],
+  "nohddunload": {
+    "ini_path": "X:\\StarwingParadox\\NoHDDUnload.ini",
+    "dll_path": "X:\\StarwingParadox\\NoHDDUnload.dll",
+    "ini_content": "[init]\nWriteFileInterval=50000",
+    "dll_size": 77824,
+    "dll_pe": [],
+    "dll_arch": "x86"
+  },
+  "network_strings": {
+    "D DRIVE CONTENTS\\system\\Service\\NesysService.exe": [
+      "169.254.255.255",
+      "255.255.255.255"
+    ]
+  },
+  "input_strings": {
+    "D DRIVE CONTENTS\\system\\Service\\NesysService.exe": [
+      "SCOMMAND_DHCP_RENEW_START",
+      "error: WSAStartup()    code: 0x%08X",
+      "Game_Start_Free",
+      "SCOMMAND_DESTROY_MY_SERVICE",
+      "C:\\alienbrainWork\\all_development_solution\\NESYS_support\\NESiCAxLive\\NesysService\\bin\\Release(NESYS_Game_cert3)\\NesysServiceCert_x64.pdb",
+      "Can't add Average filter after starting",
+      "NESYS Service   : %s(c)",
+      "LCOMMAND_CARD_REISSUE_TEST_REQUEST",
+      "Can't add Paeth filter after starting",
+      "LCOMMAND_INCOME_START_REQUEST",
+      "SCOMMAND_SERVICE_VERSION_REPLY",
+      "..\\src\\ServiceMain.cpp",
+      "%s://%s/service/upload/%s",
+      "%s://%s/service/incom/%s",
+      "GetStartupInfoA",
+      "SetServiceStatus",
+      "Can't add Up filter after starting",
+      "LCOMMAND_INCOME_FREE_START_REQUEST",
+      "%s://%s/service/card/%s",
+      "SCOMMAND_HTTPACCESS_START",
+      "LCOMMAND_CLIENT_START",
+      "%s://%s/service/respone/%s",
+      "program is started.",
+      "StartServiceCtrlDispatcherA",
+      "Game_Start",
+      "LCOMMAND_GAME_FREE_START_REQUEST",
+      "LCOMMAND_DESTROY_MY_SERVICE",
+      "LCOMMAND_GAME_START_REQUEST",
+      "SCOMMAND_CLIENT_START_REPLY",
+      "SCOMMAND_CARD_REISSUE_TEST_REPLY",
+      "NesysService",
+      "LCOMMAND_SERVICE_VERSION_REQUEST",
+      "RegisterServiceCtrlHandlerA"
+    ],
+    "WindowsNoEditor\\AcrGame.exe": [
+      "Couldn't start:",
+      "GetStartupInfoW",
+      "XINPUT1_3.DLL"
+    ]
+  },
+  "ue4_config": {
+    "engine_config": true,
+    "game_config": true,
+    "input_config": true,
+    "saved_config": false,
+    "engine_dir": true,
+    "acrgame_dir": true,
+    "engine_config_path": "AcrGame\\Config\\DefaultEngine.ini",
+    "game_config_path": "AcrGame\\Config\\DefaultGame.ini",
+    "input_config_path": "AcrGame\\Config\\DefaultInput.ini"
+  }
+}
