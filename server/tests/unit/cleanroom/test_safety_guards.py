@@ -124,7 +124,11 @@ class TestNoProductionEndpoints:
         for root, _dirs, files in os.walk(pkg_dir):
             for f in files:
                 if f.endswith(".py"):
-                    source_files.append(os.path.join(root, f))
+                    filepath = os.path.join(root, f)
+                    # Exclude safety.py which contains the prohibited lists
+                    if os.path.basename(filepath) == "safety.py":
+                        continue
+                    source_files.append(filepath)
         return source_files
 
     def test_no_production_hostnames(self):
@@ -162,7 +166,11 @@ class TestNoCertificateMaterial:
         for root, _dirs, files in os.walk(pkg_dir):
             for f in files:
                 if f.endswith(".py"):
-                    source_files.append(os.path.join(root, f))
+                    filepath = os.path.join(root, f)
+                    # Exclude safety.py which contains the prohibited lists
+                    if os.path.basename(filepath) == "safety.py":
+                        continue
+                    source_files.append(filepath)
         return source_files
 
     def test_no_certificate_store_references(self):

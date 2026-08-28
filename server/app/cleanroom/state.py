@@ -138,10 +138,7 @@ class SessionStateMachine:
             raise DuplicateStartError(
                 "SESSION_START already received"
             )
-        if self._state not in (
-            SessionState.TRANSPORT_OPEN,
-            SessionState.START_PENDING,
-        ):
+        if self._state != SessionState.TRANSPORT_OPEN:
             raise CommandBeforeStartError(
                 f"Cannot start in state {self._state.value}"
             )

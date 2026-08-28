@@ -10,4 +10,12 @@ It does not contain certificate emulation.
 It does not create the original named pipe.
 It uses synthetic tests only.
 Unknown command semantics remain unimplemented.
+
+G18 additions:
+- Evidence-locked codec with explicit evidence levels
+- Deterministic clock and timeout model
+- Session scenario harness with versioned scenarios
+- State-machine invariant checker
+- Expanded safety guards
 """
+

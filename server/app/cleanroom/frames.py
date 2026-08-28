@@ -2,9 +2,15 @@
 
 This module implements only the minimum frame abstraction directly
 supported by G16 evidence. Unknown payload bytes remain opaque.
+
+Evidence constraints:
+- Packet ID: NOT confirmed in G16 evidence. Always returns 0.
+- Message type: First byte after length prefix (simplified G17 model).
+- Payload: Remaining bytes after message type (opaque).
 """
 from __future__ import annotations
 
+import struct
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
@@ -26,7 +32,7 @@ class Frame:
     """A validated protocol frame.
 
     Attributes:
-        packet_id: Non-negative packet identifier.
+        packet_id: Non-negative packet identifier (always 0; evidence not confirmed).
         message_type: Numeric message type identifier.
         message_name: Symbolic message name from registry.
         payload: Raw payload bytes (opaque).
@@ -49,7 +55,7 @@ def validate_frame(
     This function enforces only confirmed G16 boundaries:
     - frame must be at least MIN_FRAME_SIZE bytes
     - frame must not exceed max_frame_size
-    - packet_id must be non-negative
+    - packet_id is always 0 (no evidence for extraction)
     - message_type must be registered if catalog is provided
 
     Args:
@@ -63,7 +69,6 @@ def validate_frame(
     Raises:
         FrameTooSmallError: If frame is too small.
         FrameTooLargeError: If frame exceeds maximum size.
-        InvalidPacketIdError: If packet_id is negative.
         InvalidMessageTypeError: If message_type not in catalog.
     """
     if not isinstance(data, (bytes, bytearray)):
@@ -79,8 +84,6 @@ def validate_frame(
             f"Frame too large: {len(data)} bytes > {max_frame_size} maximum"
         )
 
-    # Parse the 4-byte LE length prefix
-    import struct
     frame_length = struct.unpack_from("<I", data, 0)[0]
 
     if frame_length != len(data):
@@ -89,19 +92,13 @@ def validate_frame(
             f"actual {len(data)}"
         )
 
-    # For G17, we treat the remaining bytes as opaque payload
-    # The actual protobuf parsing is handled by the existing codec
-    # We extract a minimal header for validation
     if len(data) > MIN_FRAME_SIZE:
-        # Extract message type from the first byte after length prefix
-        # This is a simplified validation; full parsing uses existing codec
-        message_type = data[MIN_FRAME_SIZE] if len(data) > MIN_FRAME_SIZE else 0
-        payload = data[MIN_FRAME_SIZE:]
+        message_type = data[MIN_FRAME_SIZE]
+        payload = data[MIN_FRAME_SIZE + 1:]
     else:
         message_type = 0
         payload = b""
 
-    # Validate against catalog if provided
     if catalog is not None:
         cmd = catalog.get_by_id(message_type)
         if cmd is None and message_type != 0:

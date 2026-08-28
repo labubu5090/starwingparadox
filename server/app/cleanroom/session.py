@@ -102,18 +102,30 @@ class Session:
         """Close the session transport and transition state.
 
         Always attempts cleanup even if transport close fails.
+        If already in CLOSED state, only closes transport.
+        If in FAILED state, only closes transport.
+        If in any other state, transitions to FAILED (fail-safe).
         """
         try:
             await self._transport.close()
         except Exception:
             logger.exception("Error closing transport")
         finally:
-            if not self._state_machine.is_terminal():
+            if self._state_machine.state == SessionState.CLOSED or self._state_machine.is_terminal():
+                self._event_log.record(
+                    EventType.TRANSPORT_CLOSED,
+                    source="session",
+                )
+            else:
                 self._state_machine.fail()
-            self._event_log.record(
-                EventType.TRANSPORT_CLOSED,
-                source="session",
-            )
+                self._event_log.record(
+                    EventType.SESSION_FAILED,
+                    source="session",
+                )
+                self._event_log.record(
+                    EventType.TRANSPORT_CLOSED,
+                    source="session",
+                )
 
     async def handle_client_start(self) -> None:
         """Handle receipt of LCOMMAND_CLIENT_START.
@@ -172,10 +184,14 @@ class Session:
 
         This is a synthetic error notification. In the clean-room
         foundation, it transitions to FAILED state.
+
+        Evidence: CERT_ERROR identity confirmed by G16, but payload
+        semantics and state effects are NOT confirmed. This method
+        represents the minimal synthetic model only.
         """
         self._state_machine.fail()
         self._event_log.record(
-            EventType.SYNTHETIC_TIMEOUT,
+            EventType.SESSION_FAILED,
             source="session",
             details={"error_type": "cert_error"},
         )
@@ -185,10 +201,14 @@ class Session:
 
         This is a synthetic error notification. In the clean-room
         foundation, it transitions to FAILED state.
+
+        Evidence: NW_ERROR identity confirmed by G16, but payload
+        semantics and state effects are NOT confirmed. This method
+        represents the minimal synthetic model only.
         """
         self._state_machine.fail()
         self._event_log.record(
-            EventType.SYNTHETIC_TIMEOUT,
+            EventType.SESSION_FAILED,
             source="session",
             details={"error_type": "nw_error"},
         )
@@ -198,6 +218,10 @@ class Session:
 
         This is a synthetic recovery notification. In the clean-room
         foundation, it records the event but does not change state.
+
+        Evidence: NWRECOVER_NOTICE identity confirmed by G16, but payload
+        semantics and state effects are NOT confirmed. This method
+        represents the minimal synthetic model only.
         """
         self._event_log.record(
             EventType.SYNTHETIC_DISCONNECT,
@@ -240,8 +264,14 @@ class Session:
 
         This is the primary integration test entry point.
 
+        Lifecycle commands (LCOMMAND_CLIENT_START, LCOMMAND_CLIENT_END)
+        are dispatched by symbolic name, not numeric ID, because their
+        numeric_id is None in the catalog (not confirmed by G16 evidence).
+
         Args:
             commands: List of (message_type, packet_id, message_name, payload).
+                For lifecycle commands, message_name is used for dispatch.
+                message_type is ignored for lifecycle commands.
 
         Returns:
             List of responses from each command.
@@ -252,13 +282,10 @@ class Session:
 
         for message_type, packet_id, message_name, payload in commands:
             try:
-                # Handle lifecycle commands specially
-                cmd_info = self._catalog.get_by_id(message_type)
-
-                if cmd_info and cmd_info.symbolic_name == "LCOMMAND_CLIENT_START":
+                if message_name == "LCOMMAND_CLIENT_START":
                     await self.handle_client_start()
                     responses.append(None)
-                elif cmd_info and cmd_info.symbolic_name == "LCOMMAND_CLIENT_END":
+                elif message_name == "LCOMMAND_CLIENT_END":
                     await self.handle_client_end()
                     responses.append(None)
                 else:

@@ -674,6 +674,73 @@ The previous G16 recommendation "Service Registration Feasibility Assessment" wa
 - Event log source
 - Installation source, uninstall source
 
-## Recommended Next Phase
+## Phase 2A-G18: Evidence-Locked Codec and Deterministic Session Harness (COMPLETE)
 
-Phase 2A-G18: Synthetic Protocol Integration and Advanced Command Handling
+**Commit**: TBD
+**Status**: COMPLETE - All exit criteria met
+**Classification**: EVIDENCE_LOCKED_CODEC_AND_DETERMINISTIC_HARNESS
+
+### G18 Summary
+
+Phase 2A-G18 established an evidence-locked codec, deterministic timeout model, session scenario harness, and expanded safety guards for the clean-room protocol foundation. All G17 semantic overreach was identified and corrected.
+
+### G18 Deliverables
+
+| Deliverable | Count |
+|-------------|-------|
+| New source modules | 6 |
+| New test modules | 6 |
+| Bug fixes | 3 |
+| Documentation | 1 |
+| Total new tests | 82 |
+| Total tests | 222 |
+
+### G18 New Source Modules
+
+| Module | Purpose |
+|--------|---------|
+| `codec.py` | Evidence-locked codec with explicit evidence levels |
+| `timeout.py` | Deterministic clock and timeout model |
+| `harness.py` | Session scenario harness |
+| `scenarios.py` | Versioned synthetic scenarios |
+| `invariants.py` | State-machine invariant checker |
+| `safety.py` | Expanded safety guards |
+
+### G18 Bug Fixes
+
+1. **`run_lifecycle` dispatch bug** (CRITICAL): Lifecycle commands with `numeric_id=None` were unreachable via `get_by_id()`. Fixed to dispatch by `message_name`.
+2. **`receive_client_start` logic bug** (MEDIUM): `START_PENDING` appeared in both duplicate-check and valid-state conditions. Fixed to only accept `TRANSPORT_OPEN`.
+3. **`close()` event recording** (LOW): Non-terminal close only recorded TRANSPORT_CLOSED. Now records both SESSION_FAILED and TRANSPORT_CLOSED.
+
+### G18 Test Results
+
+```
+222 tests passed, 0 failed
+Mypy: 0 errors (16 source files)
+Ruff: 0 errors
+```
+
+### G18 Quality Gates
+
+| Gate | Status |
+|------|--------|
+| All tests pass | PASS |
+| Mypy 0 errors | PASS |
+| Ruff 0 errors | PASS |
+| No restricted imports | PASS |
+| No production hostnames | PASS |
+| No certificate references | PASS |
+| No pipe paths | PASS |
+| No registry paths | PASS |
+| No deployment artifacts | PASS |
+
+### G18 Documents Created
+
+| Document | Path |
+|----------|------|
+| G17 Command Implementation Audit | docs/G17_COMMAND_IMPLEMENTATION_AUDIT.md |
+| G18 Final Report | docs/PHASE_2A_G18_FINAL_REPORT.md |
+
+### Recommended Next Phase
+
+Phase 2A-G19: Runtime Integration and Traffic Pattern Validation
