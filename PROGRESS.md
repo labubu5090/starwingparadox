@@ -181,6 +181,44 @@ The operator previously stated that the apparent game crash occurred when the op
 - Ruff: 0 errors
 - Tests: 834 passed, 1 skipped, 0 failed (with protobuf runtime)
 
+## Phase 2A-G10: OpenKey Provenance and NESYS Initialization Dependency Audit (COMPLETE)
+
+**Status**: COMPLETE
+
+### G10 Objectives
+
+- Determine legitimate origin, ownership, lifecycle, and role of OpenKey.json
+- Correct overreaching claims about OpenKey causality
+- Inventory all OpenKey references across codebase
+- Determine whether original OpenKey file exists
+- Identify expected producer of OpenKey.json
+- Determine read vs write behavior for each component
+- Analyze SystemDataCheck causality
+- Determine NesysService exit relationship to OpenKey
+
+### G10 Results
+
+| Finding | Detail |
+|---------|--------|
+| OpenKey files found | 2 (OpenKey.json, OpenKeyEvent_Galaxy.json) |
+| OpenKey location | D DRIVE CONTENTS (original game content) |
+| OpenKey producer | UNKNOWN (not proven to be NesysService) |
+| OpenKey role | REQUIRED_CANDIDATE (one of multiple SystemDataCheck requirements) |
+| SystemDataCheck | MULTIPLE_SYSTEMDATA_REQUIREMENTS |
+| NesysService exit | BEFORE_OPENKEY_ACCESS |
+| Provisioning context | MISSING (launcher, certificates, registry, network) |
+
+### G10 Classification
+
+**Primary**: `NESYS_OFFLINE_PRIMARY_GATE`
+**Secondary**: `ORIGINAL_PROVISIONING_CONTEXT_MISSING`
+
+### G10 Environment
+
+- Mypy: version 2.3.1, 0 errors on 64 source files
+- Ruff: 0 errors
+- Tests: 834 passed, 1 skipped, 0 failed
+
 ## Current State
 
 | Metric | Value |
@@ -197,8 +235,12 @@ The operator previously stated that the apparent game crash occurred when the op
 | Deployment status | SINGLE_CABINET_DEPLOYMENT_CANDIDATE |
 | NESYS | OFFLINE (CertError, pipe does not exist) |
 | D: drive | NOT MOUNTED |
+| OpenKey | MISSING_AT_EXPECTED_RUNTIME_PATH |
 | G9 startup race | DISPROVEN |
 | G9 post-HTTP gating | CLASSIFIED (BGAMECONNECT_GATES_TCP_CONNECTION) |
+| G10 OpenKey producer | UNKNOWN |
+| G10 SystemDataCheck | MULTIPLE_REQUIREMENTS |
+| G10 NesysService exit | BEFORE_OPENKEY_ACCESS |
 
 ## SQLite Architecture
 

@@ -1,0 +1,41 @@
+{
+  "inventory_date": "2026-08-28",
+  "search_scope": [
+    "C:\\Users\\KAHO\\Pictures\\Starwing",
+    "X:\\StarwingParadox",
+    "D:\\Saved\\ACRSaved"
+  ],
+  "files_found": [
+    {
+      "relative_path": "X:\\StarwingParadox\\D DRIVE CONTENTS\\Saved\\ACRSaved\\SaveData\\OpenKey.json",
+      "file_size_bytes": 96,
+      "sha256": "B166054FD8CFAC828A9BF72F97663A311F7C5B9A4A23AEE3189B959241D64AE2",
+      "creation_time": "2026-08-27T11:48:52",
+      "last_write_time": "2018-11-21T07:00:00",
+      "is_read_only": false,
+      "source_classification": "OPERATOR_OWNED_RUNTIME_SOURCE",
+      "inside_d_drive_contents": true,
+      "inside_runtime_appdata": false,
+      "inside_documentation_or_fixture": false
+    },
+    {
+      "relative_path": "X:\\StarwingParadox\\D DRIVE CONTENTS\\system\\DUA\\event\\OpenKeyEvent_Galaxy.json",
+      "file_size_bytes": 80,
+      "sha256": "65E45AF83B115422B3F4D6331D927845FF383BBE1568D6D8C9E2848C32C4FD00",
+      "creation_time": "2026-08-27T11:48:52",
+      "last_write_time": "2018-11-21T07:00:00",
+      "is_read_only": false,
+      "source_classification": "OPERATOR_OWNED_RUNTIME_SOURCE",
+      "inside_d_drive_contents": true,
+      "inside_runtime_appdata": false,
+      "inside_documentation_or_fixture": false
+    }
+  ],
+  "files_not_found": [
+    "C:\\Users\\KAHO\\Pictures\\Starwing\\**\\OpenKey*",
+    "D:\\Saved\\ACRSaved\\SaveData\\OpenKey.json",
+    "C:\\Users\\KAHO\\AppData\\**\\OpenKey*"
+  ],
+  "total_files_found": 2,
+  "status": "OPERATOR_OWNED_RUNTIME_SOURCE_FOUND"
+}

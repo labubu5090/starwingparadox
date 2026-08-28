@@ -7,6 +7,7 @@
 - **2026-08-28**: RENDERING_CRASH_STATUS: NOT_CONFIRMED_AS_SPONTANEOUS (operator-forced close)
 - **2026-08-28**: messageType 103 (0x67): CAPTURE_SEQUENCE_CANDIDATE — not proven as PingResponse
 - **2026-08-28**: G9-A analysis: Startup race DISPROVEN; post-HTTP gating classified as `BGAMECONNECT_GATES_TCP_CONNECTION`
+- **2026-08-28**: G10 analysis: OpenKey causality corrected from "OpenKey missing → SystemDataCheck error" to MULTIPLE_SYSTEMDATA_REQUIREMENTS. OpenKey is one of multiple requirements. See `OPENKEY_SYSTEMDATACHECK_CAUSALITY.md`.
 
 ## Boot Sequence (G9-A Validated)
 

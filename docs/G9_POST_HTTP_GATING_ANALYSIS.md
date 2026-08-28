@@ -4,6 +4,10 @@
 **Run:** G9-A cold boot validation
 **Classification:** `BGAMECONNECT_GATES_TCP_CONNECTION`
 
+## Correction Note (2026-08-28)
+
+**OPENKEY_CAUSALITY**: OVERSTATED — Prior claim "OpenKey missing → SystemDataCheck error" is a direct causal chain. G10 analysis corrects this to MULTIPLE_SYSTEMDATA_REQUIREMENTS. OpenKey is ONE OF MULTIPLE requirements checked by SystemDataCheck (IsOnline, OpenKey, NESYS Event). See `OPENKEY_SYSTEMDATACHECK_CAUSALITY.md`.
+
 ## Executive Summary
 
 After HTTP matching succeeds (game receives `{"ip_addr":"127.0.0.1:6666"}`), the game **does not establish a TCP connection** because:
