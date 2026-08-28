@@ -599,6 +599,65 @@ The operator previously stated that the apparent game crash occurred when the op
 
 The previous G16 recommendation "Service Registration Feasibility Assessment" was replaced because G15 found no external registration or provisioning evidence. The current G16 is "Original Runtime Recovery Closure and Clean-room Compatibility Boundary".
 
+## Phase 2A-G17: Synthetic Transport and Protocol State-Machine Foundation (COMPLETE)
+
+**Commit**: TBD
+**Status**: COMPLETE
+**Classification**: SYNTHETIC_PROTOCOL_FOUNDATION_COMPLETE
+
+### G17 Results
+
+| Metric | Value |
+|--------|-------|
+| pytest | 974 passed |
+| skipped | 1 |
+| failed | 0 |
+| Tests added | 140 |
+| Ruff | 0 errors |
+| Mypy | 0 errors on 74 source files |
+| Typed source files | 74 |
+| Source files created | 10 |
+| Test files created | 11 |
+| Documents created | 12 |
+| Artifacts created | 4 |
+
+### G17 Key Findings
+
+1. **Transport abstraction implemented**: Abstract interface with synthetic implementation
+2. **Command catalog loaded**: 28 commands from G16 evidence
+3. **State machine implemented**: 7 states with 12 allowed transitions
+4. **Frame validation implemented**: Minimum size, maximum size, catalog validation
+5. **Dispatcher implemented**: Handler registration, direction validation, lifecycle constraints
+6. **Lifecycle controller implemented**: Complete synthetic lifecycle
+7. **Safety guards implemented**: No prohibited imports, no production endpoints
+8. **Observability implemented**: 10 event types with structured logging
+9. **Test suite comprehensive**: 140 new tests, all passing
+10. **No regressions**: All existing tests still pass
+
+### G17 Documents Created
+
+| Document | Path |
+|----------|------|
+| G17 Initial Baseline | docs/PHASE_2A_G17_INITIAL_BASELINE.md |
+| G17 Implementation Plan | docs/PHASE_2A_G17_IMPLEMENTATION_PLAN.md |
+| Transport Architecture | docs/CLEANROOM_TRANSPORT_ARCHITECTURE.md |
+| Command Catalog | docs/CLEANROOM_COMMAND_CATALOG.md |
+| Session State Machine | docs/CLEANROOM_SESSION_STATE_MACHINE.md |
+| Frame Validation | docs/CLEANROOM_FRAME_VALIDATION.md |
+| Dispatch Foundation | docs/CLEANROOM_DISPATCH_FOUNDATION.md |
+| Synthetic Test Strategy | docs/CLEANROOM_SYNTHETIC_TEST_STRATEGY.md |
+| Safety Verification | docs/CLEANROOM_G17_SAFETY_VERIFICATION.md |
+| G17 Final Report | docs/PHASE_2A_G17_FINAL_REPORT.md |
+
+### G17 Artifacts Created
+
+| Artifact | Path |
+|----------|------|
+| Implementation Status | artifacts/phase_2a_g17/implementation_status.json |
+| Test Coverage Matrix | artifacts/phase_2a_g17/test_coverage_matrix.json |
+| Safety Guard Results | artifacts/phase_2a_g17/safety_guard_results.json |
+| State Transition Matrix | artifacts/phase_2a_g17/state_transition_matrix.json |
+
 ## Remaining Unknowns
 
 - 6 computed player profile fields
@@ -617,4 +676,4 @@ The previous G16 recommendation "Service Registration Feasibility Assessment" wa
 
 ## Recommended Next Phase
 
-Phase 2A-G17: Synthetic Transport and Protocol State-Machine Foundation
+Phase 2A-G18: Synthetic Protocol Integration and Advanced Command Handling

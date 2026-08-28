@@ -182,3 +182,44 @@ This document compares the clean-room compatibility specification with the curre
 | Network operations | Security boundary |
 | Registry operations | Security boundary |
 | Service operations | Security boundary |
+
+---
+
+## G17 Audit Note
+
+**Date**: 2026-08-28
+**Phase**: 2A-G17
+
+This document was reviewed during Phase 2A-G17 (Synthetic Transport and Protocol State-Machine Foundation). The following gaps have been addressed:
+
+### G17 Implemented Behaviors
+
+| Gap | Status | Source Module | Tests |
+|-----|--------|---------------|-------|
+| Abstract transport interface | IMPLEMENTED_SYNTHETIC | app/cleanroom/transport.py | test_synthetic_transport.py |
+| Synthetic transport | IMPLEMENTED_SYNTHETIC | app/cleanroom/synthetic_transport.py | test_synthetic_transport.py |
+| Session state machine | IMPLEMENTED_SYNTHETIC | app/cleanroom/state.py | test_state.py |
+| CLIENT_START handler | IMPLEMENTED_SYNTHETIC | app/cleanroom/session.py | test_session.py |
+| CLIENT_END handler | IMPLEMENTED_SYNTHETIC | app/cleanroom/session.py | test_session.py |
+| CERT_ERROR reporting | IMPLEMENTED_SYNTHETIC | app/cleanroom/session.py | test_session.py |
+| NW_ERROR reporting | IMPLEMENTED_SYNTHETIC | app/cleanroom/session.py | test_session.py |
+| Command catalog | IMPLEMENTED_SYNTHETIC | app/cleanroom/commands.py | test_commands.py |
+| Frame validation | IMPLEMENTED_SYNTHETIC | app/cleanroom/frames.py | test_frames.py |
+| Request dispatcher | IMPLEMENTED_SYNTHETIC | app/cleanroom/dispatcher.py | test_dispatcher.py |
+| Lifecycle controller | IMPLEMENTED_SYNTHETIC | app/cleanroom/session.py | test_session.py |
+| Observability events | IMPLEMENTED_SYNTHETIC | app/cleanroom/events.py | test_events.py |
+
+### G17 Remaining Gaps
+
+| Gap | Status | Rationale |
+|-----|--------|-----------|
+| Named pipe transport | NOT_IMPLEMENTED | Requires authorization |
+| Payload validation | PARTIAL | Only basic size validation |
+| Timeout handling | PARTIAL | Only receive timeout |
+| Error responses | PARTIAL | Only synthetic error reporting |
+| Protocol-identified commands | CATALOG_ONLY | No implementation without evidence |
+| Unknown commands | NOT_IMPLEMENTED | No evidence |
+| Certificate operations | RESTRICTED_EXCLUDED | Security boundary |
+| Network operations | RESTRICTED_EXCLUDED | Security boundary |
+| Registry operations | RESTRICTED_EXCLUDED | Security boundary |
+| Service operations | RESTRICTED_EXCLUDED | Security boundary |
