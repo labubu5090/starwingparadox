@@ -49,6 +49,9 @@ MAX_FRAME_SIZE = 1 * 1024 * 1024  # 1 MiB
 
 # ── Connection counter and logging ────────────────────────
 _connection_counter: int = 0
+_readiness_probe_connections: int = 0
+_probable_game_connections: int = 0
+_decoded_game_frames: int = 0
 _tcp_log_file: Path | None = None
 
 
@@ -85,6 +88,20 @@ def _setup_tcp_logging() -> Path:
     cwd = os.getcwd()
     git_commit = _get_git_commit()
     generated_status = "LOADED" if HAS_GENERATED else "FALLBACK_RAW"
+    protobuf_path = ""
+    descriptor_ok = False
+    if HAS_GENERATED:
+        try:
+            from app.protocol.generated import starwingMessage_pb2 as _pb_check
+            protobuf_path = str(Path(_pb_check.__file__))
+            # Verify descriptor is usable
+            msg = _pb_check.PbMessage()  # type: ignore[attr-defined]
+            msg.packetId = 1
+            msg.messageType = 0x66
+            _ = msg.SerializeToString()
+            descriptor_ok = True
+        except Exception:
+            generated_status = "IMPORT_FAILED"
 
     header = (
         f"=== TCP Server Startup ===\n"
@@ -96,6 +113,8 @@ def _setup_tcp_logging() -> Path:
         f"Bind: {settings.app_host}:{settings.pb_port}\n"
         f"Log path: {_tcp_log_file}\n"
         f"Generated-Protobuf: {generated_status}\n"
+        f"Protobuf path: {protobuf_path}\n"
+        f"Descriptor verification: {'PASS' if descriptor_ok else 'FAIL'}\n"
         f"Raw fallback: {not HAS_GENERATED}\n"
         f"===========================\n"
     )
@@ -222,9 +241,12 @@ async def _handle_client(
     writer: asyncio.StreamWriter,
 ) -> None:
     """Process a single client connection."""
-    global _connection_counter
+    global _connection_counter, _readiness_probe_connections
+    global _probable_game_connections, _decoded_game_frames
     _connection_counter += 1
     conn_num = _connection_counter
+    connection_source = "readiness_probe"
+    frames_decoded = 0
 
     peer = writer.get_extra_info("peername")
     client_id = f"{peer[0]}:{peer[1]}" if peer else "unknown"
@@ -233,7 +255,7 @@ async def _handle_client(
     _log_tcp_event(
         f"ACCEPT #{conn_num}",
         client_id=client_id,
-        extra=f"total_connections={_connection_counter}",
+        extra=f"total_connections={_connection_counter} connection_source={connection_source}",
     )
 
     buffer = bytearray()
@@ -276,10 +298,27 @@ async def _handle_client(
 
                 request_id_var.set(f"{client_id}:pkt{packet_id}")
 
+                # Classify: if we decode a known game messageType, this is game traffic
+                # The probe sends messageType 0x66 with packetId=999, which is also a valid
+                # game Ping. To distinguish, check if this frame came from our probe or from
+                # real game traffic by tracking if we've already seen a non-probe frame.
+                frames_decoded += 1
+                is_probe_frame = (packet_id == 999 and message_type == 0x66 and frames_decoded == 1)
+                if not is_probe_frame:
+                    if connection_source == "readiness_probe":
+                        connection_source = "probable_game_traffic"
+                        _probable_game_connections += 1
+                        _log_tcp_event(
+                            f"RECLASSIFIED #{conn_num}",
+                            client_id=client_id,
+                            extra=f"connection_source=probable_game_traffic total_game_connections={_probable_game_connections}",
+                        )
+                    _decoded_game_frames += 1
+
                 _log_tcp_event(
                     f"RECV #{conn_num}",
                     client_id=client_id,
-                    extra=f"packetId={packet_id} messageType={message_type} (0x{message_type:X}) name={message_name}",
+                    extra=f"packetId={packet_id} messageType={message_type} (0x{message_type:X}) name={message_name} connection_source={connection_source}",
                 )
 
                 handler = _handlers.get(message_type, handle_message)
@@ -320,7 +359,19 @@ async def _handle_client(
         writer.close()
         with contextlib.suppress(Exception):
             await writer.wait_closed()
-        _log_tcp_event(f"CLOSED #{conn_num}", client_id=client_id, extra=f"total_connections={_connection_counter}")
+        if connection_source == "readiness_probe":
+            _readiness_probe_connections += 1
+        _log_tcp_event(
+            f"CLOSED #{conn_num}",
+            client_id=client_id,
+            extra=(
+                f"connection_source={connection_source} "
+                f"total_connections={_connection_counter} "
+                f"readiness_probes={_readiness_probe_connections} "
+                f"game_connections={_probable_game_connections} "
+                f"decoded_frames={_decoded_game_frames}"
+            ),
+        )
 
 
 async def _run_server(

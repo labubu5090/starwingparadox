@@ -1,0 +1,205 @@
+{
+  "run_id": "g9-a-cold-boot",
+  "run_timestamp": "2026-08-28",
+  "log_file": "AcrGame.log",
+  "server_status": "READY (all health checks passed, 2 readiness probe connections received)",
+  "startup_race": "DISPROVEN_FOR_THIS_RUN",
+  "classification": "BGAMECONNECT_GATES_TCP_CONNECTION",
+  "timeline": [
+    {
+      "seq": 1,
+      "time": "02:36.34",
+      "phase": "BOOT",
+      "event": "NESYS CertError spam begins",
+      "detail": "Repeated NesysControlErrorMessage / ENesysNetworkServerMessage[CertError] and RequestNetworkInfo OK → RequestNetworkInfo Error cycles",
+      "log_lines": "107331-107456",
+      "subsystem": "NESYS",
+      "status": "FAILING"
+    },
+    {
+      "seq": 2,
+      "time": "02:36.35",
+      "phase": "BOOT",
+      "event": "Boot → Notice transition",
+      "detail": "SetGameSequence Old:[Boot] New:[Notice]",
+      "log_lines": "107460-107468",
+      "subsystem": "GameSequence",
+      "status": "OK"
+    },
+    {
+      "seq": 3,
+      "time": "02:36.40",
+      "phase": "SEAT_CHECK",
+      "event": "Notice → SeatCheck → AdvertiseMovie",
+      "detail": "SeatCheck completes immediately (empty message), transitions to AdvertiseMovie",
+      "log_lines": "107609-107700",
+      "subsystem": "GameSequence",
+      "status": "OK"
+    },
+    {
+      "seq": 4,
+      "time": "02:36.40",
+      "phase": "MATCHING",
+      "event": "HTTP matching request sent",
+      "detail": "POST http://dev.starwing.jp/mock/matching/server via proxy → FastAPI",
+      "log_lines": "107720-107732",
+      "subsystem": "HttpReq",
+      "status": "SENT"
+    },
+    {
+      "seq": 5,
+      "time": "02:36.41",
+      "phase": "MATCHING",
+      "event": "HTTP matching response received",
+      "detail": "Response code:200, SetConnectAddress 127.0.0.1:6666, IsSuccess[1]",
+      "log_lines": "107953-107958",
+      "subsystem": "HttpReq",
+      "status": "SUCCESS"
+    },
+    {
+      "seq": 6,
+      "time": "02:36.41",
+      "phase": "TCP_SETUP",
+      "event": "TCP connection setup begins",
+      "detail": "UCPP_TcpThread created, Connect / Start Connect addr[127.0.0.1:6666], SetupConnect TargetAddress[127.0.0.1:6666]",
+      "log_lines": "107984-108009",
+      "subsystem": "TcpThread",
+      "status": "INITIATED"
+    },
+    {
+      "seq": 7,
+      "time": "02:36.41",
+      "phase": "SYSTEM_CHECK",
+      "event": "SystemDataCheck checks NESYS IsOnline",
+      "detail": "UCPP_NesysControl::Get(this)->IsOnline[0] — NESYS is OFFLINE",
+      "log_lines": "108146",
+      "subsystem": "SystemDataCheck",
+      "status": "FAIL"
+    },
+    {
+      "seq": 8,
+      "time": "02:36.41",
+      "phase": "SYSTEM_CHECK",
+      "event": "OpenKey.json load fails",
+      "detail": "LoadJsonFile path[D:/Saved/ACRSaved/SaveData/OpenKey.json] — LoadKeyFile error",
+      "log_lines": "108153-108155",
+      "subsystem": "SystemDataCheck",
+      "status": "FAIL"
+    },
+    {
+      "seq": 9,
+      "time": "02:36.41",
+      "phase": "SYSTEM_CHECK",
+      "event": "NESYS Event error",
+      "detail": "CheckOpenKeyUpdate / NESYS Event error. IsEventCheck[0] IsEventError[0]",
+      "log_lines": "108156",
+      "subsystem": "SystemDataCheck",
+      "status": "FAIL"
+    },
+    {
+      "seq": 10,
+      "time": "02:36.41",
+      "phase": "SYSTEM_CHECK",
+      "event": "DispError set",
+      "detail": "ACPP_SystemDataCheck::SetWindowString — offline check error message displayed",
+      "log_lines": "108157-108159",
+      "subsystem": "SystemDataCheck",
+      "status": "ERROR"
+    },
+    {
+      "seq": 11,
+      "time": "02:36.41",
+      "phase": "TCP_SETUP",
+      "event": "TCP address resolution completes",
+      "detail": "ResolvedAddress / ResolvedAddr complete! DomainName[127.0.0.1:6666] ErrorCode[0]",
+      "log_lines": "108161-108163",
+      "subsystem": "TcpThread",
+      "status": "RESOLVED"
+    },
+    {
+      "seq": 12,
+      "time": "02:36.51",
+      "phase": "SYSTEM_CHECK",
+      "event": "SystemDataCheck ends with error",
+      "detail": "SetNextMode[End](20), isError[1]",
+      "log_lines": "108164-108172",
+      "subsystem": "SystemDataCheck",
+      "status": "END_ERROR"
+    },
+    {
+      "seq": 13,
+      "time": "02:36.51",
+      "phase": "PROMOTION",
+      "event": "PromotionMovie displayed (insert coin screen)",
+      "detail": "WBP_InsertStart animation looping, WarningAdvertiseSub shown",
+      "log_lines": "108223-108281",
+      "subsystem": "PromotionMovie",
+      "status": "ACTIVE"
+    },
+    {
+      "seq": 14,
+      "time": "02:37.33",
+      "phase": "EXIT",
+      "event": "Game closes (operator-forced)",
+      "detail": "Closing by request, FPlatformMisc::RequestExit(0)",
+      "log_lines": "108283-108288",
+      "subsystem": "Windows",
+      "status": "CLOSED"
+    },
+    {
+      "seq": 15,
+      "time": "02:38.27",
+      "phase": "CRASH",
+      "event": "Rendering thread crash (30s timeout)",
+      "detail": "GameThread timed out waiting for RenderThread after 30.00 secs, EXCEPTION_ACCESS_VIOLATION at FRCPassPostProcessAA::Process",
+      "log_lines": "108302-108327",
+      "subsystem": "Renderer",
+      "status": "CRASH"
+    }
+  ],
+  "key_findings": {
+    "nesys_certerror": {
+      "description": "NESYS service repeatedly fails with CertError during boot (status[4] option[0])",
+      "root_cause": "NESYS service (NesysService.exe) crashes immediately with exit code -1; game cannot authenticate",
+      "effect": "bNesysServerLive remains false; IsOnline remains 0"
+    },
+    "openkey_json_missing": {
+      "description": "OpenKey.json not found at D:/Saved/ACRSaved/SaveData/OpenKey.json",
+      "root_cause": "File never created because NESYS was never online to generate it",
+      "effect": "SystemDataCheck fails → DispError → game enters error state"
+    },
+    "bgameconnect_gating": {
+      "description": "TCP address resolved but connection never established after error state",
+      "root_cause": "SystemDataCheck error state may abort TCP connection callback; game transitions to PromotionMovie instead of completing TCP handshake",
+      "effect": "No TCP connection observed on server console"
+    },
+    "tcp_resolution_slow": {
+      "description": "TCP address resolution took ~750ms (02:36.41:055 → 02:36.41:804) for localhost",
+      "root_cause": "UE4 async DNS resolution for 127.0.0.1:6666",
+      "effect": "Resolution completed but error state was already triggered"
+    },
+    "operator_forced_close": {
+      "description": "Game closed by operator at 02:37:33, NOT spontaneous crash",
+      "root_cause": "Operator closed the window (Closing by request)",
+      "effect": "Render thread crash at 02:38:27 is aftermath of forced close, not root cause"
+    }
+  },
+  "classification": {
+    "primary": "BGAMECONNECT_GATES_TCP_CONNECTION",
+    "description": "The game-level bGameConnect flag gates TCP connection establishment. NESYS offline → OpenKey missing → SystemDataCheck error → bGameConnect never set → TCP connection aborted. The server was ready 3+ minutes before HTTP request.",
+    "secondary_factors": [
+      "NESYS CertError blocks NESYS authentication (root cause of offline state)",
+      "OpenKey.json missing (consequence of NESYS offline)",
+      "SystemDataCheck error state prevents TCP completion"
+    ],
+    "conclusive_evidence": "TCP address was resolved (line 108161-108163) but no TCP connection was established after the resolution. The only event between resolution and game close was the SystemDataCheck error (DispError at line 108157-108159)."
+  },
+  "server_evidence": {
+    "total_connections": "0",
+    "readiness_probe_connections": "2 ( ACCEPT #1 and #2)",
+    "probable_game_connections": "0",
+    "decoded_game_frames": "0",
+    "http_requests": "1 (POST /mock/matching/server → 200)",
+    "server_ready_before_game": "~180 seconds"
+  }
+}

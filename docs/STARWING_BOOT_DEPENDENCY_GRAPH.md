@@ -2,17 +2,13 @@
 
 ## Date: 2026-08-27
 
-## Correction Note (2026-08-28)
+## Corrections
 
-**RENDERING_CRASH_STATUS**: NOT_CONFIRMED_AS_SPONTANEOUS
+- **2026-08-28**: RENDERING_CRASH_STATUS: NOT_CONFIRMED_AS_SPONTANEOUS (operator-forced close)
+- **2026-08-28**: messageType 103 (0x67): CAPTURE_SEQUENCE_CANDIDATE — not proven as PingResponse
+- **2026-08-28**: G9-A analysis: Startup race DISPROVEN; post-HTTP gating classified as `BGAMECONNECT_GATES_TCP_CONNECTION`
 
-The operator previously stated that the apparent game crash occurred when the operator forcibly closed the game. The rendering crash (FRCPassPostProcessAA::Process) is NOT confirmed as spontaneous. Do not classify as a current blocker.
-
-**messageType 103 (0x67)**: CAPTURE_SEQUENCE_CANDIDATE — not proven as PingResponse.
-
-**Current primary hypothesis**: First-connection startup timing / server readiness race.
-
-## Boot Sequence
+## Boot Sequence (G9-A Validated)
 
 ```
 1. AcrGame.exe (Bootstrap)
@@ -37,38 +33,41 @@ The operator previously stated that the apparent game crash occurred when the op
 7. NESYS status: offline (Nesys:0)
    Status: FAILED (offline)
    
-8. CertError reported
+8. CertError spam (12 cycles)
+   Detail: NesysControlErrorMessage / ENesysNetworkServerMessage[CertError]
    Status: FAILED (NESYS offline)
    
-9. Game continues in offline/testmode
-   Status: COMPLETED (fallback to offline)
+9. Boot → Notice → SeatCheck → AdvertiseMovie
+   Status: COMPLETED
    
-10. SystemDataCheck runs
-    Detects NESYS offline
-    Status: COMPLETED (error displayed)
-    
-11. "offline, cannot check" message displayed
-    Status: COMPLETED (operator observes this)
-    
-12. Card-based gameplay blocked
-    Status: BLOCKED_BY_NESYS_OFFLINE
-    
-13. PromotionMovie plays
-    Status: COMPLETED
-    
-14. InsertStart widget visible
-    Status: COMPLETED (but overlaid by NESYS error)
-    
-15. HTTP matching-server discovery
+10. HTTP matching-server discovery
     Request: dev.starwing.jp/mock/matching/server
     Response: {"ip_addr":"127.0.0.1:6666"}
-    Status: VERIFIED_WORKING
+    Status: VERIFIED_WORKING (server ready ~3min before request)
     
-16. "Error No MatchingServer so initialize Nesys before."
-    Status: COMPLETED (game requires NESYS first)
+11. TCP connection setup
+    TcpThread created, SetupConnect initiated
+    Status: INITIATED
     
-17. Normal title flow (menu, card, gameplay)
-    Status: NOT_REACHED (blocked by NESYS offline)
+12. SystemDataCheck runs
+    Checks NESYS IsOnline → FAIL (IsOnline[0])
+    Checks OpenKey.json → FAIL (file missing)
+    Checks NESYS Event → FAIL (IsEventCheck[0])
+    Status: FAILED → DispError displayed
+    
+13. TCP address resolved
+    ResolvedAddress: 127.0.0.1:6666 → ErrorCode[0]
+    Status: RESOLVED (but connection aborted by error state)
+    
+14. SystemDataCheck ends with error
+    SetNextMode[End](20), isError[1]
+    Status: END_ERROR
+    
+15. PromotionMovie plays (InsertStart animation)
+    Status: COMPLETED (operator-forced close at 02:37:33)
+    
+16. Card-based gameplay blocked
+    Status: BLOCKED_BY_NESYS_OFFLINE
 ```
 
 ## Dependency Summary
@@ -79,47 +78,43 @@ The operator previously stated that the apparent game crash occurred when the op
 | D3D11 | COMPLETED | — |
 | Assets | COMPLETED | — |
 | NESYS pipe | FAILED | No pipe exists |
-| NESYS status | FAILED | Offline |
-| SystemDataCheck | COMPLETED | Error shown |
+| NESYS status | FAILED | Offline (CertError) |
+| HTTP discovery | WORKING | — |
+| TCP setup | INITIATED | Aborted by error state |
+| TCP resolution | RESOLVED | Never connected |
+| SystemDataCheck | FAILED | OpenKey missing + NESYS offline |
 | Card play | BLOCKED | NESYS offline |
 | Normal flow | NOT_REACHED | NESYS offline |
-| HTTP discovery | WORKING | — |
-| Matching TCP | PARTIAL | First attempt fails (race condition), bGameConnect never restores |
-| TCP ping/pong | WORKING | Transport level works after first failure |
 | Battle | NOT_IMPLEMENTED | — |
 
-## TCP Connection State (2026-08-28)
+## TCP Connection State (G9-A)
 
-### Observed in Both Runs (Run A and Run B)
+### Key Findings
 
-1. GameConnect:1 initially
-2. HTTP POST matching/server → 200 → {"ip_addr":"127.0.0.1:6666"}
-3. TCP #1: SetupConnect → Failed to post Ping (race condition)
-4. GameConnect drops to 0, never restores
-5. TCP #2+: Successful ping/pong at transport level
-6. bGameConnect stays 0 despite WebServer Revived
-7. SystemDataCheck detects offline → error
-8. Crash on SL_Title (rendering bug)
+1. **Server ready ~3 min before game request** — startup race DISPROVEN
+2. **HTTP matching succeeds** — server returns `{"ip_addr":"127.0.0.1:6666"}` with 200
+3. **TCP address resolved** — `127.0.0.1:6666` resolved successfully
+4. **TCP connection NEVER established** — error state aborts callback
+5. **Root cause chain**: NESYS offline → OpenKey missing → SystemDataCheck error → bGameConnect never set → TCP aborted
 
-### Key Finding
+### Classification
 
-The first TCP attempt fails because the game sends a Ping before the TCP handshake completes. This sets GameConnect:0 permanently. Subsequent successful TCP connections never restore it.
-
-### Discrepancy
-
-Run B TCP server console showed zero connections, but game log shows TCP connections. Status: UNEXPLAINED.
+**`BGAMECONNECT_GATES_TCP_CONNECTION`**: The game-level `bGameConnect` flag gates TCP connection establishment. NESYS offline → OpenKey missing → SystemDataCheck error → bGameConnect remains false → TCP connection callback is aborted before completion.
 
 ## Root Cause
-**NesysService.exe is not running.** The game's NESYS client plugin attempts to connect to a named pipe that does not exist. Without NESYS initialization, the game stays in offline mode permanently. Additionally, the game's TCP client has a race condition where the first connection attempt fails, and bGameConnect never restores even after successful reconnection.
+
+**NesysService.exe is not running** (exits with -1). Without NESYS:
+1. No named pipe connection → NESYS offline
+2. No OpenKey.json generated → SystemDataCheck fails
+3. SystemDataCheck error state → bGameConnect never set
+4. TCP connection aborted → no game traffic
 
 ## What Would Fix This
-1. Mount D: drive with correct directory structure
-2. Start NesysService.exe with correct launcher/arguments
-3. Configure valid NESYS certificates
-4. Configure correct registry keys
-5. Provide network access to TAITO NESYS servers
-6. Fix the TCP race condition (game-level bug)
-7. Fix bGameConnect restoration after reconnection (game-level bug)
 
-**Items 6-7 are game-level bugs that require source code access to fix.**
-**Items 1-5 require the original cabinet launcher or equivalent startup context.**
+1. **Start NesysService.exe** with correct launcher/arguments/certificates
+2. **Provide NESYS authentication** so OpenKey.json is generated
+3. **Fix SystemDataCheck** to not gate TCP on NESYS (game-level bug)
+4. **Fix bGameConnect restoration** after reconnection (game-level bug)
+
+**Items 3-4 are game-level bugs that require source code access to fix.**
+**Items 1-2 require the original cabinet launcher or equivalent startup context.**

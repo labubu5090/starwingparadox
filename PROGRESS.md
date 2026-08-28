@@ -141,9 +141,9 @@ The operator previously stated that the apparent game crash occurred when the op
 | Primary blocker | NESYS_OFFLINE → bGameConnect_never_restores |
 | Runtime difference | TCP_CONNECTION_STATE_DEPENDS_ON_GAME_FLOW |
 
-## Phase 2A-G9: Cold-Boot Server Readiness and First-Ping Race Validation (IN_PROGRESS)
+## Phase 2A-G9: Cold-Boot Server Readiness and Post-HTTP Gating Analysis (COMPLETE)
 
-**Status**: IN_PROGRESS
+**Status**: COMPLETE
 
 ### G9 Objectives
 
@@ -152,28 +152,53 @@ The operator previously stated that the apparent game crash occurred when the op
 - Create cold-boot validation procedure
 - Verify true TCP accept readiness
 - Capture first game connection precisely
+- Analyze post-HTTP gating condition (why TCP connection is never established after HTTP matching succeeds)
+
+### G9 Results
+
+**Startup race: DISPROVEN_FOR_THIS_RUN** — Server was ready ~3 minutes before game HTTP request.
+
+**Post-HTTP gating: `BGAMECONNECT_GATES_TCP_CONNECTION`**
+
+| Finding | Detail |
+|---------|--------|
+| NESYS CertError | Repeated during boot (status[4] option[0]), NESYS never online |
+| IsOnline | 0 (NESYS offline) |
+| OpenKey.json | Missing (D:/Saved/ACRSaved/SaveData/OpenKey.json) |
+| SystemDataCheck | Fails → DispError → error state |
+| TCP address | Resolved successfully (127.0.0.1:6666) |
+| TCP connection | Never established (error state aborts callback) |
+| Game close | Operator-forced (NOT spontaneous crash) |
+
+### G9 Classification
+
+**Primary**: `BGAMECONNECT_GATES_TCP_CONNECTION`
+**Root cause**: NESYS offline → OpenKey missing → SystemDataCheck error → bGameConnect never set → TCP connection aborted
 
 ### G9 Environment
 
 - Mypy: version 2.3.1, 0 errors on 64 source files
 - Ruff: 0 errors
-- Tests: 796 passed, 6 skipped, 0 failed
+- Tests: 834 passed, 1 skipped, 0 failed (with protobuf runtime)
 
 ## Current State
 
 | Metric | Value |
 |--------|-------|
-| Tests collected | 823 |
-| Tests passed | 822 |
+| Tests collected | 835 |
+| Tests passed | 834 |
 | Tests failed | 0 |
 | Tests skipped | 1 |
 | Ruff errors | 0 |
 | Mypy errors | 0 |
 | Database | SQLite-only |
+| Protobuf runtime | LOADED (protobuf==7.36.0, HAS_GENERATED=True) |
 | TCP flaky test | FIXED |
 | Deployment status | SINGLE_CABINET_DEPLOYMENT_CANDIDATE |
-| NESYS | OFFLINE (pipe does not exist) |
+| NESYS | OFFLINE (CertError, pipe does not exist) |
 | D: drive | NOT MOUNTED |
+| G9 startup race | DISPROVEN |
+| G9 post-HTTP gating | CLASSIFIED (BGAMECONNECT_GATES_TCP_CONNECTION) |
 
 ## SQLite Architecture
 

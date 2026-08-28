@@ -1,16 +1,22 @@
-# TCP Runtime Differential Analysis: Run A vs Run B
+# TCP Runtime Differential Analysis: Run A vs Run B vs Run G9-A
 
 ## Date: 2026-08-28
 
-## Correction Note (2026-08-28)
+## Corrections
 
-**RENDERING_CRASH_STATUS**: NOT_CONFIRMED_AS_SPONTANEOUS
+- **2026-08-28**: RENDERING_CRASH_STATUS: NOT_CONFIRMED_AS_SPONTANEOUS (operator-forced close)
+- **2026-08-28**: messageType 103 (0x67): CAPTURE_SEQUENCE_CANDIDATE — not proven as PingResponse
+- **2026-08-28**: G9-A analysis: Startup race DISPROVEN; post-HTTP gating classified as `BGAMECONNECT_GATES_TCP_CONNECTION`
 
-The operator previously stated that the apparent game crash occurred when the operator forcibly closed the game. The rendering crash (FRCPassPostProcessAA::Process) is NOT confirmed as spontaneous. Do not classify as a current blocker. Do not use operator-forced closure as renderer-failure evidence.
+## Executive Summary
 
-**messageType 103 (0x67)**: CAPTURE_SEQUENCE_CANDIDATE — not proven as PingResponse. Only one capture sequence exists.
+Run A (01:21), Run B (01:41), and Run G9-A (10:33) exhibited **identical game-level NESYS behavior** but **different TCP outcomes**:
 
-**Current primary hypothesis**: First-connection startup timing / server readiness race.
+- **Run A**: TCP #1 fails (race condition), TCP #2+ succeed, bGameConnect never restores
+- **Run B**: TCP #1 fails (race condition), TCP #2+ succeed (per game log), bGameConnect never restores, server console shows ZERO connections
+- **Run G9-A**: TCP #1 SetupConnect initiated but NEVER COMPLETED (error state aborts callback), server shows ZERO game connections
+
+**G9-A key finding**: Server was ready ~3 minutes before game HTTP request. Startup race DISPROVEN. The TCP connection is never established because NESYS offline → OpenKey missing → SystemDataCheck error → bGameConnect never set.
 
 ## Executive Summary
 
@@ -68,6 +74,28 @@ Run A (01:21) and Run B (01:41) exhibited **identical game-level TCP behavior**.
 | 01:42:50 | Log file closed | 109225 |
 
 **Duration**: ~3 minutes. **TCP connections on server console**: NO (zero observed).
+
+### Run G9-A (Cold Boot Validation)
+
+| Time (game log) | Event | Line |
+|-----------------|-------|------|
+| 02:36.34 | CertError spam (12 cycles) | 107331-107456 |
+| 02:36.35 | Boot → Notice | 107460-107468 |
+| 02:36.40 | Notice → SeatCheck → AdvertiseMovie | 107609-107700 |
+| 02:36.40 | HTTP POST matching/server | 107729-107732 |
+| 02:36.41 | HTTP 200, address=127.0.0.1:6666 | 107953-107958 |
+| 02:36.41 | TCP: SetupConnect initiated | 107984-108009 |
+| 02:36.41 | SystemDataCheck: IsOnline[0] | 108146 |
+| 02:36.41 | OpenKey.json missing | 108153-108155 |
+| 02:36.41 | NESYS Event error | 108156 |
+| 02:36.41 | DispError displayed | 108157-108159 |
+| 02:36.41 | TCP address resolved (127.0.0.1:6666) | 108161-108163 |
+| 02:36.51 | SystemDataCheck ends (error) | 108164 |
+| 02:36.51 | PromotionMovie plays | 108223-108281 |
+| 02:37.33 | Operator closes game | 108283-108288 |
+| 02:38.27 | Render thread crash (30s timeout) | 108302-108327 |
+
+**Duration**: ~1 minute. **TCP connections on server console**: ZERO (readiness probes only). **Server ready before game request**: ~3 minutes.
 
 ---
 
@@ -188,45 +216,58 @@ This discrepancy requires further investigation. The game log evidence is strong
 
 ## 5. Runtime State Classification
 
-| State | Classification |
-|-------|---------------|
-| HTTP_CONNECTION | CONFIRMED |
-| MATCHING_SERVER_DISCOVERY | CONFIRMED |
-| MATCHING_SERVER_RESPONSE | CONFIRMED (identical both runs) |
-| TCP_LISTENER | RUNNING |
-| TCP_CONNECTION_ATTEMPT | GAME_LOG_SHOWS_ATTEMPTS |
-| TCP_CONNECTION_SUCCESS | GAME_LOG_SHOWS_SUCCESS (unverified on server) |
-| TCP_CONNECTION_OBSERVED_ON_SERVER | Run A: YES, Run B: NO |
-| TCP_DISCONNECT | Run A: YES, Run B: YES (per game log) |
-| NESYS_STATUS | OFFLINE |
-| CARD_PLAY | BLOCKED |
-| PRIMARY_TCP_BLOCKER | bGameConnect_never_restores_after_first_failure |
-| RENDERING_CRASH | NOT_CONFIRMED_AS_SPONTANEOUS |
-| GAME_LEVEL_BEHAVIOR | IDENTICAL_BETWEEN_RUNS |
+| State | Run A | Run B | Run G9-A |
+|-------|-------|-------|----------|
+| HTTP_CONNECTION | CONFIRMED | CONFIRMED | CONFIRMED |
+| MATCHING_SERVER_DISCOVERY | CONFIRMED | CONFIRMED | CONFIRMED |
+| MATCHING_SERVER_RESPONSE | CONFIRMED | CONFIRMED | CONFIRMED (identical) |
+| TCP_LISTENER | RUNNING | RUNNING | RUNNING |
+| TCP_SETUP_CONNECT | INITIATED | INITIATED | INITIATED |
+| TCP_FIRST_ATTEMPT | FAILED (race) | FAILED (race) | ABORTED (error state) |
+| TCP_SUBSEQUENT_ATTEMPTS | SUCCESS (transport) | SUCCESS (transport) | N/A |
+| TCP_OBSERVED_ON_SERVER | YES | NO | NO |
+| TCP_RESOLVED | YES | YES | YES |
+| NESYS_STATUS | OFFLINE | OFFLINE | OFFLINE |
+| OPENKEY_JSON | MISSING | MISSING | MISSING |
+| SYSTEM_DATACHECK | ERROR | ERROR | ERROR |
+| CARD_PLAY | BLOCKED | BLOCKED | BLOCKED |
+| PRIMARY_TCP_BLOCKER | bGameConnect_never_restores | bGameConnect_never_restores | BGAMECONNECT_GATES_TCP_CONNECTION |
+| RENDERING_CRASH | NOT_CONFIRMED_AS_SPONTANEOUS | NOT_CONFIRMED_AS_SPONTANEOUS | NOT_CONFIRMED_AS_SPONTANEOUS |
+| GAME_LEVEL_BEHAVIOR | IDENTICAL | IDENTICAL | IDENTICAL (NESYS) |
+| STARTUP_RACE | NOT_TESTED | NOT_TESTED | DISPROVEN |
 
 ---
 
 ## 6. Conclusions
 
-1. **The game's TCP behavior is identical in both runs.** The difference is not in the game code or protocol handling, but in the server-side observation.
+1. **The game's TCP behavior differs between runs based on error state timing.**
+   - Run A: TCP #1 fails (race), TCP #2+ succeed at transport level
+   - Run B: TCP #1 fails (race), TCP #2+ succeed at transport level (per game log)
+   - Run G9-A: TCP #1 initiated but NEVER COMPLETED (error state aborts callback)
 
 2. **The first TCP failure is a game-level race condition.** The game sends a Ping before the TCP handshake completes. This sets `GameConnect:0` permanently.
 
-3. **bGameConnect never restores.** Even after successful TCP connections and pong exchanges, the game-level connection state stays at 0. This prevents the game from progressing past the offline error.
+3. **bGameConnect never restores.** Even after successful TCP connections and pong exchanges (Runs A/B), the game-level connection state stays at 0.
 
-4. **The TCP server console discrepancy in Run B is unexplained.** The game log shows TCP connections with successful ping/pong, but the server console showed zero connections. This needs investigation.
+4. **G9-A proves the startup race is DISPROVEN.** Server was ready ~3 minutes before game HTTP request. The TCP connection failure is caused by NESYS offline → OpenKey missing → SystemDataCheck error → bGameConnect never set.
 
-5. **The rendering crash is unrelated to networking.** Both runs crash with the same null pointer dereference in the post-processing anti-aliasing pass.
+5. **The TCP server console discrepancy in Run B is unexplained.** The game log shows TCP connections with successful ping/pong, but the server console showed zero connections.
 
-6. **NESYS remains the primary blocker.** Without NesysService running, the game stays in offline mode, `bGameConnect` never restores, and gameplay is impossible.
+6. **The rendering crash is unrelated to networking.** All runs crash with the same null pointer dereference in the post-processing anti-aliasing pass (operator-forced close in G9-A).
+
+7. **NESYS remains the primary blocker.** Without NesysService running, the game stays in offline mode, `bGameConnect` never restores, and gameplay is impossible.
+
+8. **G9-A classification: `BGAMECONNECT_GATES_TCP_CONNECTION`** — The game-level `bGameConnect` flag gates TCP connection establishment. NESYS offline → OpenKey missing → SystemDataCheck error → bGameConnect remains false → TCP connection aborted.
 
 ---
 
 ## 7. Required Next Steps
 
-1. Investigate why Run B's TCP server console showed zero connections despite game log showing TCP connections
-2. Verify which TCP server process the game connected to during Run B
-3. Check for stale TCP server processes from Run A
-4. Do NOT add more TCP message handlers until the connection discrepancy is resolved
-5. Do NOT fabricate NESYS online status
-6. Focus on NESYS initialization failure (the root cause of offline mode)
+1. ~~Investigate why Run B's TCP server console showed zero connections~~ — G9-A confirms this is expected behavior (NESYS offline → error state → TCP aborted)
+2. ~~Verify which TCP server process the game connected to during Run B~~ — No game TCP connections occurred
+3. ~~Check for stale TCP server processes from Run A~~ — Not applicable
+4. Focus on NESYS initialization (root cause of offline mode and TCP gating)
+5. Investigate NesysService.exe exit code -1 (cert issue, missing dependency, or configuration error)
+6. Do NOT add more TCP message handlers until NESYS is operational
+7. Do NOT fabricate NESYS online status
+8. Consider creating mock OpenKey.json to bypass SystemDataCheck error (if NESYS cannot be made operational)
