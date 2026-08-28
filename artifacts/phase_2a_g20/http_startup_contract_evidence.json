@@ -1,0 +1,70 @@
+{
+  "phase": "Phase 2A-G20",
+  "title": "Private-Server HTTP Startup Contract - Recovered Evidence Inventory",
+  "binary": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe",
+  "method": "IDA static-analysis workflow; pefile string extraction (idat batch/headless unavailable - error code 2; ida.exe batch produced no output)",
+  "recovered": {
+    "payload_encoding": "JSON (NOT protobuf)",
+    "payload_encoding_evidence": {
+      "json_serializer": "Source/NetworkModule/Private/CPP_HttpJsonSerialize.cpp",
+      "json_difference": "Source/NetworkModule/Private/CPP_HttpJsonDifference.cpp",
+      "http_requester": "Source/NetworkModule/Private/CPP_HttpRequester.cpp",
+      "http_response_param": "Source/NetworkModule/Private/CPP_HttpResponseParam.cpp",
+      "http_utility": "Source/NetworkModule/Private/HttpUtility.cpp",
+      "json_data_symbols": ["HttpGameDataLoadData", "HttpGameDataLoadMissionData"],
+      "response_section_strings": [
+        "http:ResponseGameDataLoad:OptionData success",
+        "http:ResponseGameDataLoad:PlayerData success",
+        "http:ResponseGameDataLoad:mechas success",
+        "http:ResponseGameDataLoad:<%s> Error"
+      ],
+      "field_extraction_string": "ACPP_UserDataCheckMain::HttpGameDataLoad / IsSuccess[%d] / PlayerData Name[%s] NesysID[%s] PlayerID[%d] CharacterCustomize.Num(%d) GameMode[%s](%d) BuddyId[%s](%d)",
+      "protobuf_scoping": "message.pb.cpp is the TCP protocol; protobuf fields do not apply to HTTP startup"
+    },
+    "literal_url_paths_recovered": [
+      "/matching/match_id/generate",
+      "/option/save"
+    ],
+    "resource_path_evidence": [".resource/", "resource.frk/", "frkrfvbafwlbflahftsputavtcjc (candidate resource key)"],
+    "startup_ordering": {
+      "wait_state": "ACPP_SystemDataCheck::HttpRequestWait",
+      "advance_strings": [
+        "ACPP_SystemDataCheck::Tick / HttpRequestWait / Request complete.",
+        "ACPP_SystemDataCheck::Tick / HttpRequestWait / WaitTimer over."
+      ],
+      "implication": "Boot progression is gated on HTTP request completion with a wait timer; a stalled/unanswered startup HTTP request blocks boot until timeout."
+    },
+    "boot_module_evidence": ["Source/OutGameModule/Private/Boot/CPP_GameModeBoot.cpp", "ACPP_GameModeBoot::OnReceiveMatchingServer"]
+  },
+  "binding_inventory": {
+    "startup_relevant": [
+      "BindHttpBoot",
+      "BindHttpVersion",
+      "BindHttpResource",
+      "BindHttpMatchingServer",
+      "BindHttpMatchingMatchIdGenerate",
+      "BindHttpGameDataLoad",
+      "BindHttpGameDataSave",
+      "BindHttpGameDataSaveData",
+      "BindHttpPlayerLogin",
+      "BindHttpPlayerRegister",
+      "BindHttpPlayerProfileLoad",
+      "BindHttpPlayerLogout"
+    ],
+    "full_inventory_present": true,
+    "note": "BindHttp<Name> are callback-binding function names (route intent). They do NOT encode the URL path, HTTP method, or JSON payload contract. A subset is: FestEntry, FestResult, GachaDraw, InfoNewItems, MechaRegister, ShopBuy/ShopSave, QuestStatusSet, QuestsLoad, Ranking*/Ranging*, GreetingLoginSave, BuddyPresentGive, PlayerEntryName, BattleRecord, Tutorial*."
+  },
+  "not_recovered": {
+    "url_paths_for": ["boot", "version", "resource", "matching_server", "game_data_load", "game_data_save", "player_login"],
+    "http_methods_for_any_route": true,
+    "json_request_keys_for_any_route": true,
+    "json_response_schema": "partial only (GameDataLoad sections)",
+    "exact_client_success_condition": "partial only",
+    "exact_client_state_effect": "partial only"
+  },
+  "determination": {
+    "can_implement_startup_routes": false,
+    "reason": "G20 implementation rule requires confirmed route path + HTTP method + request message type + response message type + fields + client success condition + client state effect for each route. Only 2 literal paths are recovered; methods and JSON payload contracts are not confirmed for any startup route. Fabrication is forbidden. All routes documented as blocked.",
+    "transport_note": "HTTP payload is JSON; protobuf field-number derivation from declaration order does not apply and must not be attempted."
+  }
+}

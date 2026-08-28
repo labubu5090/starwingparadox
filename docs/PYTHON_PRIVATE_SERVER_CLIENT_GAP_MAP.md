@@ -4,6 +4,11 @@
 
 **Classification:** PARTIAL_GAME_CLIENT_CONTRACT
 
+**G20 update (Phase 2A-G20):** HTTP startup payload contract is confirmed to be **JSON, not
+protobuf** (see `HTTP_STARTUP_PAYLOAD_EVIDENCE_INSUFFICIENT`). Startup routes remain
+`BLOCKED_EVIDENCE` because URL paths, HTTP methods, and JSON key contracts are not recovered from
+static analysis. See `artifacts/phase_2a_g20/http_route_confirmation_matrix.json`.
+
 ## Current Server Surface
 
 - **HTTP app:** FastAPI, `127.0.0.1:4001`, routes: battle, credit, game_data, health, matching,

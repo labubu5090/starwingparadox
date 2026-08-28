@@ -1,0 +1,153 @@
+{
+  "phase": "Phase 2A-G20",
+  "title": "Private-Server HTTP Startup Contract - Route Confirmation Matrix",
+  "source_of_truth": "Static string/PE analysis of AcrGame-Win64-Shipping.exe (IDA workflow; pefile string extraction)",
+  "classification": "HTTP_STARTUP_PAYLOAD_EVIDENCE_INSUFFICIENT",
+  "serialization_finding": {
+    "transport": "HTTP",
+    "payload_encoding": "JSON",
+    "is_protobuf": false,
+    "evidence": [
+      "Source/NetworkModule/Private/CPP_HttpJsonSerialize.cpp",
+      "Source/NetworkModule/Private/CPP_HttpJsonDifference.cpp",
+      "HttpGameDataLoadData / HttpGameDataLoadMissionData (JSON data symbols)",
+      "http:ResponseGameDataLoad:OptionData/PlayerData/mechas success",
+      "ACPP_UserDataCheckMain::HttpGameDataLoad extracts PlayerData fields (Name/NesysID/PlayerID/CharacterCustomize.Num/GameMode/BuddyId) as JSON",
+      "message.pb.cpp (protobuf) scoped to TCP protocol, not HTTP"
+    ],
+    "implication": "HTTP startup payload contract is JSON. Protobuf field-number recovery is NOT applicable to the HTTP startup layer. The G20 'request protobuf field numbers' requirement maps to 'JSON key names/types' and does NOT apply to the TCP protobuf protocol."
+  },
+  "routes": [
+    {
+      "route_key": "boot",
+      "binding_evidence": ["BindHttpBoot", "TestHttpBoot"],
+      "module_evidence": ["Source/OutGameModule/Private/Boot/CPP_GameModeBoot.cpp", "ACPP_GameModeBoot::OnReceiveMatchingServer"],
+      "url_path": {"confirmed": false, "note": "No literal path string recovered"},
+      "http_method": {"confirmed": false},
+      "request_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "response_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "client_success_condition": {"confirmed": false},
+      "client_state_effect": {"confirmed": false},
+      "status": "BLOCKED_EVIDENCE",
+      "missing_evidence": ["URL path", "HTTP method", "request JSON keys", "response JSON keys", "success condition", "state effect"]
+    },
+    {
+      "route_key": "version",
+      "binding_evidence": ["BindHttpVersion", "TestHttpVersion"],
+      "url_path": {"confirmed": false},
+      "http_method": {"confirmed": false},
+      "request_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "response_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "client_success_condition": {"confirmed": false},
+      "client_state_effect": {"confirmed": false},
+      "status": "BLOCKED_EVIDENCE",
+      "missing_evidence": ["URL path", "HTTP method", "request JSON keys", "response JSON keys", "success condition", "state effect"]
+    },
+    {
+      "route_key": "resource",
+      "binding_evidence": ["BindHttpResource"],
+      "resource_evidence": [".resource/", "resource.frk/", "frkrfvbafwlbflahftsputavtcjc (resource key candidate)"],
+      "url_path": {"confirmed": false},
+      "http_method": {"confirmed": false},
+      "request_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "response_payload": {"encoding": "JSON/binary frk", "confirmed_fields": false},
+      "client_success_condition": {"confirmed": false},
+      "client_state_effect": {"confirmed": false},
+      "status": "BLOCKED_EVIDENCE",
+      "missing_evidence": ["URL path", "HTTP method", "request JSON keys", "response shape", "success condition", "state effect"]
+    },
+    {
+      "route_key": "matching_server",
+      "binding_evidence": ["BindHttpMatchingServer"],
+      "url_path": {"confirmed": false, "note": "G19 hardcoded base http://dev.starwing.jp/mock/matching/server; full path string not recovered in this binary"},
+      "http_method": {"confirmed": false},
+      "request_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "response_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "client_success_condition": {"confirmed": "partial", "note": "GameModeBoot/SystemDataCheck OnReceiveMatchingServer"},
+      "client_state_effect": {"confirmed": "partial", "note": "advances SystemDataCheck from HttpRequestWait"},
+      "status": "BLOCKED_EVIDENCE",
+      "missing_evidence": ["URL path (literal)", "HTTP method", "request JSON keys", "response JSON keys"]
+    },
+    {
+      "route_key": "matching_match_id_generate",
+      "binding_evidence": ["BindHttpMatchingMatchIdGenerate"],
+      "url_path": {"confirmed": true, "value": "/matching/match_id/generate"},
+      "http_method": {"confirmed": false},
+      "request_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "response_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "client_success_condition": {"confirmed": false},
+      "client_state_effect": {"confirmed": false},
+      "status": "BLOCKED_EVIDENCE",
+      "missing_evidence": ["HTTP method", "request JSON keys", "response JSON keys", "success condition", "state effect"]
+    },
+    {
+      "route_key": "game_data_load",
+      "binding_evidence": ["BindHttpGameDataLoad", "TestHttpGameDataLoad", "HttpGameDataLoadData", "HttpGameDataLoadMissionData"],
+      "direction": "client->server load request",
+      "url_path": {"confirmed": false},
+      "http_method": {"confirmed": false},
+      "request_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "response_payload": {"encoding": "JSON", "confirmed_fields": "partial",
+        "critical_sections": ["IsSuccess", "PlayerData (Name/NesysID/PlayerID/CharacterCustomize/GameMode/BuddyId)", "OptionData", "mechas", "MissionsList"]},
+      "client_success_condition": {"confirmed": "partial", "note": "OnHttpGameDataLoad / OnHttpGameDataLoadMission; IsSuccess[%d]"},
+      "client_state_effect": {"confirmed": "partial", "note": "UPlayerProfileWork receives via ReceiveHttpGameDataLoadDelegate"},
+      "status": "BLOCKED_EVIDENCE",
+      "missing_evidence": ["URL path", "HTTP method", "full request JSON keys", "full response JSON schema/types", "exact success accept condition"]
+    },
+    {
+      "route_key": "option_save",
+      "binding_evidence": ["BindHttpGreetingLoginSave / option save area"],
+      "url_path": {"confirmed": true, "value": "/option/save"},
+      "http_method": {"confirmed": false},
+      "request_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "response_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "client_success_condition": {"confirmed": false},
+      "client_state_effect": {"confirmed": false},
+      "status": "BLOCKED_EVIDENCE",
+      "missing_evidence": ["HTTP method", "request JSON keys", "response JSON keys", "success condition", "state effect"]
+    },
+    {
+      "route_key": "game_data_save",
+      "binding_evidence": ["BindHttpGameDataSave", "BindHttpGameDataSaveData", "ACPP_ModeSelectMain::BindHttpGameDataSave"],
+      "direction": "client->server save request",
+      "url_path": {"confirmed": false},
+      "http_method": {"confirmed": false},
+      "request_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "response_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "client_success_condition": {"confirmed": false},
+      "client_state_effect": {"confirmed": false},
+      "status": "BLOCKED_EVIDENCE",
+      "missing_evidence": ["URL path", "HTTP method", "request JSON keys", "response JSON keys", "success condition", "state effect", "persistence effect (deferred to result/save phase)"]
+    },
+    {
+      "route_key": "player_login",
+      "binding_evidence": ["BindHttpPlayerLogin"],
+      "url_path": {"confirmed": false},
+      "http_method": {"confirmed": false},
+      "request_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "response_payload": {"encoding": "JSON", "confirmed_fields": false},
+      "client_success_condition": {"confirmed": false},
+      "client_state_effect": {"confirmed": false},
+      "status": "BLOCKED_EVIDENCE",
+      "missing_evidence": ["URL path", "HTTP method", "request JSON keys", "response JSON keys", "success condition", "state effect"]
+    }
+  ],
+  "summary": {
+    "total_routes_in_scope": 9,
+    "fully_confirmed_implementable": 0,
+    "blocked_evidence": 9,
+    "literal_paths_recovered": 2,
+    "note": "No startup route meets the G20 implementation threshold (confirmed path + method + request/response payload + fields + success condition + state effect). All are documented as blocked rather than implemented with invented payloads."
+  },
+  "deferred": {
+    "matching_tcp": "do not implement (G20 deferred)",
+    "battle": "do not implement (G20 deferred)",
+    "result_submission": "deferred; document result HTTP functions (BindHttpFestResult, BindHttpGameDataSaveData) and missing requirements",
+    "error_commands": "retain G18 evidence-locked behavior; do not assign lifecycle semantics to CERT_ERROR/NW_ERROR/NWRECOVER_NOTICE without proof",
+    "live_pipe_adapter": "do not build in G20",
+    "original_nesys_service": "do not restore",
+    "hosts_dns_proxy_binding": "no changes",
+    "launching_game": "do not launch",
+    "runtime_packet_capture": "do not capture"
+  }
+}

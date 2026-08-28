@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     protocol_raw_logging: bool = False
     protocol_hash_logging: bool = True
     legacy_compatibility_mode: bool = True
+    private_server_compatibility_mode: bool = False
     matcher_hostname: str = "127.0.0.1"
     version_main: int = 70571
     version_data: int = 70571

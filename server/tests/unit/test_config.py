@@ -46,6 +46,23 @@ class TestSettings:
         )
         assert settings.legacy_compatibility_mode is True
 
+    def test_private_server_compatibility_mode_default(self):
+        """Private-server compatibility mode defaults to False (disabled by default)."""
+        settings = Settings(
+            database_url="sqlite+aiosqlite:///:memory:",
+            redis_url="redis://localhost:6379/0",
+        )
+        assert settings.private_server_compatibility_mode is False
+
+    def test_private_server_compatibility_mode_explicit_enable(self):
+        """Private-server compatibility mode can be enabled explicitly."""
+        settings = Settings(
+            private_server_compatibility_mode=True,
+            database_url="sqlite+aiosqlite:///:memory:",
+            redis_url="redis://localhost:6379/0",
+        )
+        assert settings.private_server_compatibility_mode is True
+
     def test_database_url_stored(self):
         """Database URL is stored correctly."""
         url = "postgresql+psycopg://user:pass@host:5432/db"

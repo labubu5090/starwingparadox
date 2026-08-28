@@ -816,3 +816,53 @@ while determining there is NO supported game-side endpoint override.
 ### Recommended Next Phase
 
 Phase 2A-G20: Runtime Integration, Traffic Pattern Validation, and Private-Server Contract Enforcement
+
+---
+
+## Phase 2A-G20 (Private-Server HTTP Startup Contract Vertical Slice)
+
+**Classification:** HTTP_STARTUP_PAYLOAD_EVIDENCE_INSUFFICIENT
+
+### G20 Outcome Summary
+
+1. **HTTP startup uses JSON, not protobuf (CONFIRMED).** Evidence: `CPP_HttpJsonSerialize.cpp`,
+   `CPP_HttpJsonDifference.cpp`, `HttpGameDataLoadData`/`HttpGameDataLoadMissionData` JSON symbols,
+   `http:ResponseGameDataLoad:OptionData/PlayerData/mechas success`. Protobuf field-number recovery
+   does NOT apply to HTTP startup; the TCP `message.pb.cpp` is separate.
+2. **Startup route payloads NOT recovered.** Only two literal URL paths exist in the binary:
+   `/matching/match_id/generate` and `/option/save`. `BindHttpBoot/Version/Resource/...` encode route
+   intent only, not path/method/JSON contract.
+3. **Boot gating:** `ACPP_SystemDataCheck::HttpRequestWait` (`Request complete.` / `WaitTimer over.`).
+4. **All 9 startup routes documented BLOCKED_EVIDENCE** (0 implementable) — no fabrication.
+5. **Compatibility mode added, disabled by default:** `private_server_compatibility_mode: bool = False`.
+6. **NESYS pipe decision:** PIPE_NOT_REQUIRED_FOR_HTTP_STARTUP (card-session pipe deferred).
+
+### G20 Quality Gates (actual)
+
+| Gate | Result |
+|------|--------|
+| Full test suite | 1058 passed, 1 skipped, 0 failed (baseline 1056 + 2 new config tests) |
+| Clean-room subset | 222 passed, 0 failed |
+| Ruff | All checks passed |
+| Mypy | 0 errors |
+| SHA-256 integrity (6 artifacts) | All MATCH |
+| No original exe modified/launched | PASS |
+| No live pipe / service / registry / cert / DNS / proxy change | PASS |
+| legacy-js unchanged | PASS |
+
+### G20 Documents Created
+
+| Document/Artifact | Path |
+|----------|------|
+| G20 Final Report | docs/PHASE_2A_G20_FINAL_REPORT.md |
+| HTTP Startup Contract | docs/PRIVATE_SERVER_HTTP_STARTUP_CONTRACT.md |
+| Python Server Gap Map (updated) | docs/PYTHON_PRIVATE_SERVER_CLIENT_GAP_MAP.md |
+| Route Confirmation Matrix | artifacts/phase_2a_g20/http_route_confirmation_matrix.json |
+| HTTP Startup Contract Evidence | artifacts/phase_2a_g20/http_startup_contract_evidence.json |
+| NESYS Pipe Decision | artifacts/phase_2a_g20/nesys_pipe_decision.json |
+
+### Recommended Next Phase
+
+Phase 2A-G21: resolve startup route URL-path/method/JSON payload via control-flow or runtime-capture
+evidence (currently BLOCKED_EVIDENCE), then implement confirmed boot/version/resource routes.
+
