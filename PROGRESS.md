@@ -219,6 +219,45 @@ The operator previously stated that the apparent game crash occurred when the op
 - Ruff: 0 errors
 - Tests: 834 passed, 1 skipped, 0 failed
 
+## Phase 2A-G11: Upstream Repository Launch Instructions Audit (COMPLETE)
+
+**Commit**: `99f55ed`
+**Status**: COMPLETE
+
+### G11 Objectives
+
+- Audit https://github.com/ArcadeMachinist/StarwingParadox repository
+- Determine what the upstream repository provides
+- Compare upstream against local legacy-js/ files
+- Answer 20 audit questions about game launch capability
+- Create comprehensive audit document
+
+### G11 Results
+
+| Finding | Detail |
+|---------|--------|
+| Repository classification | MOCK_SERVER_START_ONLY |
+| Game launch capability | NOT_PROVIDED |
+| NESYS support | NOT_PROVIDED |
+| OpenKey provisioning | NOT_PROVIDED |
+| Certificate provisioning | NOT_PROVIDED |
+| Registry setup | NOT_PROVIDED |
+| D-drive deployment | NOT_DOCUMENTED |
+| Local legacy-js/ | EXACT_CLONE of upstream at commit 020adaf |
+| Our FastAPI server | MORE_COMPLETE than upstream mock server |
+
+### G11 Classification
+
+**Primary**: `MOCK_SERVER_START_ONLY`
+
+**Rationale**: Repository provides mock HTTP/TCP server for Starwing Paradox. Repository does NOT provide game launch, NESYS, OpenKey, certificates, or cabinet environment. Repository is explicitly labeled "WORK IN PROGRESS".
+
+### G11 Environment
+
+- Mypy: version 2.3.1, 0 errors on 64 source files
+- Ruff: 0 errors
+- Tests: 834 passed, 1 skipped, 0 failed
+
 ## Current State
 
 | Metric | Value |
@@ -241,6 +280,10 @@ The operator previously stated that the apparent game crash occurred when the op
 | G10 OpenKey producer | UNKNOWN |
 | G10 SystemDataCheck | MULTIPLE_REQUIREMENTS |
 | G10 NesysService exit | BEFORE_OPENKEY_ACCESS |
+| G11 upstream classification | MOCK_SERVER_START_ONLY |
+| G11 game launch | NOT_PROVIDED |
+| G11 NESYS support | NOT_PROVIDED |
+| G11 local legacy-js/ | EXACT_CLONE of upstream |
 
 ## SQLite Architecture
 
