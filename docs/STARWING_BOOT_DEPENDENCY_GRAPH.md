@@ -1,6 +1,6 @@
 # Starwing Paradox Boot Dependency Graph (Corrected)
 
-## Date: 2026-08-27
+## Date: 2026-08-28
 
 ## Corrections
 
@@ -8,6 +8,7 @@
 - **2026-08-28**: messageType 103 (0x67): CAPTURE_SEQUENCE_CANDIDATE — not proven as PingResponse
 - **2026-08-28**: G9-A analysis: Startup race DISPROVEN; post-HTTP gating classified as `BGAMECONNECT_GATES_TCP_CONNECTION`
 - **2026-08-28**: G10 analysis: OpenKey causality corrected from "OpenKey missing → SystemDataCheck error" to MULTIPLE_SYSTEMDATA_REQUIREMENTS. OpenKey is one of multiple requirements. See `OPENKEY_SYSTEMDATACHECK_CAUSALITY.md`.
+- **2026-08-28**: G12 analysis: Operator-owned content is D_DRIVE_ONLY_BACKUP. Original system drive missing. NesysService requires Windows Service context, certificate installation, and network access. See `PHASE_2A_G12_FINAL_REPORT.md`.
 
 ## Boot Sequence (G9-A Validated)
 

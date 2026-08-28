@@ -258,6 +258,46 @@ The operator previously stated that the apparent game crash occurred when the op
 - Ruff: 0 errors
 - Tests: 834 passed, 1 skipped, 0 failed
 
+## Phase 2A-G12: Original Cabinet Runtime Gap and NesysService Launcher Search (COMPLETE)
+
+**Status**: COMPLETE
+
+### G12 Objectives
+
+- Determine whether operator-owned content contains original launcher
+- Search for startup artifacts, process manager, service wrapper
+- Audit all executable candidates
+- Analyze shortcut and startup evidence
+- Determine NesysService invocation evidence
+- Analyze system-drive gap
+- Determine NesysService standalone capability
+- Make safe launch test decision
+
+### G12 Results
+
+| Finding | Detail |
+|---------|--------|
+| Executables found | 3 (AcrGame.exe, AcrGame-Win64-Shipping.exe, NesysService.exe) |
+| Script files found | 0 (.bat, .cmd, .lnk, .reg, .vbs, .ps1) |
+| Launcher candidates | NOT_FOUND |
+| NesysService binary evidence | STRONG (Windows Service, named pipe, certificates, network) |
+| External invocation evidence | NONE |
+| System drive backup | D_DRIVE_ONLY_BACKUP |
+| NesysService standalone | PARENT_CONTEXT_REQUIRED |
+| Safe launch test | PARTIAL_INVOCATION_NOT_SAFE_TO_TEST |
+
+### G12 Classification
+
+**Primary**: `D_DRIVE_ONLY_BACKUP_CONFIRMED`
+
+**Rationale**: Only D: drive content is present. No C: drive content found. No system drive components found. No startup configuration found. No registry found. No certificate store found. No Windows Service configuration found.
+
+### G12 Environment
+
+- Mypy: version 2.3.1, 0 errors on 64 source files
+- Ruff: 0 errors
+- Tests: 834 passed, 1 skipped, 0 failed
+
 ## Current State
 
 | Metric | Value |
@@ -284,6 +324,12 @@ The operator previously stated that the apparent game crash occurred when the op
 | G11 game launch | NOT_PROVIDED |
 | G11 NESYS support | NOT_PROVIDED |
 | G11 local legacy-js/ | EXACT_CLONE of upstream |
+| G12 system drive backup | D_DRIVE_ONLY_BACKUP_CONFIRMED |
+| G12 launcher candidates | NOT_FOUND |
+| G12 NesysService standalone | PARENT_CONTEXT_REQUIRED |
+| G12 safe launch test | PARTIAL_INVOCATION_NOT_SAFE_TO_TEST |
+| G12 service registration | MISSING |
+| G12 certificate installation | MISSING |
 
 ## SQLite Architecture
 

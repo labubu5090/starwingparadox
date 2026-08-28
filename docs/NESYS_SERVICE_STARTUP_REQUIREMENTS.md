@@ -1,6 +1,6 @@
 # NesysService Startup Requirements
 
-## Date: 2026-08-27
+## Date: 2026-08-28
 
 ## Binary Analysis Results
 
@@ -11,6 +11,7 @@
 - **Built**: (x64) 2017/11/07
 - **PDB**: `C:\alienbrainWork\all_development_solution\NESYS_support\NESiCAxLive\NesysService\bin\Release(NESYS_Game_cert3)\NesysServiceCert_x64.pdb`
 - **Size**: 548,352 bytes
+- **SHA-256**: `3A968F29B12050DD1B3AE7A8ACFE48BF98F1E6E11B0E090D3EB4B5A05B51D76F`
 
 ### Named Pipe Interface
 - **Pipe prefix**: `\\.\pipe\`
@@ -116,5 +117,51 @@ AcrGame.exe starts
 4. Correct registry keys for machine configuration
 5. Network access to cert3.nesys.jp (external TAITO servers)
 6. Parent process managing service lifecycle
+
+## G12 Findings (2026-08-28)
+
+### Operator-Owned Content Analysis
+
+| Finding | Detail |
+|---------|--------|
+| Executables found | 3 (AcrGame.exe, AcrGame-Win64-Shipping.exe, NesysService.exe) |
+| Script files found | 0 (.bat, .cmd, .lnk, .reg, .vbs, .ps1) |
+| Launcher candidates | NOT_FOUND |
+| System drive backup | D_DRIVE_ONLY_BACKUP |
+| NesysService standalone | PARENT_CONTEXT_REQUIRED |
+| Safe launch test | PARTIAL_INVOCATION_NOT_SAFE_TO_TEST |
+
+### NesysService Binary Evidence
+
+| Component | Evidence | Strength |
+|-----------|----------|----------|
+| Service Control | StartServiceCtrlDispatcherA, RegisterServiceCtrlHandlerA, SetServiceStatus | CONFIRMED |
+| Named Pipe | `\\.\pipe\nesys_games`, CreateNamedPipeA, ConnectNamedPipe | CONFIRMED |
+| Certificate | CertOpenStore, CertFindCertificateInStore, cert3.nesys.jp | CONFIRMED |
+| Network | WSACreateEvent, WSAEventSelect, URL patterns | CONFIRMED |
+| Mutex | CreateMutexA, ReleaseMutex | CONFIRMED |
+| Registry | RegOpenKeyExA | CONFIRMED |
+| Process Creation | CreateProcessA, GenerateConsoleCtrlEvent | CONFIRMED |
+
+### Missing Components
+
+| Component | Status | Impact |
+|-----------|--------|--------|
+| Launcher executable | MISSING | Cannot determine startup sequence |
+| Service registration | MISSING | NesysService not registered |
+| Certificate store | MISSING | Cannot authenticate with NESYS |
+| Registry | MISSING | Cannot read configuration |
+| Startup shortcuts | MISSING | No startup folder placement |
+| Scheduled tasks | MISSING | No task scheduler entries |
+| Watchdog | MISSING | No crash recovery |
+| Environment variables | MISSING | Cannot configure NESYS |
+
+### Conclusion
+
+The operator-owned content is a D-drive only backup. The original Windows system drive, launcher, startup configuration, certificate store, registry, and Windows Service configuration are missing.
+
+**Classification**: `D_DRIVE_ONLY_BACKUP_CONFIRMED`
+
+**The NESYS offline block cannot be resolved with the available content.**
 
 **None of these are present on this system.**
