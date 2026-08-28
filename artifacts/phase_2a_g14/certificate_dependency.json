@@ -1,0 +1,53 @@
+{
+  "phase": "2A-G14",
+  "executable": "NesysService.exe",
+  "certificate_store": {
+    "provider": "Microsoft Enhanced Cryptographic Provider v1.0",
+    "store_name": "MY",
+    "store_location": ".Default",
+    "confidence": "CONFIRMED"
+  },
+  "search_criteria": {
+    "subject": "nesys",
+    "issuer": "NOT_FOUND",
+    "thumbprint": "NOT_FOUND",
+    "eku": "NOT_FOUND",
+    "serial": "NOT_FOUND"
+  },
+  "private_key": {
+    "acquisition": "NOT_SHOWN",
+    "requirement": "PROBABLY_REQUIRED",
+    "confidence": "LOW",
+    "rationale": "Client authentication typically requires private key, but no direct evidence found"
+  },
+  "tls_attachment": {
+    "client_certificate": "NOT_SHOWN",
+    "server_validation": "NOT_SHOWN"
+  },
+  "cert3_nesys_jp": {
+    "purpose": "UNRESOLVED",
+    "hostname_reference": "CONFIRMED",
+    "operation": "UNRESOLVED",
+    "rationale": "Hostname presence does not prove network connection or operation"
+  },
+  "failure_handling": {
+    "cert_error": "SCOMMAND_CERT_ERROR",
+    "store_error": "Error logging"
+  },
+  "apis": {
+    "present": [
+      "CertOpenStore",
+      "CertFindCertificateInStore",
+      "CertFreeCertificateContext",
+      "CertCloseStore",
+      "CertGetNameStringA"
+    ],
+    "missing": [
+      "CertGetCertificateContextProperty",
+      "CryptAcquireCertificatePrivateKey",
+      "NCryptOpenKey",
+      "CryptAcquireContext",
+      "CryptSign"
+    ]
+  }
+}

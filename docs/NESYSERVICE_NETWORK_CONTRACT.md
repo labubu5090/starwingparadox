@@ -9,7 +9,11 @@
 
 ## Executive Summary
 
-NesysService.exe communicates with multiple NESYS network endpoints using WinHTTP. The service connects to cert3.nesys.jp for certificate operations, data.nesys.jp for data downloads, nesys.taito.co.jp for alive checks, and fjm170920zero.nesica.net for card service operations.
+NesysService.exe imports WinHTTP APIs and contains string references to four hostnames: cert3.nesys.jp, data.nesys.jp, nesys.taito.co.jp, and fjm170920zero.nesica.net. The exact purpose of each hostname is classified based on string evidence only — hostname presence does not prove network connection, operation type, or data flow direction.
+
+### G14 Audit Correction
+
+The original claim "connects to cert3.nesys.jp for certificate operations" overstated the evidence. Hostname string reference ≠ network connection or operation.
 
 ---
 
@@ -58,12 +62,14 @@ NesysService.exe communicates with multiple NESYS network endpoints using WinHTT
 
 ### Host Usage Patterns
 
-| Host | Usage | Evidence |
-|------|-------|----------|
-| cert3.nesys.jp | Certificate verification, card operations | URL patterns |
-| data.nesys.jp | Data downloads, alive checks | URL patterns |
-| nesys.taito.co.jp | Alive checks | URL patterns |
-| fjm170920zero.nesica.net | Card service, income, shopping | URL patterns |
+| Host | Usage (Inferred) | Evidence | Confidence |
+|------|------------------|----------|------------|
+| cert3.nesys.jp | Certificate/authentication (UNRESOLVED) | Hostname string only | LOW |
+| data.nesys.jp | Data downloads (UNRESOLVED) | Hostname string only | LOW |
+| nesys.taito.co.jp | Alive check (UNRESOLVED) | Hostname string only | LOW |
+| fjm170920zero.nesica.net | Card service (UNRESOLVED) | Hostname string only | LOW |
+
+**Note**: Usage patterns are inferred from URL patterns and endpoint names only. Hostname presence does not prove network connection or operation type.
 
 ---
 
@@ -100,20 +106,22 @@ NesysService.exe communicates with multiple NESYS network endpoints using WinHTT
 
 ### Endpoint Files
 
-| File | Host | Purpose | Evidence |
-|------|------|---------|----------|
-| certify.php | cert3.nesys.jp | Certificate verification | String reference |
-| cardn.cgi | cert3.nesys.jp | Card service | String reference |
-| data.php | cert3.nesys.jp | Data service | String reference |
-| incomAAA.php | fjm170920zero.nesica.net | Income service | String reference |
-| incomALL.php | fjm170920zero.nesica.net | Income service | String reference |
-| incom.php | fjm170920zero.nesica.net | Income service | String reference |
-| shop.php | fjm170920zero.nesica.net | Shopping | String reference |
-| respone.php | fjm170920zero.nesica.net | Response | String reference |
-| upload.php | fjm170920zero.nesica.net | Upload | String reference |
-| ticket.php | fjm170920zero.nesica.net | Ticket | String reference |
-| Alive.txt | data.nesys.jp | Alive check | String reference |
-| i.php | nesys.taito.co.jp | Alive check | String reference |
+| File | Host | Purpose (Inferred) | Evidence | Confidence |
+|------|------|-------------------|----------|------------|
+| certify.php | cert3.nesys.jp | Certificate (UNRESOLVED) | String only | LOW |
+| cardn.cgi | cert3.nesys.jp | Card (UNRESOLVED) | String only | LOW |
+| data.php | cert3.nesys.jp | Data (UNRESOLVED) | String only | LOW |
+| incomAAA.php | fjm170920zero.nesica.net | Income (UNRESOLVED) | String only | LOW |
+| incomALL.php | fjm170920zero.nesica.net | Income (UNRESOLVED) | String only | LOW |
+| incom.php | fjm170920zero.nesica.net | Income (UNRESOLVED) | String only | LOW |
+| shop.php | fjm170920zero.nesica.net | Shopping (UNRESOLVED) | String only | LOW |
+| respone.php | fjm170920zero.nesica.net | Response (UNRESOLVED) | String only | LOW |
+| upload.php | fjm170920zero.nesica.net | Upload (UNRESOLVED) | String only | LOW |
+| ticket.php | fjm170920zero.nesica.net | Ticket (UNRESOLVED) | String only | LOW |
+| Alive.txt | data.nesys.jp | Alive (UNRESOLVED) | String only | LOW |
+| i.php | nesys.taito.co.jp | Alive (UNRESOLVED) | String only | LOW |
+
+**Note**: Endpoint purposes are inferred from filename patterns only. String presence does not prove network request, operation type, or data flow.
 
 ---
 
@@ -251,8 +259,16 @@ NesysService.exe communicates with multiple NESYS network endpoints using WinHTT
 
 ## Conclusion
 
-NesysService.exe communicates with multiple NESYS network endpoints using WinHTTP. The service connects to cert3.nesys.jp for certificate operations, data.nesys.jp for data downloads, nesys.taito.co.jp for alive checks, and fjm170920zero.nesica.net for card service operations. The service handles network errors and notifies the game via SCOMMAND_NW_ERROR.
+NesysService.exe imports WinHTTP APIs and contains string references to four hostnames: cert3.nesys.jp, data.nesys.jp, nesys.taito.co.jp, and fjm170920zero.nesica.net. The service imports network error handling APIs and contains SCOMMAND_NW_ERROR string references.
 
-**Classification**: `CONFIRMED`
+**Classification**: 
+- Hostname references: `CONFIRMED`
+- WinHTTP imports: `CONFIRMED`
+- Network operations: `UNRESOLVED` (hostname presence ≠ connection or operation)
+- cert3.nesys.jp purpose: `UNRESOLVED`
 
-The network contract is fully evidenced with string references and API imports.
+The network contract includes confirmed hostname references and API imports. The exact purpose of each hostname remains unresolved — hostname presence does not prove network connection, operation type, or data flow direction.
+
+### G14 Audit Correction
+
+The original claim "connects to cert3.nesys.jp for certificate operations" overstated the evidence. Hostname string reference ≠ network connection or operation.

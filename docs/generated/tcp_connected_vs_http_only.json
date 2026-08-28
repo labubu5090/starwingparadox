@@ -1,0 +1,216 @@
+{
+  "metadata": {
+    "created": "2026-08-28T02:00:00Z",
+    "purpose": "Compare Run A (TCP-connected) vs Run B (HTTP-only) runtime timelines",
+    "game_log_run_a": "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame-backup-2026.08.28-01.39.32.log",
+    "game_log_run_b": "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame.log"
+  },
+  "run_a": {
+    "name": "Run A - TCP Connected",
+    "file_close_time": "08/28/26 01:21:55",
+    "game_log_span": "16:51:05 to 17:21:55 (30 min 50 sec)",
+    "timeline": [
+      {"time": "16:51:05", "event": "GameModeBoot BeginPlay", "log_line": 593},
+      {"time": "16:51:05", "event": "NesysControl Setup Completed", "log_line": 9213},
+      {"time": "16:51:05", "event": "CertError spam begins", "log_line": 23020, "note": "NesysControlErrorMessage / status[4] / CertError, repeating every ~16ms"},
+      {"time": "16:53:16", "event": "GameConnect:1", "log_line": 108231, "detail": "Revival:1 Death:0 GameConnect:1 HttpSuccess:1"},
+      {"time": "16:53:16", "event": "HTTP POST matching/server (1st)", "log_line": 108250, "detail": "POST http://dev.starwing.jp/mock/matching/server"},
+      {"time": "16:53:18", "event": "HTTP 200 response (1st)", "log_line": 108475, "detail": "Response code:200, IPAddress[127.0.0.1:6666], Change[1]"},
+      {"time": "16:53:18", "event": "SetConnectAddress 127.0.0.1:6666", "log_line": 108476},
+      {"time": "16:53:18", "event": "Error No MatchingServer so initialize Nesys before", "log_line": 108508},
+      {"time": "16:53:18", "event": "TCP #1: Connect Start", "log_line": 108529, "detail": "addr[127.0.0.1:6666]"},
+      {"time": "16:53:18", "event": "TCP #1: SetupConnect", "log_line": 108530},
+      {"time": "16:53:18", "event": "TCP #1: FAILED - Failed to post Ping", "log_line": 108531, "detail": "No TryToConnect between SetupConnect and failure. TCP handshake not complete when Ping sent."},
+      {"time": "16:53:18", "event": "SystemDataCheck: IsOnline[0]", "log_line": 108667},
+      {"time": "16:53:18", "event": "SystemDataCheck: CheckOpenKey LoadKeyFile error", "log_line": 108676},
+      {"time": "16:53:18", "event": "SystemDataCheck: NESYS Event error", "log_line": 108678, "detail": "IsEventCheck[0] IsEventError[0]"},
+      {"time": "16:53:18", "event": "SystemDataCheck: offline error displayed", "log_line": 108679, "detail": "現在オフラインの為チェック出来ません"},
+      {"time": "16:53:28", "event": "PromotionMovie plays", "log_line": 108748, "detail": "Media Resource [GAL_PV2_short_1920]"},
+      {"time": "16:54:18", "event": "HTTP POST matching/server (2nd)", "log_line": 109021},
+      {"time": "16:54:18", "event": "HTTP 200 response (2nd)", "log_line": 109027, "detail": "IPAddress[127.0.0.1:6666], Change[0]"},
+      {"time": "16:54:18", "event": "TCP #2: Connect Start", "log_line": 109034},
+      {"time": "16:54:18", "event": "TCP #2: TryToConnect", "log_line": 109036},
+      {"time": "16:54:18", "event": "TCP #2: SUCCESS", "log_line": 109041, "detail": "Success to connect. GetTargetAddress[127.0.0.1:6666]"},
+      {"time": "16:54:18", "event": "TCP #2: Ping sent", "log_line": 109043, "detail": "TryToSend / Send [17] Bytes"},
+      {"time": "16:54:18", "event": "TCP #2: Pong received", "log_line": 109045, "detail": "OnDecode_Ping: PingId:1"},
+      {"time": "16:54:18", "event": "TCP #2: WebServer Revived", "log_line": 109046, "detail": "bGameConnect[0] bNesysServerLive[0]"},
+      {"time": "16:54:33", "event": "TCP #2: Disconnect", "log_line": 109179, "detail": "Close to Address. addr[127.0.0.1:6666]"},
+      {"time": "16:54:50", "event": "HTTP POST matching/server (3rd)", "log_line": 109684},
+      {"time": "16:54:50", "event": "HTTP 200 response (3rd)", "log_line": 109790},
+      {"time": "16:54:50", "event": "TCP #3: Connect Start", "log_line": 109820},
+      {"time": "16:54:50", "event": "TCP #3: SUCCESS", "log_line": 109829, "detail": "Success to connect"},
+      {"time": "16:55:03", "event": "TCP #3: Disconnect", "log_line": 109971},
+      {"time": "16:55:03", "event": "HTTP POST matching/server (4th)", "log_line": 110028},
+      {"time": "16:55:03", "event": "HTTP 200 response (4th)", "log_line": 110134},
+      {"time": "16:55:03", "event": "TCP #4: Connect Start", "log_line": 110164},
+      {"time": "16:55:03", "event": "TCP #4: SUCCESS", "log_line": 110171, "detail": "Success to connect, PingId:7"},
+      {"time": "16:55:07", "event": "TCP #4: Heartbeat continues", "log_line": 110186, "detail": "Error-free heartbeat for ~27 minutes"},
+      {"time": "17:21:55", "event": "CRASH on SL_Title", "log_line": 112079, "detail": "EXCEPTION_ACCESS_VIOLATION reading address 0x00000000 in FRCPassPostProcessAA::Process()"},
+      {"time": "01:21:55", "event": "Log file closed", "log_line": 112115}
+    ],
+    "http_matching_requests": 4,
+    "http_matching_responses_200": 4,
+    "tcp_connection_attempts": 4,
+    "tcp_connection_successes": 3,
+    "tcp_connection_failures": 1,
+    "tcp_first_attempt_result": "FAILED - Failed to post Ping : Lost Connection",
+    "bGameConnect_after_pong": "0 (never becomes 1)",
+    "bNesysServerLive": "0 (always offline)",
+    "game_connect_state": "GameConnect:1 initially, drops to 0 after first TCP disconnect",
+    "crash": "EXCEPTION_ACCESS_VIOLATION in FRCPassPostProcessAA::Process() at postprocessaa.cpp:289",
+    "crash_level": "SL_Title",
+    "runtime_duration_sec": 1850
+  },
+  "run_b": {
+    "name": "Run B - HTTP Only (per operator observation)",
+    "file_close_time": "08/28/26 01:42:50",
+    "game_log_span": "17:39:xx to 17:42:50 (~3 min)",
+    "operator_observed": {
+      "http_connection": "CONFIRMED",
+      "http_post_matching": "CONFIRMED at 01:41:44",
+      "http_response_200": "CONFIRMED",
+      "tcp_listener_running": "CONFIRMED on 0.0.0.0:6666",
+      "tcp_client_connections": "NOT_OBSERVED - zero connections on TCP server console",
+      "tcp_ping_messages": "NOT_OBSERVED",
+      "tcp_0x67_messages": "NOT_OBSERVED",
+      "tcp_disconnect_events": "NOT_OBSERVED",
+      "nesys_status": "OFFLINE",
+      "card_play": "BLOCKED"
+    },
+    "game_log_observed": {
+      "note": "Game log SHOWS TCP connections despite operator observing zero on TCP server console",
+      "tcp_connections_in_game_log": [
+        {"time": "17:42:08", "event": "TCP: Success to connect", "log_line": 108790, "detail": "GetTargetAddress[127.0.0.1:6666]"},
+        {"time": "17:42:08", "event": "TCP: Ping sent/received", "log_line": 108792, "detail": "TryToSend [17] Bytes, OnDecode_Ping: PingId:1"},
+        {"time": "17:42:08", "event": "TCP: WebServer Revived", "log_line": 108795, "detail": "bGameConnect[0]"},
+        {"time": "17:42:25", "event": "TCP: Success to connect", "log_line": 109136, "detail": "GetTargetAddress[127.0.0.1:6666]"},
+        {"time": "17:42:25", "event": "TCP: WebServer Revived", "log_line": 109141, "detail": "bGameConnect[0]"}
+      ],
+      "critical_discrepancy": "Game log shows TCP connections but TCP server console showed zero connections. Most likely explanation: game connected to a stale TCP server from a previous run, or the TCP server was started after the game's connection attempts."
+    },
+    "timeline": [
+      {"time": "17:39:xx", "event": "GameModeBoot BeginPlay", "detail": "Boot sequence identical to Run A"},
+      {"time": "17:39:xx", "event": "CertError spam begins", "detail": "NesysControlErrorMessage / status[4] / CertError"},
+      {"time": "17:41:44", "event": "GameConnect:1", "log_line": 107730, "detail": "Revival:1 Death:0 GameConnect:1 HttpSuccess:1"},
+      {"time": "17:41:44", "event": "HTTP POST matching/server (1st)", "log_line": 107749, "detail": "POST http://dev.starwing.jp/mock/matching/server"},
+      {"time": "17:41:45", "event": "HTTP 200 response (1st)", "log_line": 107974, "detail": "Response code:200, IPAddress[127.0.0.1:6666], Change[1]"},
+      {"time": "17:41:45", "event": "SetConnectAddress 127.0.0.1:6666", "log_line": 107975},
+      {"time": "17:41:45", "event": "Error No MatchingServer so initialize Nesys before", "log_line": 108007},
+      {"time": "17:41:45", "event": "TCP #1: Connect Start", "log_line": 108028, "detail": "addr[127.0.0.1:6666]"},
+      {"time": "17:41:45", "event": "TCP #1: SetupConnect", "log_line": 108029},
+      {"time": "17:41:45", "event": "TCP #1: FAILED - Failed to post Ping", "log_line": 108030, "detail": "IDENTICAL to Run A: No TryToConnect between SetupConnect and failure"},
+      {"time": "17:41:45", "event": "GameConnect drops to 0", "log_line": 108520, "detail": "Death:1 GameConnect:0"},
+      {"time": "17:42:08", "event": "HTTP POST matching/server (2nd)", "log_line": 108655},
+      {"time": "17:42:08", "event": "HTTP 200 response (2nd)", "log_line": 108761},
+      {"time": "17:42:08", "event": "TCP #2: Connect Start", "log_line": 108781},
+      {"time": "17:42:08", "event": "TCP #2: SUCCESS (per game log)", "log_line": 108790, "detail": "BUT TCP server console showed zero connections"},
+      {"time": "17:42:08", "event": "TCP #2: WebServer Revived", "log_line": 108795, "detail": "bGameConnect[0]"},
+      {"time": "17:42:25", "event": "SystemDataCheck: offline error", "log_line": 108926, "detail": "現在オフラインの為チェック出来ません"},
+      {"time": "17:42:25", "event": "TCP #2: Disconnect", "log_line": 108934},
+      {"time": "17:42:25", "event": "HTTP POST matching/server (3rd)", "log_line": 108991},
+      {"time": "17:42:25", "event": "HTTP 200 response (3rd)", "log_line": 109097},
+      {"time": "17:42:25", "event": "TCP #3: Connect Start", "log_line": 109127},
+      {"time": "17:42:25", "event": "TCP #3: SUCCESS (per game log)", "log_line": 109136, "detail": "BUT TCP server console showed zero connections"},
+      {"time": "17:42:25", "event": "TCP #3: WebServer Revived", "log_line": 109141, "detail": "bGameConnect[0]"},
+      {"time": "17:42:50", "event": "CRASH on SL_Title", "log_line": 109189, "detail": "EXCEPTION_ACCESS_VIOLATION in FRCPassPostProcessAA::Process() - SAME crash as Run A"},
+      {"time": "01:42:50", "event": "Log file closed", "log_line": 109225}
+    ],
+    "http_matching_requests": 3,
+    "http_matching_responses_200": 3,
+    "tcp_connection_attempts_game_log": 3,
+    "tcp_connection_successes_game_log": 2,
+    "tcp_connection_failures_game_log": 1,
+    "tcp_first_attempt_result": "FAILED - Failed to post Ping : Lost Connection (IDENTICAL to Run A)",
+    "bGameConnect_after_pong": "0 (IDENTICAL to Run A)",
+    "bNesysServerLive": "0 (IDENTICAL to Run A)",
+    "game_connect_state": "GameConnect:1 initially, drops to 0 (IDENTICAL to Run A)",
+    "crash": "EXCEPTION_ACCESS_VIOLATION in FRCPassPostProcessAA::Process() - SAME crash as Run A",
+    "crash_level": "SL_Title",
+    "runtime_duration_sec": 185,
+    "tcp_server_console_observed": "ZERO connections, ZERO pings, ZERO disconnects"
+  },
+  "comparison": {
+    "identical_behaviors": [
+      "First TCP attempt fails with 'Failed to post Ping : Lost Connection' (no TryToConnect before failure)",
+      "bGameConnect stays 0 even after successful pong",
+      "bNesysServerLive stays 0 (NESYS always offline)",
+      "CertError spam during boot",
+      "SystemDataCheck detects offline, shows error",
+      "GameConnect starts at 1, drops to 0",
+      "Crash on SL_Title with EXCEPTION_ACCESS_VIOLATION in FRCPassPostProcessAA::Process()",
+      "HTTP matching response identical: {\"ip_addr\":\"127.0.0.1:6666\"}",
+      "MatchingServer address from NESYS and Config both 127.0.0.1:6666"
+    ],
+    "differences": [
+      {
+        "aspect": "Runtime duration",
+        "run_a": "~28 minutes (16:51 to 17:21)",
+        "run_b": "~3 minutes (17:39 to 17:42)",
+        "significance": "Run A survived longer before rendering crash"
+      },
+      {
+        "aspect": "TCP server console observations",
+        "run_a": "TCP connections observed on server console",
+        "run_b": "ZERO connections observed on TCP server console",
+        "significance": "CRITICAL DISCREPANCY - game log shows TCP connections but server console showed none"
+      },
+      {
+        "aspect": "Number of HTTP matching requests",
+        "run_a": 4,
+        "run_b": 3,
+        "significance": "Minor - Run B crashed before 4th cycle"
+      },
+      {
+        "aspect": "TCP connections in game log",
+        "run_a": "4 attempts, 3 successful, 1 failed",
+        "run_b": "3 attempts, 2 successful, 1 failed",
+        "significance": "Run B had fewer TCP cycles due to shorter runtime"
+      }
+    ],
+    "root_cause_analysis": {
+      "first_tcp_failure": {
+        "cause": "Game sends Ping before TCP handshake completes. SetupConnect is called but TryToConnect never executes before the Ping is posted. This is a RACE CONDITION in the game's TCP client initialization.",
+        "evidence": [
+          "Run A line 108530: SetupConnect, then immediately line 108531: Failed to post Ping",
+          "Run B line 108029: SetupConnect, then immediately line 108030: Failed to post Ping",
+          "No TryToConnect between SetupConnect and failure in either run"
+        ],
+        "identical_in_both_runs": true
+      },
+      "bGameConnect_never_one": {
+        "cause": "After the first TCP failure sets bGameConnect=0, subsequent successful TCP connections never restore it to 1. The 'WebServer Revived' event fires but bGameConnect remains 0. This appears to be a game-level state machine bug where the GameConnect flag is only set during the initial connection, not during reconnection.",
+        "evidence": [
+          "Run A line 109047: OnReceivePong / bGameConnect[0] (after successful TCP)",
+          "Run B line 108796: OnReceivePong / bGameConnect[0] (after successful TCP)"
+        ],
+        "identical_in_both_runs": true
+      },
+      "tcp_server_console_discrepancy": {
+        "cause": "UNKNOWN - The game log shows TCP connections in Run B, but the TCP server console showed zero connections. Possible explanations: (1) game connected to a stale TCP server from a previous run, (2) TCP server was started after game connection attempts, (3) game connected to a different process on port 6666.",
+        "evidence": [
+          "Run B game log line 108790: Success to connect. GetTargetAddress[127.0.0.1:6666]",
+          "Run B game log line 108792: TryToSend / Send [17] Bytes",
+          "Run B game log line 108793: TryToReceive / Received",
+          "Run B game log line 108794: OnDecode_Ping: PingId:1",
+          "Run B game log line 108795: OnReceivePong / WebServer Revived!",
+          "TCP server console: ZERO connections observed"
+        ],
+        "status": "UNEXPLAINED_DISCREPANCY"
+      },
+      "rendering_crash": {
+        "cause": "EXCEPTION_ACCESS_VIOLATION reading address 0x00000000 in FRCPassPostProcessAA::Process() at postprocessaa.cpp:289. This is a null pointer dereference in the rendering thread's post-processing anti-aliasing pass. Not related to networking.",
+        "evidence": [
+          "Run A line 112089: FRCPassPostProcessAA::Process() at postprocessaa.cpp:289",
+          "Run B line 109189: OnCrash / SL_Title"
+        ],
+        "identical_in_both_runs": true,
+        "status": "NOT_CONFIRMED_AS_SPONTANEOUS"
+      }
+    }
+  },
+  "runtime_result": "TCP_CONNECTION_STATE_DEPENDS_ON_GAME_FLOW",
+  "message_103_classification": "CAPTURE_SEQUENCE_CANDIDATE",
+  "matching_response_difference": "NONE_FOUND",
+  "stale_session_difference": "POSSIBLE - may explain TCP server console discrepancy",
+  "server_start_order_difference": "POSSIBLE - may explain TCP server console discrepancy"
+}

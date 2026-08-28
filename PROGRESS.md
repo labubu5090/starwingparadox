@@ -408,13 +408,82 @@ The operator previously stated that the apparent game crash occurred when the op
 - [x] Documentation uses SINGLE_CABINET_DEPLOYMENT_CANDIDATE
 - [x] Real cabinet compatibility not claimed
 
+## Phase 2A-G14: Offline Service Registration Reconstruction (COMPLETE)
+
+**Commit**: TBD
+**Status**: COMPLETE
+**Classification**: `EXTERNAL_REGISTRATION_REQUIRED`
+
+### G14 Results
+
+| Metric | Value |
+|--------|-------|
+| Service name | NesysService (CONFIRMED) |
+| Binary path | X:\StarwingParadox\D DRIVE CONTENTS\system\Service\NesysService.exe (CONFIRMED) |
+| Self-installation | NOT_FOUND |
+| Registration mechanism | EXTERNAL (installer, system image, or deployment package) |
+| Certificate store | MY\.Default (CONFIRMED) |
+| Certificate subject | nesys (CONFIRMED) |
+| Private key | PROBABLY_REQUIRED (inference) |
+| cert3.nesys.jp | UNRESOLVED |
+| Registry values | 8 values (CONFIRMED) |
+| Safe to register | FALSE |
+
+### G14 Key Findings
+
+1. **Service does NOT contain self-installation code** - Only service mode implemented
+2. **Registration was performed externally** - Installer, system image, or deployment package
+3. **Certificate private key acquisition NOT_SHOWN** - No direct evidence found
+4. **cert3.nesys.jp purpose UNRESOLVED** - Hostname reference only
+5. **Registry default values NOT_SHOWN** - Cannot determine defaults
+6. **Service registration is NOT safe or complete** - Critical items unresolved
+
+### G14 Documents Created
+
+| Document | Path |
+|----------|------|
+| G14 Initial Baseline | docs/PHASE_2A_G14_INITIAL_BASELINE.md |
+| G14 Analysis Plan | docs/PHASE_2A_G14_ANALYSIS_PLAN.md |
+| Service Registration Contract | docs/NESYSERVICE_REGISTRATION_CONTRACT.md |
+| Command-Line Modes | docs/NESYSERVICE_COMMAND_LINE_MODES.md |
+| Certificate Data Flow | docs/NESYSERVICE_CERTIFICATE_DATA_FLOW.md |
+| cert3.nesys.jp Relationship | docs/CERT3_NESYS_JP_RELATIONSHIP.md |
+| typex Registry Semantics | docs/TYPEX_REGISTRY_SEMANTICS.md |
+| File-Path Dependencies | docs/NESYSERVICE_FILE_PATH_DEPENDENCIES.md |
+| Safe Registration Assessment | docs/NESYSERVICE_SAFE_REGISTRATION_ASSESSMENT.md |
+| G14 Final Report | docs/PHASE_2A_G14_FINAL_REPORT.md |
+
+### G14 Artifacts Created
+
+| Artifact | Path |
+|----------|------|
+| Registration Manifest | artifacts/phase_2a_g14/nesys_service_registration_manifest.json |
+| Certificate Dependency | artifacts/phase_2a_g14/certificate_dependency.json |
+| Registry Semantics | artifacts/phase_2a_g14/registry_semantics.json |
+
+### G13 Corrections Applied
+
+| Document | Correction | Reason |
+|----------|------------|--------|
+| PHASE_2A_G13_FINAL_REPORT.md | Removed "connects to cert3.nesys.jp" | Hostname reference ≠ connection |
+| PHASE_2A_G13_FINAL_REPORT.md | Removed "retrieves certificate" | Store API ≠ retrieval |
+| NESYSERVICE_CERTIFICATE_CONTRACT.md | Corrected "retrieve NESYS certificates" | Overstated evidence |
+| NESYSERVICE_CERTIFICATE_CONTRACT.md | Corrected "Private key: (required)" | Inference, not confirmed |
+| NESYSERVICE_NETWORK_CONTRACT.md | Corrected "connects to cert3.nesys.jp for certificate operations" | Overstated evidence |
+| artifacts/phase_2a_g13/runtime_contract.json | Updated service, certificates, and network sections | Corrected overstated claims |
+
 ## Remaining Unknowns
 
 - 6 computed player profile fields
 - Real cabinet wire compatibility (no captures exist)
 - Matching implementation (guarded, NOT_IMPLEMENTED)
 - Battle implementation (guarded, NOT_IMPLEMENTED)
+- External service registration mechanism
+- Certificate private key acquisition
+- cert3.nesys.jp purpose
+- Registry default values
+- File path requirements
 
 ## Recommended Next Phase
 
-Phase 2B: Player profile implementation with SQLite persistence
+Phase 2A-G15: External Registration Mechanism Investigation

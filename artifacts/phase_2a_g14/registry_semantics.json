@@ -1,0 +1,91 @@
+{
+  "phase": "2A-G14",
+  "executable": "NesysService.exe",
+  "registry_key": {
+    "hive": "HKEY_LOCAL_MACHINE",
+    "subkey": "SOFTWARE\\taito\\typex",
+    "confidence": "CONFIRMED"
+  },
+  "values": [
+    {
+      "name": "GameKind",
+      "type": "REG_DWORD",
+      "operation": "READ",
+      "classification": "INSTALLATION_IDENTITY",
+      "mutability": "STATIC",
+      "default_value": "NOT_SHOWN",
+      "valid_range": "NOT_SHOWN",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "EventNextTime",
+      "type": "REG_DWORD",
+      "operation": "READ",
+      "classification": "RUNTIME_STATE",
+      "mutability": "RUNTIME_STATE",
+      "default_value": "NOT_SHOWN",
+      "valid_range": "NOT_SHOWN",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "ConditionTime",
+      "type": "REG_DWORD",
+      "operation": "READ",
+      "classification": "RUNTIME_STATE",
+      "mutability": "RUNTIME_STATE",
+      "default_value": "NOT_SHOWN",
+      "valid_range": "NOT_SHOWN",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "TrafficCount",
+      "type": "REG_DWORD",
+      "operation": "READ",
+      "classification": "RUNTIME_STATE",
+      "mutability": "RUNTIME_STATE",
+      "default_value": "NOT_SHOWN",
+      "valid_range": "NOT_SHOWN",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "LogLevel",
+      "type": "REG_DWORD",
+      "operation": "READ",
+      "classification": "LOGGING_CONFIGURATION",
+      "mutability": "STATIC",
+      "default_value": "NOT_SHOWN",
+      "valid_range": "NOT_SHOWN",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "NewsPath",
+      "type": "REG_SZ",
+      "operation": "READ",
+      "classification": "FILE_PATH",
+      "mutability": "STATIC",
+      "default_value": "NOT_SHOWN",
+      "valid_range": "NOT_SHOWN",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "EventPath",
+      "type": "REG_SZ",
+      "operation": "READ",
+      "classification": "FILE_PATH",
+      "mutability": "STATIC",
+      "default_value": "NOT_SHOWN",
+      "valid_range": "NOT_SHOWN",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "LogPath",
+      "type": "REG_SZ",
+      "operation": "READ",
+      "classification": "FILE_PATH",
+      "mutability": "STATIC",
+      "default_value": "NOT_SHOWN",
+      "valid_range": "NOT_SHOWN",
+      "confidence": "HIGH"
+    }
+  ]
+}

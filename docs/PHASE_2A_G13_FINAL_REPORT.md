@@ -277,23 +277,21 @@ HKEY_LOCAL_MACHINE
 
 ## Reconstructed Process Startup Sequence
 
-### Ideal Sequence
+### Hypothetical Sequence (Evidence-Based)
 
 ```
 1. Windows boots
-2. SCM starts NesysService.exe
-3. NesysService registers as "NesysService"
-4. NesysService creates named pipe server
-5. NesysService connects to cert3.nesys.jp
-6. NesysService retrieves certificate
+2. SCM starts NesysService.exe (if registered - NOT_CONFIRMED)
+3. NesysService reads registry HKLM\SOFTWARE\taito\typex
+4. NesysService creates named pipe server \\.\pipe\nesys_games
+5. NesysService accesses certificate store MY\.Default (subject: nesys)
+6. [cert3.nesys.jp purpose UNRESOLVED - hostname reference only]
 7. User launches AcrGame.exe
-8. AcrGame.exe creates AcrGame-Win64-Shipping.exe
+8. AcrGame.exe creates AcrGame-Win64-Shipping.exe via CreateProcessW
 9. Game initializes UE4 engine
-10. NesysClient plugin initializes
-11. Game connects to \\.\pipe\nesys_games\...
-12. Connection succeeds
-13. Game and service exchange commands
-14. Card operations available
+10. Game attempts to connect to \\.\pipe\nesys_games\...
+11. [Connection result depends on NesysService availability]
+12. Game and service exchange LCOMMAND/SCOMMAND messages
 ```
 
 ### Current Sequence (Without System Drive)
@@ -305,11 +303,10 @@ HKEY_LOCAL_MACHINE
 4. User launches AcrGame.exe
 5. AcrGame.exe creates AcrGame-Win64-Shipping.exe
 6. Game initializes UE4 engine
-7. NesysClient plugin initializes
-8. Game attempts to connect to \\.\pipe\nesys_games\...
-9. Connection FAILS (pipe does not exist)
-10. NESYS offline
-11. Game continues in offline mode
+7. Game attempts to connect to \\.\pipe\nesys_games\...
+8. Connection FAILS (pipe does not exist)
+9. NESYS offline
+10. Game continues in offline mode
 ```
 
 ---
@@ -333,6 +330,19 @@ HKEY_LOCAL_MACHINE
 **Objective**: Determine whether NesysService.exe can be registered as a Windows Service without the original system drive, and whether certificate requirements can be satisfied from the available content.
 
 **Rationale**: The static analysis has recovered the runtime contract but critical startup elements remain unresolved. The next phase should investigate whether these elements can be reconstructed from the available evidence.
+
+---
+
+## G14 Audit Corrections
+
+The following overstated claims were identified and corrected in Phase 2A-G14:
+
+| Original Claim | Correction | Reason |
+|----------------|------------|--------|
+| "NesysService connects to cert3.nesys.jp" | Hostname reference only | String reference ≠ network connection |
+| "NesysService retrieves certificate" | Certificate store access only | Store API ≠ retrieval |
+| "NesysClient plugin initializes" | Removed | Not evidenced in static analysis |
+| "Card operations available" | Removed | Not evidenced in static analysis |
 
 ---
 

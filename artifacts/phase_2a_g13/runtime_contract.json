@@ -36,12 +36,12 @@
   ],
   "service": {
     "name": "NesysService",
-    "display_name": "NesysService",
-    "type": "SERVICE_WIN32_OWN_PROCESS",
-    "start_type": "SERVICE_AUTO_START",
-    "error_control": "SERVICE_ERROR_NORMAL",
-    "account": "LocalSystem (inferred)",
-    "description": "NESYS communication service for Starwing Paradox"
+    "display_name": "NOT_FOUND",
+    "type": "INFERRED (SERVICE_WIN32_OWN_PROCESS)",
+    "start_type": "INFERRED (SERVICE_AUTO_START)",
+    "error_control": "INFERRED (SERVICE_ERROR_NORMAL)",
+    "account": "INFERRED (LocalSystem)",
+    "description": "NOT_FOUND"
   },
   "registry": [
     {
@@ -209,9 +209,9 @@
     {
       "store": "MY\\.Default",
       "subject": "nesys",
-      "issuer": "Unknown",
-      "private_key_required": true,
-      "purpose": "Client authentication with NESYS servers"
+      "issuer": "NOT_FOUND",
+      "private_key_required": "PROBABLY_REQUIRED (inference, not confirmed)",
+      "purpose": "UNRESOLVED (hostname reference does not prove operation)"
     }
   ],
   "network": [
@@ -219,7 +219,7 @@
       "host": "cert3.nesys.jp",
       "port": 443,
       "protocol": "HTTPS",
-      "purpose": "Certificate/authentication",
+      "purpose": "UNRESOLVED (hostname reference only)",
       "endpoints": [
         "certify.php",
         "cardn.cgi",
@@ -230,7 +230,7 @@
       "host": "data.nesys.jp",
       "port": 80,
       "protocol": "HTTP",
-      "purpose": "Data downloads",
+      "purpose": "UNRESOLVED (hostname reference only)",
       "endpoints": [
         "Alive.txt"
       ]
@@ -239,7 +239,7 @@
       "host": "nesys.taito.co.jp",
       "port": 80,
       "protocol": "HTTP",
-      "purpose": "Alive check",
+      "purpose": "UNRESOLVED (hostname reference only)",
       "endpoints": [
         "i.php"
       ]
@@ -248,7 +248,7 @@
       "host": "fjm170920zero.nesica.net",
       "port": 443,
       "protocol": "HTTPS",
-      "purpose": "Card service",
+      "purpose": "UNRESOLVED (hostname reference only)",
       "endpoints": [
         "incomAAA.php",
         "incomALL.php",
@@ -298,5 +298,64 @@
     "no_executing_binaries": true,
     "no_altering_windows_services": true,
     "no_recording_secrets": true
+  },
+  "g14_audit_corrections": {
+    "date": "2026-08-28",
+    "corrections": [
+      {
+        "field": "service.display_name",
+        "original": "NesysService",
+        "corrected": "NOT_FOUND",
+        "reason": "No direct evidence of display name"
+      },
+      {
+        "field": "service.type",
+        "original": "SERVICE_WIN32_OWN_PROCESS",
+        "corrected": "INFERRED",
+        "reason": "Standard inference, not confirmed"
+      },
+      {
+        "field": "service.start_type",
+        "original": "SERVICE_AUTO_START",
+        "corrected": "INFERRED",
+        "reason": "Standard inference, not confirmed"
+      },
+      {
+        "field": "service.error_control",
+        "original": "SERVICE_ERROR_NORMAL",
+        "corrected": "INFERRED",
+        "reason": "Standard inference, not confirmed"
+      },
+      {
+        "field": "service.account",
+        "original": "LocalSystem",
+        "corrected": "INFERRED",
+        "reason": "Standard inference, not confirmed"
+      },
+      {
+        "field": "service.description",
+        "original": "NESYS communication service for Starwing Paradox",
+        "corrected": "NOT_FOUND",
+        "reason": "No evidence of service description"
+      },
+      {
+        "field": "certificates[0].private_key_required",
+        "original": true,
+        "corrected": "PROBABLY_REQUIRED",
+        "reason": "Inference from client auth pattern, not direct evidence"
+      },
+      {
+        "field": "certificates[0].purpose",
+        "original": "Client authentication with NESYS servers",
+        "corrected": "UNRESOLVED",
+        "reason": "Hostname reference does not prove operation"
+      },
+      {
+        "field": "network[*].purpose",
+        "original": "Certificate/authentication, Data downloads, Alive check, Card service",
+        "corrected": "UNRESOLVED",
+        "reason": "Hostname references do not prove operations"
+      }
+    ]
   }
 }

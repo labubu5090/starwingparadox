@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-NesysService.exe accesses the Windows certificate store to retrieve NESYS certificates for authentication with cert3.nesys.jp. The service uses the "MY" store with ".Default" provider and searches for certificates by subject/issuer patterns.
+NesysService.exe imports certificate store APIs (CertOpenStore, CertFindCertificateInStore) and contains string references to "MY\.Default" and "nesys". The exact purpose of cert3.nesys.jp hostname references is UNRESOLVED — hostname presence does not prove certificate retrieval, download, or authentication operations.
 
 ---
 
@@ -78,11 +78,13 @@ MY\.Default
 
 | Requirement | Evidence | Strength |
 |-------------|----------|----------|
-| Private key required | HIGH | Client authentication typically requires private key |
+| Private key required | PROBABLY_REQUIRED | Client authentication typically requires private key |
 | CryptAcquireContext | NOT_FOUND | No import found |
 | CryptSign | NOT_FOUND | No import found |
+| CryptAcquireCertificatePrivateKey | NOT_FOUND | No import found |
+| NCryptOpenKey | NOT_FOUND | No import found |
 
-**Inference**: Certificate likely requires private key for TLS client authentication, but no direct evidence of private key usage found in imports.
+**Classification**: `PROBABLY_REQUIRED` — Certificate likely requires private key for TLS client authentication, but no direct evidence of private key acquisition found in imports. This remains an inference, not a confirmed fact.
 
 ---
 
@@ -198,8 +200,12 @@ MY\.Default
 
 ## Conclusion
 
-NesysService.exe accesses the Windows certificate store (MY\.Default) to retrieve NESYS certificates for authentication with cert3.nesys.jp. The service sends SCOMMAND_CERT_ERROR when certificate lookup fails. The certificate likely requires a private key for client authentication.
+NesysService.exe imports certificate store APIs and contains string references to "MY\.Default" and "nesys". The service sends SCOMMAND_CERT_ERROR when certificate lookup fails. The certificate likely requires a private key for client authentication (PROBABLY_REQUIRED, not confirmed).
 
-**Classification**: `CONFIRMED`
+**Classification**: `CONFIRMED` (store access), `PROBABLY_REQUIRED` (private key), `UNRESOLVED` (cert3.nesys.jp purpose)
 
-The certificate contract is fully evidenced with string references and API imports.
+The certificate store access is evidenced with string references and API imports. The exact purpose of cert3.nesys.jp hostname references remains unresolved — hostname presence does not prove certificate retrieval, download, or authentication operations.
+
+### G14 Audit Correction
+
+The original claim "retrieve NESYS certificates for authentication with cert3.nesys.jp" overstated the evidence. Hostname reference ≠ certificate retrieval. Store API import ≠ retrieval operation.
