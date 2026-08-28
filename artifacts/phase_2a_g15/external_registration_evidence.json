@@ -1,0 +1,88 @@
+{
+  "phase": "2A-G15",
+  "date": "2026-08-28",
+  "evidence_summary": {
+    "scripts_with_service_references": 0,
+    "logs_with_installation_evidence": 0,
+    "configurations_with_registration_data": 0,
+    "pe_resources_with_installation_apis": 0,
+    "registry_provisioning_data": 0,
+    "startup_orchestration_evidence": 0
+  },
+  "service_configuration_recovered": {
+    "service_name": {
+      "value": "NesysService",
+      "confidence": "CONFIRMED",
+      "evidence": "String reference in binary"
+    },
+    "binary_path": {
+      "value": "X:\\StarwingParadox\\D DRIVE CONTENTS\\system\\Service\\NesysService.exe",
+      "confidence": "CONFIRMED",
+      "evidence": "File exists at path"
+    },
+    "service_type": {
+      "value": "SERVICE_WIN32_OWN_PROCESS",
+      "confidence": "INFERRED",
+      "evidence": "Standard for standalone service"
+    },
+    "start_type": {
+      "value": "SERVICE_AUTO_START",
+      "confidence": "INFERRED",
+      "evidence": "Standard for game services"
+    },
+    "error_control": {
+      "value": "SERVICE_ERROR_NORMAL",
+      "confidence": "INFERRED",
+      "evidence": "Standard error handling"
+    },
+    "account": {
+      "value": "LocalSystem",
+      "confidence": "INFERRED",
+      "evidence": "Needs network and cert access"
+    },
+    "display_name": {
+      "value": "NOT_FOUND",
+      "confidence": "NOT_FOUND",
+      "evidence": "No evidence found"
+    },
+    "description": {
+      "value": "NOT_FOUND",
+      "confidence": "NOT_FOUND",
+      "evidence": "No evidence found"
+    },
+    "dependencies": {
+      "value": "NOT_FOUND",
+      "confidence": "NOT_FOUND",
+      "evidence": "No evidence found"
+    },
+    "failure_actions": {
+      "value": "NOT_FOUND",
+      "confidence": "NOT_FOUND",
+      "evidence": "No evidence found"
+    }
+  },
+  "registry_provisioning": {
+    "gamekind": "NOT_FOUND",
+    "eventnexttime": "NOT_FOUND",
+    "conditiontime": "NOT_FOUND",
+    "trafficcount": "NOT_FOUND",
+    "loglevel": "NOT_FOUND",
+    "newspath": "NOT_FOUND",
+    "eventpath": "NOT_FOUND",
+    "logpath": "NOT_FOUND"
+  },
+  "startup_orchestration": {
+    "windows_automatic_start": "NOT_FOUND",
+    "delayed_automatic_start": "NOT_FOUND",
+    "startup_folder_shortcut": "NOT_FOUND",
+    "scheduled_task": "NOT_FOUND",
+    "launcher_executable": "NOT_FOUND",
+    "watchdog": "NOT_FOUND",
+    "shell_replacement": "NOT_FOUND",
+    "external_cabinet_management": "NOT_FOUND",
+    "installer_configured_start": "NOT_FOUND",
+    "recovery_image_script": "NOT_FOUND"
+  },
+  "classification": "NO_EXTERNAL_REGISTRATION_EVIDENCE",
+  "notes": "No external service registration evidence found in operator-owned content."
+}

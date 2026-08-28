@@ -1,0 +1,123 @@
+{
+  "phase": "2A-G15",
+  "date": "2026-08-28",
+  "recovery_sources": [
+    {
+      "source": "Original C-drive image",
+      "availability": "NOT_FOUND",
+      "impact": "CRITICAL",
+      "service_registration": "NOT_FOUND",
+      "certificate_store": "NOT_FOUND",
+      "registry_configuration": "NOT_FOUND",
+      "startup_configuration": "NOT_FOUND"
+    },
+    {
+      "source": "Original physical system drive",
+      "availability": "NOT_FOUND",
+      "impact": "CRITICAL",
+      "service_registration": "NOT_FOUND",
+      "certificate_store": "NOT_FOUND",
+      "registry_configuration": "NOT_FOUND",
+      "startup_configuration": "NOT_FOUND"
+    },
+    {
+      "source": "Operator-created backup",
+      "availability": "AVAILABLE_BUT_INCOMPLETE",
+      "impact": "PARTIAL",
+      "service_registration": "NOT_FOUND",
+      "certificate_store": "NOT_FOUND",
+      "registry_configuration": "NOT_FOUND",
+      "startup_configuration": "NOT_FOUND"
+    },
+    {
+      "source": "Arcade distributor recovery image",
+      "availability": "NOT_FOUND",
+      "impact": "UNKNOWN",
+      "service_registration": "UNKNOWN",
+      "certificate_store": "UNKNOWN",
+      "registry_configuration": "UNKNOWN",
+      "startup_configuration": "UNKNOWN"
+    },
+    {
+      "source": "Authorized installer package",
+      "availability": "NOT_FOUND",
+      "impact": "UNKNOWN",
+      "service_registration": "UNKNOWN",
+      "certificate_store": "UNKNOWN",
+      "registry_configuration": "UNKNOWN",
+      "startup_configuration": "UNKNOWN"
+    },
+    {
+      "source": "Vendor deployment media",
+      "availability": "NOT_FOUND",
+      "impact": "UNKNOWN",
+      "service_registration": "UNKNOWN",
+      "certificate_store": "UNKNOWN",
+      "registry_configuration": "UNKNOWN",
+      "startup_configuration": "UNKNOWN"
+    },
+    {
+      "source": "Windows System32 service Registry hive",
+      "availability": "NOT_FOUND",
+      "impact": "CRITICAL",
+      "service_registration": "NOT_FOUND",
+      "certificate_store": "NOT_FOUND",
+      "registry_configuration": "NOT_FOUND",
+      "startup_configuration": "NOT_FOUND"
+    },
+    {
+      "source": "Exported service metadata",
+      "availability": "NOT_FOUND",
+      "impact": "CRITICAL",
+      "service_registration": "NOT_FOUND",
+      "certificate_store": "NOT_FOUND",
+      "registry_configuration": "NOT_FOUND",
+      "startup_configuration": "NOT_FOUND"
+    },
+    {
+      "source": "Old maintenance backup",
+      "availability": "NOT_FOUND",
+      "impact": "UNKNOWN",
+      "service_registration": "UNKNOWN",
+      "certificate_store": "UNKNOWN",
+      "registry_configuration": "UNKNOWN",
+      "startup_configuration": "UNKNOWN"
+    },
+    {
+      "source": "Installation log",
+      "availability": "NOT_FOUND",
+      "impact": "CRITICAL",
+      "service_registration": "NOT_FOUND",
+      "certificate_store": "NOT_FOUND",
+      "registry_configuration": "NOT_FOUND",
+      "startup_configuration": "NOT_FOUND"
+    },
+    {
+      "source": "Cabinet clone",
+      "availability": "NOT_FOUND",
+      "impact": "UNKNOWN",
+      "service_registration": "UNKNOWN",
+      "certificate_store": "UNKNOWN",
+      "registry_configuration": "UNKNOWN",
+      "startup_configuration": "UNKNOWN"
+    },
+    {
+      "source": "Legitimate spare cabinet image",
+      "availability": "NOT_FOUND",
+      "impact": "UNKNOWN",
+      "service_registration": "UNKNOWN",
+      "certificate_store": "UNKNOWN",
+      "registry_configuration": "UNKNOWN",
+      "startup_configuration": "UNKNOWN"
+    }
+  ],
+  "summary": {
+    "available_sources": 1,
+    "incomplete_sources": 1,
+    "not_found_sources": 11,
+    "critical_sources_missing": 4,
+    "recovery_possible": false
+  },
+  "classification": "RECOVERY_SOURCES_INSUFFICIENT",
+  "notes": "Only operator-created D-drive backup is available. All other recovery sources are NOT_FOUND."
+}

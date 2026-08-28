@@ -472,18 +472,77 @@ The operator previously stated that the apparent game crash occurred when the op
 | NESYSERVICE_NETWORK_CONTRACT.md | Corrected "connects to cert3.nesys.jp for certificate operations" | Overstated evidence |
 | artifacts/phase_2a_g13/runtime_contract.json | Updated service, certificates, and network sections | Corrected overstated claims |
 
+## Phase 2A-G15: External Registration Mechanism Investigation (COMPLETE)
+
+**Commit**: TBD
+**Status**: COMPLETE
+**Classification**: `NO_NEW_REGISTRATION_EVIDENCE`
+
+### G15 Results
+
+| Metric | Value |
+|--------|-------|
+| Deployment artifacts found | 0 |
+| Installer packages found | 0 |
+| Recovery images found | 0 |
+| Service registration evidence | NONE |
+| Registry provisioning evidence | NONE |
+| Startup orchestration evidence | NONE |
+| Recovery sources available | 1 (D-drive backup, incomplete) |
+| Recovery sources NOT_FOUND | 11 |
+| Safe to register | FALSE |
+
+### G15 Key Findings
+
+1. **No deployment artifacts found** - No scripts, installers, or recovery images
+2. **No service registration evidence** - No scripts or logs with service references
+3. **No registry provisioning data** - No artifacts define typex values
+4. **No startup orchestration evidence** - No startup scripts or shortcuts
+5. **Most recovery sources NOT_AVAILABLE** - Only D-drive backup exists
+6. **Service configuration partially recovered** - Name and path confirmed
+7. **G14 classification maps to predefined** - EXTERNAL_REGISTRATION_REQUIRED → SYSTEM_IMAGE_OR_INSTALLER_REQUIRED
+
+### G15 Documents Created
+
+| Document | Path |
+|----------|------|
+| G15 Initial Baseline | docs/PHASE_2A_G15_INITIAL_BASELINE.md |
+| G15 Analysis Plan | docs/PHASE_2A_G15_ANALYSIS_PLAN.md |
+| Deployment Artifact Inventory | docs/DEPLOYMENT_ARTIFACT_INVENTORY.md |
+| Installer and Image Candidates | docs/INSTALLER_AND_IMAGE_CANDIDATES.md |
+| External Service Registration Evidence | docs/EXTERNAL_SERVICE_REGISTRATION_EVIDENCE.md |
+| NesysService Deployment Residue | docs/NESYSERVICE_DEPLOYMENT_RESIDUE.md |
+| NesysService Startup Orchestration | docs/NESYSERVICE_STARTUP_ORCHESTRATION.md |
+| typex Provisioning Evidence | docs/TYPEX_PROVISIONING_EVIDENCE.md |
+| Authorized Recovery Source Matrix | docs/AUTHORIZED_RECOVERY_SOURCE_MATRIX.md |
+| G14 Classification Mapping | docs/G14_CLASSIFICATION_MAPPING.md |
+| G15 Final Report | docs/PHASE_2A_G15_FINAL_REPORT.md |
+
+### G15 Artifacts Created
+
+| Artifact | Path |
+|----------|------|
+| Deployment Artifact Inventory | artifacts/phase_2a_g15/deployment_artifact_inventory.json |
+| External Registration Evidence | artifacts/phase_2a_g15/external_registration_evidence.json |
+| Startup Orchestration | artifacts/phase_2a_g15/startup_orchestration.json |
+| Recovery Source Matrix | artifacts/phase_2a_g15/recovery_source_matrix.json |
+
 ## Remaining Unknowns
 
 - 6 computed player profile fields
 - Real cabinet wire compatibility (no captures exist)
 - Matching implementation (guarded, NOT_IMPLEMENTED)
 - Battle implementation (guarded, NOT_IMPLEMENTED)
-- External service registration mechanism
+- External service registration mechanism (CONFIRMED: UNKNOWN)
 - Certificate private key acquisition
 - cert3.nesys.jp purpose
 - Registry default values
 - File path requirements
+- Service display name, description, dependencies, failure actions
+- Service SID type, preshutdown timeout
+- Event log source
+- Installation source, uninstall source
 
 ## Recommended Next Phase
 
-Phase 2A-G15: External Registration Mechanism Investigation
+Phase 2A-G16: Service Registration Feasibility Assessment
