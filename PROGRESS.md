@@ -298,6 +298,43 @@ The operator previously stated that the apparent game crash occurred when the op
 - Ruff: 0 errors
 - Tests: 834 passed, 1 skipped, 0 failed
 
+## Phase 2A-G13: IDA Static Runtime Reconstruction (COMPLETE)
+
+**Status**: COMPLETE
+
+### G13 Objectives
+
+- Perform IDA static analysis of NesysService.exe, AcrGame.exe, AcrGame-Win64-Shipping.exe
+- Reconstruct missing runtime contract between game, SCM, Registry, certificate store, named pipe
+- Document service control, registry, pipe, certificate, and network contracts
+- Determine process startup sequence
+- Identify missing system-drive dependencies
+
+### G13 Results
+
+| Finding | Detail |
+|---------|--------|
+| Service name | NesysService (CONFIRMED) |
+| Registry path | HKLM\SOFTWARE\taito\typex (CONFIRMED) |
+| Certificate store | MY\.Default (CONFIRMED) |
+| Named pipe | \\.\pipe\nesys_games (CONFIRMED) |
+| Network endpoints | cert3.nesys.jp, data.nesys.jp, nesys.taito.co.jp, fjm170920zero.nesica.net (CONFIRMED) |
+| Process launch | AcrGame.exe → AcrGame-Win64-Shipping.exe (CONFIRMED) |
+| Runtime contract | PARTIAL_STATIC_RUNTIME_CONTRACT |
+| Missing components | Service registration, certificate installation, registry configuration |
+
+### G13 Classification
+
+**Primary**: `PARTIAL_STATIC_RUNTIME_CONTRACT`
+
+**Rationale**: Service identity, named pipe protocol, and network endpoints are confirmed. However, critical startup elements remain unresolved: the exact Windows Service registration, certificate installation, and Registry configuration.
+
+### G13 Environment
+
+- Mypy: version 2.3.1, 0 errors on 64 source files
+- Ruff: 0 errors
+- Tests: 834 passed, 1 skipped, 0 failed
+
 ## Current State
 
 | Metric | Value |
@@ -327,6 +364,12 @@ The operator previously stated that the apparent game crash occurred when the op
 | G12 system drive backup | D_DRIVE_ONLY_BACKUP_CONFIRMED |
 | G12 launcher candidates | NOT_FOUND |
 | G12 NesysService standalone | PARENT_CONTEXT_REQUIRED |
+| G13 service name | NesysService (CONFIRMED) |
+| G13 registry path | HKLM\SOFTWARE\taito\typex (CONFIRMED) |
+| G13 certificate store | MY\.Default (CONFIRMED) |
+| G13 named pipe | \\.\pipe\nesys_games (CONFIRMED) |
+| G13 network endpoints | cert3.nesys.jp, data.nesys.jp, nesys.taito.co.jp, fjm170920zero.nesica.net (CONFIRMED) |
+| G13 runtime contract | PARTIAL_STATIC_RUNTIME_CONTRACT |
 | G12 safe launch test | PARTIAL_INVOCATION_NOT_SAFE_TO_TEST |
 | G12 service registration | MISSING |
 | G12 certificate installation | MISSING |
