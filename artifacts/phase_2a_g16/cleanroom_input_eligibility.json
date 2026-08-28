@@ -1,0 +1,350 @@
+{
+  "phase": "2A-G16",
+  "title": "Clean-room Input Eligibility",
+  "date": "2026-08-28",
+  "classification": "INPUT_ELIGIBILITY_DEFINED",
+  "summary": {
+    "total_observations": 74,
+    "eligible_interface_fact": 35,
+    "eligible_failure_behavior": 6,
+    "documentation_only": 12,
+    "restricted_security_behavior": 12,
+    "unknown_do_not_implement": 8,
+    "proprietary_internal_detail_excluded": 3
+  },
+  "categories": {
+    "ELIGIBLE_INTERFACE_FACT": "Externally observable or statically confirmed interface behavior that may inform an independent compatibility specification",
+    "ELIGIBLE_FAILURE_BEHAVIOR": "Observable error, timeout or unavailable-service behavior that may be represented in isolated tests",
+    "DOCUMENTATION_ONLY": "Evidence useful for historical understanding but not required in the implementation",
+    "RESTRICTED_SECURITY_BEHAVIOR": "Certificate, authentication, credential, production-host or trust behavior that must not be reproduced or bypassed",
+    "UNKNOWN_DO_NOT_IMPLEMENT": "Behavior lacking sufficient evidence",
+    "PROPRIETARY_INTERNAL_DETAIL_EXCLUDED": "Internal implementation detail unrelated to the independently needed interface"
+  },
+  "observations": [
+    {
+      "observation": "Pipe name: \\\\.\\pipe\\nesys_games",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Externally observable path"
+    },
+    {
+      "observation": "Server creates pipe, client connects",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Standard pipe roles"
+    },
+    {
+      "observation": "Message-based framing",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary analysis"
+    },
+    {
+      "observation": "4-byte LE length prefix",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary analysis"
+    },
+    {
+      "observation": "47 LCOMMAND types (game→service)",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary analysis"
+    },
+    {
+      "observation": "44 SCOMMAND types (service→game)",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary analysis"
+    },
+    {
+      "observation": "LCOMMAND_CLIENT_START",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable lifecycle event"
+    },
+    {
+      "observation": "LCOMMAND_CLIENT_END",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable lifecycle event"
+    },
+    {
+      "observation": "SCOMMAND_CLIENT_START_REPLY",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable lifecycle event"
+    },
+    {
+      "observation": "LCOMMAND_PING (0x66)",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable command ID"
+    },
+    {
+      "observation": "SCOMMAND_PING_RESPONSE (0x67)",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable command ID"
+    },
+    {
+      "observation": "Card operation structures",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable field names"
+    },
+    {
+      "observation": "Command field meanings",
+      "classification": "UNKNOWN_DO_NOT_IMPLEMENT",
+      "rationale": "Not evidenced"
+    },
+    {
+      "observation": "Command payload formats",
+      "classification": "UNKNOWN_DO_NOT_IMPLEMENT",
+      "rationale": "Not evidenced"
+    },
+    {
+      "observation": "Checksum algorithms",
+      "classification": "UNKNOWN_DO_NOT_IMPLEMENT",
+      "rationale": "Not evidenced"
+    },
+    {
+      "observation": "Registry key: HKLM\\SOFTWARE\\taito\\typex",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary strings"
+    },
+    {
+      "observation": "8 values (5 DWORD, 3 SZ)",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary imports"
+    },
+    {
+      "observation": "Value names: GameKind, EventNextTime, etc.",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary strings"
+    },
+    {
+      "observation": "READ_ONLY at startup",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from API imports"
+    },
+    {
+      "observation": "Default values",
+      "classification": "UNKNOWN_DO_NOT_IMPLEMENT",
+      "rationale": "Not evidenced"
+    },
+    {
+      "observation": "Missing-value behavior",
+      "classification": "UNKNOWN_DO_NOT_IMPLEMENT",
+      "rationale": "Not evidenced"
+    },
+    {
+      "observation": "Downstream functions",
+      "classification": "UNKNOWN_DO_NOT_IMPLEMENT",
+      "rationale": "Not evidenced"
+    },
+    {
+      "observation": "Store path: MY\\.Default",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary imports"
+    },
+    {
+      "observation": "Search subject: nesys",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary strings"
+    },
+    {
+      "observation": "Store access: CertOpenStore, CertFindCertificateInStore",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary imports"
+    },
+    {
+      "observation": "Private key acquisition",
+      "classification": "RESTRICTED_SECURITY_BEHAVIOR",
+      "rationale": "Security boundary"
+    },
+    {
+      "observation": "TLS client certificate attachment",
+      "classification": "RESTRICTED_SECURITY_BEHAVIOR",
+      "rationale": "Security boundary"
+    },
+    {
+      "observation": "Server certificate validation",
+      "classification": "RESTRICTED_SECURITY_BEHAVIOR",
+      "rationale": "Security boundary"
+    },
+    {
+      "observation": "cert3.nesys.jp purpose",
+      "classification": "RESTRICTED_SECURITY_BEHAVIOR",
+      "rationale": "Production endpoint"
+    },
+    {
+      "observation": "Certificate renewal",
+      "classification": "RESTRICTED_SECURITY_BEHAVIOR",
+      "rationale": "Security boundary"
+    },
+    {
+      "observation": "Failure: SCOMMAND_CERT_ERROR",
+      "classification": "ELIGIBLE_FAILURE_BEHAVIOR",
+      "rationale": "Observable error behavior"
+    },
+    {
+      "observation": "cert3.nesys.jp:443",
+      "classification": "RESTRICTED_SECURITY_BEHAVIOR",
+      "rationale": "Production endpoint"
+    },
+    {
+      "observation": "data.nesys.jp:80",
+      "classification": "RESTRICTED_SECURITY_BEHAVIOR",
+      "rationale": "Production endpoint"
+    },
+    {
+      "observation": "nesys.taito.co.jp:80",
+      "classification": "RESTRICTED_SECURITY_BEHAVIOR",
+      "rationale": "Production endpoint"
+    },
+    {
+      "observation": "fjm170920zero.nesica.net:443",
+      "classification": "RESTRICTED_SECURITY_BEHAVIOR",
+      "rationale": "Production endpoint"
+    },
+    {
+      "observation": "WinHTTP APIs imported",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary imports"
+    },
+    {
+      "observation": "Socket APIs imported",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary imports"
+    },
+    {
+      "observation": "URL patterns (/alive/, /server/, etc.)",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary strings"
+    },
+    {
+      "observation": "DNS resolution via gethostbyname",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary imports"
+    },
+    {
+      "observation": "Offline behavior: SCOMMAND_NW_ERROR",
+      "classification": "ELIGIBLE_FAILURE_BEHAVIOR",
+      "rationale": "Observable error behavior"
+    },
+    {
+      "observation": "Recovery behavior: SCOMMAND_NWRECOVER_NOTICE",
+      "classification": "ELIGIBLE_FAILURE_BEHAVIOR",
+      "rationale": "Observable recovery behavior"
+    },
+    {
+      "observation": "Service name: NesysService",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary strings"
+    },
+    {
+      "observation": "Entry point: swp_service_main",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary imports"
+    },
+    {
+      "observation": "Control handler: swp_service_ctrl_handler",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary imports"
+    },
+    {
+      "observation": "State: START_PENDING → RUNNING → STOPPED",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary imports"
+    },
+    {
+      "observation": "Stop handling: SERVICE_CONTROL_STOP",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary imports"
+    },
+    {
+      "observation": "Shutdown handling: SERVICE_CONTROL_SHUTDOWN",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary imports"
+    },
+    {
+      "observation": "Mutex creation",
+      "classification": "PROPRIETARY_INTERNAL_DETAIL_EXCLUDED",
+      "rationale": "Internal implementation"
+    },
+    {
+      "observation": "Worker thread creation",
+      "classification": "PROPRIETARY_INTERNAL_DETAIL_EXCLUDED",
+      "rationale": "Internal implementation"
+    },
+    {
+      "observation": "Service registration",
+      "classification": "RESTRICTED_SECURITY_BEHAVIOR",
+      "rationale": "Windows system mutation"
+    },
+    {
+      "observation": "Service account configuration",
+      "classification": "RESTRICTED_SECURITY_BEHAVIOR",
+      "rationale": "Windows system mutation"
+    },
+    {
+      "observation": "AcrGame.exe creates AcrGame-Win64-Shipping.exe",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from binary imports"
+    },
+    {
+      "observation": "AcrGame.exe is UE4 bootstrap wrapper",
+      "classification": "DOCUMENTATION_ONLY",
+      "rationale": "Historical understanding"
+    },
+    {
+      "observation": "AcrGame.exe contains zero NesysService references",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from string analysis"
+    },
+    {
+      "observation": "Game connects to named pipe",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from runtime logs"
+    },
+    {
+      "observation": "Game enters offline mode on NESYS failure",
+      "classification": "ELIGIBLE_FAILURE_BEHAVIOR",
+      "rationale": "Observable from runtime logs"
+    },
+    {
+      "observation": "Game blocks TCP on NESYS offline",
+      "classification": "ELIGIBLE_FAILURE_BEHAVIOR",
+      "rationale": "Observable from runtime logs"
+    },
+    {
+      "observation": "Game HTTP matching succeeds offline",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable from runtime logs"
+    },
+    {
+      "observation": "Game process model",
+      "classification": "DOCUMENTATION_ONLY",
+      "rationale": "Historical understanding"
+    },
+    {
+      "observation": "37,334 files",
+      "classification": "DOCUMENTATION_ONLY",
+      "rationale": "Historical understanding"
+    },
+    {
+      "observation": "3 executables",
+      "classification": "DOCUMENTATION_ONLY",
+      "rationale": "Historical understanding"
+    },
+    {
+      "observation": "0 scripts",
+      "classification": "DOCUMENTATION_ONLY",
+      "rationale": "Historical understanding"
+    },
+    {
+      "observation": "OpenKey.json",
+      "classification": "ELIGIBLE_INTERFACE_FACT",
+      "rationale": "Observable runtime state"
+    },
+    {
+      "observation": "EWF=1",
+      "classification": "DOCUMENTATION_ONLY",
+      "rationale": "Historical understanding"
+    },
+    {
+      "observation": "CmdFile logs",
+      "classification": "DOCUMENTATION_ONLY",
+      "rationale": "Historical understanding"
+    }
+  ]
+}

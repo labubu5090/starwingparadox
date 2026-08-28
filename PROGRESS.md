@@ -527,6 +527,78 @@ The operator previously stated that the apparent game crash occurred when the op
 | Startup Orchestration | artifacts/phase_2a_g15/startup_orchestration.json |
 | Recovery Source Matrix | artifacts/phase_2a_g15/recovery_source_matrix.json |
 
+## Phase 2A-G16: Original Runtime Recovery Closure and Clean-room Compatibility Boundary (COMPLETE)
+
+**Commit**: TBD
+**Status**: COMPLETE
+**Classification**: CLEANROOM_COMPATIBILITY_SCOPE_DEFINED
+
+### G16 Results
+
+| Metric | Value |
+|--------|-------|
+| Recovery branch | CLOSED |
+| Evidence consolidated | 55 confirmed, 56 unresolved |
+| Interface facts eligible | 35 |
+| Restricted behaviors | 12 |
+| Protocol commands classified | 91 (8 confirmed, 20 protocol-identified, 63 unknown) |
+| Implementation gaps | 41 not implemented, 3 partially implemented |
+| Synthetic fixtures created | 4 files |
+| Security boundary violations | 0 |
+
+### G16 Key Findings
+
+1. **Recovery branch closed** - No safe reconstruction from available backup
+2. **Evidence consolidated** - 55 confirmed interface facts documented
+3. **Startup model corrected** - Three models produced (confirmed, plausible, failure)
+4. **Input eligibility defined** - 35 eligible interface facts identified
+5. **Protocol confidence matrix** - 91 commands classified
+6. **Compatibility specification** - Clean-room design established
+7. **Implementation gaps identified** - 41 not implemented behaviors documented
+8. **Security boundary established** - No violations found
+9. **Decision record created** - Recovery branch closure justified
+10. **Roadmap rebased** - G17 recommended as next phase
+
+### G16 Documents Created
+
+| Document | Path |
+|----------|------|
+| G16 Initial Baseline | docs/PHASE_2A_G16_INITIAL_BASELINE.md |
+| G16 Analysis Plan | docs/PHASE_2A_G16_ANALYSIS_PLAN.md |
+| Recovery Closure | docs/ORIGINAL_RUNTIME_RECOVERY_CLOSURE.md |
+| Evidence Matrix | docs/G12_G15_CONSOLIDATED_EVIDENCE_MATRIX.md |
+| Startup Model Correction | docs/ORIGINAL_STARTUP_MODEL_CORRECTION.md |
+| Input Eligibility | docs/CLEANROOM_INPUT_ELIGIBILITY.md |
+| Protocol Confidence | docs/NESYS_PROTOCOL_CONFIDENCE_MATRIX.md |
+| Compatibility Spec | docs/CLEANROOM_COMPATIBILITY_SPECIFICATION.md |
+| Gap Analysis | docs/CURRENT_IMPLEMENTATION_GAP_ANALYSIS.md |
+| Security Boundary | docs/SECURITY_AND_AUTHORIZATION_BOUNDARY.md |
+| Decision Record | docs/ADR_ORIGINAL_NESYSERVICE_RECOVERY_CLOSURE.md |
+| G16 Final Report | docs/PHASE_2A_G16_FINAL_REPORT.md |
+
+### G16 Artifacts Created
+
+| Artifact | Path |
+|----------|------|
+| Recovery Closure | artifacts/phase_2a_g16/recovery_closure.json |
+| Evidence Matrix | artifacts/phase_2a_g16/consolidated_evidence.json |
+| Input Eligibility | artifacts/phase_2a_g16/cleanroom_input_eligibility.json |
+| Protocol Confidence | artifacts/phase_2a_g16/protocol_confidence_matrix.json |
+| Gap Analysis | artifacts/phase_2a_g16/implementation_gap_analysis.json |
+
+### G16 Synthetic Fixtures Created
+
+| Fixture | Path |
+|---------|------|
+| README | tests/fixtures/starwing_cleanroom/README.md |
+| Command Catalog | tests/fixtures/starwing_cleanroom/command_catalog.json |
+| Lifecycle Cases | tests/fixtures/starwing_cleanroom/lifecycle_cases.json |
+| Invalid Cases | tests/fixtures/starwing_cleanroom/invalid_cases.json |
+
+### G16 Audit Note
+
+The previous G16 recommendation "Service Registration Feasibility Assessment" was replaced because G15 found no external registration or provisioning evidence. The current G16 is "Original Runtime Recovery Closure and Clean-room Compatibility Boundary".
+
 ## Remaining Unknowns
 
 - 6 computed player profile fields
@@ -545,4 +617,4 @@ The operator previously stated that the apparent game crash occurred when the op
 
 ## Recommended Next Phase
 
-Phase 2A-G16: Service Registration Feasibility Assessment
+Phase 2A-G17: Synthetic Transport and Protocol State-Machine Foundation

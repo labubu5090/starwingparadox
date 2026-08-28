@@ -1,0 +1,170 @@
+{
+  "phase": "2A-G16",
+  "title": "Invalid Test Cases",
+  "date": "2026-08-28",
+  "classification": "SYNTHETIC_FIXTURE",
+  "description": "Invalid input test cases. All data is synthetic and derived from confirmed interface observations.",
+  "synthetic": true,
+  "no_production_data": true,
+  "no_authentication_material": true,
+  "no_certificate_material": true,
+  "no_production_hostnames": true,
+  "evidence_source": "G12-G15 evidence documents, G13 protocol analysis",
+  "test_cases": [
+    {
+      "id": "INVALID-001",
+      "name": "Bad Frame Length",
+      "description": "Test handling of frame with invalid length",
+      "input": {
+        "frame_length": 2,
+        "data": "0100"
+      },
+      "expected": "Connection dropped, no response"
+    },
+    {
+      "id": "INVALID-002",
+      "name": "Empty Frame",
+      "description": "Test handling of empty frame",
+      "input": {
+        "frame_length": 0,
+        "data": ""
+      },
+      "expected": "Connection dropped, no response"
+    },
+    {
+      "id": "INVALID-003",
+      "name": "Unknown Message Type",
+      "description": "Test handling of unknown message type",
+      "input": {
+        "frame_length": 10,
+        "message_type": 999,
+        "packet_id": 1,
+        "payload": "0000000000"
+      },
+      "expected": "Message logged and dropped, connection maintained"
+    },
+    {
+      "id": "INVALID-004",
+      "name": "Invalid Packet ID",
+      "description": "Test handling of negative packet ID",
+      "input": {
+        "frame_length": 10,
+        "message_type": 0x66,
+        "packet_id": -1,
+        "payload": "0000000000"
+      },
+      "expected": "Message logged and dropped, connection maintained"
+    },
+    {
+      "id": "INVALID-005",
+      "name": "CLIENT_END Before CLIENT_START",
+      "description": "Test handling of CLIENT_END before CLIENT_START",
+      "input": {
+        "sequence": [
+          {
+            "step": 1,
+            "message_type": "LCOMMAND_CLIENT_END",
+            "expected": "Message logged and dropped"
+          }
+        ]
+      },
+      "expected": "Message logged and dropped, connection maintained"
+    },
+    {
+      "id": "INVALID-006",
+      "name": "Duplicate CLIENT_START",
+      "description": "Test handling of duplicate CLIENT_START",
+      "input": {
+        "sequence": [
+          {
+            "step": 1,
+            "message_type": "LCOMMAND_CLIENT_START",
+            "expected": "Receive SCOMMAND_CLIENT_START_REPLY"
+          },
+          {
+            "step": 2,
+            "message_type": "LCOMMAND_CLIENT_START",
+            "expected": "Message logged and dropped"
+          }
+        ]
+      },
+      "expected": "Second CLIENT_START logged and dropped"
+    },
+    {
+      "id": "INVALID-007",
+      "name": "PING Before CLIENT_START",
+      "description": "Test handling of PING before CLIENT_START",
+      "input": {
+        "sequence": [
+          {
+            "step": 1,
+            "message_type": "LCOMMAND_PING",
+            "expected": "Message logged and dropped"
+          }
+        ]
+      },
+      "expected": "PING logged and dropped, connection maintained"
+    },
+    {
+      "id": "INVALID-008",
+      "name": "Card Operation Before CLIENT_START",
+      "description": "Test handling of card operation before CLIENT_START",
+      "input": {
+        "sequence": [
+          {
+            "step": 1,
+            "message_type": "LCOMMAND_CARD_READ",
+            "expected": "Message logged and dropped"
+          }
+        ]
+      },
+      "expected": "Card operation logged and dropped, connection maintained"
+    },
+    {
+      "id": "INVALID-009",
+      "name": "Invalid Payload Size",
+      "description": "Test handling of payload with invalid size",
+      "input": {
+        "frame_length": 10,
+        "message_type": 0x66,
+        "packet_id": 1,
+        "payload": "00"
+      },
+      "expected": "Message logged and dropped, connection maintained"
+    },
+    {
+      "id": "INVALID-010",
+      "name": "Corrupted Payload",
+      "description": "Test handling of corrupted payload",
+      "input": {
+        "frame_length": 10,
+        "message_type": 0x66,
+        "packet_id": 1,
+        "payload": "FFFFFFFFFFFF"
+      },
+      "expected": "Message logged and dropped, connection maintained"
+    },
+    {
+      "id": "INVALID-011",
+      "name": "Oversized Frame",
+      "description": "Test handling of frame exceeding maximum size",
+      "input": {
+        "frame_length": 2000000,
+        "data": "00000000000000000000000000000000"
+      },
+      "expected": "Connection dropped, no response"
+    },
+    {
+      "id": "INVALID-012",
+      "name": "Invalid Varint",
+      "description": "Test handling of invalid varint encoding",
+      "input": {
+        "frame_length": 10,
+        "message_type": 0x66,
+        "packet_id": 1,
+        "payload": "8080808080808080808080"
+      },
+      "expected": "Message logged and dropped, connection maintained"
+    }
+  ]
+}

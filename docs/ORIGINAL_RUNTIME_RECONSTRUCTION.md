@@ -164,3 +164,19 @@ The original runtime contract has been partially reconstructed. The service iden
 **Classification**: `PARTIAL_STATIC_RUNTIME_CONTRACT`
 
 The runtime contract is partially recovered but critical startup elements remain unresolved.
+
+---
+
+## G16 Audit Note
+
+**Date**: 2026-08-28
+**Phase**: 2A-G16
+
+This document was reviewed during Phase 2A-G16 (Original Runtime Recovery Closure and Clean-room Compatibility Boundary). The following corrections were applied:
+
+1. **Startup model corrected**: The previously documented "ideal startup sequence" was corrected to three separate models (confirmed, plausible, failure) in docs/ORIGINAL_STARTUP_MODEL_CORRECTION.md
+2. **Recovery branch closed**: The original runtime recovery branch has been formally closed. No safe reconstruction is possible from the available backup.
+3. **Clean-room boundary established**: An explicit security and authorization boundary has been established for the Python rewrite.
+4. **Implementation gaps identified**: 41 not implemented behaviors documented in docs/CURRENT_IMPLEMENTATION_GAP_ANALYSIS.md
+
+The original runtime recovery branch may be reopened ONLY when legitimate new evidence becomes available (original C-drive image, authorized installer, verified service configuration export, vendor documentation, or authorized intact cabinet environment).

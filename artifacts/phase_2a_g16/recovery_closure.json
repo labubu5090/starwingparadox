@@ -1,0 +1,148 @@
+{
+  "phase": "2A-G16",
+  "title": "Original Runtime Recovery Closure",
+  "date": "2026-08-28",
+  "classification": "RECOVERY_BRANCH_CLOSED",
+  "closure_statement": "The in-scope original-runtime recovery investigation has reached its evidence limit. No safe reconstruction is possible from the available backup.",
+  "available_evidence": [
+    {
+      "component": "NesysService.exe",
+      "claim": "Service binary",
+      "classification": "CONFIRMED",
+      "evidence_source": "D-drive backup",
+      "confidence": "HIGH",
+      "permitted_use": "Interface specification",
+      "prohibited_inference": "Cannot start without SCM",
+      "remaining_dependency": "Service registration"
+    },
+    {
+      "component": "AcrGame.exe",
+      "claim": "Bootstrap wrapper",
+      "classification": "CONFIRMED",
+      "evidence_source": "D-drive backup",
+      "confidence": "HIGH",
+      "permitted_use": "Interface specification",
+      "prohibited_inference": "Cannot determine launcher requirements",
+      "remaining_dependency": "Original context"
+    },
+    {
+      "component": "AcrGame-Win64-Shipping.exe",
+      "claim": "Main game binary",
+      "classification": "CONFIRMED",
+      "evidence_source": "D-drive backup",
+      "confidence": "HIGH",
+      "permitted_use": "Interface specification",
+      "prohibited_inference": "Cannot determine initialization",
+      "remaining_dependency": "Original context"
+    },
+    {
+      "component": "Named pipe",
+      "claim": "\\\\.\\pipe\\nesys_games",
+      "classification": "CONFIRMED",
+      "evidence_source": "Binary imports",
+      "confidence": "HIGH",
+      "permitted_use": "Interface specification",
+      "prohibited_inference": "Cannot create without service",
+      "remaining_dependency": "Service running"
+    },
+    {
+      "component": "Registry",
+      "claim": "HKLM\\SOFTWARE\\taito\\typex",
+      "classification": "CONFIRMED",
+      "evidence_source": "Binary strings",
+      "confidence": "HIGH",
+      "permitted_use": "Configuration specification",
+      "prohibited_inference": "Cannot create without admin",
+      "remaining_dependency": "Original context"
+    },
+    {
+      "component": "Certificate store",
+      "claim": "MY\\.Default",
+      "classification": "CONFIRMED",
+      "evidence_source": "Binary imports",
+      "confidence": "HIGH",
+      "permitted_use": "Interface specification",
+      "prohibited_inference": "Cannot install without provisioning",
+      "remaining_dependency": "Certificate installation"
+    }
+  ],
+  "missing_evidence": [
+    {
+      "component": "Service registration",
+      "claim": "Windows Service configuration",
+      "classification": "NOT_FOUND",
+      "evidence_source": "C-drive",
+      "confidence": "NONE",
+      "permitted_use": "Cannot use",
+      "prohibited_inference": "Cannot reconstruct",
+      "remaining_dependency": "Original C-drive"
+    },
+    {
+      "component": "Certificate installation",
+      "claim": "Certificate and private key",
+      "classification": "NOT_FOUND",
+      "evidence_source": "C-drive",
+      "confidence": "NONE",
+      "permitted_use": "Cannot use",
+      "prohibited_inference": "Cannot reconstruct",
+      "remaining_dependency": "Original C-drive"
+    },
+    {
+      "component": "Registry provisioning",
+      "claim": "Default values and configuration",
+      "classification": "NOT_FOUND",
+      "evidence_source": "C-drive",
+      "confidence": "NONE",
+      "permitted_use": "Cannot use",
+      "prohibited_inference": "Cannot reconstruct",
+      "remaining_dependency": "Original C-drive"
+    },
+    {
+      "component": "Startup orchestration",
+      "claim": "Launch sequence and dependencies",
+      "classification": "NOT_FOUND",
+      "evidence_source": "C-drive",
+      "confidence": "NONE",
+      "permitted_use": "Cannot use",
+      "prohibited_inference": "Cannot reconstruct",
+      "remaining_dependency": "Original C-drive"
+    }
+  ],
+  "searches_performed": [
+    {
+      "phase": "G12",
+      "scope": "D-drive backup: 37,334 files",
+      "result": "3 executables, 0 scripts, 0 configs"
+    },
+    {
+      "phase": "G13",
+      "scope": "NesysService.exe: 548KB binary",
+      "result": "Static runtime contract recovered"
+    },
+    {
+      "phase": "G14",
+      "scope": "NesysService.exe: API imports",
+      "result": "No self-installation, external registration required"
+    },
+    {
+      "phase": "G15",
+      "scope": "D-drive + project root: 47,000+ files",
+      "result": "0 deployment artifacts, 0 installers, 0 recovery images"
+    }
+  ],
+  "conditions_for_reopening": [
+    "Original C-drive image becomes available",
+    "Authorized installer becomes available",
+    "Verified service configuration export becomes available",
+    "Vendor documentation becomes available",
+    "Authorized intact cabinet environment becomes available"
+  ],
+  "safe_registration_cannot_be_established_because": [
+    "Service registration requires Windows Service Control Manager context",
+    "Certificate installation requires certificate store access and private key",
+    "Registry provisioning requires HKLM write access and default values",
+    "Startup orchestration requires service configuration and dependencies",
+    "Service account requires security configuration",
+    "Recovery configuration requires failure actions and restart behavior"
+  ]
+}

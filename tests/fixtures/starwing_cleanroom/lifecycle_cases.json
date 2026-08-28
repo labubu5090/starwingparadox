@@ -1,0 +1,290 @@
+{
+  "phase": "2A-G16",
+  "title": "Lifecycle Test Cases",
+  "date": "2026-08-28",
+  "classification": "SYNTHETIC_FIXTURE",
+  "description": "Connection lifecycle test cases. All data is synthetic and derived from confirmed interface observations.",
+  "synthetic": true,
+  "no_production_data": true,
+  "no_authentication_material": true,
+  "no_certificate_material": true,
+  "no_production_hostnames": true,
+  "evidence_source": "G12-G15 evidence documents, G13 protocol analysis",
+  "test_cases": [
+    {
+      "id": "LIFECYCLE-001",
+      "name": "Successful Connection Lifecycle",
+      "description": "Test successful connection from start to end",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Client connects",
+          "expected": "Transport connected"
+        },
+        {
+          "step": 2,
+          "action": "Send LCOMMAND_CLIENT_START",
+          "expected": "Receive SCOMMAND_CLIENT_START_REPLY"
+        },
+        {
+          "step": 3,
+          "action": "Send LCOMMAND_PING",
+          "expected": "Receive SCOMMAND_PING_RESPONSE"
+        },
+        {
+          "step": 4,
+          "action": "Send LCOMMAND_CLIENT_END",
+          "expected": "Connection closed"
+        }
+      ],
+      "cleanup": "None"
+    },
+    {
+      "id": "LIFECYCLE-002",
+      "name": "Timeout Disconnect",
+      "description": "Test timeout handling when client does not send data",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Client connects",
+          "expected": "Transport connected"
+        },
+        {
+          "step": 2,
+          "action": "Wait for timeout",
+          "expected": "Connection disconnected"
+        }
+      ],
+      "cleanup": "None"
+    },
+    {
+      "id": "LIFECYCLE-003",
+      "name": "Certificate Error",
+      "description": "Test certificate error handling",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Client connects",
+          "expected": "Transport connected"
+        },
+        {
+          "step": 2,
+          "action": "Send LCOMMAND_CLIENT_START",
+          "expected": "Receive SCOMMAND_CLIENT_START_REPLY"
+        },
+        {
+          "step": 3,
+          "action": "Trigger certificate error",
+          "expected": "Receive SCOMMAND_CERT_ERROR"
+        },
+        {
+          "step": 4,
+          "action": "Send LCOMMAND_CLIENT_END",
+          "expected": "Connection closed"
+        }
+      ],
+      "cleanup": "None"
+    },
+    {
+      "id": "LIFECYCLE-004",
+      "name": "Network Error",
+      "description": "Test network error handling",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Client connects",
+          "expected": "Transport connected"
+        },
+        {
+          "step": 2,
+          "action": "Send LCOMMAND_CLIENT_START",
+          "expected": "Receive SCOMMAND_CLIENT_START_REPLY"
+        },
+        {
+          "step": 3,
+          "action": "Trigger network error",
+          "expected": "Receive SCOMMAND_NW_ERROR"
+        },
+        {
+          "step": 4,
+          "action": "Send LCOMMAND_CLIENT_END",
+          "expected": "Connection closed"
+        }
+      ],
+      "cleanup": "None"
+    },
+    {
+      "id": "LIFECYCLE-005",
+      "name": "Network Recovery",
+      "description": "Test network recovery handling",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Client connects",
+          "expected": "Transport connected"
+        },
+        {
+          "step": 2,
+          "action": "Send LCOMMAND_CLIENT_START",
+          "expected": "Receive SCOMMAND_CLIENT_START_REPLY"
+        },
+        {
+          "step": 3,
+          "action": "Trigger network error",
+          "expected": "Receive SCOMMAND_NW_ERROR"
+        },
+        {
+          "step": 4,
+          "action": "Trigger network recovery",
+          "expected": "Receive SCOMMAND_NWRECOVER_NOTICE"
+        },
+        {
+          "step": 5,
+          "action": "Send LCOMMAND_CLIENT_END",
+          "expected": "Connection closed"
+        }
+      ],
+      "cleanup": "None"
+    },
+    {
+      "id": "LIFECYCLE-006",
+      "name": "Card Read Operation",
+      "description": "Test card read operation lifecycle",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Client connects",
+          "expected": "Transport connected"
+        },
+        {
+          "step": 2,
+          "action": "Send LCOMMAND_CLIENT_START",
+          "expected": "Receive SCOMMAND_CLIENT_START_REPLY"
+        },
+        {
+          "step": 3,
+          "action": "Send LCOMMAND_CARD_READ",
+          "expected": "Receive SCOMMAND_CARD_DATA"
+        },
+        {
+          "step": 4,
+          "action": "Send LCOMMAND_CLIENT_END",
+          "expected": "Connection closed"
+        }
+      ],
+      "cleanup": "None"
+    },
+    {
+      "id": "LIFECYCLE-007",
+      "name": "Card Write Operation",
+      "description": "Test card write operation lifecycle",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Client connects",
+          "expected": "Transport connected"
+        },
+        {
+          "step": 2,
+          "action": "Send LCOMMAND_CLIENT_START",
+          "expected": "Receive SCOMMAND_CLIENT_START_REPLY"
+        },
+        {
+          "step": 3,
+          "action": "Send LCOMMAND_CARD_WRITE",
+          "expected": "Receive SCOMMAND_CARD_RESULT"
+        },
+        {
+          "step": 4,
+          "action": "Send LCOMMAND_CLIENT_END",
+          "expected": "Connection closed"
+        }
+      ],
+      "cleanup": "None"
+    },
+    {
+      "id": "LIFECYCLE-008",
+      "name": "Card Check Operation",
+      "description": "Test card check operation lifecycle",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Client connects",
+          "expected": "Transport connected"
+        },
+        {
+          "step": 2,
+          "action": "Send LCOMMAND_CLIENT_START",
+          "expected": "Receive SCOMMAND_CLIENT_START_REPLY"
+        },
+        {
+          "step": 3,
+          "action": "Send LCOMMAND_CARD_CHECK",
+          "expected": "Receive SCOMMAND_CARD_STATUS"
+        },
+        {
+          "step": 4,
+          "action": "Send LCOMMAND_CLIENT_END",
+          "expected": "Connection closed"
+        }
+      ],
+      "cleanup": "None"
+    },
+    {
+      "id": "LIFECYCLE-009",
+      "name": "News Request",
+      "description": "Test news request lifecycle",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Client connects",
+          "expected": "Transport connected"
+        },
+        {
+          "step": 2,
+          "action": "Send LCOMMAND_CLIENT_START",
+          "expected": "Receive SCOMMAND_CLIENT_START_REPLY"
+        },
+        {
+          "step": 3,
+          "action": "Send LCOMMAND_NEWS_REQUEST",
+          "expected": "Receive SCOMMAND_NEWS_DATA"
+        },
+        {
+          "step": 4,
+          "action": "Send LCOMMAND_CLIENT_END",
+          "expected": "Connection closed"
+        }
+      ],
+      "cleanup": "None"
+    },
+    {
+      "id": "LIFECYCLE-010",
+      "name": "Event Request",
+      "description": "Test event request lifecycle",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Client connects",
+          "expected": "Transport connected"
+        },
+        {
+          "step": 2,
+          "action": "Send LCOMMAND_CLIENT_START",
+          "expected": "Receive SCOMMAND_CLIENT_START_REPLY"
+        },
+        {
+          "step": 3,
+          "action": "Send LCOMMAND_EVENT_REQUEST",
+          "expected": "Receive SCOMMAND_EVENT_DATA"
+        },
+        {
+          "step": 4,
+          "action": "Send LCOMMAND_CLIENT_END",
+          "expected": "Connection closed"
+        }
+      ],
+      "cleanup": "None"
+    }
+  ]
+}

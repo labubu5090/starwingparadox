@@ -209,3 +209,17 @@ The service cannot be safely registered without resolving critical unresolved it
 ## G14 Audit Notes
 
 This document was created in Phase 2A-G14 to evaluate whether future service registration could be considered safe and complete. The decision remains false because critical items are unresolved. "SCM can technically register an executable" ≠ "service registration is safe or correct".
+
+## G16 Audit Notes
+
+**Date**: 2026-08-28
+**Phase**: 2A-G16
+
+This document was reviewed during Phase 2A-G16 (Original Runtime Recovery Closure and Clean-room Compatibility Boundary). The following updates were applied:
+
+1. **Recovery branch closed**: The original runtime recovery branch has been formally closed. No safe reconstruction is possible from the available backup.
+2. **Safe registration remains FALSE**: All 9 safety criteria evaluated — ALL FAIL
+3. **Decision record created**: ADR_ORIGINAL_NESYSERVICE_RECOVERY_CLOSURE.md documents the decision to close the recovery branch
+4. **Clean-room boundary established**: An explicit security and authorization boundary has been established for the Python rewrite
+
+The safe registration assessment remains FALSE. The recovery branch may be reopened ONLY when legitimate new evidence becomes available.

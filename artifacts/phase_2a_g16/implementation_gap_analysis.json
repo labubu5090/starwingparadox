@@ -1,0 +1,473 @@
+{
+  "phase": "2A-G16",
+  "title": "Implementation Gap Analysis",
+  "date": "2026-08-28",
+  "classification": "IMPLEMENTATION_GAPS_DEFINED",
+  "summary": {
+    "total_behaviors": 73,
+    "implemented": 25,
+    "partially_implemented": 3,
+    "not_implemented": 41,
+    "intentionally_excluded": 4,
+    "blocked_by_evidence": 0
+  },
+  "implementation_gaps": [
+    {
+      "behavior": "Abstract transport interface",
+      "specification": "Transport class",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Create abstract base",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "Synthetic transport",
+      "specification": "SyntheticTestTransport",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Create test transport",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "Named pipe transport",
+      "specification": "PipeTransport",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Future, requires authorization",
+      "priority": "LOW"
+    },
+    {
+      "behavior": "Frame decoding",
+      "specification": "decode_length_prefix",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Frame encoding",
+      "specification": "encode_length_prefix",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Protobuf decoding",
+      "specification": "decode_request",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Protobuf encoding",
+      "specification": "encode_response",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "State machine",
+      "specification": "SessionState",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Create state tracking",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "State transitions",
+      "specification": "Valid transitions",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement transition logic",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "Timeout handling",
+      "specification": "Configurable timeout",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Add timeout support",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "Connection classification",
+      "specification": "Readiness vs game traffic",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Frame length validation",
+      "specification": ">= 4 bytes",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Message type validation",
+      "specification": "Registered type",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Packet ID extraction",
+      "specification": "Non-negative integer",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Payload extraction",
+      "specification": "Match structure",
+      "current_status": "PARTIALLY_IMPLEMENTED",
+      "gap": "Add validation",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "Error handling",
+      "specification": "FramingError, DecodeError",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Frame encoding",
+      "specification": "4-byte LE prefix",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Protobuf encoding",
+      "specification": "Message serialization",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Error responses",
+      "specification": "CERT_ERROR, NW_ERROR",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Add error encoding",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "Unknown responses",
+      "specification": "Synthetic responses",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Add synthetic encoding",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "Handler registration",
+      "specification": "register(message_type, handler)",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Command dispatch",
+      "specification": "dispatch(command)",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Unknown type handling",
+      "specification": "Log and drop",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Handler response",
+      "specification": "Return Command or None",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "CLIENT_START handling",
+      "specification": "Acknowledge connection",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement handler",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "CLIENT_END handling",
+      "specification": "Acknowledge disconnection",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement handler",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "PING handling",
+      "specification": "Acknowledge keepalive",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "CARD_READ handling",
+      "specification": "Synthetic card data",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement handler",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "CARD_WRITE handling",
+      "specification": "Synthetic result",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement handler",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "CARD_CHECK handling",
+      "specification": "Synthetic status",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement handler",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "NEWS_REQUEST handling",
+      "specification": "Synthetic news",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement handler",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "EVENT_REQUEST handling",
+      "specification": "Synthetic events",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement handler",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "LOG_UPLOAD handling",
+      "specification": "Acknowledge",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement handler",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "MATCH_REQUEST handling",
+      "specification": "Not implemented",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Intentionally excluded",
+      "priority": "LOW"
+    },
+    {
+      "behavior": "MATCH_CANCEL handling",
+      "specification": "Not implemented",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Intentionally excluded",
+      "priority": "LOW"
+    },
+    {
+      "behavior": "BURST_GROUP_JOIN handling",
+      "specification": "Not implemented",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Intentionally excluded",
+      "priority": "LOW"
+    },
+    {
+      "behavior": "BURST_GROUP_LEAVE handling",
+      "specification": "Not implemented",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Intentionally excluded",
+      "priority": "LOW"
+    },
+    {
+      "behavior": "CERT_ERROR handling",
+      "specification": "Report error",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement error reporting",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "NW_ERROR handling",
+      "specification": "Report error",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement error reporting",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "NWRECOVER_NOTICE handling",
+      "specification": "Report recovery",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement recovery reporting",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "Confirmed commands",
+      "specification": "6 commands",
+      "current_status": "PARTIALLY_IMPLEMENTED",
+      "gap": "2 of 6 implemented",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "Protocol-identified commands",
+      "specification": "10 commands",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "0 of 10 implemented",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "Unknown commands",
+      "specification": "31 commands",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Intentionally excluded",
+      "priority": "LOW"
+    },
+    {
+      "behavior": "Connection lifecycle",
+      "specification": "DISCONNECTED → STOPPED",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement state machine",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "Error handling",
+      "specification": "ERROR → DISCONNECTED",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement error states",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "Timeout handling",
+      "specification": "Configurable timeout",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Add timeout logic",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "Frame length validation",
+      "specification": ">= 4 bytes",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Message type validation",
+      "specification": "Registered type",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Packet ID validation",
+      "specification": "Non-negative",
+      "current_status": "PARTIALLY_IMPLEMENTED",
+      "gap": "Add validation",
+      "priority": "LOW"
+    },
+    {
+      "behavior": "Session ID validation",
+      "specification": "Consistent",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Add validation",
+      "priority": "LOW"
+    },
+    {
+      "behavior": "Payload validation",
+      "specification": "Match structure",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Add validation",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "Ordering validation",
+      "specification": "CLIENT_START first",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Add validation",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "Invalid frame length",
+      "specification": "Drop connection",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Unknown message type",
+      "specification": "Log and drop",
+      "current_status": "IMPLEMENTED",
+      "gap": "None",
+      "priority": "NONE"
+    },
+    {
+      "behavior": "Invalid payload",
+      "specification": "Log and drop",
+      "current_status": "PARTIALLY_IMPLEMENTED",
+      "gap": "Add validation",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "Timeout",
+      "specification": "Disconnect",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Add timeout",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "Transport error",
+      "specification": "Disconnect",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Add error handling",
+      "priority": "MEDIUM"
+    },
+    {
+      "behavior": "Certificate error",
+      "specification": "Report SCOMMAND_CERT_ERROR",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement reporting",
+      "priority": "HIGH"
+    },
+    {
+      "behavior": "Network error",
+      "specification": "Report SCOMMAND_NW_ERROR",
+      "current_status": "NOT_IMPLEMENTED",
+      "gap": "Implement reporting",
+      "priority": "HIGH"
+    }
+  ],
+  "minimum_next_implementation_slice": {
+    "phase_1_transport_abstraction": [
+      "Create abstract Transport interface",
+      "Create SyntheticTestTransport",
+      "Create SessionState with state machine",
+      "Implement CLIENT_START/CLIENT_END handlers",
+      "Add timeout handling",
+      "Add error reporting (CERT_ERROR, NW_ERROR)",
+      "Create comprehensive test suite"
+    ],
+    "phase_2_command_catalog": [
+      "Implement CARD_READ/WRITE/CHECK handlers",
+      "Implement NEWS_REQUEST/EVENT_REQUEST handlers",
+      "Implement LOG_UPLOAD handler",
+      "Add payload validation",
+      "Add ordering validation",
+      "Expand test coverage"
+    ],
+    "phase_3_advanced_features": [
+      "Implement MATCH_REQUEST/CANCEL (guarded)",
+      "Implement BURST_GROUP_JOIN/LEAVE (guarded)",
+      "Add session ID validation",
+      "Add configurable logging",
+      "Performance optimization"
+    ]
+  },
+  "intentionally_excluded": [
+    {
+      "behavior": "MATCH_REQUEST handling",
+      "rationale": "Matching not implemented (guarded)"
+    },
+    {
+      "behavior": "MATCH_CANCEL handling",
+      "rationale": "Matching not implemented (guarded)"
+    },
+    {
+      "behavior": "BURST_GROUP_JOIN handling",
+      "rationale": "BurstGroup not implemented (guarded)"
+    },
+    {
+      "behavior": "BURST_GROUP_LEAVE handling",
+      "rationale": "BurstGroup not implemented (guarded)"
+    }
+  ]
+}
