@@ -263,3 +263,44 @@ DISCONNECTED
 4. Dispatch to handler
 5. Encode response
 6. Send response to transport
+
+---
+
+## G19 Update: Game-Client Contract Mapping
+
+**Date**: 2026-08-29
+**Phase**: 2A-G19
+**Classification**: GAME_CLIENT_CONTRACT_SUFFICIENT_FOR_NEXT_IMPLEMENTATION
+
+### Impact of Game-Client Static Analysis on the Clean-room Boundary
+
+G19 mapped the game client's actual network contracts (HTTP via WININET, raw TCP via WS2_32,
+and a local NESYS named pipe `\\.\pipe\nesys_games`). Key consequences for this specification:
+
+1. **Transport abstraction is validated**: The game uses multiple independent transports, so the
+   clean-room `Transport` abstraction remains the correct seam. No production pipe transport is
+   authorized without explicit, evidence-backed approval.
+
+2. **Pipe role is UNRESOLVED**: The game imports both client (`WaitNamedPipeA`) and server
+   (`ConnectNamedPipe`) pipe functions. This specification's `PipeTransport` remains future and
+   must NOT be implemented until the game's pipe role and message format are resolved by
+   control-flow evidence.
+
+3. **91-command registry preserved**: Confirmed/high (8), protocol-identified/medium (20),
+   unknown (63) = 91. Certificate/error commands remain OPAQUE; no automatic FAILED/recovery
+   transition may be inferred without control-flow proof.
+
+4. **No supported endpoint override**: The game hardcodes `http://dev.starwing.jp/mock` (port 80)
+   with no game-side override. Any integration operates at the operator network/TLS/DNS/proxy
+   boundary, consistent with the two-tier (Option A) architecture.
+
+5. **Synthetic foundation remains intact**: The clean-room codec, timeout model, scenario
+   harness, and safety guards are unchanged by G19 analysis. G19 produced documentation and
+   artifacts only (plus two narrow unused-import fixes in G18 test files).
+
+### Updated Validation Rules Note
+
+Rule 5 (payload must match expected structure) and the timeout model remain synthetic until the
+game-side HTTP JSON and TCP protobuf payload structures are confirmed by capture. G20 is the
+planned phase for that confirmation.
+

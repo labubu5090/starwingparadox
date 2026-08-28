@@ -8,7 +8,7 @@ from app.cleanroom.invariants import (
     InvariantLevel,
     StateMachineInvariantChecker,
 )
-from app.cleanroom.state import SessionState, SessionStateMachine
+from app.cleanroom.state import SessionStateMachine
 
 
 class TestInvariantCheck:

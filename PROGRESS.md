@@ -744,3 +744,75 @@ Ruff: 0 errors
 ### Recommended Next Phase
 
 Phase 2A-G19: Runtime Integration and Traffic Pattern Validation
+
+## Phase 2A-G19: Game Client Contract Mapping for Private Server (COMPLETE)
+
+**Commit**: TBD (single commit)
+**Status**: COMPLETE - All exit criteria met
+**Classification**: GAME_CLIENT_CONTRACT_SUFFICIENT_FOR_NEXT_IMPLEMENTATION
+
+### G19 Summary
+
+Phase 2A-G19 mapped the game-client-visible contracts required for an operator-owned private
+server, using the game's own executables and DLLs (Starwing Paradox Shipping build, launcher,
+GALAXYIO, Lua524, QRreader) as the primary source of truth. Static PE analysis confirmed
+multiple independent transports (HTTP via WININET, raw TCP via WS2_32, local NESYS named pipe),
+the module structure, and the command families for matching, battle, result, and error handling,
+while determining there is NO supported game-side endpoint override.
+
+### G19 Deliverables
+
+| Deliverable | Count |
+|-------------|-------|
+| Artifacts (JSON) | 11 |
+| Documents | 15 |
+| Analysis scripts | 11 |
+| PE analysis outputs | 3 |
+
+### G19 Key Findings
+
+1. **Role of AcrGame.exe**: thin launcher/wrapper (CreateProcessW/ShellExecuteExW); no network protocol of its own.
+2. **Startup path**: launcher -> Shipping build; Shipping reads OpenKey + master data locally before contacting any server.
+3. **Contracts**: HTTP (matching/game-data/fest-result/error), TCP (matching/battle commands), NESYS pipe (card ops).
+4. **Direct network protocols**: HTTP (WININET), TCP (WS2_32), local pipe. Framing = 4-byte LE length prefix + protobuf.
+5. **Endpoint override**: NO_SUPPORTED_ENDPOINT_OVERRIDE_FOUND. Hardcoded `http://dev.starwing.jp/mock` (port 80); only operator hosts-file/DNS redirect works.
+6. **Python-server gaps**: no endpoint confirmed against game-side contract; matching/battle/result need confirmed client request + response + state advancement.
+7. **Architecture**: Option A (two-tier transport boundary + Python HTTP/TCP server), SQLite-only.
+8. **91-command registry preserved**: 8 confirmed/high + 20 protocol-identified/medium + 63 unknown = 91.
+
+### G19 Quality Gates (actual)
+
+| Gate | Result |
+|------|--------|
+| Full test suite | 1056 passed, 1 skipped, 0 failed |
+| Clean-room subset | 222 passed, 0 failed |
+| Ruff | All checks passed (2 unused imports removed from G18 test files) |
+| Mypy | 0 errors, 80 source files |
+| SHA-256 integrity (6 artifacts) | All MATCH |
+| No live pipe created | PASS |
+| No service/registry/cert change | PASS |
+| legacy-js unchanged | PASS |
+
+### G19 Documents Created
+
+| Document | Path |
+|----------|------|
+| G19 Initial Baseline | docs/PHASE_2A_G19_INITIAL_BASELINE.md |
+| G19 IDA Analysis Plan | docs/PHASE_2A_G19_IDA_ANALYSIS_PLAN.md |
+| G19 Final Report | docs/PHASE_2A_G19_FINAL_REPORT.md |
+| Executable Module Map | docs/GAME_CLIENT_EXECUTABLE_MODULE_MAP.md |
+| Startup Dependency Graph | docs/GAME_CLIENT_STARTUP_DEPENDENCY_GRAPH.md |
+| Pipe Protocol | docs/GAME_SIDE_PIPE_PROTOCOL.md |
+| Command Dispatch | docs/GAME_SIDE_COMMAND_DISPATCH.md |
+| NESYS Min-Necessity | docs/NESYSERVICE_MINIMUM_NECESSITY_ASSESSMENT.md |
+| Feature Protocol Map | docs/PRIVATE_SERVER_FEATURE_PROTOCOL_MAP.md |
+| Endpoint Classification | docs/GAME_NETWORK_ENDPOINT_CLASSIFICATION.md |
+| Endpoint Configuration | docs/GAME_SUPPORTED_ENDPOINT_CONFIGURATION.md |
+| Python Server Gap Map | docs/PYTHON_PRIVATE_SERVER_CLIENT_GAP_MAP.md |
+| Minimum Architecture | docs/PRIVATE_SERVER_MINIMUM_ARCHITECTURE.md |
+| Service Requirement Matrix | docs/SERVICE_REQUIREMENT_MATRIX.md |
+| Implementation Eligibility | docs/PRIVATE_SERVER_IMPLEMENTATION_ELIGIBILITY.md |
+
+### Recommended Next Phase
+
+Phase 2A-G20: Runtime Integration, Traffic Pattern Validation, and Private-Server Contract Enforcement

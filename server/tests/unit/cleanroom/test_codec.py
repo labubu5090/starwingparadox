@@ -10,7 +10,6 @@ from app.cleanroom.codec import (
     EvidenceLockedCodec,
 )
 from app.cleanroom.errors import (
-    FrameTooLargeError,
     FrameTooSmallError,
     InvalidMessageTypeError,
 )

@@ -1,0 +1,212 @@
+{
+  "phase": "2A-G19",
+  "title": "Game Pipe Contract Analysis",
+  "timestamp": "2026-08-29",
+  "classification": "PARTIAL_EVIDENCE",
+  "pipe_evidence": {
+    "pipe_name": "\\\\.\\pipe\\nesys_games",
+    "evidence_type": "STRING_AND_IMPORT",
+    "confidence": "HIGH",
+    "sources": [
+      {
+        "type": "string",
+        "value": "\\\\.\\pipe\\",
+        "location": "AcrGame-Win64-Shipping.exe",
+        "offset": "unknown"
+      },
+      {
+        "type": "string",
+        "value": "nesys_games",
+        "location": "AcrGame-Win64-Shipping.exe",
+        "offset": "unknown"
+      },
+      {
+        "type": "import",
+        "function": "ConnectNamedPipe",
+        "dll": "KERNEL32.dll",
+        "location": "AcrGame-Win64-Shipping.exe"
+      },
+      {
+        "type": "import",
+        "function": "DisconnectNamedPipe",
+        "dll": "KERNEL32.dll",
+        "location": "AcrGame-Win64-Shipping.exe"
+      },
+      {
+        "type": "import",
+        "function": "SetNamedPipeHandleState",
+        "dll": "KERNEL32.dll",
+        "location": "AcrGame-Win64-Shipping.exe"
+      },
+      {
+        "type": "import",
+        "function": "PeekNamedPipe",
+        "dll": "KERNEL32.dll",
+        "location": "AcrGame-Win64-Shipping.exe"
+      },
+      {
+        "type": "import",
+        "function": "WaitNamedPipeA",
+        "dll": "KERNEL32.dll",
+        "location": "AcrGame-Win64-Shipping.exe"
+      },
+      {
+        "type": "import",
+        "function": "ReadFile",
+        "dll": "KERNEL32.dll",
+        "location": "AcrGame-Win64-Shipping.exe"
+      },
+      {
+        "type": "import",
+        "function": "WriteFile",
+        "dll": "KERNEL32.dll",
+        "location": "AcrGame-Win64-Shipping.exe"
+      }
+    ]
+  },
+  "pipe_behavior": {
+    "opening": {
+      "function": "CreateFileW",
+      "evidence": "Import in KERNEL32.dll",
+      "flags": "UNKNOWN",
+      "access_mode": "UNKNOWN",
+      "share_mode": "UNKNOWN",
+      "confidence": "LOW"
+    },
+    "communication": {
+      "read": {
+        "function": "ReadFile",
+        "evidence": "Import in KERNEL32.dll",
+        "buffer_size": "UNKNOWN",
+        "overlapped": "UNKNOWN",
+        "confidence": "LOW"
+      },
+      "write": {
+        "function": "WriteFile",
+        "evidence": "Import in KERNEL32.dll",
+        "buffer_size": "UNKNOWN",
+        "overlapped": "UNKNOWN",
+        "confidence": "LOW"
+      },
+      "peek": {
+        "function": "PeekNamedPipe",
+        "evidence": "Import in KERNEL32.dll",
+        "purpose": "Check available data without blocking",
+        "confidence": "MEDIUM"
+      }
+    },
+    "state_management": {
+      "connect": {
+        "function": "ConnectNamedPipe",
+        "evidence": "Import in KERNEL32.dll",
+        "purpose": "Wait for client connection",
+        "note": "This suggests the game acts as a PIPE SERVER, not client"
+      },
+      "disconnect": {
+        "function": "DisconnectNamedPipe",
+        "evidence": "Import in KERNEL32.dll",
+        "purpose": "Disconnect client"
+      },
+      "set_state": {
+        "function": "SetNamedPipeHandleState",
+        "evidence": "Import in KERNEL32.dll",
+        "purpose": "Configure pipe mode (byte/message, blocking/non-blocking)"
+      },
+      "wait": {
+        "function": "WaitNamedPipeA",
+        "evidence": "Import in KERNEL32.dll",
+        "purpose": "Wait for pipe instance availability"
+      }
+    }
+  },
+  "pipe_role_analysis": {
+    "observation": "ConnectNamedPipe is a SERVER-side function",
+    "interpretation": "The game client may act as a pipe SERVER, not a client",
+    "alternative": "The game may link both client and server pipe functions",
+    "confidence": "MEDIUM",
+    "implications": [
+      "If game is pipe server: NesysService connects to game",
+      "If game is pipe client: Game connects to NesysService",
+      "Need to determine which role from control flow analysis"
+    ]
+  },
+  "galaxyio_role": {
+    "observation": "GALAXYIO.dll uses WinHTTP, not named pipes",
+    "interpretation": "GALAXYIO.dll handles HTTP communication, not pipe IPC",
+    "confidence": "HIGH",
+    "implications": [
+      "HTTP endpoints are separate from pipe communication",
+      "GALAXYIO.dll handles certificate validation and card HTTP endpoints",
+      "Named pipe may be for NESYS service communication only"
+    ]
+  },
+  "nesys_service_evidence": {
+    "source_paths": [
+      "C:\\work\\acr\\AcrGame\\Source\\_Test\\Private\\KoikeTest\\CPP_TestNesys.cpp"
+    ],
+    "test_functions": [
+      "TestNesysCardRead",
+      "CallbackNesysCompleteCardStatus",
+      "CallbackNesysControlComplete"
+    ],
+    "reconnect_functions": [
+      "RequestNesysReconnect",
+      "UCPP_NesysControl::RequestNesysReconnect"
+    ],
+    "confidence": "HIGH"
+  },
+  "protocol_framing": {
+    "four_byte_minimum": {
+      "evidence": "PROTOCOL_CONFIRMED",
+      "confidence": "HIGH",
+      "source": "Previous G8/G17 analysis"
+    },
+    "command_identifier_width": {
+      "evidence": "HIGH_CONFIDENCE",
+      "confidence": "HIGH",
+      "source": "Previous G17 analysis"
+    },
+    "byte_order": {
+      "evidence": "LITTLE_ENDIAN",
+      "confidence": "CONFIRMED",
+      "source": "x86_64 architecture"
+    },
+    "payload_start_offset": {
+      "evidence": "UNKNOWN",
+      "confidence": "LOW",
+      "source": "Static analysis insufficient"
+    }
+  },
+  "implementation_recommendation": {
+    "approach": "OPTION_B",
+    "description": "Game -> minimal local compatibility adapter -> Python private server",
+    "rationale": [
+      "Game has pipe client/server functions",
+      "GALAXYIO.dll handles HTTP separately",
+      "Local adapter can handle NESYS pipe protocol",
+      "Private server can handle HTTP endpoints"
+    ],
+    "adapter_surface": [
+      "Named pipe server for \\\\.\\pipe\\nesys_games",
+      "Minimal command handling (CLIENT_START, PING, card operations)",
+      "HTTP proxy to private server for game data"
+    ]
+  },
+  "unknowns": [
+    "Exact pipe message format",
+    "Command IDs and payload structures",
+    "Synchronous vs overlapped I/O",
+    "Pipe mode (byte vs message)",
+    "Buffer sizes",
+    "Timeout values",
+    "Reconnection behavior"
+  ],
+  "analysis_method": "Static analysis of PE imports and strings",
+  "confidence": "MEDIUM",
+  "notes": [
+    "ConnectNamedPipe suggests game acts as pipe SERVER",
+    "This contradicts previous assumption of game as pipe CLIENT",
+    "Need control flow analysis to confirm pipe role",
+    "GALAXYIO.dll handles HTTP, not pipes"
+  ]
+}

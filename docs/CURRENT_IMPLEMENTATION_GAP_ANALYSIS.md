@@ -223,3 +223,36 @@ This document was reviewed during Phase 2A-G17 (Synthetic Transport and Protocol
 | Network operations | RESTRICTED_EXCLUDED | Security boundary |
 | Registry operations | RESTRICTED_EXCLUDED | Security boundary |
 | Service operations | RESTRICTED_EXCLUDED | Security boundary |
+
+---
+
+## G19 Audit Note
+
+**Date**: 2026-08-29
+**Phase**: 2A-G19
+**Classification**: GAME_CLIENT_CONTRACT_SUFFICIENT_FOR_NEXT_IMPLEMENTATION
+
+G19 mapped game-client-visible contracts from static analysis of the game executables/DLLs.
+This does not change the G17 classification above (the cleanroom foundation is unchanged), but
+it updates the private-server integration picture with new game-side evidence:
+
+### New Game-Side Evidence (G19)
+
+| Gap | Status | G19 Game-Side Evidence |
+|-----|--------|------------------------|
+| Named pipe transport | UNRESOLVED_ROLE | Game imports both ConnectNamedPipe (server) and WaitNamedPipeA (client); `\\.\pipe\nesys_games`. Pipe role and message format not yet confirmed. |
+| HTTP matching endpoints | PARTIAL | BindHttpMatchingServer, BindHttpMatchingMatchIdGenerate (names confirmed; JSON contract unconfirmed) |
+| TCP matching/battle | PARTIAL | [Client->Gameserver]EntryMatching/CancelMatching/ReMatching/EntryBurst/... (names confirmed; numeric IDs/payloads unconfirmed) |
+| Result submission HTTP | PARTIAL | BindHttpFestResult, BindHttpGameDataSaveData (names confirmed; contract unconfirmed) |
+| Endpoint override | NO_SUPPORTED_OVERRIDE | Game hardcodes http://dev.starwing.jp/mock (port 80); no game-side override. |
+| Payload validation | BLOCKED_BY_EVIDENCE | Payload structures (HTTP JSON + TCP protobuf) unconfirmed from game side |
+| Timeout / error handling | PARTIAL | BindHttpErrorCallback, WebServerError, NG_Timeout, "Disconnect GameServer. Try to Reconnect!" (names confirmed; semantics unconfirmed) |
+
+### Implication
+
+The synthetic cleanroom modules are validated and correct as a *protocol foundation*. Actual
+game integration (matching/battle/result) still requires confirmed three-part contracts
+(client request + server response + state advancement) before those features are marked
+complete. The current Python server's HTTP :4001, proxy :80, TCP :6666 surface is not yet
+confirmed to match the game's real contracts.
+

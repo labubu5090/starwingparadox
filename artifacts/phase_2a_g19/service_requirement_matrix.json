@@ -1,0 +1,175 @@
+{
+  "phase": "2A-G19",
+  "title": "Service Requirement Matrix",
+  "timestamp": "2026-08-29",
+  "classification": "PARTIAL_GAME_CLIENT_CONTRACT",
+  "services": [
+    {
+      "service": "NESYS Service (NesysService.exe)",
+      "necessity": "MINIMAL_LOCAL_ADAPTER_MAY_BE_REQUIRED",
+      "evidence": {
+        "game_side": [
+          "Named pipe \\\\.\\pipe\\nesys_games referenced in AcrGame-Win64-Shipping.exe",
+          "ConnectNamedPipe/DisconnectNamedPipe/SetNamedPipeHandleState/PeekNamedPipe/WaitNamedPipeA imports",
+          "Card flow functions (TestNesysCardRead, CallbackNesysCompleteCardStatus, RequestNesysCompleteCardIncert)"
+        ],
+        "gap": "Whether the game is pipe server or client, and the exact pipe message format, is UNRESOLVED (requires control-flow/disassembly confirmation)."
+      },
+      "decision": "Do NOT rebuild full NesysService. Build a minimal local adapter only where the game demonstrably requires local IPC.",
+      "commands_assessed": [
+        {
+          "name": "CLIENT_START",
+          "status": "UNKNOWN",
+          "id_confidence": "LOW",
+          "direction_confidence": "LOW",
+          "framing_confidence": "LOW",
+          "payload_confidence": "LOW",
+          "semantic_confidence": "LOW",
+          "lifecycle_confidence": "LOW",
+          "adaptation": "Not confirmed from game side"
+        },
+        {
+          "name": "CLIENT_START_REPLY",
+          "status": "UNKNOWN",
+          "id_confidence": "LOW",
+          "direction_confidence": "LOW",
+          "framing_confidence": "LOW",
+          "payload_confidence": "LOW",
+          "semantic_confidence": "LOW",
+          "lifecycle_confidence": "LOW",
+          "adaptation": "Not confirmed from game side"
+        },
+        {
+          "name": "CLIENT_END",
+          "status": "UNKNOWN",
+          "id_confidence": "LOW",
+          "direction_confidence": "LOW",
+          "framing_confidence": "LOW",
+          "payload_confidence": "LOW",
+          "semantic_confidence": "LOW",
+          "lifecycle_confidence": "LOW",
+          "adaptation": "Not confirmed from game side"
+        },
+        {
+          "name": "PING",
+          "status": "UNKNOWN",
+          "id_confidence": "LOW",
+          "direction_confidence": "LOW",
+          "framing_confidence": "LOW",
+          "payload_confidence": "LOW",
+          "semantic_confidence": "LOW",
+          "lifecycle_confidence": "LOW",
+          "adaptation": "Not confirmed from game side"
+        },
+        {
+          "name": "PING_RESPONSE",
+          "status": "UNKNOWN",
+          "id_confidence": "LOW",
+          "direction_confidence": "LOW",
+          "framing_confidence": "LOW",
+          "payload_confidence": "LOW",
+          "semantic_confidence": "LOW",
+          "lifecycle_confidence": "LOW",
+          "adaptation": "Not confirmed from game side"
+        },
+        {
+          "name": "CERT_ERROR",
+          "status": "UNKNOWN",
+          "id_confidence": "LOW",
+          "direction_confidence": "LOW",
+          "framing_confidence": "LOW",
+          "payload_confidence": "LOW",
+          "semantic_confidence": "LOW",
+          "lifecycle_confidence": "LOW",
+          "adaptation": "Opaque payload; do NOT infer certificate operation or trigger automatic FAILED/recovery without direct control-flow proof.",
+          "payload_treatment": "OPAQUE"
+        },
+        {
+          "name": "NW_ERROR",
+          "status": "UNKNOWN",
+          "id_confidence": "LOW",
+          "direction_confidence": "LOW",
+          "framing_confidence": "LOW",
+          "payload_confidence": "LOW",
+          "semantic_confidence": "LOW",
+          "lifecycle_confidence": "LOW",
+          "adaptation": "Opaque payload; do NOT trigger automatic FAILED or retry without direct control-flow proof.",
+          "payload_treatment": "OPAQUE"
+        },
+        {
+          "name": "NWRECOVER_NOTICE",
+          "status": "UNKNOWN",
+          "id_confidence": "LOW",
+          "direction_confidence": "LOW",
+          "framing_confidence": "LOW",
+          "payload_confidence": "LOW",
+          "semantic_confidence": "LOW",
+          "lifecycle_confidence": "LOW",
+          "adaptation": "Opaque payload; do NOT advance lifecycle state without direct control-flow proof.",
+          "payload_treatment": "OPAQUE"
+        }
+      ]
+    },
+    {
+      "service": "Game Server (HTTP)",
+      "necessity": "DIRECT_SERVER_PROTOCOL",
+      "evidence": {
+        "game_side": [
+          "WININET.dll HTTP imports",
+          "BindHttpMatchingServer, BindHttpGameDataSaveData, BindHttpFestResult strings",
+          "https://log.starwing.jp/acr/public/ URL"
+        ]
+      },
+      "decision": "Python private server should provide the HTTP endpoints the game calls directly.",
+      "priority": "HIGH"
+    },
+    {
+      "service": "Matching Server (TCP)",
+      "necessity": "DIRECT_SERVER_PROTOCOL",
+      "evidence": {
+        "game_side": [
+          "WS2_32.dll socket/connect/send/recv imports",
+          "[Client->Gameserver]EntryMatching/CancelMatching/ReMatching strings",
+          "CPP_TestTCP.cpp test file"
+        ]
+      },
+      "decision": "Python private server should provide a TCP endpoint for matching/battle, protocol confirmed from game side.",
+      "priority": "MEDIUM"
+    },
+    {
+      "service": "Production services (event agents, update agents, crash reporters, monitoring)",
+      "necessity": "NOT_REQUIRED_BY_CURRENT_EVIDENCE",
+      "evidence": "No game-side dependency demonstrates these are required for the target private-server features.",
+      "decision": "Do NOT implement.",
+      "priority": "EXCLUDED"
+    },
+    {
+      "service": "Certificate provisioning / production authentication",
+      "necessity": "PRODUCTION_TRUST_DEPENDENCY",
+      "evidence": "GALAXYIO.dll contacts https://cert2.nesys.jp; CRYPT32.dll certificate imports.",
+      "decision": "EXCLUDED from private server. Do NOT reproduce vendor certificate provisioning, private keys, or cabinet secrets.",
+      "priority": "EXCLUDED"
+    }
+  ],
+  "frame_reconciliation": {
+    "four_byte_minimum": "PROTOCOL_CONFIRMED",
+    "identifier_width": "HIGH_CONFIDENCE",
+    "identifier_offset": "PROTOCOL_CONFIRMED",
+    "byte_order": "LITTLE_ENDIAN (x86_64 CONFIRMED)",
+    "payload_start_offset": "UNRESOLVED",
+    "frame_length_mechanism": "4-byte uint32 LE length prefix (PROTOCOL_CONFIRMED from prior G8/G17)",
+    "message_boundary_mechanism": "UNRESOLVED (stream decoder NOT implemented without proof)",
+    "one_message_one_frame_assumption": "HIGH_CONFIDENCE",
+    "partial_input_behavior": "UNRESOLVED",
+    "stream_decoder_feasibility": "NOT_IMPLEMENTED (no game-side frame boundary proof)",
+    "one_miB_maximum": "IMPLEMENTATION_SAFETY_LIMIT"
+  },
+  "analysis_method": "Static analysis of game imports, strings, and source paths vs current Python server",
+  "confidence": "MEDIUM",
+  "notes": [
+    "NESYS command classification remains LOW because no game-side control-flow evidence confirms IDs, directions, or payloads",
+    "CERT_ERROR, NW_ERROR, NWRECOVER_NOTICE payloads treated as opaque unless control flow proves otherwise",
+    "No endpoint override found in game configuration",
+    "Local adapter justified ONLY where game demonstrably requires local IPC"
+  ]
+}

@@ -113,3 +113,50 @@ The G13 analysis identified 44 total SCOMMAND types. The following remain unspec
 | SCOMMAND_NW_ERROR | YES | Observable error behavior |
 | SCOMMAND_NWRECOVER_NOTICE | YES | Observable recovery behavior |
 | All other commands | YES | Observable command IDs (field meanings unknown) |
+
+---
+
+## G19 Audit Note (Game-Client Evidence Update)
+
+**Date**: 2026-08-29
+**Phase**: 2A-G19
+**Classification**: GAME_CLIENT_CONTRACT_SUFFICIENT_FOR_NEXT_IMPLEMENTATION
+
+G19 re-audited the protocol identification basis using the game client's own binaries. The
+G13-derived NESYS confidence values above are based on inferred pipe protocol analysis. G19
+static analysis adds the following, and adjusts certain confidence evaluations:
+
+### New Game-Side Evidence
+
+1. **Pipe role UNRESOLVED**: The game imports both `ConnectNamedPipe` (server-side) and
+   `WaitNamedPipeA`/`PeekNamedPipe` (client-side) functions, along with `\\.\pipe\nesys_games`.
+   The direction of all NESYS pipe commands (LCOMMAND/SCOMMAND) is therefore **not confirmed**.
+   This does NOT change the symbolic names, but the direction and pipe-role assumptions must be
+   treated as provisional.
+
+2. **GALAXYIO is HTTP, not pipe**: GALAXYIO.dll uses WinHTTP (`https://cert2.nesys.jp` + AMIC
+   card endpoint) and WINUSB, NOT the named pipe. The NESYS card-trust/HTTP path is separate
+   from the pipe IPC channel.
+
+3. **CERT_ERROR / NW_ERROR / NWRECOVER_NOTICE**: Their payloads remain **OPAQUE**. No automatic
+   FAILED/recovery lifecycle transition may be triggered from G19 evidence. Confidence for
+   their *semantics* stays MEDIUM (not HIGH), as it is name-evidence only; the values remain
+   clean-room eligible but not behavior-confirmed.
+
+4. **91-command registry reconciliation**: The preserved split is 8 confirmed/high +
+   20 protocol-identified/medium + 63 unknown = 91. G19 string analysis enumerated 29
+   game-visible command names (HTTP Bind*/Test*, TCP `[Client->Gameserver]*`/`[Dedicated->GameServer]*`,
+   NESYS Request*/Callback*) as name-level identification within the 20 protocol-identified tier;
+   none promoted to confirmed, none downgraded, none discarded.
+
+### Confidence Adjustments
+
+| Item | Prior (G13) | G19 evaluation |
+|------|-------------|----------------|
+| NESYS pipe command directions | inferred | UNRESOLVED (pipe role unknown) |
+| CERT/NW/NWRECOVER semantics | HIGH (names) | MEDIUM (name only; opaque payload) |
+| GALAXYIO | treated as pipe-adjacent | HTTP + USB, separate transport |
+
+All direction, framing, and payload confidence values that rely on the pipe-role assumption
+should be re-verified before implementing any live pipe transport (no live pipe in G19).
+

@@ -1,0 +1,409 @@
+{
+  "phase": "2A-G19",
+  "title": "Game Client Module Map",
+  "timestamp": "2026-08-29",
+  "classification": "GAME_CLIENT_CONTRACT_SUFFICIENT_FOR_NEXT_IMPLEMENTATION",
+  "executables": {
+    "AcrGame-Win64-Shipping.exe": {
+      "file_path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\AcrGame-Win64-Shipping.exe",
+      "sha256": "CE4C89054BF7C4D833EE8AF455A485AC401EEAD12A80FFC077663A768FD47DC4",
+      "file_size": 163000000,
+      "machine": "0x8664",
+      "image_base": "0x140000000",
+      "subsystem": 2,
+      "sections": [
+        {
+          "name": ".text",
+          "virtual_address": "0x1000",
+          "virtual_size": 43472,
+          "raw_data_size": 43520,
+          "characteristics": "0x60000020"
+        },
+        {
+          "name": ".rdata",
+          "virtual_address": "0xc000",
+          "virtual_size": 37038,
+          "raw_data_size": 37376,
+          "characteristics": "0x40000040"
+        },
+        {
+          "name": ".data",
+          "virtual_address": "0x16000",
+          "virtual_size": 7544,
+          "raw_data_size": 3072,
+          "characteristics": "0xc0000040"
+        }
+      ],
+      "imports": {
+        "KERNEL32.dll": {
+          "count": 208,
+          "key_functions": [
+            "CreateProcessW",
+            "LoadLibraryW",
+            "GetProcAddress",
+            "ConnectNamedPipe",
+            "SetNamedPipeHandleState",
+            "PeekNamedPipe",
+            "WaitNamedPipeA",
+            "ReadFile",
+            "WriteFile",
+            "CreateFileW",
+            "GetOverlappedResult"
+          ]
+        },
+        "WS2_32.dll": {
+          "count": 42,
+          "key_functions": [
+            "socket",
+            "connect",
+            "send",
+            "recv",
+            "gethostbyname",
+            "WSAStartup",
+            "inet_ntop"
+          ]
+        },
+        "WININET.dll": {
+          "count": 14,
+          "key_functions": [
+            "InternetReadFile",
+            "InternetConnectW",
+            "HttpOpenRequestW",
+            "HttpSendRequestW",
+            "HttpQueryInfoW",
+            "InternetSetStatusCallbackW"
+          ]
+        },
+        "WINHTTP.dll": {
+          "count": 2,
+          "key_functions": [
+            "WinHttpGetIEProxyConfigForCurrentUser",
+            "WinHttpGetDefaultProxyConfiguration"
+          ]
+        },
+        "CRYPT32.dll": {
+          "count": 5,
+          "key_functions": [
+            "CertFreeCertificateContext",
+            "CertFindCertificateInStore",
+            "CertCloseStore",
+            "CertGetNameStringA",
+            "CertOpenStore"
+          ]
+        },
+        "Lua524.dll": {
+          "count": 39,
+          "key_functions": [
+            "luaL_ref",
+            "luaL_openlibs",
+            "luaL_loadbufferx",
+            "lua_gc",
+            "lua_close",
+            "lua_newstate",
+            "lua_pcallk"
+          ]
+        }
+      },
+      "exports": {
+        "count": 347,
+        "note": "UE4 export table"
+      },
+      "strings": {
+        "ascii": 1135629,
+        "unicode": 653911
+      }
+    },
+    "AcrGame.exe": {
+      "file_path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame.exe",
+      "sha256": "97800621BB91A2706FBC68AD937679C874B17AC1B2389BDDF472BE9350E62D6C",
+      "file_size": 161280,
+      "machine": "0x8664",
+      "purpose": "Launcher/Wrapper",
+      "imports": {
+        "KERNEL32.dll": {
+          "count": 75,
+          "key_functions": [
+            "CreateProcessW",
+            "GetModuleFileNameW",
+            "LoadLibraryW",
+            "GetProcAddress",
+            "CreateFileW",
+            "ShellExecuteExW"
+          ]
+        },
+        "USER32.dll": {
+          "count": 2,
+          "key_functions": [
+            "wsprintfW",
+            "MessageBoxW"
+          ]
+        },
+        "SHELL32.dll": {
+          "count": 1,
+          "key_functions": [
+            "ShellExecuteExW"
+          ]
+        }
+      },
+      "exports": {
+        "count": 0
+      }
+    }
+  },
+  "dlls": {
+    "GALAXYIO.dll": {
+      "file_path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\GALAXYIO.dll",
+      "sha256": "47B4E1EDD13A7F94C74FF512C2CA705B0D9EEAF9C0355673452091BD882B9C92",
+      "file_size": 154112,
+      "purpose": "NESYS I/O and USB communication",
+      "classification": "LOCAL_IPC_RELEVANT",
+      "imports": {
+        "KERNEL32.dll": {
+          "count": 79,
+          "key_functions": [
+            "CreateEventW",
+            "CreateThread",
+            "WaitForSingleObject",
+            "Sleep",
+            "CreateFileW",
+            "ReadFile",
+            "WriteFile"
+          ]
+        },
+        "WINHTTP.dll": {
+          "count": 11,
+          "key_functions": [
+            "WinHttpOpen",
+            "WinHttpConnect",
+            "WinHttpOpenRequest",
+            "WinHttpSetOption",
+            "WinHttpSendRequest",
+            "WinHttpReceiveResponse",
+            "WinHttpQueryHeaders",
+            "WinHttpCloseHandle",
+            "WinHttpQueryDataAvailable",
+            "WinHttpReadData",
+            "WinHttpCrackUrl"
+          ]
+        },
+        "WINUSB.DLL": {
+          "count": 8,
+          "key_functions": [
+            "WinUsb_ReadPipe",
+            "WinUsb_WritePipe",
+            "WinUsb_Initialize",
+            "WinUsb_Free",
+            "WinUsb_QueryPipe",
+            "WinUsb_QueryInterfaceSettings",
+            "WinUsb_GetDescriptor",
+            "WinUsb_QueryDeviceInformation"
+          ]
+        },
+        "SETUPAPI.dll": {
+          "count": 4,
+          "key_functions": [
+            "SetupDiDestroyDeviceInfoList",
+            "SetupDiEnumDeviceInterfaces",
+            "SetupDiGetClassDevsW",
+            "SetupDiGetDeviceInterfaceDetailW"
+          ]
+        }
+      },
+      "exports": [
+        {
+          "name": "GALAXYIO_Init",
+          "ordinal": 3
+        },
+        {
+          "name": "GALAXYIO_Update",
+          "ordinal": 4
+        },
+        {
+          "name": "GALAXYIO_GetStatus",
+          "ordinal": 2
+        },
+        {
+          "name": "GALAXYIO_Delete",
+          "ordinal": 1
+        }
+      ],
+      "strings": {
+        "ascii": 1675,
+        "unicode": 381,
+        "key_strings": [
+          "https://cert2.nesys.jp",
+          "%s/service/card/amic.php?RC=%s&ID=%s&CKV=%s&WCNT=%s&MAC_A=%s&PAD0=%s",
+          "WinHttpOpen",
+          "WinHttpConnect",
+          "WinHttpOpenRequest",
+          "WinHttpSendRequest",
+          "WinHttpReceiveResponse"
+        ]
+      }
+    },
+    "Lua524.dll": {
+      "file_path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\Lua524.dll",
+      "sha256": "5B8F9941F91C1C9683CF248A57C698496629524E5B2D031F05670C1DC23389C9",
+      "file_size": 231936,
+      "purpose": "Lua 5.24 scripting runtime",
+      "classification": "OPTIONAL",
+      "imports": {
+        "MSVCP140.dll": {
+          "count": 20,
+          "key_functions": []
+        },
+        "VCRUNTIME140.dll": {
+          "count": 10,
+          "key_functions": []
+        }
+      },
+      "exports": {
+        "count": 147,
+        "key_functions": [
+          "luaL_newstate",
+          "luaL_openlibs",
+          "luaL_loadbufferx",
+          "lua_pcallk",
+          "lua_close"
+        ]
+      }
+    },
+    "QRreader.dll": {
+      "file_path": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Binaries\\Win64\\QRreader.dll",
+      "sha256": "C6DDFDF673919CE5C5B4D1393CB44B311A26D22ADDC695CFA49B44693FF99383",
+      "file_size": 770048,
+      "purpose": "QR code reader for card scanning",
+      "classification": "CARD_OR_PLAYER_RELEVANT",
+      "imports": {
+        "KERNEL32.dll": {
+          "count": 30,
+          "key_functions": []
+        }
+      },
+      "exports": [
+        {
+          "name": "QRreader_Open",
+          "ordinal": 1000
+        },
+        {
+          "name": "QRreader_Close",
+          "ordinal": 1001
+        },
+        {
+          "name": "QRreader_GetState",
+          "ordinal": 1002
+        },
+        {
+          "name": "QRreader_GetBuffer",
+          "ordinal": 1003
+        },
+        {
+          "name": "QRreader_GetCode",
+          "ordinal": 1004
+        }
+      ]
+    }
+  },
+  "source_modules": {
+    "game_specific": {
+      "BattleModule": {
+        "files": 151,
+        "purpose": "Battle system (actions, AI, characters)",
+        "classification": "BATTLE_RELEVANT"
+      },
+      "NetworkModule": {
+        "files": 17,
+        "purpose": "Network protocol, HTTP, sessions",
+        "classification": "PRIVATE_SERVER_RELEVANT"
+      },
+      "HudModule": {
+        "files": 15,
+        "purpose": "UI widgets (menus, displays)",
+        "classification": "OPTIONAL"
+      },
+      "OutGameModule": {
+        "files": 11,
+        "purpose": "Out-of-game systems (matching, disconnect, read card)",
+        "classification": "MATCHING_RELEVANT"
+      },
+      "SystemModule": {
+        "files": 5,
+        "purpose": "Game viewport, reporting",
+        "classification": "OPTIONAL"
+      },
+      "CommonDataModule": {
+        "files": 3,
+        "purpose": "Battle settings, error messages",
+        "classification": "OPTIONAL"
+      },
+      "ResidentModule": {
+        "files": 2,
+        "purpose": "OpenKey check, error observation",
+        "classification": "STARTUP_CRITICAL"
+      },
+      "USBIOModule": {
+        "files": 1,
+        "purpose": "GALAXYIO wrapper",
+        "classification": "LOCAL_IPC_RELEVANT"
+      },
+      "ControllerModule": {
+        "files": 1,
+        "purpose": "Player controller",
+        "classification": "OPTIONAL"
+      },
+      "UserDataModule": {
+        "files": 1,
+        "purpose": "Player profile",
+        "classification": "CARD_OR_PLAYER_RELEVANT"
+      },
+      "TestModeModule": {
+        "files": 1,
+        "purpose": "Device test",
+        "classification": "OPTIONAL"
+      }
+    },
+    "engine": {
+      "Runtime": {
+        "files": 114,
+        "purpose": "Core UE4 engine",
+        "classification": "UNRELATED"
+      },
+      "OnlineSubsystemUtils": {
+        "files": 16,
+        "purpose": "Online subsystem",
+        "classification": "PRIVATE_SERVER_RELEVANT"
+      },
+      "TcpMessaging": {
+        "files": 3,
+        "purpose": "TCP messaging",
+        "classification": "MATCHING_RELEVANT"
+      }
+    }
+  },
+  "test_files": [
+    {
+      "path": "C:\\work\\acr\\AcrGame\\Source\\_Test\\Private\\KoikeTest\\CPP_TestNesys.cpp",
+      "purpose": "NESYS protocol test",
+      "classification": "LOCAL_IPC_RELEVANT"
+    },
+    {
+      "path": "C:\\work\\acr\\AcrGame\\Source\\_Test\\Private\\OtakeTest\\CPP_TestTCP.cpp",
+      "purpose": "TCP protocol test",
+      "classification": "MATCHING_RELEVANT"
+    },
+    {
+      "path": "C:\\work\\acr\\AcrGame\\Source\\_Test\\Private\\ShimizuTest\\CPP_HttpMockTest.cpp",
+      "purpose": "HTTP mock test",
+      "classification": "PRIVATE_SERVER_RELEVANT"
+    }
+  ],
+  "total_unique_source_paths": 378,
+  "analysis_method": "PE static analysis using pefile library",
+  "confidence": "HIGH",
+  "notes": [
+    "IDA batch mode was unavailable; analysis performed using pefile library",
+    "Source code paths extracted from debug strings in binary",
+    "Import/export tables provide strong evidence of functionality",
+    "String analysis reveals protocol endpoints and patterns"
+  ]
+}

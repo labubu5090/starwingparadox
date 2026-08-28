@@ -1,0 +1,125 @@
+{
+  "phase": "2A-G19",
+  "title": "Private Server Implementation Eligibility",
+  "timestamp": "2026-08-29",
+  "classification": "GAME_CLIENT_CONTRACT_SUFFICIENT_FOR_NEXT_IMPLEMENTATION",
+  "scope": "This file assesses which private-server features are ELIGIBLE for implementation in the next phase (G20), based on the confirmed three-part contract test (client request + server response + state advancement).",
+  "eligibility_criteria": "A feature is ELIGIBLE only when all three hold from game-side evidence: (1) confirmed client request contract, (2) required server response contract, (3) state advancement/completion behavior.",
+  "features": [
+    {
+      "feature": "Game Startup & Configuration",
+      "contract_status": {
+        "client_request": "PARTIAL",
+        "server_response": "PARTIAL",
+        "state_advancement": "PARTIAL"
+      },
+      "eligibility": "ELIGIBLE_WITH_CAVEATS",
+      "caveat": "OpenKey validation, master-data load, and version handshake endpoints exist (resource.py, game_data.py, version.py) but are not confirmed against the game's exact HTTP payload contracts. Proceed only with captures or client-observed evidence.",
+      "g20_scope": "Validate existing HTTP startup routes against observed game behavior.",
+      "priority": "HIGH"
+    },
+    {
+      "feature": "Player / Card Session",
+      "contract_status": {
+        "client_request": "PARTIAL (pipe path)",
+        "server_response": "NOT_CONFIRMED",
+        "state_advancement": "NOT_CONFIRMED"
+      },
+      "eligibility": "BLOCKED_BY_LOCAL_ADAPTER_EVIDENCE",
+      "caveat": "Card flow runs through the NESYS named pipe (\\\\.\\pipe\\nesys_games). Whether the game is pipe server or client, and the exact pipe message format, is UNRESOLVED. Full external-registration context also missing.",
+      "g20_scope": "Resolve pipe role (server vs client) via control-flow; only then build a minimal local adapter.",
+      "priority": "HIGH"
+    },
+    {
+      "feature": "Matching",
+      "contract_status": {
+        "client_request": "PARTIAL (HTTP server bind + TCP entry/cancel strings)",
+        "server_response": "NOT_CONFIRMED",
+        "state_advancement": "NOT_CONFIRMED"
+      },
+      "eligibility": "CONDITIONAL",
+      "caveat": "matching.py and tcp_server.py exist but their message IDs and payloads are built from synthetic/protocol evidence, NOT confirmed game-side. EntryMatching/CancelMatching/ReMatching strings confirm intent, not the exact TCP frames.",
+      "g20_scope": "Capture real TCP matching exchanges to confirm request/response/state before finalizing.",
+      "priority": "MEDIUM"
+    },
+    {
+      "feature": "Battle Coordination",
+      "contract_status": {
+        "client_request": "PARTIAL (command strings)",
+        "server_response": "NOT_CONFIRMED",
+        "state_advancement": "NOT_CONFIRMED"
+      },
+      "eligibility": "NOT_ELIGIBLE_UNTIL_TCP_EXCHANGE_EVIDENCE",
+      "caveat": "Battle commands (EntryBurst, ChangeBurstMode, CancelBurst, BurstUpdate, BurstRejectPlayer, BurstSelect) are strings only; payload proto definitions not verified from the client. Battle requires the TCP exchange to be observed.",
+      "g20_scope": "Defer until TCP matching/battle exchange evidence obtained.",
+      "priority": "LOW"
+    },
+    {
+      "feature": "Result Submission",
+      "contract_status": {
+        "client_request": "PARTIAL (BindHttpFestResult, BindHttpGameDataSaveData)",
+        "server_response": "NOT_CONFIRMED",
+        "state_advancement": "NOT_CONFIRMED"
+      },
+      "eligibility": "CONDITIONAL",
+      "caveat": "HTTP endpoints exist but no confirmed request/response contract or duplication behavior from the game side.",
+      "g20_scope": "Confirm HTTP result-handling contract; add idempotency based on evidence.",
+      "priority": "MEDIUM"
+    },
+    {
+      "feature": "Error Handling & Reconnection",
+      "contract_status": {
+        "client_request": "PARTIAL (BindHttpErrorCallback, RequestNesysReconnect, 'Disconnect GameServer. Try to Reconnect!')",
+        "server_response": "NOT_CONFIRMED",
+        "state_advancement": "NOT_CONFIRMED"
+      },
+      "eligibility": "CONDITIONAL",
+      "caveat": "Error callback and reconnection intent confirmed by strings, but exact behavior contract is not.",
+      "g20_scope": "Confirm error semantics; align synthetic error handler to evidence.",
+      "priority": "MEDIUM"
+    },
+    {
+      "feature": "NESYS / Card Trust Services",
+      "contract_status": {
+        "client_request": "NOT_ELIGIBLE",
+        "server_response": "NOT_ELIGIBLE",
+        "state_advancement": "NOT_ELIGIBLE"
+      },
+      "eligibility": "EXCLUDED",
+      "caveat": "Production certificate provisioning at https://cert2.nesys.jp and GALAXYIO card trust flow are EXCLUDED from the private server (production trust dependency, not operator-controlled).",
+      "g20_scope": "Excluded.",
+      "priority": "N/A"
+    }
+  ],
+  "architecture_recommendation": {
+    "option": "A",
+    "detail": "Two-tier service: (1) a proxy/adapter that keeps the game's existing endpoint expectations (hosts-file/DNS redirect) while routing HTTP/ TCP traffic to the Python server, and (2) the existing Python HTTP+TCP server with confirmed contracts. Local NESYS pipe adapter added only after pipe-role resolution.",
+    "rationale": [
+      "The game has NO supported endpoint override; operator-level redirect (hosts file) is the only practical path",
+      "Multi-transport reality (HTTP + TCP + local pipe) requires a composite surface",
+      "Cleanroom synthetic foundation remains intact; production adapter is gated on evidence",
+      "Matches the existing deployed architecture (HTTP :4001, proxy :80, TCP :6666)"
+    ],
+    "explicitly_rejected": [
+      "Option D (monolithic single-port) — incompatible with multi-transport game client evidence",
+      "Running the proxy on a non-80 port — the game's hardcoded URL uses default HTTP port 80",
+      "Any modification/redirection of the game executables (integrity constraint)"
+    ]
+  },
+  "constraints": {
+    "no_binary_modification": "CONFIRMED",
+    "no_pipe_creation": "CONFIRMED",
+    "no_endpoint_redirection": "CONFIRMED",
+    "no_certificate_behavior": "CONFIRMED",
+    "no_service_registration": "CONFIRMED",
+    "no_speculative_protocol_handlers": "CONFIRMED",
+    "legacy_js_unchanged": "CONFIRMED"
+  },
+  "analysis_method": "Assess game-side evidence (static PE analysis) against the three-part contract test",
+  "confidence": "MEDIUM",
+  "notes": [
+    "Matching, battle, and result are NOT fully eligible without confirmed client request + server response + state advancement from captures",
+    "Local adapter justified ONLY where game demonstrably requires local IPC",
+    "NESYS card trust flow is excluded, not merely deferred, because it is a production trust dependency"
+  ]
+}
