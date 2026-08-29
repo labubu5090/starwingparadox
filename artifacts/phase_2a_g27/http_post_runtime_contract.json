@@ -1,0 +1,16 @@
+﻿{
+  "phase": "G27",
+  "request": {
+    "method": "POST",
+    "url": "http://dev.starwing.jp/mock/matching/server",
+    "api_id": 1,
+    "content": "EMPTY",
+    "timeout": "2 seconds",
+    "retry": "NONE_OBSERVED"
+  },
+  "response": {
+    "status": "TIMEOUT",
+    "success": false,
+    "error": "http:unknown(timeout / network off)"
+  }
+}

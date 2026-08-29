@@ -1,0 +1,9 @@
+﻿{
+  "phase": "G27",
+  "meaning": "NESYS SERVICE CONNECTIVITY",
+  "evidence": "UCPP_NesysControl::Get(this)->IsOnline[0]",
+  "writes": ["CertError sets IsOnline=0"],
+  "reads": ["SystemDataCheck EventRequest checks IsOnline"],
+  "effect": "IsOnline=0 does NOT prevent SystemDataCheck from proceeding",
+  "classification": "BACKGROUND_STATUS_NOT_GATING"
+}

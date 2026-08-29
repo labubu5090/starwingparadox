@@ -1,0 +1,23 @@
+﻿{
+  "phase": "G27",
+  "no_binary_modified": true,
+  "no_debugger_attached": true,
+  "no_dll_injection": true,
+  "no_port_1042_listener": true,
+  "no_replacement_pipe": true,
+  "no_registry_change": true,
+  "no_certificate_operation": true,
+  "no_hosts_dns_modification": true,
+  "no_tls_decryption": true,
+  "no_active_remote_probe": true,
+  "no_packet_replay": true,
+  "no_crafted_request": true,
+  "no_real_card": true,
+  "no_account_credentials": true,
+  "no_matching": true,
+  "no_battle": true,
+  "no_result_submission": true,
+  "only_g27_processes_terminated": true,
+  "no_raw_capture_committed": true,
+  "working_tree_clean_after_commit": "PENDING"
+}

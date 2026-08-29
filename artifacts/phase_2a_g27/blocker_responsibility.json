@@ -1,0 +1,39 @@
+﻿{
+  "phase": "G27",
+  "blockers": [
+    {
+      "name": "OpenKey.json not found",
+      "type": "PRIMARY_BLOCKER",
+      "state": 2,
+      "evidence": "LoadKeyFile error",
+      "severity": "CRITICAL",
+      "private_server_fixable": "YES"
+    },
+    {
+      "name": "NESYS Event error",
+      "type": "SECONDARY_BLOCKER",
+      "state": 3,
+      "evidence": "IsEventCheck[0] IsEventError[0]",
+      "severity": "HIGH",
+      "private_server_fixable": "UNKNOWN"
+    },
+    {
+      "name": "IsOnline=0",
+      "type": "BACKGROUND_STATUS",
+      "state": 0,
+      "evidence": "UCPP_NesysControl::Get(this)->IsOnline[0]",
+      "severity": "LOW",
+      "private_server_fixable": "YES"
+    },
+    {
+      "name": "HTTP timeout",
+      "type": "BACKGROUND_NON_BLOCKING",
+      "state": "TITLE",
+      "evidence": "POST dev.starwing.jp/mock timeout",
+      "severity": "LOW",
+      "private_server_fixable": "YES"
+    }
+  ],
+  "primary_blocker": "OpenKey.json not found",
+  "secondary_blocker": "NESYS Event error"
+}

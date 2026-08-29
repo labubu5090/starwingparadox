@@ -1,0 +1,14 @@
+﻿{
+  "phase": "G27",
+  "states": [
+    {"name": "LOCAL_GAME_BOOTED", "status": "ACHIEVED"},
+    {"name": "LOCAL_CREDIT_READY", "status": "ACHIEVED"},
+    {"name": "SYSTEM_DATA_REQUEST_PENDING", "status": "ACHIEVED"},
+    {"name": "OPENKEY_CONFIGURATION_AVAILABLE", "status": "PENDING"},
+    {"name": "NESYS_EVENT_CHECK_PENDING", "status": "PENDING"},
+    {"name": "PRIVATE_PLAYER_SESSION_UNAVAILABLE", "status": "BLOCKED"},
+    {"name": "READY_FOR_SAFE_LOCAL_FEATURES", "status": "PENDING"},
+    {"name": "BLOCKED_TRUST_REQUIRED", "status": "UNKNOWN"}
+  ],
+  "current_blocking": "OPENKEY_CONFIGURATION"
+}

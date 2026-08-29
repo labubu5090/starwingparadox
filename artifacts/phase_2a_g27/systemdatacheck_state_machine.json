@@ -1,0 +1,15 @@
+﻿{
+  "phase": "G27",
+  "states": {
+    "0": {"name": "EventRequest", "next": "2", "on_success": "CheckOpenKeyLoad", "on_failure": "DispError"},
+    "2": {"name": "CheckOpenKeyLoad", "next": "3", "on_success": "CheckOpenKeyUpdate", "on_failure": "DispError"},
+    "3": {"name": "CheckOpenKeyUpdate", "next": "19", "on_success": "unknown", "on_failure": "DispError"},
+    "19": {"name": "DispError", "next": "20", "on_success": "End", "on_failure": "End"},
+    "20": {"name": "End", "next": "Title", "on_success": "Title", "on_failure": "Title"}
+  },
+  "initial_state": 0,
+  "terminal_state": 20,
+  "success_path": "0 → 2 → 3 → unknown",
+  "failure_path": "0 → 2 → 3 → 19 → 20 → Title",
+  "observed_path": "0 → 2 → 3 → 19 → 20 → Title"
+}

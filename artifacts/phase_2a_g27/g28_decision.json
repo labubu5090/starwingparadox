@@ -1,0 +1,7 @@
+﻿{
+  "phase": "G27",
+  "recommendation": "PRIVATE_OPENKEY_CONFIGURATION_FOUNDATION",
+  "reason": "OpenKey.json is simple local configuration with no trust dependency",
+  "next_step": "Create OpenKey.json at expected path and test if SystemDataCheck advances",
+  "eligibility": "SAFE_LOCAL_CONFIGURATION"
+}

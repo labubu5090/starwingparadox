@@ -1,0 +1,8 @@
+﻿{
+  "phase": "G27",
+  "role": "BACKGROUND_NON_BLOCKING",
+  "evidence": "Port 1042 SYN→RST observed during title screen, not during SystemDataCheck",
+  "systemdatacheck_involvement": "NONE",
+  "certerror_role": "BACKGROUND_RETRY_LOOP",
+  "classification": "ERROR_RECORDED_NOT_GATING"
+}

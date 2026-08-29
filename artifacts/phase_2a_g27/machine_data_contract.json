@@ -1,0 +1,8 @@
+﻿{
+  "phase": "G27",
+  "role": "CREDIT_MANAGEMENT_ONLY",
+  "evidence": "UMachineDataWork::AddDebugCredit for Z key credits",
+  "systemdatacheck_involvement": "NONE",
+  "openkey_involvement": "NONE",
+  "http_involvement": "NONE"
+}
