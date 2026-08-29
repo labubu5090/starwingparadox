@@ -1,0 +1,17 @@
+﻿{
+  "phase": "G31",
+  "listener_module": "app.tcp_server",
+  "server_class": "asyncio.start_server",
+  "transport": "TCP",
+  "bind_address": "0.0.0.0 (configurable via settings.app_host)",
+  "bind_port": 6666,
+  "framing": "4-byte uint32 little-endian length prefix",
+  "protobuf_message": "PbMessage",
+  "handlers": {
+    "0x66": "Ping (echo back)",
+    "0x67": "PingResponse (acknowledge)"
+  },
+  "max_frame_size": "1 MiB",
+  "timeout": "30 seconds",
+  "status": "READY_TO_ACCEPT"
+}

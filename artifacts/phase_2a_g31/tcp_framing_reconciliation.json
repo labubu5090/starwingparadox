@@ -1,0 +1,13 @@
+﻿{
+  "phase": "G31",
+  "prefix_width": 4,
+  "byte_order": "little-endian",
+  "length_includes_prefix": false,
+  "minimum_length": 4,
+  "maximum_local_safety_limit": "1 MiB",
+  "protobuf_root_message": "PbMessage",
+  "command_id_location": "messageType field in PbMessage",
+  "complete_frame_behavior": "decode and dispatch",
+  "partial_read_behavior": "buffer until complete",
+  "multi_frame_behavior": "process frames in sequence"
+}

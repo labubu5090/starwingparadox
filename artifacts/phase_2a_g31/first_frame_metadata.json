@@ -1,0 +1,13 @@
+﻿{
+  "phase": "G31",
+  "first_frame_timestamp": "2026-08-29T12:15:40.570Z",
+  "first_frame_length": 17,
+  "first_frame_messageType": 102,
+  "first_frame_messageType_hex": "0x66",
+  "first_frame_messageName": "Ping",
+  "first_frame_packetId": 1,
+  "server_response_sent": true,
+  "response_length": 17,
+  "decode_error": "PbMessage has no Message oneof set (PingResponse)",
+  "classification": "FIRST_FRAME_CAPTURED"
+}

@@ -1,0 +1,10 @@
+﻿{
+  "phase": "G31",
+  "first_message_type": "Ping (0x66)",
+  "first_message_classification": "Keepalive/heartbeat",
+  "command_id": 102,
+  "protobuf_message": "PbMessage",
+  "response_type": "Ping (0x66) echo",
+  "response_eligibility": "ELIGIBLE - confirmed Ping handler",
+  "next_boundary": "NESYS initialization required"
+}

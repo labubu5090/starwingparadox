@@ -1,0 +1,8 @@
+﻿{
+  "phase": "G31",
+  "response_eligible": true,
+  "response_type": "Ping echo",
+  "response_returned": true,
+  "game_accepted": true,
+  "next_state": "NESYS initialization required"
+}
