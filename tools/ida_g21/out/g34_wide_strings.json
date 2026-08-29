@@ -1,0 +1,138 @@
+﻿{
+    "CERT_ERROR":  [
+                       "Nesys enums and NesysModules enums must return correct values (SystemErrorCode::NCD_NESYS_NESYS_NOCERT_ERROR)"
+                   ],
+    "NetworkInfo":  [
+                        "ACPP_TestNesys::RequestNesysControlNetworkInfo [NetworkInfo] / id[%d] / status[%d] / option[%d]",
+                        "ACPP_TestNesys::RequestNesysControlNetworkInfo [error] / id[%d] / status[%d] / option[%d]",
+                        "\u0026ACPP_TestNesys::RequestNesysControlNetworkInfo",
+                        "ACPP_TestTCP::RequestNesysControlNetworkInfo [NetworkInfo] / id[%d] / status[%d] / option[%d]",
+                        "ACPP_TestTCP::RequestNesysControlNetworkInfo [error] / id[%d] / status[%d] / option[%d]"
+                    ],
+    "GameModeBoot":  [
+                         "ACPP_GameModeBoot::BeginPlay / start",
+                         "ACPP_GameModeBoot::BeginPlay / RootDir[%s] GameDir[%s] GameConfigDir[%s] GameDir[%s] GameContentDir[%s]",
+                         "ACPP_GameModeBoot::BeginPlay / flags[%d] size[%lld] LinkerLoad[%x] FileName[%s] LinkerPackageVersion[%d] LinkerLicenseeVersion[%d] PIEInstanceID[%d]",
+                         "ACPP_GameModeBoot::BeginPlay / isNeedCook[%d]",
+                         "ACPP_GameModeBoot::BeginPlay / GetHttpConnectionTimeout[%f] GetHttpReceiveTimeout[%f] GetHttpSendTimeout[%f]"
+                     ],
+    "certificate":  [
+                        "Sets libcurl\u0027s CURL_OPT_SSL_VERIFYPEER option to verify authenticity of the peer\u0027s certificate.",
+                        "  0 = disable (allows self-signed certificates)",
+                        " - bVerifyPeer = %s  - Libcurl will %sverify peer certificate"
+                    ],
+    "NesysControlErrorMessage":  [
+                                     "\u0026ACPP_GameModeBoot::NesysControlErrorMessage",
+                                     "ACPP_GameModeBoot::NesysControlErrorMessage / id[%d] status[%d] option[%d]",
+                                     "ACPP_GameModeBoot::NesysControlErrorMessage / ENesysNetworkServerMessage[CertError]",
+                                     "ACPP_GameModeBoot::NesysControlErrorMessage / ENesysNetworkServerMessage[CertError]",
+                                     "NesysControlErrorMessage"
+                                 ],
+    "Error No Matching":  [
+                              "Error No MatchingServer so initialize Nesys before.",
+                              "Error No MatchingServer. [case default]",
+                              "Error No MatchingServer so initialize Nesys before.",
+                              "Error No MatchingServer. [case default]"
+                          ],
+    "pipe":  [
+                 "Failed to create pipes for parent process",
+                 "Failed to create pipes for parent process",
+                 "Writing message through pipe failed",
+                 "Writing some part of the message through pipe failed",
+                 "Enable using Shader pipelines."
+             ],
+    "DefaultMatchingServerAddress":  [
+                                         "DefaultMatchingServerAddress"
+                                     ],
+    "RequestNesysControlInitiazlize":  [
+                                           "ACPP_TestNesys::RequestNesysControlInitiazlize [Cert] / id[%d] / status[%d] / option[%d]",
+                                           "\u0026ACPP_TestNesys::RequestNesysControlInitiazlize",
+                                           "ACPP_TestTCP::RequestNesysControlInitiazlize [Cert] / id[%d] / status[%d] / option[%d]",
+                                           "\u0026ACPP_TestTCP::RequestNesysControlInitiazlize",
+                                           "RequestNesysControlInitiazlize"
+                                       ],
+    "address from Config":  [
+                                "[UAcrProtocol::Connect] MatchingServer address from Config:%s"
+                            ],
+    "HttpServerAddress":  [
+                              "HttpServerAddress=",
+                              "HttpServerAddress use commandLine value.(%s)",
+                              "DefaultHttpServerAddress"
+                          ],
+    "Decide connect":  [
+                           "==Decide connect MatchingServer address==",
+                           "Decide connect type NESYS address",
+                           "Decide connect type INI file address",
+                           "Decide connect type NONE address"
+                       ],
+    "RequestNetworkInfo":  [
+                               "ACPP_GameModeBoot::NesysRequest / RequestNetworkInfo",
+                               "UCPP_NesysControl::RequestNetworkInfo OK.",
+                               "UCPP_NesysControl::RequestNetworkInfo Error.",
+                               "RequestNetworkInfo"
+                           ],
+    "IsOnline":  [
+                     "ACPP_PlayerControllerBattle::BeginPlay / IsOnlineBattle[%d]",
+                     "_inIsOnline",
+                     "ACPP_ModeSelectMain::SetupEXTimer( %f ) Offline Message Change OldGameSequence:%s IsOnline:%d",
+                     "ACPP_SystemDataCheck::Tick / EventRequest / UCPP_NesysControl::Get(this)-\u003eIsOnline[%d]",
+                     "ACPP_SystemDataCheck::Tick / CheckVersion / IsOnlineStatus[%d] CheckPackage[%d] CheckMasterData[%d]"
+                 ],
+    "UseConfigHttpServer":  [
+                                "UseConfigHttpServer=",
+                                "HttpServer     : %s (UseConfigHttpServer : %d)",
+                                "UseConfigHttpServer"
+                            ],
+    "MatchingServer":  [
+                           "MatchingServer Response",
+                           "\u0026ThisClass::BindHttpMatchingServer",
+                           "BindHttpMatchingServer",
+                           "HttpMatchingServerData",
+                           "TestHttpMatchingServer"
+                       ],
+    "commandLine value":  [
+                              "MyAddress use commandLine value.(%s)",
+                              "ServerId use commandLine value.(%d)",
+                              "MatchingGroup use commandLine value.(%d)",
+                              "UseConfigMatchingServer use commandLine value.(%d)",
+                              "HttpServerAddress use commandLine value.(%s)"
+                          ],
+    "NesysRequest":  [
+                         "ACPP_GameModeBoot::NesysRequest / RequestNesysServerVersion",
+                         "ACPP_GameModeBoot::NesysRequest / RequestCompetitionSupportTicket",
+                         "ACPP_GameModeBoot::NesysRequest / RequestNetworkInfo",
+                         "TestModeNetworkNesysRequestError",
+                         "TestModeNetworkNesysRequestError"
+                     ],
+    "initialize Nesys before":  [
+                                    "Error No MatchingServer so initialize Nesys before.",
+                                    "Error No MatchingServer so initialize Nesys before."
+                                ],
+    "address from NESYS":  [
+                               "[UAcrProtocol::Connect] Connect to MatchingServer address from NESYS:%s",
+                               "[UAcrProtocol::Connect] MatchingServer address from NESYS:%s"
+                           ],
+    "UseConfigMatchingServer":  [
+                                    "UseConfigMatchingServer use commandLine value.(%d)",
+                                    "MatchingServer : %s (UseConfigMatchingServer : %d)",
+                                    "UseConfigMatchingServer"
+                                ],
+    "MatchingServerType":  [
+                               "UCPP_HttpRequester::GetHostAddress(Client) / MatchingServerType[%s]",
+                               "MatchingServerType"
+                           ],
+    "NesysControl":  [
+                         "ACPP_TestNesys::RequestNesysControlInitiazlize [Cert] / id[%d] / status[%d] / option[%d]",
+                         "ACPP_TestNesys::RequestNesysControlIncomeStatus [IncomeResult] / id[%d] / status[%d] / option[%d]",
+                         "ACPP_TestNesys::RequestNesysControlIncomeStatus [error] / id[%d] / status[%d] / option[%d]",
+                         "ACPP_TestNesys::RequestNesysControlUploadConfig [UploadConfig] / id[%d] / status[%d] / option[%d]",
+                         "ACPP_TestNesys::RequestNesysControlUploadConfig [error] / id[%d] / status[%d] / option[%d]"
+                     ],
+    "CertError":  [
+                      "ACPP_GameModeBoot::NesysControlErrorMessage / ENesysNetworkServerMessage[CertError]",
+                      "ACPP_GameModeBoot::NesysControlErrorMessage / ENesysNetworkServerMessage[CertError]",
+                      "UTestModeEventNetwork::ReceiveNesysComplete / CertError",
+                      "ENesysNetworkServerMessage::CertError",
+                      "Nesys enums and NesysModules enums must return correct values (ServerMessage::CertError)"
+                  ]
+}

@@ -1,0 +1,123 @@
+{
+  "g34_validation_result": "INI_CONFIG_PATH_RUNTIME_CONFIRMED",
+  "classification": "INI_CONFIG_PATH_RUNTIME_CONFIRMED",
+  "classification_criteria": "Runtime log shows 'Decide connect type INI file address' and TCP connected to 127.0.0.1:6666 from DefaultGame.ini [/Script/NetworkModule.NetworkConfig] without NESYS certificate trust.",
+  "evidence_chain": [
+    {
+      "line": 110289,
+      "keyword": "HttpRequestMatchingServer",
+      "role": "HTTP matching request initiated"
+    },
+    {
+      "line": 110526,
+      "keyword": "OnReceiveResponseMatchingServer / _IsSuccess[1] IPAddress[127.0.0.1:6666]",
+      "role": "HTTP response received from proxy (port 80 -> 4001 -> response)"
+    },
+    {
+      "line": 110527,
+      "keyword": "OnReceiveMatchingServer / bChangeServer[1] IsSuccess[1] IPAddress[127.0.0.1:6666]",
+      "role": "Online observer confirms matching server address"
+    },
+    {
+      "line": 110556,
+      "keyword": "Error No MatchingServer so initialize Nesys before.",
+      "role": "First-call bootstrap message (NOT a boot blocker)"
+    },
+    {
+      "line": 110557,
+      "keyword": "FAcrNetworkConfig::Init / port[7777]",
+      "role": "FAcrNetworkConfig initialization begins"
+    },
+    {
+      "line": 110561,
+      "keyword": "MatchingServer : 127.0.0.1:6666 (UseConfigMatchingServer : 1)",
+      "role": "Config reads DefaultMatchingServerAddress from INI, UseConfigMatchingServer=1"
+    },
+    {
+      "line": 110567,
+      "keyword": "Use Config(.ini)MatchingServer address:127.0.0.1:6666",
+      "role": "Config path confirmed: INI file address used"
+    },
+    {
+      "line": 110575,
+      "keyword": "Decide connect type INI file address",
+      "role": "Path decision: INI file address selected (not NESYS, not NONE)"
+    },
+    {
+      "line": 110576,
+      "keyword": "[UAcrProtocol::Connect] Finish Init Connect Config:127.0.0.1:6666",
+      "role": "Protocol connection initialized with Config address"
+    },
+    {
+      "line": 111229,
+      "keyword": "Success to connect. / GetTargetAddress[127.0.0.1:6666]",
+      "role": "TCP connection established to 127.0.0.1:6666"
+    },
+    {
+      "line": 111234,
+      "keyword": "OnReceivePong / WebServer Revived!",
+      "role": "Full Ping/Pong round-trip confirmed"
+    }
+  ],
+  "config_source": {
+    "file": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Config\\DefaultGame.ini",
+    "section": "[/Script/NetworkModule.NetworkConfig]",
+    "properties_used": {
+      "DefaultMatchingServerAddress": "127.0.0.1:6666",
+      "UseConfigMatchingServer": "1 (read, value not in INI - likely code default or from HTTP response)"
+    },
+    "properties_not_set": [
+      "MatchingServerType",
+      "DefaultHttpServerAddress",
+      "UseConfigHttpServer"
+    ],
+    "file_hash": "37AE67B38CE6DB41E99F8D9BEE59BEE4E7AD7B53A3DEF05162D53AAE12BFBF62"
+  },
+  "config_location_analysis": {
+    "source_ini": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Config\\DefaultGame.ini",
+    "saved_config_override": "NOT FOUND (Saved\\Config\\WindowsNoEditor does not exist)",
+    "appdata_override": "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Game.ini exists but does NOT contain NetworkConfig",
+    "engine_ini_override": "NOT FOUND",
+    "conclusion": "DefaultGame.ini is the sole config source. No overrides exist."
+  },
+  "decision_path_flow": {
+    "step_1": "HTTP POST to http://dev.starwing.jp/mock/matching/server",
+    "step_2": "Proxy (port 80) strips /mock, forwards to Python (port 4001)",
+    "step_3": "Python returns {\"ip_addr\":\"127.0.0.1:6666\"}",
+    "step_4": "Game sets ConnectAddress to 127.0.0.1:6666",
+    "step_5": "Error No MatchingServer so initialize Nesys before (bootstrap, NOT blocking)",
+    "step_6": "FAcrNetworkConfig::Init reads from INI: MatchingServer=127.0.0.1:6666",
+    "step_7": "UseConfigMatchingServer=1 enables INI path",
+    "step_8": "Decide connect type INI file address",
+    "step_9": "TCP connects to 127.0.0.1:6666",
+    "step_10": "Ping/Pong round-trip successful"
+  },
+  "unresolved_questions": {
+    "use_config_matching_server_origin": "UseConfigMatchingServer=1 is not set in INI. Likely code default (not command line - command line is empty '-log'). Binary string 'UseConfigMatchingServer use commandLine value.(%d)' suggests it reads from command line, but empty command line still yields 1.",
+    "matching_server_type": "Not set in INI. Exact enum/constant values unknown. Binary strings show property exists but no runtime value logged.",
+    "nesys_control_sequence": "RequestNesysControlInitiazlize [Cert] runs in background. CertError loop continues. IsOnline remains 0. NOT a boot blocker."
+  },
+  "state_transitions": {
+    "before_config_read": {
+      "bNesysServerLive": 0,
+      "bGameConnect": 1,
+      "bHttpSuccess": 1,
+      "tcp_connected": false
+    },
+    "after_config_read": {
+      "bNesysServerLive": 0,
+      "bGameConnect": 0,
+      "bWebServerLive": 1,
+      "tcp_connected": true,
+      "matching_server": "127.0.0.1:6666",
+      "decision_path": "INI file address"
+    }
+  },
+  "artifacts": {
+    "capture_log": "artifacts/phase_2a_g34/g34_ini_config_capture.log",
+    "capture_log_size_bytes": 14861116,
+    "default_game_ini": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Config\\DefaultGame.ini",
+    "default_game_ini_backup": "X:\\StarwingParadox\\WindowsNoEditor\\AcrGame\\Config\\DefaultGame.ini.backup-g34",
+    "pre_g34_log": "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame.log.pre-g34-ini"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "device_id": 0,
+  "deadzone": 0.15,
+  "button_mappings": {
+    "foot_pedal": {
+      "button": 2,
+      "key": "Space"
+    },
+    "start": {
+      "button": 7,
+      "key": "Enter"
+    },
+    "shot_left": {
+      "button": 4,
+      "key": "LMB"
+    },
+    "shot_right": {
+      "button": 5,
+      "key": "RMB"
+    },
+    "left_button": {
+      "button": 8,
+      "key": "Q"
+    },
+    "weapon_change": {
+      "button": 3,
+      "key": "MMB"
+    },
+    "step": {
+      "button": 10,
+      "key": "LCtrl"
+    },
+    "ar_skill": {
+      "button": 1,
+      "key": "F"
+    },
+    "dash": {
+      "button": 0,
+      "key": "Shift"
+    },
+    "right_button": {
+      "button": 9,
+      "key": "E"
+    },
+    "forward": {
+      "button": 0,
+      "key": "W"
+    },
+    "left": {
+      "button": 2,
+      "key": "A"
+    }
+  },
+  "axis_mappings": {
+    "right": {
+      "axis": "rx_pos",
+      "key": "D"
+    }
+  },
+  "credit": {
+    "key": "Z",
+    "armed": false,
+    "cooldown": 0.5,
+    "max_per_arm": 2
+  },
+  "created": "2026-08-29T22:17:02",
+  "modified": "2026-08-29T23:31:21"
+}

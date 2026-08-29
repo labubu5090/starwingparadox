@@ -1,0 +1,27 @@
+{
+  "status": "SUCCESS",
+  "strings": {
+    "ConnectNamedPipe": {
+      "ea": "0x148951fc2",
+      "segment": ".rdata"
+    },
+    "RegOpenKeyExW": {
+      "ea": "0x1489531f0",
+      "segment": ".rdata"
+    },
+    "RegOpenKeyExA": {
+      "ea": "0x148953a8a",
+      "segment": ".rdata"
+    },
+    "CreateNamedPipeA": {
+      "ea": "0x1489561ae",
+      "segment": ".rdata"
+    }
+  },
+  "errors": [],
+  "min_ea": "0x140000000",
+  "max_ea": "0x149cbb000",
+  "input": "C:\\Users\\KAHO\\Pictures\\Starwing\\tools\\ida_g21\\targets\\AcrGame-Win64-Shipping.exe",
+  "string_scan_count": 0,
+  "byte_search": "attempting"
+}
