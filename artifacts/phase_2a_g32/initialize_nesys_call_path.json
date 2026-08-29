@@ -1,0 +1,28 @@
+﻿{
+  "phase": "G32",
+  "error_string": "Error No MatchingServer so initialize Nesys before.",
+  "call_path": {
+    "nesys_control": "UCPP_NesysControl::Get(this)->IsOnline[0]",
+    "matching_server_check": "MatchingServer object not initialized",
+    "error_log": "LogAcrProtocol: Error No MatchingServer so initialize Nesys before.",
+    "next_action": "Send Ping anyway (heartbeats continue)"
+  },
+  "sub_operations": [
+    {
+      "operation": "Check IsOnline status",
+      "classification": "LOCAL_NON_TRUST",
+      "current_state": "IsOnline[0]"
+    },
+    {
+      "operation": "Check MatchingServer object",
+      "classification": "LOCAL_CONFIGURATION",
+      "current_state": "NOT_INITIALIZED"
+    },
+    {
+      "operation": "Initialize MatchingServer",
+      "classification": "MATCHING_CLIENT_SETUP",
+      "current_state": "BLOCKED"
+    }
+  ],
+  "trust_dependency": "UNKNOWN - requires further investigation"
+}

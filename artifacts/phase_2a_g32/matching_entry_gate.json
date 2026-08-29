@@ -1,0 +1,28 @@
+﻿{
+  "phase": "G32",
+  "matching_entry_gate": {
+    "conditions": [
+      {
+        "condition": "MatchingServer object exists",
+        "current_state": "NOT_INITIALIZED",
+        "blocking": true
+      },
+      {
+        "condition": "IsOnline status",
+        "current_state": "IsOnline[0]",
+        "blocking": true
+      },
+      {
+        "condition": "TCP connected",
+        "current_state": "CONNECTED",
+        "blocking": false
+      },
+      {
+        "condition": "Heartbeat valid",
+        "current_state": "PING_EXCHANGE_WORKING",
+        "blocking": false
+      }
+    ],
+    "primary_blocker": "MatchingServer object not initialized"
+  }
+}

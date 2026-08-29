@@ -1,0 +1,18 @@
+﻿{
+  "phase": "G32",
+  "matching_server_object": {
+    "class_or_structure": "MatchingServer (referenced in log and binary)",
+    "allocation_point": "unknown",
+    "initialization_method": "requires NesysControl initialization",
+    "readiness_flag": "IsOnline[0] indicates not ready",
+    "error_path": "Error No MatchingServer so initialize Nesys before",
+    "state": "NOT_INITIALIZED"
+  },
+  "lifecycle_states": [
+    "NOT_INITIALIZED",
+    "NESYS_CONTROL_REQUIRED",
+    "WAITING_FOR_INITIALIZATION",
+    "INITIALIZATION_BLOCKED"
+  ],
+  "evidence": "Binary string: BindHttpMatchingServer at offset 111952304"
+}
