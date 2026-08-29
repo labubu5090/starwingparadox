@@ -1,0 +1,42 @@
+{
+  "phase": "2A-G23",
+  "shipping_exe": {
+    "binary_0x0412_32bit_le": {"count": 51, "first_20_rva": ["0x58820","0x1F533D9","0x200D135","0x20EAC0D","0x223B0FA","0x2244D0F","0x22710CF","0x229C0ED","0x22EC791","0x22FEB88","0x22FEBA2","0x233D9FE","0x239D59C","0x27D823C","0x27FEA6A","0x29B41FE","0x2C504E6","0x2CBB556","0x2F41A2F","0x338B701"]},
+    "text_1042": {"count": 0, "note": "findstr returned 0 (binary data)"},
+    "text_nesys": {"count": 10},
+    "text_localhost_1042": {"count": 0},
+    "text_127_0_0_1_1042": {"count": 0},
+    "unicode_pipe_nesys": {"count": 0},
+    "text_CertError": {"count": 0},
+    "text_pipe": {"count": 5},
+    "text_certificate": {"count": 5},
+    "text_connect": {"count": 5},
+    "text_socket": {"count": 5},
+    "text_WinHttp": {"count": 3}
+  },
+  "nesysservice_exe": {
+    "binary_0x0412_32bit_le": {"count": 6, "rva": ["0x13C36","0x13D12","0x1598E","0x16996","0x3C0C0","0x4074B"]},
+    "text_1042": {"count": 0},
+    "text_nesys": {"count": "multiple (protocol strings)"},
+    "unicode_pipe_nesys": {"count": 0},
+    "key_strings": [
+      "SCOMMAND_CERT_ERROR",
+      "SCOMMAND_CERT_INIT_NOTICE",
+      "SCOMMAND_CERT_REGULAR_NOTICE",
+      "LCOMMAND_CONNECT_REQUEST",
+      "LCOMMAND_CLIENT_START",
+      "CertFindCertificateInStore()",
+      "CertOpenStore()",
+      "WinHttpOpen()",
+      "WinHttpConnect()",
+      "proxy.nesys.jp",
+      "cert3.nesys.jp",
+      "NesysService",
+      "NesysClient_SP 2.97(x64) 2017/11/07",
+      "MY\\.Default",
+      "nesys"
+    ],
+    "source_files": ["..\\src\\Ping.cpp", "..\\src\\IpHelperWrapper.cpp"]
+  },
+  "conclusion": "Port 1042 is a numeric constant in both binaries. No ASCII text '1042' found. The game connects to localhost:1042 via TCP. NesysService contains the full command protocol (LCOMMAND_*/SCOMMAND_*) and certificate handling. No direct pipe name found in either binary."
+}

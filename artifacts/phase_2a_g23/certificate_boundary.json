@@ -1,0 +1,30 @@
+{
+  "phase": "2A-G23",
+  "certificate_behavior": {
+    "local_status_interface": "SCOMMAND_CERT_INIT_NOTICE, SCOMMAND_CERT_REGULAR_NOTICE",
+    "local_certificate_store_lookup": "CertFindCertificateInStore() with MY\\.Default store, 'nesys' subject",
+    "client_certificate_use": "NesysService uses client certificate for outbound HTTPS to proxy.nesys.jp and cert3.nesys.jp",
+    "server_certificate_validation": "NesysService validates server certificates via WinHttp",
+    "remote_tls_session": "NesysService establishes TLS to proxy.nesys.jp and cert3.nesys.jp",
+    "certificate_provisioning": "SCOMMAND_CERT_INIT_NOTICE suggests initial certificate provisioning",
+    "installation_identity": "Certificate in MY\\.Default store with 'nesys' subject identifies the cabinet",
+    "classification": "SECURITY_BOUNDARY_REACHED"
+  },
+  "evidence": {
+    "function": "CertFindCertificateInStore()",
+    "api": "WinCrypt.h",
+    "store": "MY\\.Default",
+    "subject": "nesys",
+    "external_endpoints": ["proxy.nesys.jp", "cert3.nesys.jp"],
+    "protocol": "HTTPS via WinHttp"
+  },
+  "private_server_eligibility": "EXCLUDED - Certificate validation is a production trust dependency. Cannot be bypassed or forged.",
+  "excluded_behaviors": [
+    "Fake vendor certificate",
+    "Copied private key",
+    "Certificate-validation suppression",
+    "Fabricated production-authentication success",
+    "External vendor impersonation",
+    "Replayed certificate response"
+  ]
+}

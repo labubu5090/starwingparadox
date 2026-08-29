@@ -1,0 +1,23 @@
+{
+  "phase": "2A-G23",
+  "g22_corrections": [
+    {
+      "previous": "Port 1042 = NesysService (cabinet service controller)",
+      "corrected": "The game attempts a local connection to localhost:1042. The failure is correlated with repeated NESYS CertError messages. The expected local listener, complete protocol and exact certificate responsibility remain to be confirmed.",
+      "evidence": "G23 capture shows 35 TCP SYN attempts to localhost:1042, all RST. NesysService.exe contains the full command protocol (LCOMMAND_*/SCOMMAND_*) and certificate handling. No direct pipe name found.",
+      "confidence": "HIGH - protocol strings confirmed in NesysService.exe"
+    },
+    {
+      "previous": "NesysService required for certificate validation",
+      "corrected": "NesysService performs certificate operations via CertFindCertificateInStore() with MY\\.Default store. The exact certificate validation chain remains to be fully confirmed.",
+      "evidence": "NesysService.exe strings: CertFindCertificateInStore(), CertOpenStore(), MY\\.Default, nesys, SCOMMAND_CERT_ERROR",
+      "confidence": "HIGH - API calls confirmed in binary strings"
+    },
+    {
+      "previous": "4,575 connection attempts",
+      "corrected": "4,575 log lines do not equal 4,575 connection attempts. G23 capture shows 35 SYN attempts over 17s. Log lines represent repeated polling/retry of the same failed state.",
+      "evidence": "G23 capture: 35 SYN, all RST. Game log: 4575 CertError lines over 77s.",
+      "confidence": "CONFIRMED - capture vs log count reconciled"
+    }
+  ]
+}

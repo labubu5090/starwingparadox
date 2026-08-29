@@ -89,3 +89,9 @@ tools/ida_g21/logs/
 tools/wireshark_g22/captures/*.pcap
 tools/wireshark_g22/captures/*.pcapng
 tools/ida_g21/out/*.i64
+
+# G23 exclusions
+tools/wireshark_g22/captures/g23_coldstart.pcapng
+tools/wireshark_g22/captures/g23_coldstart.json
+tools/wireshark_g22/logs/g23_capture.log
+tools/ida_g21/g23_shipping_*.py
