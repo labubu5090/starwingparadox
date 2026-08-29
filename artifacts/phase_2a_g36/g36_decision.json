@@ -1,0 +1,116 @@
+{
+  "generation": "G36",
+  "timestamp": "2026-08-29T18:30:00Z",
+  "classification": "TUTORIAL_COMPLETED_ONBOARDING_PASSED",
+  "summary": "Tutorial completed successfully. Game reached full onboarding flow and returned to Title. TCP connection stable with Ping/Pong working. No new player save data created (only master data metadata).",
+  "evidence": {
+    "sequence_chain": [
+      "Boot",
+      "Notice",
+      "SeatCheck",
+      "AdvertiseMovie",
+      "SystemDataCheck",
+      "PromotionMovie",
+      "Title",
+      "SystemDataCheck",
+      "PromotionMovie",
+      "Title",
+      "SystemDataCheck",
+      "ReadCard",
+      "BuyCredit",
+      "WarningDisp",
+      "UserDataCheck",
+      "HowToPlay",
+      "UserDataInput",
+      "Immersion",
+      "Introduction",
+      "FirstTimeTutorial",
+      "Battle",
+      "LeavedBattle",
+      "TerminatedBattle",
+      "Title"
+    ],
+    "tcp_evidence": {
+      "initial_disconnect": "L109982: [UAcrProtocol::Disconnect] Start Disconnect Addr:",
+      "first_failed_ping": "L110007: Failed to post Ping : Lost Connection",
+      "connect_attempt": "L110652: TryToConnect / Connect to Address[127.0.0.1:6666]",
+      "success": "L110657: Success to connect. / GetTargetAddress[127.0.0.1:6666]",
+      "first_pong": "L110662: OnReceivePong / WebServer Revived!",
+      "pong_state": "bWebServerLive[1] bNesysServerLive[0] bNesicaReception[0] bLiveFromTestmode[1] bLiveFromGame[1] bGameConnect[0] bHttpSuccess[1]",
+      "total_pings": 43,
+      "last_ping_id": 59,
+      "ping_pong_interval": "20s"
+    },
+    "nesys_errors": {
+      "count": 46,
+      "pattern": "Error No MatchingServer so initialize Nesys before.",
+      "frequency": "every 20s (on Ping cycle)",
+      "first_seen": "L128202",
+      "impact": "non-blocking - tutorial completed despite errors"
+    },
+    "battle_evidence": {
+      "battle_start": "L120596: SetGameSequence Old:[FirstTimeTutorial] New:[Battle]",
+      "total_respawns": 51,
+      "timeover_lose": "L128358: RequestEndBattle (Team(TEAM_A)BattleResult:Result_Timeover_Lose InTimeOver:1)",
+      "leave_battle": "L130066: SetGameSequence Old:[Battle] New:[LeavedBattle] Req:[LeaveMindWayBattle]",
+      "return_to_title": "L131309: SetGameSequence Old:[LeavedBattle] New:[Title] Req:[TerminatedBattle]"
+    },
+    "credit_evidence": {
+      "initial": 0,
+      "after_buy": 1,
+      "after_z_keys": 2,
+      "after_battle": 1
+    },
+    "save_data": {
+      "open_key_json": {
+        "exists": true,
+        "path": "D:\\Saved\\ACRSaved\\SaveData\\OpenKey.json",
+        "size": 96,
+        "modified": false
+      },
+      "save_data_json": {
+        "exists": true,
+        "path": "D:\\Saved\\ACRSaved\\SaveData\\SaveData.json",
+        "size": 3771,
+        "type": "master_data_metadata",
+        "note": "CSV file list, not player save data"
+      },
+      "new_player_save_files": [],
+      "conclusion": "No player-specific save data created. Tutorial completion not persisted to local storage."
+    },
+    "game_client_evidence": {
+      "config_source": "DefaultGame.ini sole config source",
+      "config_key": "MatchingServer : 127.0.0.1:6666 (UseConfigMatchingServer : 1)",
+      "config_path_decision": "Decide connect type INI file address",
+      "command_line": "EMPTY",
+      "use_config_matching_server": 1
+    },
+    "keyboard_controls": {
+      "forward": "W",
+      "left": "A",
+      "right": "D",
+      "backward": "S",
+      "jump": "Space",
+      "dash": "LShift",
+      "attack_l": "Q",
+      "attack_r": "E",
+      "ar_skill": "F",
+      "weapon_change": "MMB",
+      "step": "LCtrl",
+      "start": "Enter",
+      "debug_credit": "Z"
+    }
+  },
+  "next_blocker": {
+    "type": "NESYS_PROTOCOL_MISSING",
+    "description": "Game sends NESYS initialization request every 20s. Our TCP server only responds to Ping/Pong. MatchingServer not initialized (bNesysServerLive[0]).",
+    "impact": "Non-blocking for tutorial. May block online features (matching, rankings, etc.)",
+    "remediation": "Implement NESYS protocol in TCP server to respond to initialization handshake"
+  },
+  "test_results": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "note": "No automated tests written for G36. Runtime observation only."
+  }
+}

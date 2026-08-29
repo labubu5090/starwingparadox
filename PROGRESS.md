@@ -922,7 +922,56 @@ evidence (currently BLOCKED_EVIDENCE), then implement confirmed boot/version/res
 
 ### Recommended Next Phase
 
-Phase 2A-G36: Pre-complete first-time onboarding by creating save data that marks
-UserDataCheck/HowToPlay/UserDataInput/Immersion/Introduction as complete, then
-re-test matching flow with TCP connection.
+Phase 2A-G36: Complete tutorial naturally via controller mapper, monitor TCP/save-data/relaunch state.
+
+---
+
+## Phase 2A-G36 (Tutorial Completed, Onboarding Passed)
+
+**Classification:** TUTORIAL_COMPLETED_ONBOARDING_PASSED
+
+**Commit:** TBD
+
+### G36 Outcome Summary
+
+1. **Full onboarding flow completed (CONFIRMED).** Game executed all 22 sequences: Boot → Notice → SeatCheck → AdvertiseMovie → SystemDataCheck → PromotionMovie → Title → SystemDataCheck → PromotionMovie → Title → SystemDataCheck → ReadCard → BuyCredit → WarningDisp → UserDataCheck → HowToPlay → UserDataInput → Immersion → Introduction → FirstTimeTutorial → Battle → LeavedBattle → TerminatedBattle → Title.
+
+2. **TCP connection stable (CONFIRMED).** 43 pings sent, all received Pong responses. Connection maintained throughout session. `bWebServerLive[1]` confirmed.
+
+3. **Tutorial battle completed (CONFIRMED).** Battle ended with `Result_Timeover_Lose`. 51 respawns. Game returned to Title via `TerminatedBattle`.
+
+4. **NESYS errors non-blocking (CONFIRMED).** 46 occurrences of `Error No MatchingServer so initialize Nesys before.` Every 20 seconds on Ping cycle. Tutorial completed despite errors.
+
+5. **No player save data (CONFIRMED).** Only master data metadata (SaveData.json, 3771 bytes). No player-specific files created.
+
+6. **Controller mapper functional (CONFIRMED).** XInput detected, keyboard output working. Tutorial playable via keyboard inputs.
+
+### G36 Quality Gates
+
+| Gate | Result |
+|------|--------|
+| Game launch | PASS |
+| INI config path | PASS (Decide connect type INI file address) |
+| TCP connection | PASS (Success to connect) |
+| Ping/Pong | PASS (43 pings, all Pong) |
+| Onboarding flow | PASS (all 22 sequences) |
+| Tutorial battle | PASS (completes with Timeover_Lose) |
+| Return to Title | PASS (TerminatedBattle → Title) |
+| NESYS errors | NON-BLOCKING (46 errors, tutorial completes) |
+| No fabricated data | PASS |
+| No NESYS pipe mock | PASS |
+| No fake player identities | PASS |
+
+### G36 Documents Created
+
+| Document/Artifact | Path |
+|----------|------|
+| G36 Final Report | docs/PHASE_2A_G36_FINAL_REPORT.md |
+| G36 Decision | artifacts/phase_2a_g36/g36_decision.json |
+| G36 Classification | artifacts/phase_2a_g36/g36_classification.md |
+| Runtime Timeline | artifacts/phase_2a_g36/runtime_timeline.json |
+
+### Recommended Next Phase
+
+Phase 2A-G37: Implement NESYS protocol in TCP server to handle initialization handshake, then test post-tutorial matching flow.
 
