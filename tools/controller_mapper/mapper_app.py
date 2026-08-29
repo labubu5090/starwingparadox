@@ -1,7 +1,6 @@
 """Starwing Controller Mapper - main application."""
 import os
 import sys
-import threading
 import time
 import tkinter as tk
 from tkinter import ttk
@@ -15,7 +14,7 @@ from process_guard import is_starwing_foreground
 from config import AxisMapping, ButtonMapping, load_config, save_config
 
 DEFAULT_ACTIONS = {
-    "forward": {"label": "Forward", "default_axis": "lx_pos", "default_key": "W"},
+    "forward": {"label": "Forward", "default_axis": "ly_neg", "default_key": "W"},
     "left": {"label": "Left", "default_axis": "lx_neg", "default_key": "A"},
     "right": {"label": "Right", "default_axis": "rx_pos", "default_key": "D"},
     "foot_pedal": {"label": "Foot Pedal", "default_button": 0, "default_key": "Space"},
@@ -32,6 +31,10 @@ DEFAULT_ACTIONS = {
 
 CREDIT_ACTION = "credit"
 
+CAPTURE_NEUTRAL = 0
+CAPTURE_WAIT_RELEASE = 1
+CAPTURE_WAIT_INPUT = 2
+
 
 class ControllerMapper:
     def __init__(self):
@@ -40,18 +43,16 @@ class ControllerMapper:
         self.running = False
         self.test_mode = False
         self.adapter_enabled = False
-        self._thread: threading.Thread | None = None
         self._capturing: str | None = None
+        self._capture_state = CAPTURE_NEUTRAL
         self._capture_prev_state = None
         self._credit_count = 0
         self._last_credit_time = 0.0
         self._prev_buttons = 0
-        self._prev_pov = 0xFFFFFFFF
-        self._prev_axes = {}
         self._root: tk.Tk | None = None
-        self._labels = {}
-        self._live_axis_labels = {}
-        self._live_button_labels = {}
+        self._labels: dict[str, tk.StringVar] = {}
+        self._live_axis_labels: dict = {}
+        self._live_button_labels: dict = {}
         self._status_label = None
         self._fg_label = None
         self._output_label = None
@@ -59,13 +60,12 @@ class ControllerMapper:
         self._adapter_btn = None
         self._credit_count_label = None
         self._credit_arm_var = None
-        self._device_var = None
         self._deadzone_var = None
 
     def start(self):
         self._root = tk.Tk()
         self._root.title("Starwing Controller Mapper")
-        self._root.geometry("520x780")
+        self._root.geometry("540x800")
         self._root.resizable(False, False)
         self._build_ui()
         self.running = True
@@ -80,24 +80,23 @@ class ControllerMapper:
         top.pack(fill=tk.X, padx=8, pady=4)
 
         ttk.Label(top, text="Controller:").pack(side=tk.LEFT)
-        self._device_var = tk.StringVar(value=str(self.config.device_id))
         devs = enumerate_devices()
         dev_names = [f"Device {d['id']}" for d in devs] if devs else ["No devices"]
+        self._device_var = tk.StringVar(value=f"Device {self.config.device_id}")
         self._device_combo = ttk.Combobox(top, values=dev_names, width=12, state="readonly",
                                           textvariable=self._device_var)
         self._device_combo.pack(side=tk.LEFT, padx=4)
+        self._device_combo.bind("<<ComboboxSelected>>", self._on_device_change)
 
         ttk.Label(top, text="Deadzone:").pack(side=tk.LEFT, padx=(12, 0))
         self._deadzone_var = tk.StringVar(value=f"{self.config.deadzone:.2f}")
-        dz_spin = ttk.Spinbox(top, from_=0.0, to=0.5, increment=0.05, width=5,
-                               textvariable=self._deadzone_var)
-        dz_spin.pack(side=tk.LEFT, padx=4)
+        ttk.Spinbox(top, from_=0.0, to=0.5, increment=0.05, width=5,
+                     textvariable=self._deadzone_var).pack(side=tk.LEFT, padx=4)
 
         self._status_label = ttk.Label(top, text="Disconnected", foreground="red")
         self._status_label.pack(side=tk.RIGHT)
 
-        sep = ttk.Separator(root, orient=tk.HORIZONTAL)
-        sep.pack(fill=tk.X, padx=8, pady=2)
+        ttk.Separator(root, orient=tk.HORIZONTAL).pack(fill=tk.X, padx=8, pady=2)
 
         ttk.Label(root, text="Live Input", font=("", 10, "bold")).pack(anchor=tk.W, padx=8)
         live_frame = ttk.Frame(root)
@@ -105,7 +104,7 @@ class ControllerMapper:
 
         axis_frame = ttk.LabelFrame(live_frame, text="Axes")
         axis_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 4))
-        for i, name in enumerate(["LX", "LY", "RX", "RY"]):
+        for name in ["LX", "LY", "RX", "RY"]:
             row = ttk.Frame(axis_frame)
             row.pack(fill=tk.X, padx=2, pady=1)
             ttk.Label(row, text=f"{name}:", width=4).pack(side=tk.LEFT)
@@ -120,10 +119,10 @@ class ControllerMapper:
         self._live_button_grid = ttk.Frame(btn_frame)
         self._live_button_grid.pack(fill=tk.BOTH, expand=True, padx=2, pady=2)
 
-        sep2 = ttk.Separator(root, orient=tk.HORIZONTAL)
-        sep2.pack(fill=tk.X, padx=8, pady=4)
+        ttk.Separator(root, orient=tk.HORIZONTAL).pack(fill=tk.X, padx=8, pady=4)
 
-        ttk.Label(root, text="Mappings", font=("", 10, "bold")).pack(anchor=tk.W, padx=8)
+        ttk.Label(root, text="Mappings (click Assign, then press button/move stick)", font=("", 10, "bold")).pack(anchor=tk.W, padx=8)
+
         canvas = tk.Canvas(root, borderwidth=0, highlightthickness=0)
         scrollbar = ttk.Scrollbar(root, orient=tk.VERTICAL, command=canvas.yview)
         self._map_frame = ttk.Frame(canvas)
@@ -147,8 +146,7 @@ class ControllerMapper:
         self._credit_count_label.pack(side=tk.RIGHT)
         self._add_mapping_row(CREDIT_ACTION, "Credit (Z)")
 
-        sep3 = ttk.Separator(root, orient=tk.HORIZONTAL)
-        sep3.pack(fill=tk.X, padx=8, pady=4)
+        ttk.Separator(root, orient=tk.HORIZONTAL).pack(fill=tk.X, padx=8, pady=4)
 
         btn_bar = ttk.Frame(root)
         btn_bar.pack(fill=tk.X, padx=8, pady=4)
@@ -161,7 +159,6 @@ class ControllerMapper:
 
         self._adapter_btn = ttk.Button(btn_bar, text="Enable Adapter", command=self._toggle_adapter)
         self._adapter_btn.pack(side=tk.RIGHT, padx=2)
-
         ttk.Button(btn_bar, text="Emergency Stop", command=self._emergency_stop).pack(side=tk.RIGHT, padx=2)
 
         bottom = ttk.Frame(root)
@@ -171,7 +168,7 @@ class ControllerMapper:
         self._output_label = ttk.Label(bottom, text="Output: None")
         self._output_label.pack(side=tk.RIGHT)
 
-        self._capture_label = ttk.Label(root, text="", foreground="blue")
+        self._capture_label = ttk.Label(root, text="", foreground="blue", font=("", 9, "bold"))
         self._capture_label.pack(fill=tk.X, padx=8)
 
         self._build_button_grid()
@@ -180,14 +177,13 @@ class ControllerMapper:
         grid = self._live_button_grid
         for child in grid.winfo_children():
             child.destroy()
-        cols = 6
         for i in range(16):
-            row_idx = i // cols
-            col_idx = i % cols
+            row_idx = i // 6
+            col_idx = i % 6
             lbl = ttk.Label(grid, text=f"B{i}:0", width=5, relief=tk.SUNKEN, anchor=tk.CENTER)
             lbl.grid(row=row_idx, column=col_idx, padx=1, pady=1, sticky=tk.EW)
             self._live_button_labels[i] = lbl
-        for c in range(cols):
+        for c in range(6):
             grid.columnconfigure(c, weight=1)
 
     def _add_mapping_row(self, action: str, label: str):
@@ -217,12 +213,21 @@ class ControllerMapper:
             return self.config.credit.key
         return ""
 
+    def _on_device_change(self, event=None):
+        sel = self._device_var.get()
+        if sel.startswith("Device "):
+            try:
+                self.config.device_id = int(sel.split(" ")[1])
+            except ValueError:
+                pass
+
     def _start_capture(self, action: str):
         if self._capturing:
             return
         self._capturing = action
-        self._capture_label.config(text=f"Capture: Move/press {action} on controller...")
+        self._capture_state = CAPTURE_WAIT_RELEASE
         self._capture_prev_state = read_joystick(self.config.device_id)
+        self._capture_label.config(text=f"Capture: Release all inputs, then press/move for '{action}'...")
 
     def _clear_mapping(self, action: str):
         self.config.button_mappings.pop(action, None)
@@ -277,8 +282,7 @@ class ControllerMapper:
         self.config = _create_default()
         for action in DEFAULT_ACTIONS:
             if action in self._labels:
-                mapping = self._get_current_mapping(action)
-                self._labels[action].set(mapping if mapping else "")
+                self._labels[action].set(self._get_current_mapping(action))
         if CREDIT_ACTION in self._labels:
             self._labels[CREDIT_ACTION].set(self.config.credit.key)
         self._deadzone_var.set(f"{self.config.deadzone:.2f}")
@@ -326,63 +330,78 @@ class ControllerMapper:
                     foreground="red" if pressed else "black"
                 )
 
+    def _inputs_neutral(self, state) -> bool:
+        dz = self.config.deadzone
+        if state.buttons != 0:
+            return False
+        if abs(normalize_axis(state.x)) > dz:
+            return False
+        if abs(normalize_axis(state.y)) > dz:
+            return False
+        if abs(normalize_axis(state.r)) > dz:
+            return False
+        return not abs(normalize_axis(state.u)) > dz
+
     def _process_capture(self, state):
-        if self._capture_prev_state is None:
+        if self._capture_state == CAPTURE_WAIT_RELEASE:
+            if self._inputs_neutral(state):
+                self._capture_state = CAPTURE_WAIT_INPUT
+                self._capture_label.config(
+                    text=f"Capture: NOW press a button or move a stick for '{self._capturing}'...")
             self._capture_prev_state = state
             return
-        prev = self._capture_prev_state
-        action = self._capturing
 
-        for bit in range(16):
-            was = is_button_pressed(prev.buttons, bit)
-            now = is_button_pressed(state.buttons, bit)
-            if now and not was:
-                self._finalize_capture(action, "button", bit)
+        if self._capture_state == CAPTURE_WAIT_INPUT:
+            if self._capture_prev_state is None:
+                self._capture_prev_state = state
                 return
+            prev = self._capture_prev_state
+            action = self._capturing
 
-        dz = self.config.deadzone
-        axes_check = [
-            ("lx_pos", normalize_axis(state.x) > dz),
-            ("lx_neg", normalize_axis(state.x) < -dz),
-            ("ly_pos", normalize_axis(state.y) > dz),
-            ("ly_neg", normalize_axis(state.y) < -dz),
-            ("rx_pos", normalize_axis(state.r) > dz),
-            ("rx_neg", normalize_axis(state.r) < -dz),
-            ("ry_pos", normalize_axis(state.u) > dz),
-            ("ry_neg", normalize_axis(state.u) < -dz),
-        ]
-        prev_axes = [
-            ("lx_pos", normalize_axis(prev.x) > dz),
-            ("lx_neg", normalize_axis(prev.x) < -dz),
-            ("ly_pos", normalize_axis(prev.y) > dz),
-            ("ly_neg", normalize_axis(prev.y) < -dz),
-            ("rx_pos", normalize_axis(prev.r) > dz),
-            ("rx_neg", normalize_axis(prev.r) < -dz),
-            ("ry_pos", normalize_axis(prev.u) > dz),
-            ("ry_neg", normalize_axis(prev.u) < -dz),
-        ]
-        for (aname, is_now), (_, was) in zip(axes_check, prev_axes):
-            if is_now and not was:
-                self._finalize_capture(action, "axis", aname)
-                return
+            for bit in range(16):
+                was = is_button_pressed(prev.buttons, bit)
+                now = is_button_pressed(state.buttons, bit)
+                if now and not was:
+                    self._finalize_capture(action, "button", bit)
+                    return
 
-        self._capture_prev_state = state
+            dz = self.config.deadzone
+            axis_checks = [
+                ("lx_pos", normalize_axis(state.x) - normalize_axis(prev.x)),
+                ("lx_neg", normalize_axis(prev.x) - normalize_axis(state.x)),
+                ("ly_pos", normalize_axis(state.y) - normalize_axis(prev.y)),
+                ("ly_neg", normalize_axis(prev.y) - normalize_axis(state.y)),
+                ("rx_pos", normalize_axis(state.r) - normalize_axis(prev.r)),
+                ("rx_neg", normalize_axis(prev.r) - normalize_axis(state.r)),
+                ("ry_pos", normalize_axis(state.u) - normalize_axis(prev.u)),
+                ("ry_neg", normalize_axis(prev.u) - normalize_axis(state.u)),
+            ]
+            for aname, delta in axis_checks:
+                if delta > dz:
+                    self._finalize_capture(action, "axis", aname)
+                    return
+
+            self._capture_prev_state = state
 
     def _finalize_capture(self, action: str, input_type: str, value):
         if action == CREDIT_ACTION:
             self.config.credit.key = "Z"
+            self._labels[action].set("Z")
         elif input_type == "button":
-            self.config.button_mappings[action] = ButtonMapping(button=value, key=DEFAULT_ACTIONS.get(action, {}).get("default_key", ""))
+            default_key = DEFAULT_ACTIONS.get(action, {}).get("default_key", "")
+            self.config.button_mappings[action] = ButtonMapping(button=value, key=default_key)
             self.config.axis_mappings.pop(action, None)
+            if action in self._labels:
+                self._labels[action].set(default_key)
         elif input_type == "axis":
-            self.config.axis_mappings[action] = AxisMapping(axis=value, key=DEFAULT_ACTIONS.get(action, {}).get("default_key", ""))
+            default_key = DEFAULT_ACTIONS.get(action, {}).get("default_key", "")
+            self.config.axis_mappings[action] = AxisMapping(axis=value, key=default_key)
             self.config.button_mappings.pop(action, None)
-
-        if action in self._labels:
-            key = DEFAULT_ACTIONS.get(action, {}).get("default_key", "Z") if action != CREDIT_ACTION else "Z"
-            self._labels[action].set(key)
+            if action in self._labels:
+                self._labels[action].set(default_key)
 
         self._capturing = None
+        self._capture_state = CAPTURE_NEUTRAL
         self._capture_prev_state = None
         self._capture_label.config(text=f"Captured: {action} -> {input_type}={value}")
         save_config(self.config)
@@ -438,17 +457,17 @@ class ControllerMapper:
             self._update_credit_display()
 
     def _get_axis_value(self, state, axis_name: str) -> float:
-        mapping = {
-            "lx_pos": normalize_axis(state.x),
-            "lx_neg": -normalize_axis(state.x),
-            "ly_pos": normalize_axis(state.y),
-            "ly_neg": -normalize_axis(state.y),
-            "rx_pos": normalize_axis(state.r),
-            "rx_neg": -normalize_axis(state.r),
-            "ry_pos": normalize_axis(state.u),
-            "ry_neg": -normalize_axis(state.u),
+        vals = {
+            "lx_pos": max(0.0, normalize_axis(state.x)),
+            "lx_neg": max(0.0, -normalize_axis(state.x)),
+            "ly_pos": max(0.0, normalize_axis(state.y)),
+            "ly_neg": max(0.0, -normalize_axis(state.y)),
+            "rx_pos": max(0.0, normalize_axis(state.r)),
+            "rx_neg": max(0.0, -normalize_axis(state.r)),
+            "ry_pos": max(0.0, normalize_axis(state.u)),
+            "ry_neg": max(0.0, -normalize_axis(state.u)),
         }
-        return max(0.0, mapping.get(axis_name, 0.0))
+        return vals.get(axis_name, 0.0)
 
     def _update_fg_status(self):
         if self._fg_label:
