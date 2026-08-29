@@ -1,0 +1,33 @@
+{
+  "original_binaries_unchanged": true,
+  "copied_targets_unchanged": true,
+  "no_debugger_attached": true,
+  "no_live_named_pipe_created": true,
+  "no_service_created_or_changed": true,
+  "no_registry_value_created_or_changed": true,
+  "no_certificate_accessed": true,
+  "no_hosts_modification": true,
+  "no_dns_modification": true,
+  "no_port_80_listener_created": true,
+  "no_proxy_created": true,
+  "no_crafted_packet_sent": true,
+  "no_request_replayed": true,
+  "no_external_host_scanned": true,
+  "no_tls_secret_collected": true,
+  "no_real_card_used": true,
+  "no_original_asset_committed": true,
+  "no_capture_file_committed": true,
+  "no_copied_pdb_committed": true,
+  "no_ida_database_committed": true,
+  "no_unrelated_process_terminated": true,
+  "all_game_processes_closed": true,
+  "wireshark_capture_closed": true,
+  "protected_hashes": {
+    "AcrGame.exe": "97800621BB91A2706FBC68AD937679C874B17AC1B2389BDDF472BE9350E62D6C",
+    "AcrGame-Win64-Shipping.exe": "CE4C89054BF7C4D833EE8AF455A485AC401EEAD12A80FFC077663A768FD47DC4",
+    "GALAXYIO.dll": "47B4E1EDD13A7F94C74FF512C2CA705B0D9EEAF9C0355673452091BD882B9C92",
+    "Lua524.dll": "5B8F9941F91C1C9683CF248A57C698496629524E5B2D031F05670C1DC23389C9",
+    "QRreader.dll": "C6DDFDF673919CE5C5B4D1393CB44B311A26D22ADDC695CFA49B44693FF99383"
+  },
+  "hash_status": "ALL_MATCH_BASELINE"
+}

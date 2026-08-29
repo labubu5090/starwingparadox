@@ -1,0 +1,12 @@
+{
+  "environment": "Windows (non-administrative)",
+  "ida_path": "C:\\Program Files\\IDA Professional 9.3",
+  "ida_version": "9.3",
+  "hex_rays_version": "9.3.0.260327",
+  "python_version": "3.x (IDA-bundled)",
+  "wireshark_path": "C:\\Program Files\\Wireshark",
+  "wireshark_version": "4.6.6",
+  "npca_p_installed": false,
+  "admin_rights": false,
+  "firewall_control": "none (non-admin)"
+}

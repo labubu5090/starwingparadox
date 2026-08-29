@@ -1,0 +1,5 @@
+{
+  "capture_file": "g21_capture.pcapng",
+  "dns_queries": [],
+  "note": "No DNS queries observed during the 90-second capture. The external IP (43.129.138.3) was likely resolved via hosts file or cached before capture started."
+}

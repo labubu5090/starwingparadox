@@ -71,3 +71,16 @@ tools/external/
 
 # Runtime trace data (Procmon PML files)
 runtime/
+
+# G21 analysis artifacts (narrow exclusions)
+tools/wireshark_g21/captures/*.pcap
+tools/wireshark_g21/captures/*.pcapng
+tools/ida_g21/targets/*.pdb
+tools/ida_g21/targets/*.i64
+tools/ida_g21/targets/*.id0
+tools/ida_g21/targets/*.id1
+tools/ida_g21/targets/*.id2
+tools/ida_g21/targets/*.nam
+tools/ida_g21/targets/*.til
+tools/ida_g21/out/*.complete
+tools/ida_g21/logs/

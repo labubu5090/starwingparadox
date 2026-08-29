@@ -1,0 +1,14 @@
+{
+  "capture_file": "g21_capture.pcapng",
+  "tcp_connections": [
+    {"src": "127.0.0.1:4338", "dst": "127.0.0.1:1042", "type": "loopback", "status": "reset", "note": "Port 1042 connection attempts rejected"},
+    {"src": "127.0.0.1:9906", "dst": "127.0.0.1:5233", "type": "loopback_http", "status": "established", "note": "First health check connection"},
+    {"src": "127.0.0.1:9907", "dst": "127.0.0.1:1042", "type": "loopback", "status": "reset", "note": "Port 1042 connection attempts rejected"},
+    {"src": "127.0.0.1:9910", "dst": "127.0.0.1:1042", "type": "loopback", "status": "reset", "note": "Port 1042 connection attempts rejected"},
+    {"src": "127.0.0.1:9912", "dst": "127.0.0.1:1042", "type": "loopback", "status": "reset", "note": "Port 1042 connection attempts rejected"}
+  ],
+  "external_connections": [],
+  "local_port_4001": false,
+  "local_port_6666": false,
+  "note": "All connections are loopback. No external TCP connections initiated during capture. Repeated connection attempts to port 1042 on localhost are being reset (likely a service that isn't running)."
+}

@@ -1,0 +1,6 @@
+{
+  "implementation_eligibility": "NONE",
+  "routes_eligible": 0,
+  "routes_implemented": 0,
+  "note": "No route has sufficient IDA function-level evidence AND runtime observation for implementation. G21 remains documentation-only."
+}
