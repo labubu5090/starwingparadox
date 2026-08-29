@@ -1,0 +1,19 @@
+{
+  "test_reconciliation": "PASS",
+  "g34_classification": "INI_CONFIG_PATH_RUNTIME_CONFIRMED",
+  "g35_classification": "PLAYABLE_FLOW_BLOCKED_AFTER_START",
+  "reconciliation_notes": "G34 proved the INI config path works and TCP connects to 127.0.0.1:6666. G35 reproduced the same INI config path (FAcrNetworkConfig::Init, MatchingServer:127.0.0.1:6666, Decide connect type INI file address). However, TCP connection failed because the game entered first-time onboarding flow. The onboarding flow is a local-only sequence that does not require network. After onboarding completes (tutorial battle), the game should retry TCP connection for online matching.",
+  "tests_passed": 19,
+  "tests_failed": 0,
+  "g34_evidence_reproduced": [
+    "FAcrNetworkConfig::Init / port[7777]",
+    "MatchingServer : 127.0.0.1:6666 (UseConfigMatchingServer : 1)",
+    "Decide connect type INI file address"
+  ],
+  "new_evidence_g35": [
+    "First-time onboarding flow: BuyCredit -> WarningDisp -> UserDataCheck -> HowToPlay -> UserDataInput -> Immersion -> Introduction -> Tutorial Battle",
+    "TCP connection attempted but never completed (DNS resolved, TCP stalled)",
+    "Credit consumption: 1 credit for BuyCredit sequence",
+    "Tutorial battle runs locally with UserId: -1"
+  ]
+}

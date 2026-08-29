@@ -1,0 +1,15 @@
+{
+  "next_blocker": "FIRST_TIME_ONBOARDING_FLOW",
+  "blocker_type": "GAME_FLOW",
+  "description": "The game detected first-time launch (no save data) and entered onboarding flow before reaching online matching. The onboarding sequence is: BuyCredit -> WarningDisp -> UserDataCheck -> HowToPlay -> UserDataInput -> Immersion -> Introduction -> Tutorial Battle. This flow runs entirely locally with no network dependency.",
+  "tcp_issue": "TCP connection to 127.0.0.1:6666 was attempted but never completed. DNS resolved successfully but TCP handshake stalled. The 60-second timeout (TimoutSec[60.000000]) may have expired during the onboarding flow.",
+  "credit_consumption": "1 credit consumed for BuyCredit sequence. Total debug credits: 3 (Z pressed 4 times, 1 consumed).",
+  "user_identity": "UserId: -1 (no player identity set). The onboarding flow requires UserDataInput which sets player identity.",
+  "classification": "PLAYABLE_FLOW_BLOCKED_AFTER_START",
+  "suggested_next_steps": [
+    "Pre-complete onboarding by creating save data that skips first-time flow",
+    "Or: complete the tutorial battle and return to title to test matching",
+    "Or: investigate if there is a way to skip onboarding in config/save data",
+    "Ensure TCP connection retries after onboarding completes"
+  ]
+}

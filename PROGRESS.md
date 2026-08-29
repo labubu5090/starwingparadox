@@ -866,3 +866,63 @@ Phase 2A-G20: Runtime Integration, Traffic Pattern Validation, and Private-Serve
 Phase 2A-G21: resolve startup route URL-path/method/JSON payload via control-flow or runtime-capture
 evidence (currently BLOCKED_EVIDENCE), then implement confirmed boot/version/resource routes.
 
+---
+
+## Phase 2A-G35 (First-Time Onboarding Blocking Matching)
+
+**Classification:** PLAYABLE_FLOW_BLOCKED_AFTER_START
+
+**Commit:** (TBD)
+
+### G35 Outcome Summary
+
+1. **INI config path reproduced (CONFIRMED).** Same evidence chain as G34:
+   `FAcrNetworkConfig::Init / port[7777]`, `MatchingServer : 127.0.0.1:6666 (UseConfigMatchingServer : 1)`,
+   `Decide connect type INI file address`.
+
+2. **TCP connection attempted but never established.** DNS resolved successfully
+   (`ResolvedAddr complete! / ResolvedAddr[127.0.0.1:6666]`) but TCP handshake stalled.
+   No `TryToConnect` or `Success to connect` messages after DNS resolution.
+   0 established TCP connections on port 6666.
+
+3. **First-time onboarding is the blocker.** Game detected first-time launch and entered
+   local-only onboarding flow: BuyCredit → WarningDisp → UserDataCheck → HowToPlay →
+   UserDataInput → Immersion → Introduction → Tutorial Battle. This flow requires no network.
+
+4. **Credit consumption:** 1 credit consumed for BuyCredit. Total debug credits: 3.
+   UserId: -1 (no player identity set during onboarding).
+
+5. **Tutorial battle runs locally.** `CurrentBattleSequence:Battle`,
+   `BattleSequencePlayer:E_BattlePlayer`, `BattlePlayerId:0`, `UserId:-1`.
+
+6. **No non-Ping frames captured.** TCP was never connected, so no game protocol frames exchanged.
+
+### G35 Quality Gates
+
+| Gate | Result |
+|------|--------|
+| Full test suite | 19 G34 tests pass |
+| Ruff | OK |
+| No fabricated network responses | PASS |
+| No fake player identities | PASS |
+| No NESYS pipe mock | PASS |
+
+### G35 Documents Created
+
+| Document/Artifact | Path |
+|----------|------|
+| G35 Final Report | docs/PHASE_2A_G35_FINAL_REPORT.md |
+| Runtime Timeline | artifacts/phase_2a_g35/runtime_timeline.json |
+| TCP Frames | artifacts/phase_2a_g35/tcp_frames.json |
+| First Non-Ping Message | artifacts/phase_2a_g35/first_non_ping_message.json |
+| Response Eligibility | artifacts/phase_2a_g35/response_eligibility.json |
+| Next Blocker | artifacts/phase_2a_g35/next_blocker.json |
+| Test Reconciliation | artifacts/phase_2a_g35/test_reconciliation.json |
+| Safety Results | artifacts/phase_2a_g35/safety_results.json |
+
+### Recommended Next Phase
+
+Phase 2A-G36: Pre-complete first-time onboarding by creating save data that marks
+UserDataCheck/HowToPlay/UserDataInput/Immersion/Introduction as complete, then
+re-test matching flow with TCP connection.
+

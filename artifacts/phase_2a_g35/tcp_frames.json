@@ -1,0 +1,26 @@
+{
+  "tcp_frames_captured": 0,
+  "distinct_message_types": 0,
+  "first_non_ping_frame": null,
+  "tcp_status": "NOT_CONNECTED",
+  "reason": "TCP connection attempted but never established. DNS resolved successfully but TCP handshake did not complete. Game entered first-time onboarding flow (BuyCredit -> WarningDisp -> UserDataCheck -> HowToPlay -> UserDataInput -> Immersion -> Introduction -> Tutorial Battle) before TCP connection finished.",
+  "tcp_evidence": [
+    {"line": 110013, "keyword": "UCPP_TcpThread::Connect / Start Connect. / addr[127.0.0.1:6666]"},
+    {"line": 110014, "keyword": "UCPP_TcpThread::SetupConnect / TargetAddress[127.0.0.1:6666]"},
+    {"line": 110015, "keyword": "Failed to post Ping : Lost Connection"},
+    {"line": 110409, "keyword": "ResolvedAddress / Resolve Start! / DomainName[127.0.0.1:6666]"},
+    {"line": 110410, "keyword": "FResolveInfo Success! / Connect to Address"},
+    {"line": 110411, "keyword": "ResolvedAddr complete! / ResolvedAddr[127.0.0.1:6666]"}
+  ],
+  "missing_evidence": [
+    "UCPP_TcpThread::TryToConnect",
+    "UCPP_TcpThread::SetStatus / Success to connect",
+    "UCPP_TcpThread::SetStatus / Begin connecting",
+    "OnReceivePong",
+    "Ping id"
+  ],
+  "ping_frames": 0,
+  "pong_frames": 0,
+  "non_ping_frames": 0,
+  "server_port_6666_established_at_capture": 0
+}
