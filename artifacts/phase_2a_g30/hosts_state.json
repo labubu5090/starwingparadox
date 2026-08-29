@@ -1,0 +1,9 @@
+﻿{
+  "phase": "G30",
+  "hosts_file_sha256_before": "8DCDA7772146E199D24733DE166F3E99B04346DEC198CEB14AF0B34DF06C82FC",
+  "hosts_file_sha256_after": "8DCDA7772146E199D24733DE166F3E99B04346DEC198CEB14AF0B34DF06C82FC",
+  "hosts_file_modified": false,
+  "hosts_mapping_active": true,
+  "backup_path": "C:\Users\KAHO\Pictures\Starwing\backups\hosts-before-g30-2026-08-29_19-38-22.txt",
+  "backup_sha256": "8DCDA7772146E199D24733DE166F3E99B04346DEC198CEB14AF0B34DF06C82FC"
+}

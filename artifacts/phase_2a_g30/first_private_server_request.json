@@ -1,0 +1,13 @@
+﻿{
+  "phase": "G30",
+  "first_private_server_request": "POST http://dev.starwing.jp/mock/matching/server",
+  "http_method": "POST",
+  "http_path": "/mock/matching/server",
+  "http_host": "dev.starwing.jp",
+  "port": 80,
+  "proxy_working": true,
+  "game_reached_title": false,
+  "game_stuck_at": "Boot - NesysControlErrorMessage",
+  "new_blocker": "NESYS connection error (port 1042)",
+  "classification": "NESYS_CONNECTION_ERROR_BLOCKED"
+}

@@ -1,0 +1,14 @@
+﻿{
+  "phase": "G30",
+  "hosts_file_exists": true,
+  "hosts_sha256_before": "8DCDA7772146E199D24733DE166F3E99B04346DEC198CEB14AF0B34DF06C82FC",
+  "hosts_size": 855,
+  "hosts_readonly": false,
+  "hosts_already_has_mapping": true,
+  "hosts_mapping": "127.0.0.1    dev.starwing.jp",
+  "dns_resolution": "127.0.0.1",
+  "backup_path": "C:\Users\KAHO\Pictures\Starwing\backups\hosts-before-g30-2026-08-29_19-38-22.txt",
+  "backup_sha256": "8DCDA7772146E199D24733DE166F3E99B04346DEC198CEB14AF0B34DF06C82FC",
+  "byte_for_byte_match": true,
+  "timestamp": "2026-08-29_19-38-22"
+}

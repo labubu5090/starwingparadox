@@ -1,0 +1,19 @@
+﻿{
+  "phase": "G30",
+  "classification": "NESYS_CONNECTION_ERROR_BLOCKED",
+  "nesys_error": "NesysControlErrorMessage / id[0] status[4] option[0]",
+  "nesys_error_count": 90,
+  "title_reached": false,
+  "z_input_detected": false,
+  "http_requests_sent": false,
+  "proxy_received_requests": false,
+  "proxy_working": true,
+  "hosts_mapping_active": true,
+  "dns_resolution": "127.0.0.1",
+  "port_80_listening": true,
+  "port_4001_listening": true,
+  "proxy_test_passed": true,
+  "game_stuck_at": "Boot - NesysControlErrorMessage",
+  "new_blocker": "NESYS connection error (port 1042)",
+  "g31_decision": "NESYS_MOCK_REQUIRED"
+}
