@@ -1,0 +1,15 @@
+﻿{
+  "phase": "G30R",
+  "response_fields": {
+    "ip_addr": {
+      "type": "string",
+      "value": "127.0.0.1:6666",
+      "required_by_client": true,
+      "client_parsed": true,
+      "success_condition": "_IsSuccess[1]"
+    }
+  },
+  "game_acceptance_proof": "OnReceiveResponseMatchingServer / _IsSuccess[1] IPAddress[127.0.0.1:6666]",
+  "response_contract": "CONFIRMED",
+  "next_boundary": "NESYS initialization required before matching"
+}

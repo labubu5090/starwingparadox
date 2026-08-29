@@ -18,13 +18,19 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
         content_length = int(self.headers.get('Content-Length', 0))
         body = self.rfile.read(content_length)
         
-        target_url = f"{TARGET_BASE}{self.path}"
-        logger.info("[%s] PROXY POST %s -> %s (%d bytes)", correlation_id, self.path, target_url, len(body))
+        # Strip /mock prefix: game sends /mock/matching/server -> /matching/server
+        upstream_path = self.path
+        if upstream_path.startswith("/mock"):
+            upstream_path = upstream_path[5:]  # strip "/mock"
+        
+        target_url = f"{TARGET_BASE}{upstream_path}"
+        logger.info("[%s] PROXY %s %s -> %s (%d bytes)", correlation_id, self.command, self.path, target_url, len(body))
         
         headers = {k: v for k, v in self.headers.items() if k.lower() not in ('host', 'transfer-encoding')}
         headers['Host'] = '127.0.0.1:4001'
         
         req = urllib.request.Request(target_url, data=body, headers=headers, method='POST')
+        logger.info("[%s] Upstream request: %s %s", correlation_id, req.method, req.full_url)
         
         try:
             with urllib.request.urlopen(req, timeout=30) as resp:

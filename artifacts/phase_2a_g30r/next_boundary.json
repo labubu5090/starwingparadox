@@ -1,0 +1,8 @@
+﻿{
+  "phase": "G30R",
+  "next_boundary": "NESYS initialization",
+  "error_message": "Error No MatchingServer so initialize Nesys before.",
+  "game_state": "Matching server discovered, NESYS required for matching entry",
+  "tcp_6666_attempted": false,
+  "classification": "GAME_ACCEPTED_MATCHING_DISCOVERY_RESPONSE"
+}

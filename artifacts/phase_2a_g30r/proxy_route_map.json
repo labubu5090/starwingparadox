@@ -1,0 +1,12 @@
+﻿{
+  "phase": "G30R",
+  "incoming_path": "/mock/matching/server",
+  "upstream_path": "/matching/server",
+  "prefix_stripped": "/mock",
+  "proxy_host": "127.0.0.1:80",
+  "upstream_host": "127.0.0.1:4001",
+  "host_header_preserved": false,
+  "host_header_set_to": "127.0.0.1:4001",
+  "external_fallback": false,
+  "g30_defect": "proxy forwarded /mock/matching/server to Python which had no route for /mock/matching/server"
+}
