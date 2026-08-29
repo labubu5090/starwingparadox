@@ -1,0 +1,500 @@
+﻿[2026.08.29-10.40.04:239][881]LogAcrOutgame: ACPP_SystemDataCheck::SetNextMode[End](20)
+[2026.08.29-10.40.04:239][881]LogAcrOutgame: ACPP_SystemDataCheck::Tick / CheckVersion / IsOnlineStatus[0] CheckPackage[1] CheckMasterData[1]
+[2026.08.29-10.40.04:254][882]LogOutGameSequenceWork: Before GetNextGameSequence OldSequenceSelect:AdvertiseMovie _NowGameSequence:SystemDataCheck)
+[2026.08.29-10.40.04:254][882]LogOutGameSequenceWork: After GetNextGameSequence NextSequenceSelect:SystemDataCheck → $Sequence:PromotionMovie) NowPlayBgmType:None
+[2026.08.29-10.40.04:254][882]LogGameSequence: RequestGameSequence:[Old:None NextSequence:PromotionMovie]
+[2026.08.29-10.40.04:254][882]LogAcrOutgame: ACPP_MainMenuControlActor::OnRecivedChangeSequence [TerminateLevel:AdvertiseMovie New:PromotionMovie IsLoadOutGameVisual:0 RequestLoadOutGameVisual:0]
+[2026.08.29-10.40.04:254][882]LogLevel: ActivateLevel /Game/Stage/OutGame/MainMenu/SL_PromotionMovie 1 0 0
+[2026.08.29-10.40.04:254][882]LogAcrOutgame: ACPP_MainMenuControlActor::OnRecivedChangeSequence Load SubLevelName(SL_PromotionMovie)
+[2026.08.29-10.40.04:254][882]LogAcrOutgame: UAdvertiseSequenceWork::Activate
+[2026.08.29-10.40.04:254][882]LogAcrOutgame: ACPP_SystemDataCheck::SetNextMode(PromotionMovie) / isError[0]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_110]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_110] World[World /Game/Stage/OutGame/MainMenu/SL_PromotionMovie.SL_PromotionMovie]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_111]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_111] World[World /Game/Stage/OutGame/MainMenu/SL_PromotionMovie.SL_PromotionMovie]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_112]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_112] World[World /Game/Stage/OutGame/MainMenu/SL_PromotionMovie.SL_PromotionMovie]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_113]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_113] World[World /Game/Stage/OutGame/MainMenu/SL_PromotionMovie.SL_PromotionMovie]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_114]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_114] World[World /Game/Stage/OutGame/MainMenu/SL_PromotionMovie.SL_PromotionMovie]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_115]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_115] World[World /Game/Stage/OutGame/MainMenu/SL_PromotionMovie.SL_PromotionMovie]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_116]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_116] World[World /Game/Stage/OutGame/MainMenu/SL_PromotionMovie.SL_PromotionMovie]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_117]
+[2026.08.29-10.40.04:272][883]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_117] World[World /Game/Stage/OutGame/MainMenu/SL_PromotionMovie.SL_PromotionMovie]
+[2026.08.29-10.40.04:272][883]LogAcrOutgame: ACPP_MainMenuControlActor::SubLevelLoadStreamLevel RecivedChangeLevel:PromotionMovie
+[2026.08.29-10.40.04:272][883]LogGameSequence: Called SetGameSequence Arg:PromotionMovie Prepare:0
+[2026.08.29-10.40.04:272][883]LogAcrOutgame: ACPP_MainMenuControlActor::OnTerminatedChangeSequence [TerminateLevel:AdvertiseMovie New:SystemDataCheck]
+[2026.08.29-10.40.04:272][883]LogSystemUtility: USystemUtility::OutputMemoryStats / World[World /Game/Stage/OutGame/MainMenu/MainMenu.MainMenu]
+	AvailablePhysical 56499027968(55174832.00KB, 53881.67MB, 52.6188GB)
+	 AvailableVirtual 140727627145216(137429319680.00KB, 134208320.00MB, 131062.8125GB)
+	     UsedPhysical 1343631360(1312140.00KB, 1281.39MB, 1.2514GB)
+	 PeakUsedPhysical 1351303168(1319632.00KB, 1288.70MB, 1.2585GB)
+	      UsedVirtual 3738996736(3651364.00KB, 3565.79MB, 3.4822GB)
+	  PeakUsedVirtual 3738996736(3651364.00KB, 3565.79MB, 3.4822GB)
+[2026.08.29-10.40.04:272][883]LogGameSequence: SetGameSequence Old:[SystemDataCheck] New:[PromotionMovie] Req:[PromotionMovie]
+[2026.08.29-10.40.04:272][883]LogAcrOutgame: ACPP_MainMenuControlActor::OnChangedChangeSequence [TerminateLevel:SystemDataCheck New:PromotionMovie]
+[2026.08.29-10.40.04:272][883]LogLevel: ActivateLevel /Game/Stage/OutGame/MainMenu/SL_SystemDataCheck 0 0 1
+[2026.08.29-10.40.04:273][883]LogAcrWidget: ACPP_WidgetHolderBase::RemoveWidget() [WBP_SystemDataCheckMainDisp_C_0]
+[2026.08.29-10.40.04:273][883]LogAcrWidget: ACPP_WidgetHolderBase::RemoveWidget() [WBP_SystemDataCheckSubDisp_C_0]
+[2026.08.29-10.40.04:273][883]LogResident: URankingDownload::SetEnable / EnableFlag[1]
+[2026.08.29-10.40.04:273][883]LogCPP_BumHudBase:Warning: ACPP_BumHudBase::RemoveHasHudArray()：inWidget(WBP_SystemDataCheckMainDisp_C_0) Has not
+[2026.08.29-10.40.04:273][883]LogAcrWidget: ACPP_WidgetHolderBase::RemoveWidget() [WBP_SystemDataCheckMainDisp_C_0]
+[2026.08.29-10.40.04:273][883]LogCPP_BumHudBase:Warning: ACPP_BumHudBase::RemoveHasHudArray()：inWidget(WBP_SystemDataCheckSubDisp_C_0) Has not
+[2026.08.29-10.40.04:273][883]LogAcrWidget: ACPP_WidgetHolderBase::RemoveWidget() [WBP_SystemDataCheckSubDisp_C_0]
+[2026.08.29-10.40.04:273][883]LogGameSequence: UGameSequenceWork::OnRemoveWorld / OldLevelName[/Game/Stage/OutGame/MainMenu/SL_SystemDataCheck] OldWorldName[World /Game/Stage/OutGame/MainMenu/MainMenu.MainMenu]
+[2026.08.29-10.40.04:273][883]LogStreaming:Display: UWorld::RemoveFromWorld for /Game/Stage/OutGame/MainMenu/SL_SystemDataCheck took  0.15 ms
+[2026.08.29-10.40.04:287][884]LogAcrOutgame: ACPP_MainMenuControlActor::SubLevelUnLoadStreamLevel
+[2026.08.29-10.40.04:287][884]LogLevel: ActivateLevel /Game/Stage/OutGame/MainMenu/SL_PromotionMovie 1 1 1
+[2026.08.29-10.40.04:287][884]LogAcrOutgame: ACPP_MainMenuControlActor::SubLevelUnLoadStreamLevel GameSequence:PromotionMovie Load
+[2026.08.29-10.40.04:287][884]LogLevel: garbage type:B [MainMenu]
+[2026.08.29-10.40.04:293][884]LogGameSequence: SetGameLoopType:[Advertise]->[Advertise]
+[2026.08.29-10.40.04:293][884]LogAcrWidget: UCPP_AcrUserWidget::SetAddToViewportProperties() [WBP_PromotionMain_C_0]
+[2026.08.29-10.40.04:293][884]LogAcrWidget: UCPP_AcrUserWidget::AddToViewport AddHasHudArray: [WBP_PromotionMain_C_0]
+[2026.08.29-10.40.04:293][884]LogAcrWidget: UCPP_AcrUserWidget::AddToViewport AddToViewport [WBP_PromotionMain_C_0]
+[2026.08.29-10.40.04:294][884]LogAcrWidget: UCPP_AcrUserWidget::SetAddToViewportProperties() [WBP_WarningAdvertiseSub_C_0]
+[2026.08.29-10.40.04:294][884]LogAcrWidget: UCPP_AcrUserWidget::AddToViewport AddHasHudArray: [WBP_WarningAdvertiseSub_C_0]
+[2026.08.29-10.40.04:294][884]LogAcrWidget: UCPP_AcrUserWidget::AddWidgetToChildWindow: 
+[2026.08.29-10.40.04:294][884]LogAcrWidget: UCPP_AcrUserWidget::AddToViewport AddWidgetToChildWindow: [WBP_WarningAdvertiseSub_C_0:1]
+[2026.08.29-10.40.04:294][884]LogAcrOutgame: ACPP_PromotionMovieMain::CreateStageDirection : Media Resource [FileMediaSource'/Game/Movies/OutGame/Advertise_demo/GAL_PV2_short_1920.GAL_PV2_short_1920']
+[2026.08.29-10.40.04:294][884]LogOutGameSequenceWork: Before NextGameSequence_EntranceSound  {NextSequence(PromotionMovie) BgmType(Now:None)}
+[2026.08.29-10.40.04:294][884]LogOutGameSequenceWork: NextGameSequence_EntranceSound PlayBgmType NextSequence(PromotionMovie) BgmType(Now:None → Next:B_PV)
+[2026.08.29-10.40.04:294][884]LogSystemUtility: USystemUtility::OutputMemoryStats / World[World /Game/Stage/OutGame/MainMenu/MainMenu.MainMenu]
+	AvailablePhysical 56502239232(55177968.00KB, 53884.73MB, 52.6218GB)
+	 AvailableVirtual 140727628259328(137429327872.00KB, 134208328.00MB, 131062.8203GB)
+	     UsedPhysical 1337749504(1306396.00KB, 1275.78MB, 1.2459GB)
+	 PeakUsedPhysical 1351303168(1319632.00KB, 1288.70MB, 1.2585GB)
+	      UsedVirtual 3732865024(3645376.00KB, 3559.94MB, 3.4765GB)
+	  PeakUsedVirtual 3739258880(3651620.00KB, 3566.04MB, 3.4825GB)
+[2026.08.29-10.40.04:294][884]LogGameSequence: UGameSequenceWork::OnAddWorld / CurrentLevelName[/Game/Stage/OutGame/MainMenu/SL_PromotionMovie] CurrentWorldName[World /Game/Stage/OutGame/MainMenu/MainMenu.MainMenu]
+[2026.08.29-10.40.04:294][884]LogStreaming:Display: Detailed AddToWorld stats for '/Game/Stage/OutGame/MainMenu/SL_PromotionMovie' - Total   1.85ms
+[2026.08.29-10.40.04:294][884]LogStreaming:Display: Move Actors             :   0.00 ms
+[2026.08.29-10.40.04:294][884]LogStreaming:Display: Shift Actors            :   0.00 ms
+[2026.08.29-10.40.04:294][884]LogStreaming:Display: Update Components       :   0.01 ms
+[2026.08.29-10.40.04:294][884]LogStreaming:Display: Init BSP Phys           :   0.00 ms
+[2026.08.29-10.40.04:294][884]LogStreaming:Display: Init Actor Phys         :   0.00 ms
+[2026.08.29-10.40.04:294][884]LogStreaming:Display: Init Actors             :   0.00 ms
+[2026.08.29-10.40.04:294][884]LogStreaming:Display: Initialize              :   1.79 ms
+[2026.08.29-10.40.04:294][884]LogStreaming:Display: Cross Level Refs        :   0.00 ms
+[2026.08.29-10.40.04:294][884]LogStreaming:Display: Sort Actor List         :   0.00 ms
+[2026.08.29-10.40.04:294][884]LogStreaming:Display: Perform Last Step       :   0.00 ms
+[2026.08.29-10.40.04:303][885]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayUniqueAnimation / Widget(WBP_WarningAdvertiseSub_C_0) UniqueAnimation[0](Ani_01_INST)
+[2026.08.29-10.40.04:303][885]LogOutGameSequenceWork: ACPP_OutGameSequenceWork::NextGameSequence_Entrance() NextSequenceSelect:PromotionMovie OldSequenceSelect:SystemDataCheck NowPlayBgmType:B_PV
+[2026.08.29-10.40.04:304][885]LogAcrWidget: UCPP_AcrUserWidget::AcrRemoveFromParent() [WBP_ErrorAnnounce_C_3]
+[2026.08.29-10.40.04:304][885]LogAcrHud: UCPP_ErrorAnnounceWidget::NativeDestruct
+[2026.08.29-10.40.04:304][885]LogAcrWidget: UCPP_AcrUserWidget::SetAddToViewportProperties() [WBP_ErrorAnnounce_C_4]
+[2026.08.29-10.40.04:304][885]LogAcrWidget: UCPP_AcrUserWidget::AddToViewport AddHasHudArray: [WBP_ErrorAnnounce_C_4]
+[2026.08.29-10.40.04:305][885]LogAcrWidget: UCPP_AcrUserWidget::AddToViewport AddToViewport [WBP_ErrorAnnounce_C_4]
+[2026.08.29-10.40.04:305][885]LogAcrHud: UCPP_ErrorAnnounceWidget::NativeConstruct
+[2026.08.29-10.40.04:339][886]LogCPPGameViewportClient: Start GameViewportClient Fade In. [FadeTime:1.000000 FadeTimer:1.000000 FadeColor(r:0.000000 g:0.000000 b:0.000000 a:0.000000) FadeOpacity:0.000000] CheckOnceFadeIn:0
+[2026.08.29-10.40.04:339][886]LogCPPGameViewportClient: Start GameViewportClient Fade In. [FadeTime:1.000000 FadeTimer:1.000000 FadeColor(r:0.000000 g:0.000000 b:0.000000 a:0.000000) FadeOpacity:0.000000] CheckOnceFadeIn:0
+[2026.08.29-10.40.04:339][886]LogHUDBase: ACPP_HudBase::FadeIn 0.000000(Sub:1)
+[2026.08.29-10.40.04:340][886]LogCPPGameViewportClient: Check GameViewportClient Fade In. [PrevColor(r:0.000000 g:0.000000 b:0.000000 a:0.000000)] CheckOnceFadeIn:1
+[2026.08.29-10.40.04:340][886]LogCPPGameViewportClient: Check GameViewportClient Fade In. [PrevColor(r:0.000000 g:0.000000 b:0.000000 a:0.000000)] CheckOnceFadeIn:1
+[2026.08.29-10.40.05:809][979]LogOnlineObserver: UOnlineObserverWork::Report / Observe < Revival:1 Death:0 > LiveBits < WebServer:0 Nesys:0 Reception:1 Game:1 Testmode:1 GameConnect:0 HttpSuccess:0>
+[2026.08.29-10.40.05:809][979]LogOnlineObserver: UOnlineObserverWork::SetHttpSuccess / b:0
+[2026.08.29-10.40.05:809][979]LogOnlineObserver: UOnlineObserverWork::SetHttpSuccess / bWebServerLive[0] bNesysServerLive[0] bNesicaReception[1] bLiveFromTestmode[1] bLiveFromGame[1] bGameConnect[0] bHttpSuccess[0]
+[2026.08.29-10.40.05:809][979]LogHttpReq:Warning: http:unknown(timeout / network off) error
+[2026.08.29-10.40.05:809][979]LogAcrNetwork: UWebServerWork::OnReceiveResponseMatchingServer / _IsSuccess[0] IPAddress[]
+[2026.08.29-10.40.05:809][979]LogOnlineObserver: UOnlineObserverWork::OnReceiveMatchingServer / bChangeServer[1] IsSuccess[0] IPAddress[]
+[2026.08.29-10.40.08:276][131]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.08:277][131]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.12:277][379]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.12:277][379]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.14:308][505]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayUniqueAnimation / Widget(WBP_WarningAdvertiseSub_C_0) UniqueAnimation[1](Ani_02_INST)
+[2026.08.29-10.40.16:277][627]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.16:277][627]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.20:277][875]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.20:277][875]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.24:277][123]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.24:278][123]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.24:309][125]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayUniqueAnimation / Widget(WBP_WarningAdvertiseSub_C_0) UniqueAnimation[2](Ani_03_INST)
+[2026.08.29-10.40.28:277][371]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.28:277][371]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.32:278][619]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.32:278][619]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.34:309][745]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayUniqueAnimation / Widget(WBP_WarningAdvertiseSub_C_0) UniqueAnimation[3](Ani_04_INST)
+[2026.08.29-10.40.36:277][867]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.36:277][867]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.40:277][115]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.40:277][115]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.44:278][363]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.44:278][363]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.44:325][366]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayUniqueAnimation / Widget(WBP_WarningAdvertiseSub_C_0) UniqueAnimation[0](Ani_01_INST)
+[2026.08.29-10.40.48:278][611]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.48:278][611]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.52:278][859]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.52:278][859]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.54:325][986]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayUniqueAnimation / Widget(WBP_WarningAdvertiseSub_C_0) UniqueAnimation[1](Ani_02_INST)
+[2026.08.29-10.40.56:278][107]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.56:278][107]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.59:440][304]LogOutGameSequenceWork: Before GetNextGameSequence OldSequenceSelect:SystemDataCheck _NowGameSequence:PromotionMovie)
+[2026.08.29-10.40.59:440][304]LogOutGameSequenceWork: After GetNextGameSequence NextSequenceSelect:PromotionMovie → $Sequence:Title) NowPlayBgmType:B_PV
+[2026.08.29-10.40.59:440][304]LogGameSequence: RequestGameSequence:[Old:None NextSequence:Title]
+[2026.08.29-10.40.59:440][304]LogAcrOutgame: ACPP_MainMenuControlActor::OnRecivedChangeSequence [TerminateLevel:SystemDataCheck New:Title IsLoadOutGameVisual:0 RequestLoadOutGameVisual:0]
+[2026.08.29-10.40.59:440][304]LogLevel: ActivateLevel /Game/Stage/OutGame/MainMenu/SL_Title 1 0 0
+[2026.08.29-10.40.59:440][304]LogAcrOutgame: ACPP_MainMenuControlActor::OnRecivedChangeSequence Load SubLevelName(SL_Title)
+[2026.08.29-10.40.59:490][306]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_118]
+[2026.08.29-10.40.59:490][306]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_118] World[World /Game/Stage/OutGame/MainMenu/SL_Title.SL_Title]
+[2026.08.29-10.40.59:490][306]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_119]
+[2026.08.29-10.40.59:490][306]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_119] World[World /Game/Stage/OutGame/MainMenu/SL_Title.SL_Title]
+[2026.08.29-10.40.59:490][306]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_120]
+[2026.08.29-10.40.59:490][306]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_120] World[World /Game/Stage/OutGame/MainMenu/SL_Title.SL_Title]
+[2026.08.29-10.40.59:490][306]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_121]
+[2026.08.29-10.40.59:491][306]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_121] World[World /Game/Stage/OutGame/MainMenu/SL_Title.SL_Title]
+[2026.08.29-10.40.59:491][306]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_122]
+[2026.08.29-10.40.59:491][306]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_122] World[World /Game/Stage/OutGame/MainMenu/SL_Title.SL_Title]
+[2026.08.29-10.40.59:491][306]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_123]
+[2026.08.29-10.40.59:491][306]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_123] World[World /Game/Stage/OutGame/MainMenu/SL_Title.SL_Title]
+[2026.08.29-10.40.59:491][306]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_124]
+[2026.08.29-10.40.59:491][306]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_124] World[World /Game/Stage/OutGame/MainMenu/SL_Title.SL_Title]
+[2026.08.29-10.40.59:491][306]LogMaterial: UMaterialParameterCollectionInstance::Constructor / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_125]
+[2026.08.29-10.40.59:491][306]LogMaterial: UMaterialParameterCollectionInstance::SetCollection / name[MaterialParameterCollectionInstance /Engine/Transient.MaterialParameterCollectionInstance_125] World[World /Game/Stage/OutGame/MainMenu/SL_Title.SL_Title]
+[2026.08.29-10.40.59:491][306]LogAcrOutgame: ACPP_MainMenuControlActor::SubLevelLoadStreamLevel RecivedChangeLevel:Title
+[2026.08.29-10.40.59:491][306]LogGameSequence: Called SetGameSequence Arg:Title Prepare:0
+[2026.08.29-10.40.59:491][306]LogAcrOutgame: ACPP_MainMenuControlActor::OnTerminatedChangeSequence [TerminateLevel:SystemDataCheck New:PromotionMovie]
+[2026.08.29-10.40.59:491][306]LogSystemUtility: USystemUtility::OutputMemoryStats / World[World /Game/Stage/OutGame/MainMenu/MainMenu.MainMenu]
+	AvailablePhysical 56167841792(54851408.00KB, 53565.83MB, 52.3104GB)
+	 AvailableVirtual 140726929842176(137428639744.00KB, 134207656.00MB, 131062.1641GB)
+	     UsedPhysical 1509486592(1474108.00KB, 1439.56MB, 1.4058GB)
+	 PeakUsedPhysical 1888268288(1844012.00KB, 1800.79MB, 1.7586GB)
+	      UsedVirtual 4148490240(4051260.00KB, 3956.31MB, 3.8636GB)
+	  PeakUsedVirtual 4523896832(4417868.00KB, 4314.32MB, 4.2132GB)
+[2026.08.29-10.40.59:491][306]LogGameSequence: SetGameSequence Old:[PromotionMovie] New:[Title] Req:[Title]
+[2026.08.29-10.40.59:491][306]LogGameSequence: StartGamePlan [None](0)->[None](0)
+[2026.08.29-10.40.59:491][306]LogPlayingGameWork: UPlayingGameWork::SetGameMode / GameMode[ModeNormal](0)
+[2026.08.29-10.40.59:491][306]LogBattleSetting: UBattleSettingWork::SetGameMode:ModeNormal(0) Net:0(7cb4e930)
+[2026.08.29-10.40.59:491][306]LogBattleSetting: UBattleSettingWork::SetPlayerMaxNum / PlayerMaxNum:16
+[2026.08.29-10.40.59:491][306]LogBattleSetting: UBattleSettingWork::SetPlayerTeamMaxNum / PlayerTeamMaxNum:8
+[2026.08.29-10.40.59:491][306]LogGameSequence: StartGameMode [ModeNormal](0)->[ModeNormal](0)
+[2026.08.29-10.40.59:491][306]LogGameSequence: SetBossModeLevel [None](0)->[None](0)
+[2026.08.29-10.40.59:491][306]LogAcrOutgame: ACPP_MainMenuControlActor::OnChangedChangeSequence [TerminateLevel:PromotionMovie New:Title]
+[2026.08.29-10.40.59:491][306]LogLevel: ActivateLevel /Game/Stage/OutGame/MainMenu/SL_PromotionMovie 0 0 1
+[2026.08.29-10.40.59:491][306]LogAcrHud: UCPP_InsertStartWidget::NativeDestruct
+[2026.08.29-10.40.59:491][306]LogAcrWidget: ACPP_WidgetHolderBase::RemoveWidget() [WBP_PromotionMain_C_0]
+[2026.08.29-10.40.59:491][306]LogAcrHud: UCPP_InsertStartWidget::NativeDestruct
+[2026.08.29-10.40.59:492][306]LogAcrWidget: ACPP_WidgetHolderBase::RemoveWidget() [WBP_WarningAdvertiseSub_C_0]
+[2026.08.29-10.40.59:492][306]LogCPP_BumHudBase:Warning: ACPP_BumHudBase::RemoveHasHudArray()：inWidget(WBP_PromotionMain_C_0) Has not
+[2026.08.29-10.40.59:492][306]LogAcrWidget: UCPP_AcrUserWidget::AcrRemoveFromParent() [WBP_PromotionMain_C_0]
+[2026.08.29-10.40.59:492][306]LogCPP_BumHudBase:Warning: ACPP_BumHudBase::RemoveHasHudArray()：inWidget(WBP_WarningAdvertiseSub_C_0) Has not
+[2026.08.29-10.40.59:492][306]LogAcrWidget: UCPP_AcrUserWidget::AcrRemoveFromParent() [WBP_WarningAdvertiseSub_C_0]
+[2026.08.29-10.40.59:492][306]LogGameSequence: UGameSequenceWork::OnRemoveWorld / OldLevelName[/Game/Stage/OutGame/MainMenu/SL_PromotionMovie] OldWorldName[World /Game/Stage/OutGame/MainMenu/MainMenu.MainMenu]
+[2026.08.29-10.40.59:492][306]LogStreaming:Display: UWorld::RemoveFromWorld for /Game/Stage/OutGame/MainMenu/SL_PromotionMovie took  0.33 ms
+[2026.08.29-10.40.59:504][307]LogAcrOutgame: ACPP_MainMenuControlActor::SubLevelUnLoadStreamLevel
+[2026.08.29-10.40.59:504][307]LogLevel: ActivateLevel /Game/Stage/OutGame/MainMenu/SL_Title 1 1 1
+[2026.08.29-10.40.59:504][307]LogAcrOutgame: ACPP_MainMenuControlActor::SubLevelUnLoadStreamLevel GameSequence:Title Load
+[2026.08.29-10.40.59:504][307]LogLevel: garbage type:B [MainMenu]
+[2026.08.29-10.40.59:525][307]LogAcrOutgame: ACPP_TitleMain::Init / fAdvertiseTransitionTimer[15.000000]
+[2026.08.29-10.40.59:525][307]LogAcrOutgame: ACPP_TitleMain::BeginPlay / GGameUserSettingsIni[C:/Users/KAHO/AppData/Local/AcrGame/Saved/Config/WindowsNoEditor/GameUserSettings.ini] GetTextureQuality[3]
+[2026.08.29-10.40.59:525][307]LogOutGameSequenceWork: Before NextGameSequence_EntranceSound  {NextSequence(Title) BgmType(Now:B_PV)}
+[2026.08.29-10.40.59:525][307]LogOutGameSequenceWork: NextGameSequence_EntranceSound StopBgmType NextSequence(Title) BgmType(B_PV)
+[2026.08.29-10.40.59:525][307]LogOutGameSequenceWork: NextGameSequence_EntranceSound PlayBgmType NextSequence(Title) BgmType(Now:B_PV → Next:B_Title)
+[2026.08.29-10.40.59:525][307]LogGameSequence: SetGameLoopType:[Advertise]->[Title]
+[2026.08.29-10.40.59:526][307]LogAcrWidget: UCPP_AcrUserWidget::SetAddToViewportProperties() [WBP_Title_MainDisplay_C_0]
+[2026.08.29-10.40.59:526][307]LogAcrWidget: UCPP_AcrUserWidget::AddToViewport AddHasHudArray: [WBP_Title_MainDisplay_C_0]
+[2026.08.29-10.40.59:526][307]LogAcrWidget: UCPP_AcrUserWidget::AddToViewport AddToViewport [WBP_Title_MainDisplay_C_0]
+[2026.08.29-10.40.59:526][307]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_Title_MainDisplay_C_0) StandardAnimation[0](Ani_Start_INST)
+[2026.08.29-10.40.59:526][307]LogAcrWidget: UCPP_AcrUserWidget::SetAddToViewportProperties() [WBP_Title_SubDisplay_C_0]
+[2026.08.29-10.40.59:526][307]LogAcrWidget: UCPP_AcrUserWidget::AddToViewport AddHasHudArray: [WBP_Title_SubDisplay_C_0]
+[2026.08.29-10.40.59:526][307]LogAcrWidget: UCPP_AcrUserWidget::AddWidgetToChildWindow: 
+[2026.08.29-10.40.59:526][307]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_Title_SubDisplay_C_0) StandardAnimation[0](Ani_Start_INST)
+[2026.08.29-10.40.59:526][307]LogAcrWidget: UCPP_AcrUserWidget::AddToViewport AddWidgetToChildWindow: [WBP_Title_SubDisplay_C_0:1]
+[2026.08.29-10.40.59:526][307]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_Title_StartButton) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.40.59:526][307]LogUSBIO: UGALAXYIOWrapper::RFIDReadSerialAndID / success.
+[2026.08.29-10.40.59:526][307]LogCPPGameViewportClient: Start GameViewportClient Fade In. [FadeTime:0.500000 FadeTimer:0.000000 FadeColor(r:0.000000 g:0.000000 b:0.000000 a:0.000000) FadeOpacity:0.000000] CheckOnceFadeIn:0
+[2026.08.29-10.40.59:526][307]LogCPPGameViewportClient: Start GameViewportClient Fade In. [FadeTime:0.500000 FadeTimer:0.000000 FadeColor(r:0.000000 g:0.000000 b:0.000000 a:0.000000) FadeOpacity:0.000000] CheckOnceFadeIn:0
+[2026.08.29-10.40.59:526][307]LogHUDBase: ACPP_HudBase::FadeIn 0.500000(Sub:1)
+[2026.08.29-10.40.59:527][307]LogBattleSetting: UBattleSettingWork::BattleClear / MySetupClear:1
+[2026.08.29-10.40.59:527][307]LogBattleSetting: UBattleSettingWork::Clear
+[2026.08.29-10.40.59:527][307]LogBattleSetting: UBattleSettingWork::InitializeAdvertiseInternal / CharacterNum:16 PlayerArraySetupInformation:0 (InSetting:1)
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Constructor / DataTable
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[1] Name[ライジングスター] TexturePtr is set[1] InitialPoint[0] RequiredPoint[20000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[2] Name[ライジングスター] TexturePtr is set[1] InitialPoint[22000] RequiredPoint[40000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[3] Name[ライジングスター] TexturePtr is set[1] InitialPoint[42000] RequiredPoint[60000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[4] Name[シングルスター] TexturePtr is set[1] InitialPoint[60000] RequiredPoint[80000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[5] Name[シングルスター] TexturePtr is set[1] InitialPoint[90000] RequiredPoint[110000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[6] Name[シングルスター] TexturePtr is set[1] InitialPoint[120000] RequiredPoint[140000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[7] Name[ダブルスター] TexturePtr is set[1] InitialPoint[150000] RequiredPoint[170000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[8] Name[ダブルスター] TexturePtr is set[1] InitialPoint[180000] RequiredPoint[200000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[9] Name[ダブルスター] TexturePtr is set[1] InitialPoint[210000] RequiredPoint[230000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[10] Name[トリプルスター] TexturePtr is set[1] InitialPoint[240000] RequiredPoint[260000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[11] Name[トリプルスター] TexturePtr is set[1] InitialPoint[270000] RequiredPoint[290000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[12] Name[トリプルスター] TexturePtr is set[1] InitialPoint[300000] RequiredPoint[320000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[13] Name[フォースター] TexturePtr is set[1] InitialPoint[330000] RequiredPoint[350000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[14] Name[フォースター] TexturePtr is set[1] InitialPoint[360000] RequiredPoint[380000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[15] Name[フォースター] TexturePtr is set[1] InitialPoint[390000] RequiredPoint[410000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[16] Name[ファイブスター] TexturePtr is set[1] InitialPoint[420000] RequiredPoint[440000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[17] Name[ファイブスター] TexturePtr is set[1] InitialPoint[450000] RequiredPoint[470000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[18] Name[ファイブスター] TexturePtr is set[1] InitialPoint[480000] RequiredPoint[500000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[19] Name[ノヴァ] TexturePtr is set[1] InitialPoint[510000] RequiredPoint[530000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[20] Name[ノヴァ] TexturePtr is set[1] InitialPoint[540000] RequiredPoint[560000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[21] Name[ノヴァ] TexturePtr is set[1] InitialPoint[570000] RequiredPoint[590000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[22] Name[スーパーノヴァ] TexturePtr is set[1] InitialPoint[600000] RequiredPoint[620000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[23] Name[スーパーノヴァ] TexturePtr is set[1] InitialPoint[630000] RequiredPoint[650000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[24] Name[スーパーノヴァ] TexturePtr is set[1] InitialPoint[660000] RequiredPoint[680000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[25] Name[スターウィング] TexturePtr is set[1] InitialPoint[690000] RequiredPoint[730000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[26] Name[スターウィング] TexturePtr is set[1] InitialPoint[740000] RequiredPoint[780000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[27] Name[スターウィング] TexturePtr is set[1] InitialPoint[790000] RequiredPoint[830000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[28] Name[スターウィング] TexturePtr is set[1] InitialPoint[840000] RequiredPoint[880000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[29] Name[スターウィング] TexturePtr is set[1] InitialPoint[890000] RequiredPoint[930000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[30] Name[スターウィング] TexturePtr is set[1] InitialPoint[940000] RequiredPoint[980000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[31] Name[スターウィング] TexturePtr is set[1] InitialPoint[990000] RequiredPoint[1030000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[32] Name[スターウィング] TexturePtr is set[1] InitialPoint[1040000] RequiredPoint[1080000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[33] Name[スターウィング] TexturePtr is set[1] InitialPoint[1090000] RequiredPoint[1130000]
+[2026.08.29-10.40.59:527][307]LogCommonData: URankPointWork::Setup / RequiredRankPointData id[34] Name[スターウィング] TexturePtr is set[1] InitialPoint[1140000] RequiredPoint[1180000]
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:0 Team:TEAM_A Head:9
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:1 Team:TEAM_B Head:9
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:2 Team:TEAM_A Head:1
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:3 Team:TEAM_B Head:1
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:4 Team:TEAM_A Head:2
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:5 Team:TEAM_B Head:2
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:6 Team:TEAM_A Head:3
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:7 Team:TEAM_B Head:3
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:8 Team:TEAM_A Head:4
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:9 Team:TEAM_B Head:4
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:10 Team:TEAM_A Head:5
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:11 Team:TEAM_B Head:5
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:12 Team:TEAM_A Head:8
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:13 Team:TEAM_B Head:8
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:14 Team:TEAM_A Head:9
+[2026.08.29-10.40.59:527][307]LogPlayerProfileWork: GetWeaponPackSetDefault
+[2026.08.29-10.40.59:527][307]LogBattleSetting: BattleSetting AdvertiseAI BattlePlayerId:15 Team:TEAM_B Head:9
+[2026.08.29-10.40.59:527][307]LogBattleSetting: UBattleSettingWork::InitializeBattle / BattleType:AdvertiseSetting NPCNum:16 CharacterNum:16 RandomSeed:0
+[2026.08.29-10.40.59:527][307]LogBattleSetting: UBattleSettingWork::InitializeOffline / InBType[AdvertiseSetting] CharacterNum[16] is2on2[0]
+[2026.08.29-10.40.59:527][307]LogAcrOutgame: UAdvertiseSequenceWork::Activate
+[2026.08.29-10.40.59:527][307]LogPreloader: UPreloaderWork::ReleaseAll:0
+[2026.08.29-10.40.59:527][307]LogPreloader: UPreloaderWork::ReleaseLevels Start
+[2026.08.29-10.40.59:527][307]LogPreloader: UPreloaderWork::ReleaseLevels End
+[2026.08.29-10.40.59:527][307]LogPreloader: UPreloaderWork::ReleaseAssetAll Start
+[2026.08.29-10.40.59:529][307]LogPreloader: UPreloaderWork::ReleaseAssetAll End
+[2026.08.29-10.40.59:529][307]LogPreloader: UPreloaderWork::ReleaseAssetAll 7379Assets -> 7379Assets
+[2026.08.29-10.40.59:529][307]LogPreloader: UPreloaderWork::ReleaseCharacterAll Start
+[2026.08.29-10.40.59:529][307]LogPreloader: UPreloaderWork::ReleaseCharacterAll Force:0
+[2026.08.29-10.40.59:529][307]LogPreloader: UPreloaderWork::ReleaseCharacterAll 0Assets -> 0Assets
+[2026.08.29-10.40.59:529][307]LogPreloader: UPreloaderWork::ReleaseCharacterAll End
+[2026.08.29-10.40.59:529][307]LogSystemUtility: USystemUtility::OutputMemoryStats / World[World /Game/Stage/OutGame/MainMenu/MainMenu.MainMenu]
+	AvailablePhysical 56426151936(55103664.00KB, 53812.17MB, 52.5509GB)
+	 AvailableVirtual 140727353655296(137429057536.00KB, 134208064.00MB, 131062.5625GB)
+	     UsedPhysical 1248636928(1219372.00KB, 1190.79MB, 1.1629GB)
+	 PeakUsedPhysical 1888268288(1844012.00KB, 1800.79MB, 1.7586GB)
+	      UsedVirtual 3742117888(3654412.00KB, 3568.76MB, 3.4851GB)
+	  PeakUsedVirtual 4523896832(4417868.00KB, 4314.32MB, 4.2132GB)
+[2026.08.29-10.40.59:529][307]LogGameSequence: UGameSequenceWork::OnAddWorld / CurrentLevelName[/Game/Stage/OutGame/MainMenu/SL_Title] CurrentWorldName[World /Game/Stage/OutGame/MainMenu/MainMenu.MainMenu]
+[2026.08.29-10.40.59:529][307]LogStreaming:Display: Detailed AddToWorld stats for '/Game/Stage/OutGame/MainMenu/SL_Title' - Total   4.35ms
+[2026.08.29-10.40.59:529][307]LogStreaming:Display: Move Actors             :   0.00 ms
+[2026.08.29-10.40.59:529][307]LogStreaming:Display: Shift Actors            :   0.00 ms
+[2026.08.29-10.40.59:529][307]LogStreaming:Display: Update Components       :   0.02 ms
+[2026.08.29-10.40.59:529][307]LogStreaming:Display: Init BSP Phys           :   0.00 ms
+[2026.08.29-10.40.59:529][307]LogStreaming:Display: Init Actor Phys         :   0.00 ms
+[2026.08.29-10.40.59:529][307]LogStreaming:Display: Init Actors             :   0.00 ms
+[2026.08.29-10.40.59:529][307]LogStreaming:Display: Initialize              :   4.29 ms
+[2026.08.29-10.40.59:529][307]LogStreaming:Display: Cross Level Refs        :   0.00 ms
+[2026.08.29-10.40.59:529][307]LogStreaming:Display: Sort Actor List         :   0.00 ms
+[2026.08.29-10.40.59:529][307]LogStreaming:Display: Perform Last Step       :   0.00 ms
+[2026.08.29-10.40.59:531][308]LogOutGameSequenceWork: ACPP_OutGameSequenceWork::NextGameSequence_Entrance() NextSequenceSelect:Title OldSequenceSelect:PromotionMovie NowPlayBgmType:B_Title
+[2026.08.29-10.40.59:532][308]LogHUDBase: ACPP_HudBase::OutGameFadeIn Color:0 WithSub:1 Time:0.050000 HudRequest:0
+[2026.08.29-10.40.59:532][308]LogCPPGameViewportClient: Start GameViewportClient Fade In. [FadeTime:0.050000 FadeTimer:0.000000 FadeColor(r:0.000000 g:0.000000 b:0.000000 a:0.000000) FadeOpacity:0.000000] CheckOnceFadeIn:0
+[2026.08.29-10.40.59:532][308]LogCPPGameViewportClient: Start GameViewportClient Fade In. [FadeTime:0.050000 FadeTimer:0.000000 FadeColor(r:0.000000 g:0.000000 b:0.000000 a:0.000000) FadeOpacity:0.000000] CheckOnceFadeIn:0
+[2026.08.29-10.40.59:532][308]LogOutGameSequenceWork: NextGameSequence_Entrance OutGameFadeIn(Title)
+[2026.08.29-10.40.59:532][308]LogMainMenuWidgetHolder: Call SetVisibleBGWidgetMain GameSequence:[NowSequence:Title]
+[2026.08.29-10.40.59:532][308]LogMainMenuWidgetHolder: ACPP_MainMenuWidgetHolder::Tick ModeSelect 背景Widget (表示)命令
+[2026.08.29-10.40.59:534][308]LogAcrWidget: UCPP_AcrUserWidget::AcrRemoveFromParent() [WBP_ErrorAnnounce_C_4]
+[2026.08.29-10.40.59:534][308]LogAcrHud: UCPP_ErrorAnnounceWidget::NativeDestruct
+[2026.08.29-10.40.59:534][308]LogAcrWidget: UCPP_AcrUserWidget::SetAddToViewportProperties() [WBP_ErrorAnnounce_C_5]
+[2026.08.29-10.40.59:534][308]LogAcrWidget: UCPP_AcrUserWidget::AddToViewport AddHasHudArray: [WBP_ErrorAnnounce_C_5]
+[2026.08.29-10.40.59:534][308]LogAcrWidget: UCPP_AcrUserWidget::AddToViewport AddToViewport [WBP_ErrorAnnounce_C_5]
+[2026.08.29-10.40.59:534][308]LogAcrHud: UCPP_ErrorAnnounceWidget::NativeConstruct
+[2026.08.29-10.40.59:565][310]LogCPPGameViewportClient: Check GameViewportClient Fade In. [PrevColor(r:0.000000 g:0.000000 b:0.000000 a:0.000000)] CheckOnceFadeIn:1
+[2026.08.29-10.40.59:565][310]LogCPPGameViewportClient: Check GameViewportClient Fade In. [PrevColor(r:0.000000 g:0.000000 b:0.000000 a:0.000000)] CheckOnceFadeIn:1
+[2026.08.29-10.41.00:001][337]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_Title_MainDisplay_C_0) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.00:002][337]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_Title_SubDisplay_C_0) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.01:501][430]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.03:032][525]LogACPP_DebugActor: ACPP_DebugActor::ZPressed
+[2026.08.29-10.41.03:032][525]LogAcrOutgame: UAdvertiseSequenceWork::OnChangeCreditCount:1,0,0,1
+[2026.08.29-10.41.03:032][525]LogAcrOutgame: UAdvertiseSequenceWork::TransitionSequence 2
+[2026.08.29-10.41.03:032][525]LogTestModeWork: UTestModeWork::OnAddDebugCredit / all[1] debug[1]
+[2026.08.29-10.41.03:032][525]LogTestModeWork: UTestModeWork::AddDebugCredit / debug[1] / date[2026/08/29 18:41:03]
+[2026.08.29-10.41.03:032][525]LogMachineDataWork: UMachineDataWork::AddDebugCredit / success / _credit[1] tmpCredit[1] kind[AddCreditKindMaxGame] checkLockout:[0] / all[1](1) credit:[0] service:[0] debug:[1](1)
+[2026.08.29-10.41.03:500][554]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.03:500][554]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.03:531][556]LogACPP_DebugActor: ACPP_DebugActor::ZPressed
+[2026.08.29-10.41.03:531][556]LogAcrOutgame: UAdvertiseSequenceWork::OnChangeCreditCount:2,0,0,2
+[2026.08.29-10.41.03:531][556]LogAcrOutgame: UAdvertiseSequenceWork::TransitionSequence 2
+[2026.08.29-10.41.03:531][556]LogTestModeWork: UTestModeWork::OnAddDebugCredit / all[1] debug[1]
+[2026.08.29-10.41.03:531][556]LogTestModeWork: UTestModeWork::AddDebugCredit / debug[1] / date[2026/08/29 18:41:03]
+[2026.08.29-10.41.03:531][556]LogMachineDataWork: UMachineDataWork::AddDebugCredit / success / _credit[1] tmpCredit[1] kind[AddCreditKindMaxGame] checkLockout:[0] / all[2](1) credit:[0] service:[0] debug:[2](1)
+[2026.08.29-10.41.05:501][678]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.05:840][699]LogAcrNetwork: UWebServerWork::HttpRequestMatchingServer
+[2026.08.29-10.41.05:840][699]LogHttpReq: UCPP_HttpRequester::GetHostAddress(Client) / MatchingServerType[None]
+[2026.08.29-10.41.05:840][699]LogHttpReq: UCPP_HttpRequester::GetHostAddress(Client) / SHORT_MOCK_URL
+[2026.08.29-10.41.05:840][699]LogHttpReq: UCPP_HttpRequester::GetHostAddress(Client) / Address[dev.starwing.jp/mock]
+[2026.08.29-10.41.05:840][699]LogHttpReq: UCPP_HttpRequester::GetHostAddress / HostURL[http://dev.starwing.jp/mock]
+[2026.08.29-10.41.05:840][699]LogHttpReq: Request:[POST] http://dev.starwing.jp/mock/matching/server
+[2026.08.29-10.41.05:840][699]LogHttpReq:    API-ID[1]
+[2026.08.29-10.41.05:840][699]LogHttpReq:    content[]
+[2026.08.29-10.41.05:840][699]LogHttpReq: start request
+[2026.08.29-10.41.05:840][699]LogOnlineObserver: UOnlineObserverWork::Tick / HttpRequestMatchingServer
+[2026.08.29-10.41.07:502][802]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.07:502][802]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.07:857][825]LogHttpReq:Warning: http:unknown(timeout / network off) error
+[2026.08.29-10.41.07:857][825]LogAcrNetwork: UWebServerWork::OnReceiveResponseMatchingServer / _IsSuccess[0] IPAddress[]
+[2026.08.29-10.41.07:857][825]LogOnlineObserver: UOnlineObserverWork::OnReceiveMatchingServer / bChangeServer[1] IsSuccess[0] IPAddress[]
+[2026.08.29-10.41.09:501][926]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.11:517][ 51]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.11:517][ 51]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.12:338][102]LogACPP_DebugActor: ACPP_DebugActor::ZPressed
+[2026.08.29-10.41.12:338][102]LogAcrOutgame: UAdvertiseSequenceWork::OnChangeCreditCount:3,0,0,3
+[2026.08.29-10.41.12:338][102]LogAcrOutgame: UAdvertiseSequenceWork::TransitionSequence 2
+[2026.08.29-10.41.12:338][102]LogTestModeWork: UTestModeWork::OnAddDebugCredit / all[1] debug[1]
+[2026.08.29-10.41.12:338][102]LogTestModeWork: UTestModeWork::AddDebugCredit / debug[1] / date[2026/08/29 18:41:12]
+[2026.08.29-10.41.12:338][102]LogMachineDataWork: UMachineDataWork::AddDebugCredit / success / _credit[1] tmpCredit[1] kind[AddCreditKindMaxGame] checkLockout:[0] / all[3](1) credit:[0] service:[0] debug:[3](1)
+[2026.08.29-10.41.12:547][115]LogACPP_DebugActor: ACPP_DebugActor::ZPressed
+[2026.08.29-10.41.12:547][115]LogAcrOutgame: UAdvertiseSequenceWork::OnChangeCreditCount:4,0,0,4
+[2026.08.29-10.41.12:547][115]LogAcrOutgame: UAdvertiseSequenceWork::TransitionSequence 2
+[2026.08.29-10.41.12:547][115]LogTestModeWork: UTestModeWork::OnAddDebugCredit / all[1] debug[1]
+[2026.08.29-10.41.12:548][115]LogTestModeWork: UTestModeWork::AddDebugCredit / debug[1] / date[2026/08/29 18:41:12]
+[2026.08.29-10.41.12:548][115]LogMachineDataWork: UMachineDataWork::AddDebugCredit / success / _credit[1] tmpCredit[1] kind[AddCreditKindMaxGame] checkLockout:[0] / all[4](1) credit:[0] service:[0] debug:[4](1)
+[2026.08.29-10.41.12:741][127]LogACPP_DebugActor: ACPP_DebugActor::ZPressed
+[2026.08.29-10.41.12:741][127]LogAcrOutgame: UAdvertiseSequenceWork::OnChangeCreditCount:5,0,0,5
+[2026.08.29-10.41.12:741][127]LogAcrOutgame: UAdvertiseSequenceWork::TransitionSequence 2
+[2026.08.29-10.41.12:741][127]LogTestModeWork: UTestModeWork::OnAddDebugCredit / all[1] debug[1]
+[2026.08.29-10.41.12:741][127]LogTestModeWork: UTestModeWork::AddDebugCredit / debug[1] / date[2026/08/29 18:41:12]
+[2026.08.29-10.41.12:741][127]LogMachineDataWork: UMachineDataWork::AddDebugCredit / success / _credit[1] tmpCredit[1] kind[AddCreditKindMaxGame] checkLockout:[0] / all[5](1) credit:[0] service:[0] debug:[5](1)
+[2026.08.29-10.41.12:935][139]LogACPP_DebugActor: ACPP_DebugActor::ZPressed
+[2026.08.29-10.41.12:935][139]LogAcrOutgame: UAdvertiseSequenceWork::OnChangeCreditCount:6,0,0,6
+[2026.08.29-10.41.12:935][139]LogAcrOutgame: UAdvertiseSequenceWork::TransitionSequence 2
+[2026.08.29-10.41.12:935][139]LogTestModeWork: UTestModeWork::OnAddDebugCredit / all[1] debug[1]
+[2026.08.29-10.41.12:935][139]LogTestModeWork: UTestModeWork::AddDebugCredit / debug[1] / date[2026/08/29 18:41:12]
+[2026.08.29-10.41.12:935][139]LogMachineDataWork: UMachineDataWork::AddDebugCredit / success / _credit[1] tmpCredit[1] kind[AddCreditKindMaxGame] checkLockout:[0] / all[6](1) credit:[0] service:[0] debug:[6](1)
+[2026.08.29-10.41.13:113][150]LogACPP_DebugActor: ACPP_DebugActor::ZPressed
+[2026.08.29-10.41.13:113][150]LogAcrOutgame: UAdvertiseSequenceWork::OnChangeCreditCount:7,0,0,7
+[2026.08.29-10.41.13:113][150]LogAcrOutgame: UAdvertiseSequenceWork::TransitionSequence 2
+[2026.08.29-10.41.13:113][150]LogTestModeWork: UTestModeWork::OnAddDebugCredit / all[1] debug[1]
+[2026.08.29-10.41.13:113][150]LogTestModeWork: UTestModeWork::AddDebugCredit / debug[1] / date[2026/08/29 18:41:13]
+[2026.08.29-10.41.13:113][150]LogMachineDataWork: UMachineDataWork::AddDebugCredit / success / _credit[1] tmpCredit[1] kind[AddCreditKindMaxGame] checkLockout:[0] / all[7](1) credit:[0] service:[0] debug:[7](1)
+[2026.08.29-10.41.13:305][162]LogACPP_DebugActor: ACPP_DebugActor::ZPressed
+[2026.08.29-10.41.13:305][162]LogAcrOutgame: UAdvertiseSequenceWork::OnChangeCreditCount:8,0,0,8
+[2026.08.29-10.41.13:305][162]LogAcrOutgame: UAdvertiseSequenceWork::TransitionSequence 2
+[2026.08.29-10.41.13:305][162]LogTestModeWork: UTestModeWork::OnAddDebugCredit / all[1] debug[1]
+[2026.08.29-10.41.13:305][162]LogTestModeWork: UTestModeWork::AddDebugCredit / debug[1] / date[2026/08/29 18:41:13]
+[2026.08.29-10.41.13:305][162]LogMachineDataWork: UMachineDataWork::AddDebugCredit / success / _credit[1] tmpCredit[1] kind[AddCreditKindMaxGame] checkLockout:[0] / all[8](1) credit:[0] service:[0] debug:[8](1)
+[2026.08.29-10.41.13:499][174]LogACPP_DebugActor: ACPP_DebugActor::ZPressed
+[2026.08.29-10.41.13:499][174]LogAcrOutgame: UAdvertiseSequenceWork::OnChangeCreditCount:9,0,0,9
+[2026.08.29-10.41.13:499][174]LogAcrOutgame: UAdvertiseSequenceWork::TransitionSequence 2
+[2026.08.29-10.41.13:499][174]LogTestModeWork: UTestModeWork::OnAddDebugCredit / all[1] debug[1]
+[2026.08.29-10.41.13:499][174]LogTestModeWork: UTestModeWork::AddDebugCredit / debug[1] / date[2026/08/29 18:41:13]
+[2026.08.29-10.41.13:499][174]LogMachineDataWork: UMachineDataWork::AddDebugCredit / success / _credit[1] tmpCredit[1] kind[AddCreditKindMaxGame] checkLockout:[0] / all[9](1) credit:[0] service:[0] debug:[9](1)
+[2026.08.29-10.41.13:517][175]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.13:709][187]LogACPP_DebugActor: ACPP_DebugActor::ZPressed
+[2026.08.29-10.41.13:709][187]LogAcrOutgame: UAdvertiseSequenceWork::OnChangeCreditCount:10,0,0,10
+[2026.08.29-10.41.13:709][187]LogAcrOutgame: UAdvertiseSequenceWork::TransitionSequence 2
+[2026.08.29-10.41.13:709][187]LogTestModeWork: UTestModeWork::OnAddDebugCredit / all[1] debug[1]
+[2026.08.29-10.41.13:709][187]LogTestModeWork: UTestModeWork::AddDebugCredit / debug[1] / date[2026/08/29 18:41:13]
+[2026.08.29-10.41.13:709][187]LogMachineDataWork: UMachineDataWork::AddDebugCredit / success / _credit[1] tmpCredit[1] kind[AddCreditKindMaxGame] checkLockout:[0] / all[10](1) credit:[0] service:[0] debug:[10](1)
+[2026.08.29-10.41.13:887][198]LogACPP_DebugActor: ACPP_DebugActor::ZPressed
+[2026.08.29-10.41.15:518][299]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.15:519][299]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.17:519][423]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.19:517][547]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.19:535][548]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.21:519][671]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.23:534][796]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.23:550][797]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.25:535][920]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.27:550][ 45]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.27:567][ 46]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.29:550][169]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.31:551][293]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.31:567][294]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.33:551][417]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.35:566][542]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.35:567][542]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.37:567][666]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.39:567][790]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.39:584][791]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.41:584][915]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.43:568][ 38]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.43:583][ 39]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.45:599][164]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.47:584][287]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.47:599][288]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.49:599][412]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.51:584][535]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.51:600][536]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.53:599][660]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.55:599][784]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.55:600][784]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.57:615][909]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.59:519][ 27]LogAcrOutgame: ACPP_TitleMain::Tick / ForceGarbageCollection
+[2026.08.29-10.41.59:519][ 27]LogLevel: garbage type:B [MainMenu]
+[2026.08.29-10.41.59:615][ 33]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.41.59:616][ 33]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.01:616][157]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.03:615][281]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.03:631][282]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.05:631][406]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.07:631][530]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.07:632][530]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.07:873][545]LogAcrNetwork: UWebServerWork::HttpRequestMatchingServer
+[2026.08.29-10.42.07:873][545]LogHttpReq: UCPP_HttpRequester::GetHostAddress(Client) / MatchingServerType[None]
+[2026.08.29-10.42.07:873][545]LogHttpReq: UCPP_HttpRequester::GetHostAddress(Client) / SHORT_MOCK_URL
+[2026.08.29-10.42.07:873][545]LogHttpReq: UCPP_HttpRequester::GetHostAddress(Client) / Address[dev.starwing.jp/mock]
+[2026.08.29-10.42.07:873][545]LogHttpReq: UCPP_HttpRequester::GetHostAddress / HostURL[http://dev.starwing.jp/mock]
+[2026.08.29-10.42.07:873][545]LogHttpReq: Request:[POST] http://dev.starwing.jp/mock/matching/server
+[2026.08.29-10.42.07:873][545]LogHttpReq:    API-ID[1]
+[2026.08.29-10.42.07:873][545]LogHttpReq:    content[]
+[2026.08.29-10.42.07:873][545]LogHttpReq: start request
+[2026.08.29-10.42.07:873][545]LogOnlineObserver: UOnlineObserverWork::Tick / HttpRequestMatchingServer
+[2026.08.29-10.42.09:647][655]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.09:891][671]LogHttpReq:Warning: http:unknown(timeout / network off) error
+[2026.08.29-10.42.09:891][671]LogAcrNetwork: UWebServerWork::OnReceiveResponseMatchingServer / _IsSuccess[0] IPAddress[]
+[2026.08.29-10.42.09:891][671]LogOnlineObserver: UOnlineObserverWork::OnReceiveMatchingServer / bChangeServer[1] IsSuccess[0] IPAddress[]
+[2026.08.29-10.42.11:632][778]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.11:647][779]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.13:648][903]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.15:648][ 27]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.15:664][ 28]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.17:664][152]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.19:648][275]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.19:664][276]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.21:664][400]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.23:648][523]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.23:680][525]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.25:680][649]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.27:664][772]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.27:680][773]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.29:680][897]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.31:681][ 21]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.31:682][ 21]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.33:696][146]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.35:697][270]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.35:698][270]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.37:696][394]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.39:696][518]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.39:712][519]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.41:698][642]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.43:713][767]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.43:714][767]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.45:713][891]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.47:713][ 15]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.47:729][ 16]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.49:713][139]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.51:730][264]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)
+[2026.08.29-10.42.51:730][264]LogCPP_BUMUserWidget: UCPP_BUMUserWidget::PlayStandardAnimation / Widget(WBP_InsertStart) StandardAnimation[1](Ani_Loop_INST)

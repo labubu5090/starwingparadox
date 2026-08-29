@@ -1,0 +1,12 @@
+﻿{
+  "phase": "G29",
+  "first_private_server_request": "POST http://dev.starwing.jp/mock/matching/server",
+  "http_method": "POST",
+  "http_path": "/mock/matching/server",
+  "http_host": "dev.starwing.jp",
+  "port": 80,
+  "timestamp_first": "2026-08-29T18:41:05.840",
+  "timestamp_retry": "2026-08-29T18:42:07.873",
+  "error": "http:unknown(timeout / network off) error",
+  "classification": "PLAYER_SESSION_BOUNDARY_REACHED"
+}

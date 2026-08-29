@@ -1,0 +1,10 @@
+﻿{
+  "phase": "G29",
+  "port_1042": "NO_LISTENER",
+  "port_4001": "NO_ACTIVITY",
+  "port_6666": "NO_ACTIVITY",
+  "port_7777": "NO_ACTIVITY",
+  "http_requests": ["POST http://dev.starwing.jp/mock/matching/server"],
+  "tcp_requests": "NONE",
+  "named_pipe": "NONE"
+}

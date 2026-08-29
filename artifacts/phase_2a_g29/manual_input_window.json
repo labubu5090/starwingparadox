@@ -1,0 +1,9 @@
+﻿{
+  "phase": "G29",
+  "manual_input_window_start": "18:40:56",
+  "manual_input_window_end": "18:41:32",
+  "z_detected": true,
+  "enter_detected": false,
+  "credit_transitions_in_window": 10,
+  "http_request_after_input": true
+}
