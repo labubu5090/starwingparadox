@@ -1,0 +1,8 @@
+﻿{
+  "phase": "G26",
+  "correction_type": "CREDIT_INPUT_INTERPRETATION",
+  "original_classification": "CREDIT_SYSTEM_BLOCKED",
+  "corrected_classification": "TITLE_START_BLOCKED_BY_ZERO_CREDITS_IN_G25",
+  "g26_evidence": "Z key adds debug credits locally, Start advances to SystemDataCheck",
+  "effect": "ALL previous BLOCKED classifications were incorrect"
+}

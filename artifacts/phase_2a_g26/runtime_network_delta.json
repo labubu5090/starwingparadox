@@ -1,0 +1,18 @@
+﻿{
+  "phase": "G26",
+  "z_press_1_network": {
+    "tcp_1042": "SYN → RST (no listener)",
+    "http_matching": "POST http://dev.starwing.jp/mock/matching/server (timeout)"
+  },
+  "z_press_2_network": {
+    "tcp_1042": "SYN → RST (no listener)"
+  },
+  "enter_network": {
+    "tcp_1042": "SYN → RST (no listener)",
+    "http_matching": "POST http://dev.starwing.jp/mock/matching/server (timeout)"
+  },
+  "port_4001": "NOT_OBSERVED",
+  "port_6666": "NOT_OBSERVED",
+  "port_7777": "NOT_OBSERVED",
+  "active_interface_captures": "EMPTY (360 bytes each)"
+}

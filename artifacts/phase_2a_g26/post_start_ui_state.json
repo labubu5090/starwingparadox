@@ -1,0 +1,18 @@
+﻿{
+  "phase": "G26",
+  "timestamp": "2026-08-29T17:50:51.624+08:00",
+  "sequence": "SystemDataCheck → Title",
+  "blocking_check": "SystemDataCheck",
+  "checks_performed": [
+    "CheckOpenKeyLoad",
+    "CheckOpenKeyUpdate"
+  ],
+  "errors": [
+    "LoadKeyFile error (OpenKey.json not found)",
+    "NESYS Event error (IsEventCheck[0] IsEventError[0])",
+    "IsOnline[0]"
+  ],
+  "error_message": "System is offline, cannot check",
+  "return_sequence": "Title",
+  "classification": "SYSTEMDATACHECK_NESYS_OFFLINE_BLOCKED"
+}

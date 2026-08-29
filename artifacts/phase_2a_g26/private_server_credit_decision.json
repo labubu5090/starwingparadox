@@ -1,0 +1,9 @@
+﻿{
+  "phase": "G26",
+  "decision": "NO_SERVER_CREDIT_COMPONENT_REQUIRED",
+  "evidence": "Z key adds debug credits locally via ACPP_DebugActor",
+  "credit_mechanism": "LOCAL_DEBUG_INPUT",
+  "nesys_required": "NO",
+  "galaxyio_required": "NO",
+  "local_state_only": "YES"
+}

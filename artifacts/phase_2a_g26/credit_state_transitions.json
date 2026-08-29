@@ -1,0 +1,12 @@
+﻿{
+  "phase": "G26",
+  "transitions": [
+    {"time": "09:45:51.804", "credits": "all[0]", "action": "ResetCredit"},
+    {"time": "09:47:54.213", "credits": "0,0,0,0", "action": "OnChangeCreditCount"},
+    {"time": "09:50:23.525", "credits": "1,0,0,1", "action": "ZPressed #1"},
+    {"time": "09:50:24.140", "credits": "2,0,0,2", "action": "ZPressed #2"}
+  ],
+  "format": "OnChangeCreditCount:all,credit,service,debug",
+  "credit_source": "LOCAL_DEBUG_INPUT",
+  "nesys_involvement": "NONE"
+}

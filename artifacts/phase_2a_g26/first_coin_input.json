@@ -1,0 +1,16 @@
+﻿{
+  "phase": "G26",
+  "timestamp": "2026-08-29T17:50:23.525+08:00",
+  "input_key": "Z",
+  "press_number": 1,
+  "pre_input_credits": 0,
+  "post_input_credits": 1,
+  "credit_type": "debug",
+  "evidence": [
+    "ACPP_DebugActor::ZPressed",
+    "UAdvertiseSequenceWork::OnChangeCreditCount:1,0,0,1",
+    "UTestModeWork::OnAddDebugCredit / all[1] debug[1]",
+    "UMachineDataWork::AddDebugCredit / success / _credit[1] kind[AddCreditKindMaxGame]"
+  ],
+  "classification": "FIRST_CREDIT_CONFIRMED"
+}
