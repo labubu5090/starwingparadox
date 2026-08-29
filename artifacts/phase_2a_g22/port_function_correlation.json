@@ -1,0 +1,45 @@
+{
+  "phase": "2A-G22",
+  "port_correlation": {
+    "port_1042": {
+      "game_class": "NesysService communication",
+      "log_evidence": "NesysControlErrorMessage / ENesysNetworkServerMessage[CertError] (4575 occurrences)",
+      "ida_string_evidence": "Port 1042 appears as QuestId in game data, but TCP connections go to localhost:1042",
+      "conclusion": "NesysService listens on port 1042. Game requires it for certificate validation."
+    },
+    "port_5233": {
+      "game_class": "HTTP health check target",
+      "log_evidence": "No direct log mention of port 5233. Health check captured in Wireshark only.",
+      "wireshark_evidence": "OPTIONS+GET /api/health -> 204 + 200 {\"healthy\":true}",
+      "conclusion": "Game health check hits OpenCode server, not Python server"
+    },
+    "port_7777": {
+      "game_class": "UE4 IpNetDriver",
+      "log_evidence": "LogNet: GameNetDriver IpNetDriver_0 IpNetDriver listening on port 7777",
+      "conclusion": "UE4 multiplayer networking on port 7777 (local only)"
+    },
+    "port_4001": {
+      "game_class": "Python server app_port",
+      "config_evidence": "app_port: int = 4001 in server/app/config.py",
+      "conclusion": "Python server not running, not contacted by game"
+    },
+    "port_6666": {
+      "game_class": "Python server pb_port",
+      "config_evidence": "pb_port: int = 6666 in server/app/config.py",
+      "conclusion": "Python server not running, not contacted by game"
+    }
+  },
+  "string_to_port_correlation": {
+    "BindHttp*": "Static evidence of HTTP client code, confirmed by runtime HTTP requests",
+    "HttpJsonSerialize/Difference": "Confirmed by JSON health check response format",
+    "SystemDataCheck": "Confirmed by ACPP_GameModeBoot::SetupSystem log entries",
+    "PlayerData": "Confirmed by PlayerData1.sav (missing) and UWebServerWork::SetupUserProfileTemplate*",
+    "BuddyId": "Confirmed by QuestId/BuddyId entries in log",
+    "CharacterCustomize": "Confirmed by character asset loading in log",
+    "PlayerID": "Confirmed by player state initialization in log",
+    "application/json": "Confirmed by HTTP Content-Type header in capture",
+    "/matching/match_id/generate": "Static string found but not observed in runtime",
+    "/option/save": "Static string found but not observed in runtime",
+    "WinHttp/WinInet": "Static strings found, HTTP requests observed"
+  }
+}

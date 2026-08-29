@@ -1,0 +1,63 @@
+{
+  "phase": "2A-G22",
+  "capture_file": "tools/wireshark_g22/captures/g22_coldstart.pcapng",
+  "capture_sha256": "D636B5A257702AACE6D2DE1825F34A868D7CE2A1A9E976BC64A551447C3AFA20",
+  "capture_size_bytes": 13878164,
+  "capture_duration_seconds": 120,
+  "interface": "loopback (interface 7)",
+  "launcher_pid": 63772,
+  "shipping_pid": 45844,
+  "timestamp_start": "2026-08-29T15:37:44.209+08:00",
+  "timestamp_end": "2026-08-29T15:39:44+08:00",
+  "total_packets": 1571,
+  "timeline": {
+    "T+0.0s": "Capture started (pre-launch)",
+    "T+0.4s": "Launcher begins port 1042 connection attempts (SYN to localhost:1042, all RST)",
+    "T+1.0s": "Shipping process launched (PID 45844)",
+    "T+0.4-23.6s": "Port 1042 retries from 9 source ports (34437,34439,34440,34441,53085,53086,62185,62187,62188), all RST immediately",
+    "T+7.3s": "Small local connections (ports 8468, 8470, 8474, 8475)",
+    "T+16.3s": "HTTP OPTIONS+GET /api/health -> 204 + 200 {\"healthy\":true} (from OpenCode server, NOT Python server)",
+    "T+55s": "External TCP connection to 100.30.30.137:443 (AWS EC2)",
+    "T+76.3s": "Second HTTP health check (same pattern)",
+    "T+78s": "SSDP M-SEARCH to 239.255.255.250:1900 from 3 interfaces",
+    "T+78s": "Local connections (ports 5835, 9506)",
+    "T+119.7s": "Capture ended"
+  },
+  "port_1042": {
+    "description": "NesysService communication port (localhost only)",
+    "attempts": 40,
+    "source_ports_used": [34437, 34439, 34440, 34441, 53085, 53086, 62185, 62187, 62188],
+    "retry_pattern": "New source port every ~1-2s, 3-5 retries per source port, ~500ms interval",
+    "result": "All RST (NesysService not running)",
+    "duration": "T+0.4s to T+23.6s (23.2 seconds)",
+    "conclusion": "NesysService is required for cabinet communication. Game gives up after 23s."
+  },
+  "port_5233": {
+    "description": "OpenCode server (NOT the Python game server)",
+    "owner_pid": 40956,
+    "owner_process": "OpenCode.exe",
+    "health_check_body": "{\"healthy\":true}",
+    "health_check_body_sha256": "E8C5C4EBDE822D11DAF0A40051DDE9C30AA8B6F2D6306B664722306D68F68EA0",
+    "health_check_interval": "~60 seconds",
+    "conclusion": "Game health checks hit OpenCode, not the Python server"
+  },
+  "external_connection": {
+    "ip": "100.30.30.137",
+    "port": 443,
+    "reverse_dns": "ec2-100-30-30-137.compute-1.amazonaws.com",
+    "protocol": "TLS/HTTPS",
+    "first_seen": "T+55s",
+    "conclusion": "Game server is AWS EC2 instance"
+  },
+  "port_4001": {
+    "listening": false,
+    "conclusion": "Python server not running, not contacted"
+  },
+  "port_6666": {
+    "listening": false,
+    "conclusion": "Python server not running, not contacted"
+  },
+  "dns_queries": 0,
+  "http_requests_captured": 4,
+  "ssdp_discovery": true
+}

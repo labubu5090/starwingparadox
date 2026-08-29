@@ -1,0 +1,21 @@
+﻿{
+    "ida_running":  true,
+    "timestamp":  "2026-08-29T15:36:46.045+08:00",
+    "relevant_processes":  [
+                               {
+                                   "pid":  61348,
+                                   "name":  "ida",
+                                   "start":  "\/Date(1787938316696)\/"
+                               },
+                               {
+                                   "pid":  6312,
+                                   "name":  "LogiSyncProxy",
+                                   "start":  null
+                               },
+                               {
+                                   "pid":  16908,
+                                   "name":  "YourPhoneAppProxyHost",
+                                   "start":  "\/Date(1787924647733)\/"
+                               }
+                           ]
+}

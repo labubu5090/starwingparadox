@@ -84,3 +84,8 @@ tools/ida_g21/targets/*.nam
 tools/ida_g21/targets/*.til
 tools/ida_g21/out/*.complete
 tools/ida_g21/logs/
+
+# G22 analysis artifacts (narrow exclusions)
+tools/wireshark_g22/captures/*.pcap
+tools/wireshark_g22/captures/*.pcapng
+tools/ida_g21/out/*.i64

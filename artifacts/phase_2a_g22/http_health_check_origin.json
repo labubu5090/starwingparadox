@@ -1,0 +1,28 @@
+{
+  "phase": "2A-G22",
+  "health_check_analysis": {
+    "discovery": "G22 cold-start capture revealed health check was hitting OpenCode, NOT the Python server",
+    "g21_misinterpretation": "G21 assumed port 5233 was the Python server. G22 corrected this.",
+    "evidence": [
+      "Port 5233 is owned by OpenCode (PID 40956)",
+      "Health check body: {\"healthy\":true} (OpenCode response)",
+      "Python server not running (ports 4001, 6666 not listening)",
+      "Game log shows no mention of port 5233 or health check path"
+    ],
+    "origin": "OpenCode desktop application (AI coding assistant)",
+    "port_5233_owner": "OpenCode.exe (PID 40956)",
+    "health_check_path": "/api/health",
+    "health_check_method": "OPTIONS + GET",
+    "health_check_response": "204 (OPTIONS) + 200 (GET) with JSON body {\"healthy\":true}",
+    "health_check_interval": "~60 seconds",
+    "conclusion": "The health check observed in G21 was OpenCode's own health endpoint, not a Starwing game service"
+  },
+  "nesys_service_analysis": {
+    "port": 1042,
+    "description": "NesysService is the cabinet's service controller for authentication",
+    "certificate_validation": "Game requires NesysService for SSL/TLS certificate validation",
+    "error_pattern": "NesysControlErrorMessage / id[0] status[4] option[0] -> RequestNetworkInfo -> CertError",
+    "retry_behavior": "Game retries ~4575 times over 77 seconds before giving up",
+    "conclusion": "NesysService is REQUIRED for game authentication. Without it, game cannot validate certificates."
+  }
+}
