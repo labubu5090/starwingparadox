@@ -1,0 +1,17 @@
+{
+  "phase": "2A-G25",
+  "classification": "CREDIT_SYSTEM_BLOCKED",
+  "decision": "The title screen requires 2 credits (coins) to advance past the Insert Start state. Credits are managed by NesysService via machine data. Without NesysService, zero credits are available. The ENTER key press had no effect because the credit check gates the Start button.",
+  "blocking_factor": "CREDIT_SYSTEM",
+  "credit_requirement": {
+    "start_credit": 2,
+    "continue_first": 2,
+    "continue_next": 1,
+    "trial_credit": 1,
+    "current_available": 0
+  },
+  "trust_dependency": "Credits are a production trust dependency managed by NesysService. Cannot be bypassed without implementing a local credit system.",
+  "private_server_implication": "A private server would need to implement a local credit system that provides credits to the game client. This requires understanding the credit protocol between NesysService and the game.",
+  "eligible_for_private_server": false,
+  "session_classification": "SESSION_NOT_REACHED - blocked at credit check"
+}

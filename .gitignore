@@ -100,3 +100,7 @@ tools/ida_g21/g23_shipping_*.py
 tools/wireshark_g22/captures/g24_coldstart.pcapng
 tools/wireshark_g22/logs/g24_capture.log
 tools/ida_g21/g24_*.py
+
+# G25 exclusions
+tools/wireshark_g22/captures/g25_title_to_session.pcapng
+tools/wireshark_g22/logs/g25_capture.log

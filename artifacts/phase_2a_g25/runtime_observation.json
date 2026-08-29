@@ -1,0 +1,19 @@
+{
+  "phase": "2A-G25",
+  "observation_duration_seconds": 120,
+  "capture_file": "tools/wireshark_g22/captures/g25_title_to_session.pcapng",
+  "total_packets": 4402,
+  "launcher_pid": 63544,
+  "shipping_pid": 58340,
+  "title_detected_at": "T+3s",
+  "start_input_at": "17:12:58.780+08:00",
+  "start_input_key": "ENTER",
+  "state_change_after_start": false,
+  "external_connections": [
+    {"dest": "34.234.47.148:443", "protocol": "TLS/HTTPS", "state": "Established"}
+  ],
+  "cert_error_continues": true,
+  "asset_preloading_continues": true,
+  "final_log_lines": 76502,
+  "conclusion": "ENTER key had no effect. Title screen requires credits. Game stayed in title state with CertError retry loop."
+}

@@ -1,0 +1,12 @@
+{
+  "phase": "2A-G25",
+  "title_detected": true,
+  "detection_time": "T+3s",
+  "detection_evidence": "LogPreloader: UPreloaderWork::RequestAssetByName / InName[/Game/GUI/Common/BluePrint/WBP_InsertStart]",
+  "title_widget": "WBP_InsertStart",
+  "title_main_display": "WBP_Title_MainDisplay",
+  "animation": "Ani_Loop_INST",
+  "window_handle": 3868288,
+  "window_title": "AcrGame",
+  "input_ready": true
+}

@@ -1,0 +1,14 @@
+{
+  "phase": "2A-G25",
+  "new_listeners_after_start": [],
+  "new_connections_after_start": [
+    {"time": "T+50s", "dest": "34.234.47.148:443", "protocol": "TLS/HTTPS", "state": "SynSent"},
+    {"time": "T+55s", "dest": "34.234.47.148:443", "state": "Established"}
+  ],
+  "port_1042": "NOT ATTEMPTED",
+  "port_4001": "NOT ATTEMPTED",
+  "port_6666": "NOT ATTEMPTED",
+  "port_7777": "NOT ATTEMPTED",
+  "external_endpoint": "34.234.47.148:443 (different from G24's 100.60.248.8)",
+  "conclusion": "No new local ports or listeners after Start. External HTTPS connection to different AWS endpoint."
+}
