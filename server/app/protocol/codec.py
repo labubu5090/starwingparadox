@@ -118,7 +118,18 @@ def _decode_with_generated(payload: bytes) -> tuple[int, int, str, bytes]:
     inner = msg.WhichOneof("Message")
 
     if inner is None:
-        raise DecodeError("PbMessage has no Message oneof set")
+        # Oneof not set - fall back to messageType registry
+        message_name = MESSAGE_TYPE_MAP.get(message_type)
+        if message_name is None:
+            raise DecodeError(f"PbMessage has no Message oneof set and unknown messageType={message_type}")
+        logger.info(
+            "Decoded (oneof unset): packetId=%d messageType=%d name=%s payload=%d bytes",
+            packet_id,
+            message_type,
+            message_name,
+            len(payload),
+        )
+        return packet_id, message_type, message_name, payload
 
     message_name = inner
     logger.info(

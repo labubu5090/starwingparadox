@@ -1,0 +1,52 @@
+{
+  "phase": "G33",
+  "title": "MatchingServer Initialization Gate",
+  "timestamp": "2026-08-29T21:10:00Z",
+  "gate_expression": {
+    "condition": "MatchingServer address must be available before Connect",
+    "error_log": "Error No MatchingServer so initialize Nesys before",
+    "error_offset_byte": 127178230,
+    "two_paths": {
+      "nesys_path": {
+        "description": "NESYS provides MatchingServer address after NesysControl initialization",
+        "log": "[UAcrProtocol::Connect] Connect to MatchingServer address from NESYS:%s",
+        "requires": "UCPP_NesysControl::Setup Completed + RequestNesysControlInitiazlize [Cert] success",
+        "is_online_required": true,
+        "trust_level": "PRODUCTION_TRUST"
+      },
+      "config_path": {
+        "description": "Config/command-line provides MatchingServer address directly",
+        "log": "[UAcrProtocol::Connect] MatchingServer address from Config:%s",
+        "config_property": "DefaultMatchingServerAddress",
+        "flag": "UseConfigMatchingServer",
+        "command_line_override": "UseConfigMatchingServer use commandLine value.(%d)",
+        "is_online_required": false,
+        "trust_level": "SAFE_LOCAL"
+      }
+    },
+    "decision_point": "==Decide connect MatchingServer address==",
+    "recommendation": "G34 should implement the Config path using command-line arguments"
+  },
+  "isonline_semantics": {
+    "read_site": "UCPP_NesysControl::Get(this)->IsOnline[%d]",
+    "poll_site": "SystemDataCheck::Tick / CheckVersion / IsOnlineStatus[%d]",
+    "meaning": "Production NESYS certificate-authenticated state",
+    "safe_local": false,
+    "classification": "PRODUCTION_TRUST_ASSERTION",
+    "override_forbidden": true
+  },
+  "nesys_control_sequence": [
+    "RequestNesysControlInitiazlize [Cert]",
+    "RequestNesysControlNetworkInfo [NetworkInfo]",
+    "RequestNesysControlGlobalIPAddr [GetIPAddr]",
+    "RequestNesysControlNesysServiceVersion [ServerVersion]",
+    "RequestNesysControlUploadConfig [UploadConfig]",
+    "RequestNesysControlIncomeStatus [IncomeResult]"
+  ],
+  "config_properties": {
+    "DefaultMatchingServerAddress": "UE4 UProperty in NetworkModule",
+    "UseConfigMatchingServer": "UE4 UProperty, read from command line",
+    "HttpServerAddress": "UE4 UProperty, read from command line",
+    "MatchingServerType": "UE4 UProperty, server type selector"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "phase": "G33",
+  "title": "Error Frame Analysis",
+  "timestamp": "2026-08-29T21:10:00Z",
+  "g32_decode_error": {
+    "error_message": "PbMessage has no Message oneof set",
+    "root_cause": "SERVER_DECODER_BUG",
+    "classification": "PING_CONTROL_FRAME_NO_ONEOF_REQUIRED",
+    "description": "Game sends a second frame after each Ping with messageType=0x66 but empty Message oneof. The generated decoder required the oneof to be set, but the raw decoder handled it via messageType registry fallback.",
+    "evidence": {
+      "tcp_log_file": "docs/generated/tcp-20260829-123155/tcp_server.log",
+      "total_decode_errors": 10,
+      "pattern": "RECV Ping -> SEND Ping -> DECODE_ERROR (~500ms later)",
+      "game_sends_two_frames_per_heartbeat": true,
+      "first_frame": "Ping with messageType=0x66, oneof NOT set (decoded via raw fallback)",
+      "second_frame": "Empty oneof frame (FAILED before fix, SUCCEEDS after fix)"
+    }
+  },
+  "error_causing_frame": {
+    "connection_id": "#1",
+    "client": "127.0.0.1:25407",
+    "timestamp_first_error": "2026-08-29T12:35:12.176834+00:00",
+    "packet_id": "unknown (second frame in recv buffer)",
+    "message_type": "0x66 (102) - Ping",
+    "oneof_status": "UNSET",
+    "protobuf_parse": "SUCCESS (envelope parsed, oneof empty)",
+    "field_numbers_wire_types": {
+      "field_1_packetId": "varint",
+      "field_2_messageType": "varint (0x66)",
+      "field_102_Ping": "NOT PRESENT"
+    }
+  },
+  "fix_applied": {
+    "file": "server/app/protocol/codec.py",
+    "function": "_decode_with_generated",
+    "change": "When WhichOneof('Message') returns None, fall back to MESSAGE_TYPE_MAP using messageType from envelope",
+    "regression": "NONE - all 20 G33 tests pass, 1078 total pass"
+  }
+}
