@@ -1,0 +1,44 @@
+{
+  "phase": "2A-G24",
+  "observation_duration_seconds": 180,
+  "capture_file": "tools/wireshark_g22/captures/g24_coldstart.pcapng",
+  "capture_sha256": "A01B43814DC9D6CBA1041BF547A891EEB491364C33270B5038625FEF27C3709E",
+  "capture_size_bytes": 19880000,
+  "total_packets": 2565,
+  "launcher_pid": 27520,
+  "shipping_pid": 63788,
+  "port_1042": {
+    "syn_attempts": "none observed (NesysService not running)",
+    "conclusion": "Game does not attempt port 1042 in this run"
+  },
+  "port_5233": {
+    "health_checks": [
+      {"time": "T+17.8s", "method": "OPTIONS", "response": 204},
+      {"time": "T+17.8s", "method": "GET", "response": 200}
+    ],
+    "conclusion": "OpenCode health checks continue normally"
+  },
+  "external_connections": [
+    {"time": "T+60s", "dest": "100.60.248.8:443", "protocol": "TLS/HTTPS", "state": "Established"},
+    {"time": "T+120s", "dest": "100.60.248.8:443", "state": "CloseWait"},
+    {"time": "T+170s", "dest": "127.0.0.1:80", "protocol": "TCP SYN", "state": "SynSent (failed)"}
+  ],
+  "log_growth": {
+    "T+10s": {"lines": 30942, "bytes": 5290723},
+    "T+60s": {"lines": 69317, "bytes": 9889299},
+    "T+120s": {"lines": 108159, "bytes": 14672539},
+    "T+180s": {"lines": 108498, "bytes": 14691287},
+    "conclusion": "Log growth slows at T+120s as preloader approaches completion"
+  },
+  "game_state_progression": [
+    "T+0s: Launcher starts",
+    "T+1s: Shipping starts",
+    "T+2s: HTTP timeouts configured (60/60/30)",
+    "T+4s: First CertError (line 23016)",
+    "T+4s-T+120s: CertError retry loop + asset preloading (4616 CertError lines)",
+    "T+60s: External connection to 100.60.248.8:443",
+    "T+120s: External connection enters CloseWait",
+    "T+170s: HTTP port 80 connection attempt (failed)",
+    "T+180s: Title screen reached (WBP_Title_MainDisplay, WBP_InsertStart)"
+  ]
+}

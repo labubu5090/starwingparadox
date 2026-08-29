@@ -1,0 +1,20 @@
+{
+  "phase": "2A-G24",
+  "assessment": "The game reaches the title screen despite CertError. This means LEVEL_0 (Process Start), LEVEL_1 (Local Boot), and LEVEL_2 (Local UI) are CURRENTLY_OBSERVED. The title screen is fully functional with animations playing.",
+  "levels": {
+    "LEVEL_0_PROCESS_START": "CURRENTLY_OBSERVED - Game launches and reaches Shipping executable",
+    "LEVEL_1_LOCAL_BOOT": "CURRENTLY_OBSERVED - Assets load, engine initializes, title screen appears",
+    "LEVEL_2_LOCAL_UI": "CURRENTLY_OBSERVED - Title screen with animations, Insert Start prompt visible",
+    "LEVEL_3_PRIVATE_SERVER_UNAUTHENTICATED": "STATICALLY_REACHABLE - Python server endpoints exist, no integration test",
+    "LEVEL_4_PLAYER_SESSION": "BLOCKED_CERTIFICATE_TRUST - Requires NesysService certificate validation",
+    "LEVEL_5_MATCHING": "BLOCKED_UNKNOWN_FLOW - Protocol not yet captured",
+    "LEVEL_6_BATTLE": "BLOCKED_UNKNOWN_FLOW - Protocol not yet captured",
+    "LEVEL_7_RESULT": "STATICALLY_REACHABLE - Python server result persistence exists"
+  },
+  "key_finding": "CertError is a BACKGROUND RETRY LOOP that does NOT block the boot sequence. The game reaches the title screen and waits for player input.",
+  "private_server Eligibility": {
+    "safe_to_implement": ["LEVEL_0", "LEVEL_1", "LEVEL_2", "LEVEL_3", "LEVEL_7"],
+    "requires_further_investigation": ["LEVEL_5", "LEVEL_6"],
+    "blocked_by_certificate_trust": ["LEVEL_4"]
+  }
+}

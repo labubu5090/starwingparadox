@@ -1,0 +1,14 @@
+{
+  "phase": "2A-G24",
+  "git_branch": "master",
+  "git_head": "34eac41",
+  "python_version": "3.10.6",
+  "ida_version": "9.3",
+  "wireshark_version": "4.6.6",
+  "full_pytest": {"passed": 1058, "skipped": 1, "warnings": 208},
+  "clean_room_pytest": {"passed": 513, "skipped": 1, "warnings": 28},
+  "ruff": "All checks passed",
+  "mypy": {"errors": 5, "files": 4, "pre_existing": true},
+  "typed_file_count": 2730,
+  "baseline_consistent_with_g23": true
+}

@@ -1,0 +1,34 @@
+{
+  "phase": "2A-G24",
+  "log_file": "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame.log",
+  "total_lines": 108502,
+  "first_cert_error_line": 23016,
+  "last_cert_error_line": 107500,
+  "total_cert_error_lines": 4616,
+  "unique_cert_error_timestamps": 7558,
+  "cert_error_pattern": "ACPP_GameModeBoot::NesysControlErrorMessage / ENesysNetworkServerMessage[CertError]",
+  "retry_loop": {
+    "pattern": "RequestNetworkInfo OK -> RequestNetworkInfo Error -> NesysRequest -> CertError",
+    "interval_ms": 16,
+    "status_code": 4,
+    "option": 0,
+    "conclusion": "Background retry loop, NOT blocking boot"
+  },
+  "engine_continues_after_cert_error": true,
+  "asset_preloading_continues": true,
+  "preloader_progress_at_log_end": {"loaded": 5972, "total": 7553, "percent": 79},
+  "title_screen_reached": true,
+  "title_screen_evidence": [
+    "LogOutGameSequenceWork: NextGameSequence_Entrance() NextSequenceSelect:Title",
+    "LogMainMenuWidgetHolder: Call SetVisibleBGWidgetMain GameSequence:[NowSequence:Title]",
+    "WBP_Title_MainDisplay_C_0 StandardAnimation[1](Ani_Loop_INST)",
+    "WBP_InsertStart StandardAnimation[1](Ani_Loop_INST)"
+  ],
+  "ui_state": "Title screen with Insert Start animation playing",
+  "input_enabled": true,
+  "local_devices_initialized": true,
+  "http_timeouts": {"connection": 60, "receive": 60, "send": 30},
+  "error_codes_loaded": {"count": 13, "range": "-1200 to -1212"},
+  "external_endpoint": "100.60.248.8:443 (AWS EC2, different from G22/G23)",
+  "ssdp_discovery": true
+}
