@@ -1,0 +1,30 @@
+{
+  "device_name": "8BitDo Ultimate 2C Wireless Controller",
+  "vid": "2DC8",
+  "pid": "301C",
+  "transport": "USB",
+  "joy_cpl_present": true,
+  "joy_cpl_live_events": "CONFIRMED_VIA_WINMM",
+  "raw_input_visible": false,
+  "hid_visible": true,
+  "directinput_visible": "dinput8.dll_LOADABLE",
+  "xinput_slots": {
+    "0": "xinput1_4:ERROR_DEVICE_NOT_CONNECTED",
+    "1": "xinput1_4:ERROR_DEVICE_NOT_CONNECTED",
+    "2": "xinput1_4:ERROR_DEVICE_NOT_CONNECTED",
+    "3": "xinput1_4:ERROR_DEVICE_NOT_CONNECTED"
+  },
+  "final_api_classification": "JOYCPL_INPUT_CONFIRMED_DIAGNOSTIC_API_GAP",
+  "winmm_device_0": {
+    "status": "CONNECTED",
+    "neutral_x": 32767,
+    "neutral_y": 32767,
+    "live_input_detected": true
+  },
+  "hid_collection": {
+    "usage_page": "0x0001",
+    "usage": "0x0005",
+    "input_reports": 0,
+    "feature_reports_failed": true
+  }
+}

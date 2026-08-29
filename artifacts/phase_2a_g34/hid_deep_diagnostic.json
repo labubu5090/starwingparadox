@@ -1,0 +1,16 @@
+[
+  {
+    "path_hash": "ad7b7b494553",
+    "usage_page": 1,
+    "usage": 5,
+    "interface_number": 0,
+    "input_report_length": 0,
+    "output_report_length": 0,
+    "feature_report_length": 0,
+    "open_result": "SUCCESS",
+    "read_result": "0 reports in 5s",
+    "read_error_code": null,
+    "report_count": 0,
+    "reports": []
+  }
+]

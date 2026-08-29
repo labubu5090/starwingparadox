@@ -1,0 +1,23 @@
+{
+  "game_input_paths": {
+    "gamepad": {
+      "axis_config": ["Gamepad_LeftX", "Gamepad_LeftY", "Gamepad_RightX", "Gamepad_RightY"],
+      "deadzone": 0.25,
+      "action_mappings": ["ShotR", "Jump", "Dash", "ShotL", "LButton", "Step", "WeaponChange", "RButton", "ARSkill"],
+      "axis_mappings": ["MoveForward", "MoveRight", "TurnRate", "LookUpRate"]
+    },
+    "usbio": {
+      "axis_config": ["USBIOLeftStickAxisX", "USBIOLeftStickAxisY", "USBIORightStickAxisX", "USBIORightStickAxisY"],
+      "action_mappings": ["Dash", "Jump", "ShotR", "ShotL", "RButton", "LButton", "Step", "ARSkill", "EmergencySeat", "Respawn", "SafetyA", "SafetyB", "SafetyC"],
+      "axis_mappings": ["MoveForward", "MoveRight", "TurnRate", "LookUpRate", "TurnRate2", "LookUpRate2"]
+    },
+    "keyboard_mouse": {
+      "action_mappings": ["ShotR", "ShotL", "Jump", "Dash", "LButton", "RButton", "WeaponChange", "Step", "ARSkill", "OutGameDecision", "OutGameStart"],
+      "axis_mappings": ["MoveForward", "MoveRight", "Turn", "LookUp"]
+    }
+  },
+  "native_gamepad_active": false,
+  "keyboard_input_active": true,
+  "galaxyio_active": false,
+  "game_input_path_classification": "KEYBOARD_AND_USBIO_ACTIVE"
+}

@@ -1,0 +1,11 @@
+{
+  "classification": "JOYCPL_INPUT_CONFIRMED_DIAGNOSTIC_API_GAP",
+  "joy_cpl_status": "OK",
+  "winmm_reads": true,
+  "hid_reports": 0,
+  "xinput_connected": false,
+  "ue4_gamepad_detected": false,
+  "remediation": "OPTION_B_PROJECT_OWNED_MAPPER",
+  "mapper_path": "tools/controller_mapper/mapper_app.py",
+  "config_path": "config/controller_mapping.json"
+}

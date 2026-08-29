@@ -1,0 +1,11 @@
+{
+  "tests_total": 1115,
+  "tests_passed": 1115,
+  "tests_failed": 0,
+  "tests_skipped": 1,
+  "ruff_passed": true,
+  "baseline": "1078 passed, 1 skipped",
+  "delta": "+37 tests (G34 controller mapper)",
+  "g34_tests": 37,
+  "all_passing": true
+}

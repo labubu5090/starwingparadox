@@ -1,0 +1,10 @@
+{
+  "mapper_path": "tools/controller_mapper/mapper_app.py",
+  "config_path": "config/controller_mapping.json",
+  "schema_version": 1,
+  "available_actions": ["forward", "left", "right", "foot_pedal", "start", "shot_left", "shot_right", "dash", "left_button", "right_button", "weapon_change", "step", "ar_skill", "credit"],
+  "test_input_mode": "sends_no_keyboard_output",
+  "assign_mode": "capture_next_input_after_neutral",
+  "emergency_stop": "releases_all_keys",
+  "foreground_guard": "only_sends_when_starwing_is_foreground"
+}
