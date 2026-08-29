@@ -1,0 +1,9 @@
+﻿{
+  "phase": "G28",
+  "next_blocker": "POST_BOOT_LOOP",
+  "description": "Game completes SystemDataCheck and reaches Title but cycles back through SystemDataCheck periodically",
+  "checkversion_passed": true,
+  "new_http_request": "POST http://dev.starwing.jp/mock/matching/server (timeout)",
+  "blocking_after_openkey": "NONE - SystemDataCheck completes successfully",
+  "note": "Z input could not be tested due to foreground window limitation"
+}

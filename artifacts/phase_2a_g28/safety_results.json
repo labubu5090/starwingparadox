@@ -1,0 +1,12 @@
+﻿{
+  "phase": "G28",
+  "no_binary_modified": true,
+  "no_debugger_attached": true,
+  "no_dll_injection": true,
+  "no_port_1042_listener": true,
+  "no_certificate_operation": true,
+  "no_hosts_dns_modification": true,
+  "openkey_deployed_to_operator_path": true,
+  "existing_openkey_backed_up": false,
+  "only_g28_processes_terminated": true
+}

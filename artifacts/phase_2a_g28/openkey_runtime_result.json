@@ -1,0 +1,17 @@
+﻿{
+  "phase": "G28",
+  "game_opened_file": true,
+  "log_evidence": "UFileManagerTickable::LoadJsonFile / path[D:/Saved/ACRSaved/SaveData/OpenKey.json]",
+  "json_parsing_succeeded": true,
+  "state_2_passed": true,
+  "isopen_accepted": true,
+  "next_state_reached": "CheckVersion (State 4)",
+  "checkversion_result": "IsOnlineStatus[0] CheckPackage[1] CheckMasterData[1]",
+  "systemdatacheck_completed": true,
+  "iserror": 0,
+  "next_sequence": "PromotionMovie",
+  "return_to_title": true,
+  "classification": "OPENKEY_GATE_PASSED_CHECKVERSION_PASSED",
+  "z_input_not_tested": true,
+  "z_input_reason": "Could not bring game window to foreground from OpenCode"
+}
