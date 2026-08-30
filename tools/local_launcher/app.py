@@ -37,6 +37,7 @@ from .environment import (
     EnvironmentState,
     run_all_checks,
 )
+from .nesys_pipe import NesysPipeServer
 from .process_manager import ProcessManager
 from .session_log import SessionLog
 from .status import (
@@ -151,6 +152,7 @@ class LauncherWindow(QMainWindow):
         self._processes = ProcessManager()
         self._session_log = SessionLog()
         self._env_state: EnvironmentState | None = None
+        self._nesys_pipe = NesysPipeServer()
         self._session_log.start()
         self._setup_ui()
         self._setup_timers()
@@ -418,6 +420,14 @@ class LauncherWindow(QMainWindow):
         else:
             self._add_log("TCP matching :6666 already running (pre-existing) — skipped")
 
+        # Start NESYS named pipe stub
+        if not self._nesys_pipe.running:
+            self._nesys_pipe.start()
+            self._add_log("NESYS pipe started (\\\\.\\pipe\\nesys_games)")
+            self._update_card("nesys_auth", "Available", COLORS["success"])
+            self._status.nesys.authentication = "Available"
+            self._status.nesys.b_nesys_server_live = "Live"
+
         self._status.state = LauncherState.RUNNING
         self._add_log("Server stack ready.")
         self._update_card("http_proxy", "Running", COLORS["success"])
@@ -431,6 +441,12 @@ class LauncherWindow(QMainWindow):
         for name in stopped:
             self._add_log(f"  Stopped: {name}")
             self._session_log.log_process_event(name, "stopped")
+        if self._nesys_pipe.running:
+            self._nesys_pipe.stop()
+            self._add_log("NESYS pipe stopped")
+            self._update_card("nesys_auth", "Unavailable", COLORS["text_muted"])
+            self._status.nesys.authentication = "Unavailable"
+            self._status.nesys.b_nesys_server_live = "Unavailable"
         self._status.state = LauncherState.IDLE
 
         from .environment import _port_available
@@ -498,6 +514,9 @@ class LauncherWindow(QMainWindow):
             stopped = self._processes.stop_all()
             for name in stopped:
                 self._add_log(f"  Stopped: {name}")
+            if self._nesys_pipe.running:
+                self._nesys_pipe.stop()
+                self._add_log("NESYS pipe stopped")
             self._status.state = LauncherState.IDLE
             self._status.game_phase = GamePhase.CLOSED
             self._add_log("Emergency stop complete.")
