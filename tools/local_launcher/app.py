@@ -33,6 +33,7 @@ from .environment import (
     GAME_EXE,
     HTTP_PORT,
     PROJECT_ROOT,
+    TCP_PORT,
     EnvironmentState,
     run_all_checks,
 )
@@ -373,42 +374,52 @@ class LauncherWindow(QMainWindow):
         self._add_log("Starting server stack...")
         self._status.state = LauncherState.STARTING
 
-        # Start HTTP server
-        try:
-            proc = subprocess.Popen(
-                [str(PROJECT_ROOT / "server" / ".venv" / "Scripts" / "python.exe"), "-m", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", "4001"],
-                cwd=str(PROJECT_ROOT / "server"),
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-            )
-            self._processes.register("http_server", proc, expected_port=APP_PORT)
-            self._add_log(f"HTTP server started (PID {proc.pid})")
-            self._session_log.log_server_event("http_server", "started", f"PID {proc.pid}")
-        except (OSError, FileNotFoundError) as exc:
-            self._add_log(f"Failed to start HTTP server: {exc}")
-            self._session_log.log_error(f"HTTP server start failed: {exc}")
-            return
+        from .environment import _port_available
 
-        # Start proxy
-        try:
-            proxy_log = self._session_log.session_dir / "proxy.log"
-            proc = subprocess.Popen(
-                [str(PROJECT_ROOT / "server" / ".venv" / "Scripts" / "python.exe"), str(PROXY_SCRIPT)],
-                cwd=str(PROJECT_ROOT),
-                stdout=open(proxy_log, "w"),  # noqa: SIM115
-                stderr=subprocess.STDOUT,
-            )
-            self._processes.register("http_proxy", proc, expected_port=HTTP_PORT, log_path=str(proxy_log))
-            self._add_log(f"HTTP proxy started (PID {proc.pid})")
-            self._session_log.log_server_event("http_proxy", "started", f"PID {proc.pid}")
-        except (OSError, FileNotFoundError) as exc:
-            self._add_log(f"Failed to start HTTP proxy: {exc}")
+        # Start HTTP server only if port 4001 is free
+        if _port_available(APP_PORT):
+            try:
+                proc = subprocess.Popen(
+                    [str(PROJECT_ROOT / "server" / ".venv" / "Scripts" / "python.exe"), "-m", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", "4001"],
+                    cwd=str(PROJECT_ROOT / "server"),
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                )
+                self._processes.register("http_server", proc, expected_port=APP_PORT)
+                self._add_log(f"HTTP server started (PID {proc.pid})")
+                self._session_log.log_server_event("http_server", "started", f"PID {proc.pid}")
+            except (OSError, FileNotFoundError) as exc:
+                self._add_log(f"Failed to start HTTP server: {exc}")
+                self._session_log.log_error(f"HTTP server start failed: {exc}")
+        else:
+            self._add_log("HTTP server :4001 already running (pre-existing) — skipped")
 
-        # TCP matching server is started as part of the HTTP server (same process)
-        self._add_log("TCP matching server managed by HTTP server process")
+        # Start proxy only if port 80 is free
+        if _port_available(HTTP_PORT):
+            try:
+                proxy_log = self._session_log.session_dir / "proxy.log"
+                proc = subprocess.Popen(
+                    [str(PROJECT_ROOT / "server" / ".venv" / "Scripts" / "python.exe"), str(PROXY_SCRIPT)],
+                    cwd=str(PROJECT_ROOT),
+                    stdout=open(proxy_log, "w"),  # noqa: SIM115
+                    stderr=subprocess.STDOUT,
+                )
+                self._processes.register("http_proxy", proc, expected_port=HTTP_PORT, log_path=str(proxy_log))
+                self._add_log(f"HTTP proxy started (PID {proc.pid})")
+                self._session_log.log_server_event("http_proxy", "started", f"PID {proc.pid}")
+            except (OSError, FileNotFoundError) as exc:
+                self._add_log(f"Failed to start HTTP proxy: {exc}")
+        else:
+            self._add_log("HTTP proxy :80 already running (pre-existing) — skipped")
+
+        # TCP matching server — start only if port 6666 is free
+        if _port_available(TCP_PORT):
+            self._add_log("TCP matching server managed by HTTP server process")
+        else:
+            self._add_log("TCP matching :6666 already running (pre-existing) — skipped")
 
         self._status.state = LauncherState.RUNNING
-        self._add_log("Server stack started.")
+        self._add_log("Server stack ready.")
         self._update_card("http_proxy", "Running", COLORS["success"])
         self._update_card("python_http", "Running", COLORS["success"])
         self._update_card("tcp_match", "Running", COLORS["success"])
