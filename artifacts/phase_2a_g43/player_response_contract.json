@@ -1,0 +1,113 @@
+{
+  "phase": "G43",
+  "classification": "LOCAL_PLAYER_PROFILE_HANDLER_IMPLEMENTED",
+  "commit": "PENDING",
+  "quality_gates": {
+    "mypy": "clean (85 files)",
+    "ruff_server": "clean",
+    "tests_collected": 125,
+    "tests_passed": 125,
+    "tests_failed": 0,
+    "tests_skipped": 0
+  },
+  "public_repositories": {
+    "starwing_paradox": {
+      "url": "https://github.com/ArcadeMachinist/StarwingParadox",
+      "license": "NOT_CONFIRMED",
+      "commit": "latest master",
+      "reuse restrictions": "No explicit license found. Used only as correlation reference for protocol observations."
+    },
+    "fake_nesica_service": {
+      "url": "https://github.com/ArcadeMachinist/FakeNesicaService",
+      "license": "NOT_CONFIRMED",
+      "commit": "latest master",
+      "reuse restrictions": "No explicit license found. Used only as correlation reference for pipe protocol."
+    }
+  },
+  "player_profile_route": {
+    "path": "/player/profile/load",
+    "method": "POST",
+    "classification": "GAME_CLIENT_CONFIRMED",
+    "evidence": [
+      "G40 live capture: POST /player/profile/load with {nesys_id: str} -> 200",
+      "G41 live capture: same pattern observed",
+      "Public implementation: same path and method",
+      "Dedicated handler implemented (not catch-all)"
+    ]
+  },
+  "request_schema": {
+    "content_type": "application/json",
+    "fields": {
+      "nesys_id": {"type": "string", "required": true, "description": "Card identifier from NESYS pipe or private server mapping"}
+    }
+  },
+  "response_schema": {
+    "content_type": "application/json",
+    "fields": {
+      "player_id": {"type": "integer", "required": true, "description": "Private-server-local player identifier"},
+      "nesys_id": {"type": "string", "required": true},
+      "player_name": {"type": "string", "required": true},
+      "rank_id": {"type": "integer", "required": true},
+      "rank_id_2on2": {"type": "integer", "required": true},
+      "title_id": {"type": "integer", "required": true},
+      "title_id_2on2": {"type": "integer", "required": true},
+      "buddy_id": {"type": "integer", "required": true},
+      "buddy_intimacy": {"type": "integer", "required": true},
+      "line_color_id": {"type": "integer", "required": true},
+      "emblem_id": {"type": "integer", "required": true},
+      "line_color_id_2on2": {"type": "integer", "required": true},
+      "emblem_id_2on2": {"type": "integer", "required": true},
+      "ranking_pref_name": {"type": "string", "required": true},
+      "last_ranking_pref_name": {"type": "string", "required": true},
+      "match_mode_id": {"type": "integer", "required": true},
+      "violation_point": {"type": "integer", "required": true},
+      "birth_day": {"type": "integer", "required": true},
+      "birth_month": {"type": "integer", "required": true},
+      "mecha_set_id": {"type": "integer", "required": true},
+      "side_weapon_id": {"type": "integer", "required": true},
+      "mecha_preset_id": {"type": "integer", "required": true},
+      "rank_point": {"type": "integer", "required": true},
+      "max_rank_id": {"type": "integer", "required": true},
+      "rank_point_2on2": {"type": "integer", "required": true},
+      "max_rank_id_2on2": {"type": "integer", "required": true},
+      "same_day_login_count": {"type": "integer", "required": true},
+      "total_login_days": {"type": "integer", "required": true},
+      "consecutive_login_days": {"type": "integer", "required": true},
+      "progresses": {"type": "array", "required": true},
+      "last_pref_ranking_order_id": {"type": "integer", "required": true},
+      "pref_ranking_top_player_count": {"type": "integer", "required": true},
+      "official_player_type_id": {"type": "integer", "required": true}
+    }
+  },
+  "safe_local_mapping": {
+    "player_id": "player.player_id (auto-increment integer)",
+    "nesys_id": "Mapped from game client or private server profile UUID",
+    "player_name": "player.player_name (default: ＮｏＮａｍｅ)",
+    "rank_id": "player.rank_id (default: 0)",
+    "title_id": "player.title_id (default: 0)"
+  },
+  "excluded_fields": [
+    "nesys_authenticated",
+    "nesys_token",
+    "certificate",
+    "entitlement",
+    "vendor_card_number",
+    "card_serial",
+    "production_account_id",
+    "is_nesica"
+  ],
+  "tap_local_card_game_event_status": "UNRESOLVED - Game sends /player/profile/load only when card is present via NESYS pipe. NESYS pipe emulation is a security boundary.",
+  "game_request_reached_python": true,
+  "response_returned": true,
+  "game_accepted_response": "NOT_YET_VALIDATED_LIVE",
+  "player_data_ui_result": "NOT_YET_VALIDATED_LIVE",
+  "card_confirmation_result": "NOT_YET_VALIDATED_LIVE",
+  "matching_handler_reconciliation": {
+    "route": "/matching/server",
+    "handler": "DEDICATED",
+    "response": {"ip_addr": "127.0.0.1:6666"},
+    "status": "CONFIRMED"
+  },
+  "game_data_load_decision": "DEFERRED - Implement after /player/profile/load is validated live",
+  "api_example_com_offline_decision": "UNRESOLVED - Game client hardcoded URL, low priority for profile progression"
+}
