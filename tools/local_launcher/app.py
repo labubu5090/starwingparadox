@@ -454,7 +454,7 @@ class LauncherWindow(QMainWindow):
 
     def _on_launch_game(self) -> None:
         from .environment import _port_available
-        if not self._processes.is_running("http_server") and not _port_available(APP_PORT):
+        if not self._processes.is_running("http_server") and _port_available(APP_PORT):
             self._add_log("Cannot launch game: HTTP server not running. Start Server Stack first.")
             return
         exe = str(GAME_EXE)
