@@ -9,11 +9,9 @@ Classification: INI_CONFIG_PATH_RUNTIME_CONFIRMED
 
 from __future__ import annotations
 
-import json
 import hashlib
+import json
 from pathlib import Path
-
-import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 ARTIFACTS = PROJECT_ROOT / "artifacts" / "phase_2a_g34"

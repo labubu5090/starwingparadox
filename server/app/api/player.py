@@ -1,4 +1,4 @@
-"""Player-related endpoints (login, profile, register, etc.)."""
+"""Player-related endpoints (login, profile, register, logout, etc.)."""
 
 import logging
 import uuid
@@ -10,6 +10,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.capture.request_capture import capture_request_metadata
 from app.config import settings
 from app.dependencies import get_db_session
 
@@ -37,6 +38,14 @@ def _galaxy_headers(x_galaxy_api_id: str) -> dict[str, str]:
     if x_galaxy_api_id:
         headers["x-galaxy-api-id"] = x_galaxy_api_id
     return headers
+
+
+async def _get_active_profile_uuid(db: AsyncSession) -> str | None:
+    from app.db.repositories.local_profile_repository import LocalProfileRepository
+
+    repo = LocalProfileRepository(db)
+    active = await repo.get_active_session()
+    return active.profile_uuid if active else None
 
 
 @router.post("/profile/load")
@@ -125,6 +134,20 @@ async def player_login_bonus(
     )
 
 
+@router.post("/logout")
+async def player_logout(
+    request: Request,
+    response: Response,
+    db: AsyncSession = Depends(get_db_session),
+    x_galaxy_api_id: str = Header(default=""),
+) -> Response:
+    headers = _galaxy_headers(x_galaxy_api_id)
+    profile_uuid = await _get_active_profile_uuid(db)
+    resp = _not_implemented("/player/logout", headers)
+    await capture_request_metadata(request, "/player/logout", resp.status_code, profile_uuid)
+    return resp
+
+
 @router.post("/register")
 async def player_register(
     request: Request,
@@ -161,10 +184,16 @@ async def player_fallback(
     path: str,
     request: Request,
     response: Response,
+    db: AsyncSession = Depends(get_db_session),
     x_galaxy_api_id: str = Header(default=""),
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
-    logger.debug("Unimplemented player endpoint: /player/%s", path)
-    if not settings.legacy_compatibility_mode:
-        return _not_implemented(f"/player/{path}", headers)
-    return JSONResponse(content=_ok(), headers=headers)
+    profile_uuid = await _get_active_profile_uuid(db)
+    endpoint = f"/player/{path}"
+    logger.debug("Unimplemented player endpoint: %s", endpoint)
+    if settings.legacy_compatibility_mode:
+        resp = JSONResponse(content=_ok(), headers=headers)
+    else:
+        resp = _not_implemented(endpoint, headers)
+    await capture_request_metadata(request, endpoint, resp.status_code, profile_uuid)
+    return resp
