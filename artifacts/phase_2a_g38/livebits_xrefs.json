@@ -1,0 +1,91 @@
+{
+  "livebits_format_string": {
+    "wide_rva": "0x079988FC",
+    "wide_va": "0x1479988FC",
+    "string": "LiveBits < WebServer:%d Nesys:%d Reception:%d Game:%d Testmode:%d GameConnect:%d HttpSuccess:%d>",
+    "encoding": "UTF-16LE"
+  },
+  "webserverlive_format_string": {
+    "wide_rva": "0x079FFF28",
+    "string": "WebServerLive[%d] _inNesysServerLive[%d] _inNesicaReception[%d] _inHttpSuccess[%d]"
+  },
+  "nesyscontrolinit_format_string": {
+    "wide_rva": "0x06A59C02",
+    "string": "Nesys::RequestNesysControlInitiazlize [Cert] / id[%d] / status[%d] / option[%d]"
+  },
+  "containing_function": {
+    "name": "sub_142C71A30 (UOnlineObserverWork::Report)",
+    "rva": "0x142C71A30",
+    "file": "C:\\work\\acr\\AcrGame\\Source\\NetworkModule\\Private\\OnlineObserverWork.cpp",
+    "line": 327,
+    "purpose": "Logs the complete LiveBits format string with all 7 boolean flags"
+  },
+  "string_xrefs": {
+    "SetHttpSuccess": {
+      "addr": "0x142C71D0B",
+      "containing_function": "sub_142C71C70",
+      "function_name": "UOnlineObserverWork::SetHttpSuccess",
+      "rva": "0x142C71C70"
+    },
+    "OnReceivePong": {
+      "addr": "0x142C7180C",
+      "containing_function": "sub_142C71790",
+      "function_name": "UOnlineObserverWork::OnReceivePong",
+      "rva": "0x142C71790"
+    },
+    "CertError": {
+      "addr": "0x142B1729E",
+      "containing_function": "sub_142B16CA0",
+      "function_name": "NesicaErrorKind setup + CertError handler",
+      "rva": "0x142B16CA0"
+    },
+    "RequestNetworkInfo": {
+      "addr": "0x142C666AB",
+      "containing_function": "sub_142C66640",
+      "function_name": "UCPP_NesysControl::RequestNetworkInfo",
+      "rva": "0x142C66640"
+    },
+    "RequestNesysControlNetworkInfo": {
+      "addr": "0x141FA04C0",
+      "containing_function": "sub_141F9FCE0",
+      "function_name": "UCPP_NesysControl::RequestNesysControlNetworkInfo",
+      "rva": "0x141F9FCE0"
+    },
+    "NesysControlErrorMessage": {
+      "addr": "0x142B06F4D",
+      "containing_function": "sub_142B06360",
+      "function_name": "NesysControl error/property setup",
+      "rva": "0x142B06360"
+    },
+    "initialize_Nesys": {
+      "addr": "0x14794A5C0",
+      "containing_function": "sub_142BCB6E0",
+      "function_name": "UAcrProtocol::Connect",
+      "rva": "0x142BCB6E0"
+    },
+    "IsOnline": {
+      "addr": "0x14268258C",
+      "containing_function": "sub_142682430",
+      "function_name": "SetupWidget_Internal / _inIsOnline property setup",
+      "rva": "0x142682430"
+    },
+    "IsOnlineStatus": {
+      "addr": "0x142B087A8",
+      "containing_function": "sub_142B08050",
+      "function_name": "IsOnlineStatus property setup",
+      "rva": "0x142B08050"
+    },
+    "_inNesysServerLive": {
+      "addr": "0x141E60C45",
+      "containing_function": "sub_141E60AE0",
+      "function_name": "OnReceivedOfflineDelegate / _inNesysServerLive property setup",
+      "rva": "0x141E60AE0"
+    },
+    "bNesysServerLive_string": {
+      "addr": "0x147997060",
+      "containing_function": "sub_142C72730",
+      "function_name": "UOnlineObserverWork::Tick",
+      "rva": "0x142C72730"
+    }
+  }
+}

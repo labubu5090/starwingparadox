@@ -1,0 +1,105 @@
+{
+  "write_map": {
+    "bWebServerLive[99]": {
+      "writer_function": "UOnlineObserverWork::OnReceivePong",
+      "rva": "0x142C71790",
+      "write": "a1[99] = 1",
+      "condition": "a1[98] && a1[99] != 1",
+      "trigger_event": "TCP pong received from matching server",
+      "tcp_dependency": true,
+      "http_dependency": false,
+      "certificate_dependency": false,
+      "pipe_dependency": false,
+      "player_session_dependency": false
+    },
+    "bNesysServerLive[100]": {
+      "writer_function": "UOnlineObserverWork::Tick",
+      "rva": "0x142C72730",
+      "write": "*(a1 + 60) = sub_142C71500(nesys_state) && !sub_142C64DF0(nesys_state)",
+      "reader_function": "sub_142C71500",
+      "reader_expression": "return *(byte*)(NESYS_state + 1600) == 1",
+      "trigger_event": "Periodic Tick (every frame)",
+      "nesys_live_source": "NESYS state object byte at offset 1600",
+      "nesys_maintenance_source": "Virtual function call chain on NESYS state object",
+      "tcp_dependency": false,
+      "http_dependency": false,
+      "certificate_dependency": true,
+      "pipe_dependency": false,
+      "player_session_dependency": false,
+      "classification": "NESYS_CERTIFICATE_AUTHENTICATED_STATE"
+    },
+    "bNesicaReception[101]": {
+      "writer_function": "UOnlineObserverWork::SetLiveFromGame",
+      "rva": "0x142C71F30",
+      "write": "a1[101] = a2",
+      "trigger_event": "Game live state change",
+      "tcp_dependency": false,
+      "http_dependency": false,
+      "certificate_dependency": false,
+      "pipe_dependency": false,
+      "player_session_dependency": false
+    },
+    "bLiveFromTestmode[102]": {
+      "writer_function": "UNKNOWN (not traced)",
+      "trigger_event": "Test mode state",
+      "tcp_dependency": false,
+      "http_dependency": false,
+      "certificate_dependency": false,
+      "pipe_dependency": false,
+      "player_session_dependency": false
+    },
+    "bLiveFromGame[103]": {
+      "writer_function": "UOnlineObserverWork::SetLiveFromGame",
+      "rva": "0x142C71F30",
+      "write": "a1[101] = a2 (indirectly)",
+      "trigger_event": "Game live state change"
+    },
+    "bGameConnect[104]": {
+      "writer_function": "UNKNOWN (not traced)",
+      "trigger_event": "Game connection established",
+      "meaning": "TCP connection to matching server is active",
+      "tcp_dependency": true,
+      "http_dependency": false,
+      "certificate_dependency": false,
+      "pipe_dependency": false,
+      "player_session_dependency": false
+    },
+    "bHttpSuccess[105]": {
+      "writer_function": "UOnlineObserverWork::SetHttpSuccess",
+      "rva": "0x142C71C70",
+      "write": "a1[105] = a2",
+      "trigger_event": "HTTP request completion (success)",
+      "tcp_dependency": false,
+      "http_dependency": true,
+      "certificate_dependency": false,
+      "pipe_dependency": false,
+      "player_session_dependency": false
+    }
+  },
+  "sethttpsuccess_callers": [
+    {
+      "function": "sub_142C38BC0",
+      "rva": "0x142C38BC0",
+      "calls": "SetHttpSuccess(observer, 0)",
+      "meaning": "HTTP request failed or started"
+    },
+    {
+      "function": "sub_142C4D0B0",
+      "rva": "0x142C4D0B0",
+      "calls": "SetHttpSuccess(observer, 0)",
+      "meaning": "HTTP error response"
+    },
+    {
+      "function": "sub_142C51880",
+      "rva": "0x142C51880",
+      "calls": "SetHttpSuccess(observer, 0)",
+      "meaning": "HTTP response processing"
+    },
+    {
+      "function": "sub_142C715B0 (OnGameOver)",
+      "rva": "0x142C715B0",
+      "calls": "SetHttpSuccess(observer, 1)",
+      "meaning": "Game over - sets HttpSuccess to 1"
+    }
+  ]
+}

@@ -975,3 +975,41 @@ Phase 2A-G36: Complete tutorial naturally via controller mapper, monitor TCP/sav
 
 Phase 2A-G37: Implement NESYS protocol in TCP server to handle initialization handshake, then test post-tutorial matching flow.
 
+## Phase 2A-G38: bNesysServerLive Writer/Reader/Semantic Classification (COMPLETE)
+
+**Status**: COMPLETE - Full IDA decompilation of LiveBits data flow
+
+### Key Findings
+
+| Property | Value |
+|----------|-------|
+| Format function | `sub_142C71A30` (UOnlineObserverWork::Report) |
+| bNesysServerLive writer | `sub_142C72730` (UOnlineObserverWork::Tick) |
+| bNesysServerLive reader | `sub_142C71500`: `*(byte*)(NESYS_state + 1600) == 1` |
+| Classification | `NESYS_CERTIFICATE_AUTHENTICATED_STATE` |
+| Certificate dependency | YES - HTTP certificate validation required |
+| Pipe dependency | NO |
+| Gate expression | `a1[99] && a1[100] && a1[102] && a1[101] && a1[103] && a1[104] && a1[105]` |
+
+### LiveBits Flags
+
+| Flag | Offset | Writer | Trigger |
+|------|--------|--------|---------|
+| bWebServerLive | [99] | OnReceivePong | TCP pong received |
+| bNesysServerLive | [100] | Tick | NESYS certificate authenticated |
+| bNesicaReception | [101] | SetLiveFromGame | Game live state change |
+| bLiveFromTestmode | [102] | Unknown | Test mode state |
+| bLiveFromGame | [103] | SetLiveFromGame | Game live state change |
+| bGameConnect | [104] | Unknown | TCP connection established |
+| bHttpSuccess | [105] | SetHttpSuccess | HTTP request completion |
+
+### Artifacts
+
+| Artifact | Path |
+|----------|------|
+| LiveBits xrefs | artifacts/phase_2a_g38/livebits_xrefs.json |
+| Data flow | artifacts/phase_2a_g38/nesys_live_dataflow.json |
+| Write map | artifacts/phase_2a_g38/livebits_write_map.json |
+| Gate expression | artifacts/phase_2a_g38/playable_gate_expression.json |
+| Final report | docs/PHASE_2A_G38_FINAL_REPORT.md |
+
