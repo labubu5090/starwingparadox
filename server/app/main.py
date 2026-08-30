@@ -11,6 +11,7 @@ from app.api.battle import router as battle_router
 from app.api.credit import router as credit_router
 from app.api.game_data import router as game_data_router
 from app.api.health import router as health_router
+from app.api.local_profile import router as local_profile_router
 from app.api.matching import router as matching_router
 from app.api.mission import router as mission_router
 from app.api.player import router as player_router
@@ -68,3 +69,4 @@ app.include_router(mission_router)
 app.include_router(credit_router)
 app.include_router(tutorial_router)
 app.include_router(battle_router)
+app.include_router(local_profile_router)

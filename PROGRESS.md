@@ -1013,3 +1013,63 @@ Phase 2A-G37: Implement NESYS protocol in TCP server to handle initialization ha
 | Gate expression | artifacts/phase_2a_g38/playable_gate_expression.json |
 | Final report | docs/PHASE_2A_G38_FINAL_REPORT.md |
 
+## Phase 2A G39: Local Profile and Offline Session (COMPLETE)
+
+**Commit**: TBD
+**Classification**: `LOCAL_PROFILE_IMPLEMENTED`
+**Status**: COMPLETE - All deliverables implemented
+
+### Summary
+Local profile system implemented with SQLite persistence, CRUD API endpoints, card-style PyQt5 GUI, server status dashboard, and tutorial progress tracking.
+
+### Tutorial Persistence Root Cause
+- Game queries `POST /tutorial/*` and `POST /game_data/save` for tutorial completion state
+- Server returned HTTP 501 (not implemented)
+- `$IsTutorialProgress` stays 0 on every relaunch
+- UserId = -1 (no authenticated player, free play mode)
+- Tutorial battle times out by design (~590s, Result_Timeover_Lose)
+
+### Deliverables
+
+| Component | Status |
+|-----------|--------|
+| Database schema | 13-field `local_profile` table |
+| Migration | `002_local_profile` |
+| API endpoints | 7 routes under `/profile/local/` |
+| Profile GUI | Card-style PyQt5 (`tools/profile_manager/app.py`) |
+| Status dashboard | Real-time monitoring (`tools/profile_manager/dashboard.py`) |
+| Tests | 11 passing tests |
+
+### API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/profile/local/create` | POST | Create a new local profile |
+| `/profile/local/list` | POST | List all local profiles |
+| `/profile/local/select` | POST | Select a profile and start session |
+| `/profile/local/end` | POST | End the current session |
+| `/profile/local/update` | POST | Update profile fields |
+| `/profile/local/delete` | POST | Delete a profile |
+| `/profile/local/tutorial/record` | POST | Record a tutorial attempt |
+
+### Security Boundaries
+- No NESYS/NESICA identity fabrication
+- No game binary modification
+- No forced `bNesysServerLive` or `IsOnline`
+- Profile labeled as "Local Profile" / "Private Profile"
+- No external interfaces exposed
+- All tools bind to loopback only
+
+### Artifacts
+
+| Artifact | Path |
+|----------|------|
+| Decision JSON | artifacts/phase_2a_g39/g39_decision.json |
+| Classification | artifacts/phase_2a_g39/g39_classification.md |
+| Profile schema | artifacts/phase_2a_g39/profile_schema.json |
+| Tutorial result | artifacts/phase_2a_g39/tutorial_persistence_result.json |
+| Security boundary | artifacts/phase_2a_g39/security_boundary.json |
+| Test reconciliation | artifacts/phase_2a_g39/test_reconciliation.json |
+| Final report | docs/PHASE_2A_G39_FINAL_REPORT.md |
+| Boundary doc | docs/G39_LOCAL_PROFILE_BOUNDARY.md |
+

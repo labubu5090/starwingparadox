@@ -1,0 +1,27 @@
+{
+  "table": "local_profile",
+  "migration": "002_local_profile",
+  "revision": "002_local_profile",
+  "down_revision": "001_initial",
+  "fields": [
+    {"name": "id", "type": "INTEGER", "primary_key": true, "autoincrement": true},
+    {"name": "profile_uuid", "type": "VARCHAR(36)", "unique": true, "nullable": false},
+    {"name": "display_name", "type": "VARCHAR(32)", "nullable": false, "default": "Player"},
+    {"name": "created_at", "type": "DATETIME(timezone=True)", "nullable": false},
+    {"name": "last_used_at", "type": "DATETIME(timezone=True)", "nullable": false},
+    {"name": "tutorial_attempts", "type": "INTEGER", "nullable": false, "default": 0},
+    {"name": "tutorial_completed", "type": "BOOLEAN", "nullable": false, "default": false},
+    {"name": "tutorial_last_result", "type": "VARCHAR(32)", "nullable": true},
+    {"name": "preferred_controller_index", "type": "INTEGER", "nullable": false, "default": 0},
+    {"name": "settings_json", "type": "TEXT", "nullable": true},
+    {"name": "session_active", "type": "BOOLEAN", "nullable": false, "default": false},
+    {"name": "session_started_at", "type": "DATETIME(timezone=True)", "nullable": true},
+    {"name": "notes", "type": "TEXT", "nullable": true}
+  ],
+  "indexes": [
+    {"name": "ix_local_profile_profile_uuid", "columns": ["profile_uuid"], "unique": true},
+    {"name": "ix_local_profile_session_active", "columns": ["session_active"], "unique": false}
+  ],
+  "total_fields": 13,
+  "total_indexes": 2
+}

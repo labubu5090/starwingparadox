@@ -1,0 +1,49 @@
+{
+  "tutorial_persistence_investigation": {
+    "symptom": "Tutorial progress ($IsTutorialProgress) resets to 0 on every relaunch",
+    "evidence_chain": [
+      {
+        "source": "game_log",
+        "keyword": "ACPP_UserDataCheckMain::BeginPlay / $IsTutorialProgress[0]",
+        "occurrence": "Both first and second launch",
+        "significance": "Tutorial flag remains 0 after completion"
+      },
+      {
+        "source": "server_api",
+        "keyword": "POST /tutorial/*",
+        "response": "HTTP 501",
+        "significance": "Tutorial persistence endpoint not implemented"
+      },
+      {
+        "source": "server_api",
+        "keyword": "POST /game_data/save",
+        "response": "HTTP 501",
+        "significance": "Game data save endpoint not implemented"
+      },
+      {
+        "source": "game_log",
+        "keyword": "Failed to read file PlayerData1.sav",
+        "occurrence": "Every launch",
+        "significance": "Local file fallback never created"
+      }
+    ],
+    "root_cause_chain": [
+      "Game queries POST /tutorial/* for tutorial completion state",
+      "Server returns HTTP 501 (not implemented)",
+      "Game has no local file persistence for this flag",
+      "On relaunch, game queries backend, receives no valid data, defaults to 0"
+    ],
+    "contributing_factors": [
+      "UserId = -1 (no authenticated player, free play mode)",
+      "No local file fallback (PlayerData1.sav never created)",
+      "Game design relies entirely on server-authoritative tutorial state"
+    ],
+    "causation_note": "The HTTP 501 response is the proximate cause, but the game's complete absence of local fallback persistence and the UserId=-1 state are contributing factors. We do not claim any single factor as the sole root cause without direct branch evidence proving causation.",
+    "result_timeover_lose": {
+      "description": "Tutorial battle is scripted to time out (unwinnable by design)",
+      "duration_seconds": 590,
+      "respawns": 51,
+      "flow": "FirstTimeTutorial -> Battle -> RequestEndBattle(Result_Timeover_Lose) -> LeaveMindWayBattle -> NoContinue -> TerminatedBattle -> Title"
+    }
+  }
+}

@@ -1,3 +1,4 @@
+from app.db.models.local_profile import LocalProfile
 from app.db.models.player import Player
 from app.db.models.player_buddies import PlayerBuddy
 from app.db.models.player_buddy_win_poses import PlayerBuddyWinPose
@@ -17,6 +18,7 @@ from app.db.models.player_weapon_set import PlayerWeaponSet
 from app.db.models.player_weapon_set_slots import PlayerWeaponSetSlot
 
 __all__ = [
+    "LocalProfile",
     "Player",
     "PlayerBuddy",
     "PlayerBuddyWinPose",
