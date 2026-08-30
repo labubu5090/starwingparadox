@@ -1,0 +1,65 @@
+{
+  "phase": "G44",
+  "classification": "NESYS_CARD_EVENT_REQUIRED",
+  "commit": "PENDING",
+  "quality_gates": {
+    "mypy": "clean (85 files)",
+    "ruff_server": "clean",
+    "tests_collected": 125,
+    "tests_passed": 125,
+    "tests_failed": 0,
+    "tests_skipped": 0
+  },
+  "live_validation": {
+    "timestamp": "2026-08-30T13:36:30Z",
+    "game_process": "AcrGame-Win64-Shipping.exe",
+    "proxy_port": 80,
+    "http_port": 4001,
+    "tcp_port": 6666,
+    "active_profile": {
+      "id": 413,
+      "name": "FullFlow",
+      "session_active": true,
+      "profile_uuid": "992206f5-48b6-4af8-b073-1cd14daadadb"
+    }
+  },
+  "http_requests_observed": [
+    {
+      "route": "POST /matching/server",
+      "timestamp": "13:38:27",
+      "status": 200,
+      "response": {"ip_addr": "127.0.0.1:6666"},
+      "game_accepted": true
+    },
+    {
+      "route": "POST /matching/server",
+      "timestamp": "13:39:18",
+      "status": 200,
+      "response": {"ip_addr": "127.0.0.1:6666"},
+      "game_accepted": true
+    }
+  ],
+  "player_profile_request": {
+    "observed": false,
+    "reason": "NESYS pipe not initialized - game blocks progression"
+  },
+  "tcp_connection": {
+    "address": "127.0.0.1:6666",
+    "ping_pong": true,
+    "session_id": 0
+  },
+  "nesys_status": {
+    "pipe_connected": false,
+    "cert_error": true,
+    "error_message": "ENesysNetworkServerMessage[CertError]",
+    "blocking_reason": "initialize Nesys before matching server"
+  },
+  "game_state": {
+    "sequence": "PromotionMovie",
+    "network_icon": false,
+    "shop_closed": true,
+    "blocked_by": "NESYS pipe initialization required"
+  },
+  "blocker": "Game requires NESYS pipe connection before it can proceed to card/profile flow. NESYS pipe emulation is a security boundary.",
+  "security_boundary": "NESYS pipe commands (LCOMMAND_CARD_SELECT_REQUEST, LCOMMAND_CARD_INSERT_REQUEST) require pipe server that we cannot emulate."
+}
