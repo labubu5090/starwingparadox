@@ -113,7 +113,7 @@ class ActionButton(QPushButton):
     def __init__(self, text: str, accent: bool = False, parent: QWidget | None = None) -> None:
         super().__init__(text, parent)
         self.setMinimumHeight(36)
-        self.setCursor(Qt.PointingHandCursor)
+        self.setCursor(Qt.PointingHandCursor)  # type: ignore[attr-defined]
         if accent:
             self.setStyleSheet(
                 f"QPushButton {{ background: {COLORS['accent']}; color: white; "
