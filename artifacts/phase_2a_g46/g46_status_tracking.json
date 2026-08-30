@@ -1,0 +1,31 @@
+{
+  "artifact": "g46_status_tracking",
+  "description": "Launcher state and status tracking",
+  "states": [
+    "IDLE",
+    "CHECKING",
+    "STARTING",
+    "RUNNING",
+    "LAUNCHING_GAME",
+    "GAME_RUNNING",
+    "STOPPING",
+    "ERROR"
+  ],
+  "game_phases": [
+    "UNKNOWN",
+    "TITLE",
+    "ONBOARDING",
+    "CONTROLLER_TEST",
+    "LAUNCHING",
+    "BATTLE",
+    "CLOSED"
+  ],
+  "status_components": [
+    "Environment checks",
+    "Port status (80, 4001, 6666)",
+    "Ping/pong latency",
+    "Controller status",
+    "Profile status",
+    "NESYS status (Unavailable)"
+  ]
+}

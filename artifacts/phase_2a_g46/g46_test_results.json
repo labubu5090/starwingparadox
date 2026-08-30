@@ -1,0 +1,32 @@
+{
+  "artifact": "g46_test_results",
+  "description": "G46 test results summary",
+  "tests": {
+    "launcher": {
+      "total": 33,
+      "passed": 33,
+      "failed": 0,
+      "errors": 0
+    },
+    "server": {
+      "total": 125,
+      "passed": 125,
+      "failed": 0,
+      "errors": 0
+    }
+  },
+  "quality_gates": {
+    "mypy": "Clean (0 errors)",
+    "ruff": "Clean (0 errors)"
+  },
+  "test_categories": [
+    "Environment checks",
+    "Process manager",
+    "Session logging",
+    "Status tracking",
+    "Security boundaries",
+    "Startup ordering",
+    "Offline labels",
+    "Credit safety"
+  ]
+}

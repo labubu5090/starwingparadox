@@ -1,0 +1,16 @@
+{
+  "artifact": "g46_process_manager",
+  "description": "Process ownership and lifecycle management",
+  "features": [
+    "Register owned processes with PID tracking",
+    "Stop individual processes",
+    "Stop all owned processes (emergency stop)",
+    "Status summary of all owned processes"
+  ],
+  "processes": [
+    {"name": "http_server", "port": 4001, "description": "FastAPI HTTP server"},
+    {"name": "http_proxy", "port": 80, "description": "Reverse proxy"},
+    {"name": "tcp_matching", "port": 6666, "description": "TCP matching server"},
+    {"name": "game", "port": null, "description": "Game executable"}
+  ]
+}
