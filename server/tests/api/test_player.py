@@ -14,7 +14,8 @@ class TestPlayerProfileLoad:
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, dict)
-        assert "result" in data
+        assert "player_id" in data
+        assert "nesys_id" in data
 
     def test_profile_load_returns_json(self, client: TestClient):
         response = client.post(

@@ -1,0 +1,71 @@
+{
+  "title": "G45 NESICA Reception Dataflow",
+  "methodology": "IDA disassembly of five getter functions + gate check function",
+  "date": "2026-08-30",
+  "bNesicaReception_meaning": "bNesicaReception is a log-category label for the 'OnReceiveMatchingServer' RPC event. It indicates whether the matching server response was successfully received and parsed. It is NOT directly related to NESICA card insertion.",
+  "certificate_dependency": {
+    "description": "bNesicaReception (offset 0x65) is set by the game's internal state machine after successful NESYS certificate authentication. Without cert3.nesys.jp trust, the NESYS pipe cannot establish, and bNesicaReception remains 0.",
+    "evidence": "Runtime log shows bNesicaReception=0 while NESYS CertError is repeating. When cert is trusted (arcade cabinet), bNesicaReception would be set to 1 by the NESYS connection handler.",
+    "conclusion": "bNesicaReception is COUPLED to certificate trust - it cannot be set without valid NESYS authentication."
+  },
+  "five_getter_functions": {
+    "sub_142D554B0": {
+      "log_name": "Get",
+      "global_singleton": "qword_14924BCD8",
+      "rpc_param_name": "Get",
+      "runtime_value": true,
+      "meaning": "General get/read operation succeeded"
+    },
+    "sub_142D557E0": {
+      "log_name": "IsOnline",
+      "global_singleton": "qword_14924BCE0",
+      "rpc_param_name": "IsOnline",
+      "runtime_value": false,
+      "meaning": "Server considers this client online (requires NESYS auth)"
+    },
+    "sub_142D55A50": {
+      "log_name": "OnReceiveMatchingServer",
+      "global_singleton": "qword_14924BCE8",
+      "rpc_param_name": "OnReceiveMatchingServer",
+      "runtime_value": false,
+      "meaning": "Matching server data received and parsed"
+    },
+    "sub_142D55DC0": {
+      "log_name": "OnReceivePong",
+      "global_singleton": "qword_14924BCF0",
+      "rpc_param_name": "OnReceivePong",
+      "runtime_value": true,
+      "meaning": "TCP pong received from matching server"
+    },
+    "sub_142D55FF0": {
+      "log_name": "SetLiveFromGame",
+      "global_singleton": "qword_14924BCF8",
+      "rpc_param_name": "SetLiveFromGame",
+      "runtime_value": true,
+      "meaning": "Game has set its live status to active"
+    }
+  },
+  "seven_byte_flags": {
+    "description": "The struct has 7 byte flags at offsets 0x63-0x69 that are checked by OnlineGateCheck. These are written by the game's internal state machine, NOT by the five getter functions. The getter functions read from separate RPC singletons.",
+    "offset_to_log_name_correlation": {
+      "0x63": "bWebServerLive (first checked, runtime=1)",
+      "0x64": "bNesysServerLive (second checked, runtime=0)",
+      "0x65": "bNesicaReception (fourth checked, runtime=0)",
+      "0x66": "bLiveFromTestmode (third checked, runtime=1)",
+      "0x67": "bLiveFromGame (fifth checked, runtime=1)",
+      "0x68": "bGameConnect (sixth checked, runtime=1)",
+      "0x69": "bHttpSuccess (seventh checked, runtime=1)"
+    },
+    "note": "These names are log-category labels correlated by evaluation order, not by code-level field names. The actual struct field names are UNKNOWN."
+  },
+  "bNesicaReception_vs_bLiveFromGame_contradiction": {
+    "previous_claim": "Both written by SetLiveFromGame with same parameter",
+    "actual_finding": "bNesicaReception (0x65) and bLiveFromGame (0x67) are at DIFFERENT offsets and are written by DIFFERENT code paths. The previous analysis confused IDA decompiler's a1[N] indexing (which uses recovered pointer type size) with byte offsets.",
+    "resolution": "The decompiler expressed offsets as a1[101] and a1[103] using the recovered struct element size. These are NOT byte offsets 101 and 103. The actual byte offsets are 0x65 (101 decimal) and 0x67 (103 decimal) respectively. Both CAN be written independently."
+  },
+  "profile_load_trigger": {
+    "description": "/player/profile/load is triggered by the NESYS card event (ReadCard flow), not by any of the seven flags directly.",
+    "trigger_chain": "NESYS card inserted → NESYS pipe authenticates → bNesicaReception set to 1 → ReadCard flow initiates → game calls /player/profile/load with nesys_id from card",
+    "current_blocker": "Without NESYS cert trust, bNesicaReception cannot be set, so ReadCard never initiates, so /player/profile/load is never called."
+  }
+}

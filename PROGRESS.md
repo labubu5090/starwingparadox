@@ -978,6 +978,7 @@ Phase 2A-G37: Implement NESYS protocol in TCP server to handle initialization ha
 ## Phase 2A-G38: bNesysServerLive Writer/Reader/Semantic Classification (COMPLETE)
 
 **Status**: COMPLETE - Full IDA decompilation of LiveBits data flow
+**AUDIT NOTE (G45)**: The LiveBits offset mapping in G38 used IDA decompiler's a1[N] notation which does NOT represent byte offsets. G45 corrected this via direct disassembly of OnlineGateCheck at sub_142C71510. The actual byte offsets are 0x63-0x69 (not a1[99]-a1[105]). See artifacts/phase_2a_g45/livebits_corrected_map.json.
 
 ### Key Findings
 
@@ -1072,4 +1073,86 @@ Local profile system implemented with SQLite persistence, CRUD API endpoints, ca
 | Test reconciliation | artifacts/phase_2a_g39/test_reconciliation.json |
 | Final report | docs/PHASE_2A_G39_FINAL_REPORT.md |
 | Boundary doc | docs/G39_LOCAL_PROFILE_BOUNDARY.md |
+
+## Phase 2A-G40: NESYS Offline Block Investigation (COMPLETE)
+
+**Status**: COMPLETE
+**Classification**: NESYS_CARD_EVENT_REQUIRED
+
+## Phase 2A-G41: Controller Mapper and Tutorial Flow (COMPLETE)
+
+**Status**: COMPLETE
+**Classification**: CONTROLLER_MAPPER_FUNCTIONAL
+
+## Phase 2A-G42: Public Implementation Correlation (COMPLETE)
+
+**Status**: COMPLETE
+**Classification**: PUBLIC_REFERENCE_CORRELATED
+
+## Phase 2A-G43: Local Player Profile Handler (COMPLETE)
+
+**Commit**: f3a6d46
+**Status**: COMPLETE
+**Classification**: LOCAL_PLAYER_PROFILE_IMPLEMENTED
+
+## Phase 2A-G44: Live Card-Profile Validation (COMPLETE)
+
+**Commit**: 326c685
+**Status**: COMPLETE
+**Classification**: NESYS_CARD_EVENT_REQUIRED
+
+### G44 Key Findings
+
+| Metric | Value |
+|--------|-------|
+| /matching/server | WORKING (game accepted response) |
+| TCP ping/pong | WORKING (127.0.0.1:6666) |
+| /player/profile/load | IMPLEMENTED but NEVER CALLED |
+| Game stuck at | Title → InsertStart animation loop |
+| Seven-flag gate | 5/7 true, bNesysServerLive[0] and bNesicaReception[0] block |
+
+## Phase 2A-G45: Onboarding State Reconciliation (COMPLETE)
+
+**Status**: COMPLETE
+**Classification**: ONBOARDING_NOT_PERSISTED
+
+### G45 Key Findings
+
+| Finding | Detail |
+|---------|--------|
+| LiveBits contradiction | RESOLVED - SetLiveFromGame is a string literal, not a function name |
+| Seven-flag offsets | CONFIRMED as byte offsets 0x63-0x69 in struct |
+| Gate check order | NON-SEQUENTIAL: 63, 64, 66, 65, 67, 68, 69 |
+| Onboarding persistence | NOT_PERSISTED - no save file, no DB record, no local config |
+| $IsTutorialProgress | Server-authoritative (defaults to 0) |
+| bNesicaReception | COUPLED to certificate trust |
+| /player/profile/load trigger | REQUIRES NESYS card event (ReadCard flow) |
+| Local Card event eligibility | NOT_ELIGIBLE (requires NESYS cert trust) |
+| Reversible test design | NO_SAFE_ONBOARDING_STATE_TEST_AVAILABLE |
+| Test assertions | 7 modified (all strengthened, evidence-based) |
+
+### G45 Quality Gates
+
+| Gate | Result |
+|------|--------|
+| Full test suite | 1115 passed, 1 skipped, 0 failed |
+| Mypy | 0 errors (85 source files) |
+| Ruff | 0 errors |
+| IDA analysis | Read-only, no modifications |
+| Safety constraints | ALL SATISFIED |
+
+### G45 Documents
+
+| Document | Path |
+|----------|------|
+| G45 Final Report | docs/PHASE_2A_G45_FINAL_REPORT.md |
+| LiveBits Corrected Map | artifacts/phase_2a_g45/livebits_corrected_map.json |
+| Save State Manifest | artifacts/phase_2a_g45/save_state_manifest.json |
+| Onboarding Branch | artifacts/phase_2a_g45/onboarding_branch.json |
+| NESICA Reception Dataflow | artifacts/phase_2a_g45/nesica_reception_dataflow.json |
+| Profile Request Trigger | artifacts/phase_2a_g45/profile_request_trigger.json |
+| Reversible Test Design | artifacts/phase_2a_g45/reversible_test_design.json |
+| Implementation Eligibility | artifacts/phase_2a_g45/implementation_eligibility.json |
+| Test Reconciliation | artifacts/phase_2a_g45/test_reconciliation.json |
+| Safety Results | artifacts/phase_2a_g45/safety_results.json |
 

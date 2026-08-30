@@ -471,7 +471,7 @@ class TestMissingPlayerReturnsCorrectStructure:
             json={"nesys_id": "NONEXISTENT"},
         )
         data = response.json()
-        assert "result" in data
+        assert "player_id" in data
 
     def test_missing_player_is_dict(self, client: TestClient) -> None:
         response = client.post(
@@ -497,46 +497,37 @@ class TestMissingPlayerReturnsCorrectStructure:
 
 class TestPlayerProfileLegacyComputedFields:
     """These fields exist in the legacy getProfile() response but are
-    NOT yet implemented in Python. Tests document the expected behavior.
+    G43 implemented these as profile dict fields. Tests verify they are present."""
 
-    Source: playerProfile.js:297-350"""
-
-    def test_same_day_login_count_not_in_response(self, client: TestClient) -> None:
-        """LEGACY ONLY: same_day_login_count is computed by getProfile().
-        Source: playerProfile.js:301-303
-        SQL: SELECT COUNT(id) AS same_day_login_count FROM player_logins
-             WHERE date_trunc('day', ts_when) = $1 AND player_id=$2"""
+    def test_same_day_login_count_in_response(self, client: TestClient) -> None:
+        """G43: same_day_login_count is now returned as profile field."""
         response = client.post(
             "/player/profile/load",
             json={"nesys_id": "7020392000000000"},
         )
         data = response.json()
-        # Python endpoint queries wrong table, returns fallback with no login stats
-        # When parity is achieved, this field should be present
-        assert "same_day_login_count" not in data or data.get("same_day_login_count") is None
+        assert "same_day_login_count" in data
+        assert isinstance(data["same_day_login_count"], int)
 
-    def test_total_login_days_not_in_response(self, client: TestClient) -> None:
-        """LEGACY ONLY: total_login_days is computed by getProfile().
-        Source: playerProfile.js:306-308
-        SQL: SELECT COUNT(DISTINCT(date_trunc('day', ts_when))) AS total_login_days
-             FROM player_logins WHERE player_id=$1"""
+    def test_total_login_days_in_response(self, client: TestClient) -> None:
+        """G43: total_login_days is now returned as profile field."""
         response = client.post(
             "/player/profile/load",
             json={"nesys_id": "7020392000000000"},
         )
         data = response.json()
-        assert "total_login_days" not in data or data.get("total_login_days") is None
+        assert "total_login_days" in data
+        assert isinstance(data["total_login_days"], int)
 
-    def test_consecutive_login_days_not_in_response(self, client: TestClient) -> None:
-        """LEGACY ONLY: consecutive_login_days is computed by getProfile().
-        Source: playerProfile.js:311
-        Computation: same_day_login_count ? 1 : 0"""
+    def test_consecutive_login_days_in_response(self, client: TestClient) -> None:
+        """G43: consecutive_login_days is now returned as profile field."""
         response = client.post(
             "/player/profile/load",
             json={"nesys_id": "7020392000000000"},
         )
         data = response.json()
-        assert "consecutive_login_days" not in data or data.get("consecutive_login_days") is None
+        assert "consecutive_login_days" in data
+        assert isinstance(data["consecutive_login_days"], int)
 
     def test_emblem_not_in_response(self, client: TestClient) -> None:
         """LEGACY ONLY: emblem is hardcoded with zeros by getProfile().
@@ -549,41 +540,32 @@ class TestPlayerProfileLegacyComputedFields:
         data = response.json()
         assert "emblem" not in data or data.get("emblem") is None
 
-    def test_last_pref_ranking_order_id_not_in_response(self, client: TestClient) -> None:
-        """LEGACY ONLY: hardcoded 0 in getProfile().
-        Source: playerProfile.js:340"""
+    def test_last_pref_ranking_order_id_in_response(self, client: TestClient) -> None:
+        """G43: last_pref_ranking_order_id is now returned as profile field."""
         response = client.post(
             "/player/profile/load",
             json={"nesys_id": "7020392000000000"},
         )
         data = response.json()
-        assert (
-            "last_pref_ranking_order_id" not in data
-            or data.get("last_pref_ranking_order_id") is None
-        )
+        assert "last_pref_ranking_order_id" in data
 
-    def test_pref_ranking_top_player_count_not_in_response(self, client: TestClient) -> None:
-        """LEGACY ONLY: hardcoded 0 in getProfile().
-        Source: playerProfile.js:341"""
+    def test_pref_ranking_top_player_count_in_response(self, client: TestClient) -> None:
+        """G43: pref_ranking_top_player_count is now returned as profile field."""
         response = client.post(
             "/player/profile/load",
             json={"nesys_id": "7020392000000000"},
         )
         data = response.json()
-        assert (
-            "pref_ranking_top_player_count" not in data
-            or data.get("pref_ranking_top_player_count") is None
-        )
+        assert "pref_ranking_top_player_count" in data
 
-    def test_official_player_type_id_not_in_response(self, client: TestClient) -> None:
-        """LEGACY ONLY: hardcoded 0 in getProfile().
-        Source: playerProfile.js:342"""
+    def test_official_player_type_id_in_response(self, client: TestClient) -> None:
+        """G43: official_player_type_id is now returned as profile field."""
         response = client.post(
             "/player/profile/load",
             json={"nesys_id": "7020392000000000"},
         )
         data = response.json()
-        assert "official_player_type_id" not in data or data.get("official_player_type_id") is None
+        assert "official_player_type_id" in data
 
 
 # ===========================================================================
@@ -594,17 +576,16 @@ class TestPlayerProfileLegacyComputedFields:
 class TestPlayerProfileLegacyDeviations:
     """Document known deviations between Python and legacy implementations."""
 
-    def test_result_wrapper_deviation(self, client: TestClient) -> None:
-        """DEVIATION: Python wraps response in {result: N, ...}.
-        Legacy returns raw player object without result wrapper.
-        Source: playerProfile.js:346 returns this.Player directly.
-        Python: player.py:67 returns _ok(player_id=..., name=..., ...)."""
+    def test_result_wrapper_resolved(self, client: TestClient) -> None:
+        """G43 RESOLVED: profile/load returns raw player dict (no result wrapper).
+        Legacy returned raw player object. G37 previously wrapped in {result: N}.
+        Source: player.py:74 returns _player_to_profile_dict(player)."""
         response = client.post(
             "/player/profile/load",
             json={"nesys_id": "7020392000000000"},
         )
         data = response.json()
-        assert "result" in data
+        assert "player_id" in data
 
     def test_wrong_table_name_deviation(self, client: TestClient) -> None:
         """DEVIATION: Python queries 'players' table (non-existent).
@@ -629,16 +610,13 @@ class TestPlayerProfileLegacyDeviations:
         # Python returns empty progresses array in fallback
         assert "progresses" in data
 
-    def test_response_has_level_field(self, client: TestClient) -> None:
-        """Python returns 'level' in response (non-existent column).
-        Legacy does not have a 'level' column in the player table.
-        Source: player.py:70 returns level=r["level"]
-        This documents a deviation - level is not a real legacy field."""
+    def test_response_no_level_field(self, client: TestClient) -> None:
+        """G43 RESOLVED: profile/load no longer returns 'level' field.
+        Legacy player table has no 'level' column.
+        Source: player.py:74 _player_to_profile_dict excludes level."""
         response = client.post(
             "/player/profile/load",
             json={"nesys_id": "7020392000000000"},
         )
         data = response.json()
-        # Python returns level=1 in fallback - this is a deviation from legacy
-        # Legacy player table has no 'level' column
-        assert "level" in data
+        assert "level" not in data
