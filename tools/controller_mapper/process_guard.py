@@ -2,7 +2,12 @@
 import ctypes
 import ctypes.wintypes as wt
 
-import psutil
+try:
+    import psutil
+
+    _PSUTIL_AVAILABLE = True
+except ImportError:
+    _PSUTIL_AVAILABLE = False
 
 user32 = ctypes.windll.user32
 
@@ -19,6 +24,8 @@ def get_foreground_pid() -> int | None:
 
 
 def is_starwing_foreground() -> bool:
+    if not _PSUTIL_AVAILABLE:
+        return False
     pid = get_foreground_pid()
     if pid is None:
         return False
@@ -30,6 +37,8 @@ def is_starwing_foreground() -> bool:
 
 
 def get_starwing_pid() -> int | None:
+    if not _PSUTIL_AVAILABLE:
+        return None
     for proc in psutil.process_iter(["pid", "name"]):
         if proc.info["name"] == STARWING_PROCESS:
             return proc.info["pid"]

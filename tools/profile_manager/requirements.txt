@@ -1,0 +1,4 @@
+# Profile Manager GUI - Optional tool dependencies
+# Install separately: pip install -r requirements.txt
+# Requires PyQt5 for GUI
+PyQt5>=5.15.0

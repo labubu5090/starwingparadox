@@ -1,0 +1,4 @@
+# Controller Mapper - Optional tool dependencies
+# Install separately: pip install -r requirements.txt
+# Requires Windows for ctypes.windll and XInput
+pydantic>=2.10.0

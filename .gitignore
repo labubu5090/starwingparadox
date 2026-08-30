@@ -104,3 +104,19 @@ tools/ida_g21/g24_*.py
 # G25 exclusions
 tools/wireshark_g22/captures/g25_title_to_session.pcapng
 tools/wireshark_g22/logs/g25_capture.log
+
+# Raw capture files (preserved locally, not committed)
+artifacts/**/g*_capture.pcapng
+artifacts/**/g*_capture.pcap
+
+# IDA generated output (preserved locally, not committed)
+tools/ida_g21/out/*.txt
+tools/ida_g21/out/*.json
+
+# Local controller mapping (operator-specific, not committed)
+tools/config/controller_mapping.json
+
+# Runtime SQLite database (not committed)
+server/data/*.db
+server/data/*.db-wal
+server/data/*.db-shm
