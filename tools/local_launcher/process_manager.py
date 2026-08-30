@@ -78,14 +78,16 @@ class ProcessManager:
             del self._owned[name]
             return True
         try:
-            op.process.terminate()  # type: ignore[union-attr]
+            subprocess.run(
+                ["taskkill", "/T", "/F", "/PID", str(op.pid)],
+                capture_output=True, timeout=10, check=False,
+            )
+        except (OSError, subprocess.TimeoutExpired):
             try:
+                op.process.terminate()  # type: ignore[union-attr]
                 op.process.wait(timeout=5)  # type: ignore[union-attr]
-            except subprocess.TimeoutExpired:
-                op.process.kill()  # type: ignore[union-attr]
-                op.process.wait(timeout=3)  # type: ignore[union-attr]
-        except (OSError, ProcessLookupError):
-            pass
+            except (OSError, ProcessLookupError, subprocess.TimeoutExpired):
+                pass
         del self._owned[name]
         return True
 
