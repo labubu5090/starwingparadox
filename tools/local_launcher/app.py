@@ -48,7 +48,7 @@ from .status import (
 SERVER_URL = "http://127.0.0.1:4001"
 SERVER_SCRIPT = PROJECT_ROOT / "server" / "main.py"
 PROXY_SCRIPT = PROJECT_ROOT / "tools" / "g30_proxy.py"
-CONTROLLER_MAPPER_SCRIPT = PROJECT_ROOT / "tools" / "controller_mapper" / "app.py"
+CONTROLLER_MAPPER_SCRIPT = PROJECT_ROOT / "tools" / "controller_mapper" / "mapper_app.py"
 
 COLORS = {
     "bg_dark": "#1a1a2e",
