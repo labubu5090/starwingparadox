@@ -21,6 +21,7 @@ from app.api.tutorial import router as tutorial_router
 from app.api.version import router as version_router
 from app.config import settings
 from app.logging_config import setup_logging
+from app.middleware.live_capture import LiveCaptureMiddleware
 from app.middleware.protocol_logging import ProtocolLoggingMiddleware
 from app.middleware.request_id import RequestIDMiddleware
 
@@ -55,6 +56,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(LiveCaptureMiddleware)
 app.add_middleware(ProtocolLoggingMiddleware)
 app.add_middleware(RequestIDMiddleware)
 
