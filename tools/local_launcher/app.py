@@ -432,9 +432,20 @@ class LauncherWindow(QMainWindow):
             self._add_log(f"  Stopped: {name}")
             self._session_log.log_process_event(name, "stopped")
         self._status.state = LauncherState.IDLE
-        self._update_card("http_proxy", "Stopped", COLORS["text_muted"])
-        self._update_card("python_http", "Stopped", COLORS["text_muted"])
-        self._update_card("tcp_match", "Stopped", COLORS["text_muted"])
+
+        from .environment import _port_available
+        if _port_available(APP_PORT):
+            self._update_card("python_http", "Running", COLORS["success"])
+        else:
+            self._update_card("python_http", "Stopped", COLORS["text_muted"])
+        if _port_available(HTTP_PORT):
+            self._update_card("http_proxy", "Running", COLORS["success"])
+        else:
+            self._update_card("http_proxy", "Stopped", COLORS["text_muted"])
+        if _port_available(TCP_PORT):
+            self._update_card("tcp_match", "Running", COLORS["success"])
+        else:
+            self._update_card("tcp_match", "Stopped", COLORS["text_muted"])
         self._add_log("Server stack stopped.")
 
     # -----------------------------------------------------------------------
@@ -442,7 +453,8 @@ class LauncherWindow(QMainWindow):
     # -----------------------------------------------------------------------
 
     def _on_launch_game(self) -> None:
-        if not self._processes.is_running("http_server"):
+        from .environment import _port_available
+        if not self._processes.is_running("http_server") and not _port_available(APP_PORT):
             self._add_log("Cannot launch game: HTTP server not running. Start Server Stack first.")
             return
         exe = str(GAME_EXE)
