@@ -89,7 +89,7 @@ def _write_capture(entry: dict[str, Any]) -> None:
 class LiveCaptureMiddleware(BaseHTTPMiddleware):
     """Logs all requests to tutorial/game_data/player with full metadata."""
 
-    CAPTURE_PREFIXES = ("/tutorial/", "/game_data/", "/player/")
+    CAPTURE_PREFIXES = ("/tutorial/", "/game_data/", "/player/", "/matching/")
 
     async def dispatch(self, request: Request, call_next) -> Response:
         path = request.url.path
