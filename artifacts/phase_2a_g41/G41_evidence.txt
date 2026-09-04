@@ -1,0 +1,136 @@
+﻿G41 Full-Session Capture Evidence
+==================================
+Date: 2026-08-30
+Session: G41_TutorialLive (profile_id=249, uuid=90e052cf-b21d-4b56-acca-7f02acb152fd)
+
+PRE-FLIGHT
+----------
+Full test suite: 1216 collected, 1216 passed, 1 skipped, 0 failed
+D: subst: OK
+OpenKey.json: D:\Saved\ACRSaved\SaveData\OpenKey.json (IsOpen=1)
+DefaultGame.ini: X:\StarwingParadox\WindowsNoEditor\AcrGame\Config\DefaultGame.ini
+Hosts: 127.0.0.1 dev.starwing.jp (confirmed)
+Ports: 80 (proxy), 4001 (HTTP), 6666 (TCP) all listening
+
+G40 PRESERVATION
+-----------------
+Path: artifacts/phase_2a_g40/live_capture.jsonl
+Size: 119011 bytes
+SHA-256: 83EC42661C9F8349B59D1A6849F692CC9808783F37B1EAB173848C98BB6158F1
+Timestamp: 2026-08-30 19:34:01
+
+GAME LAUNCH
+-----------
+PID: 12632
+Boot: ACPP_GameModeBoot::BeginPlay
+NESYS: CertError (expected - no NESiCA)
+TCP: UCPP_TcpThread::ResolvedAddress / 127.0.0.1:6666
+Title: WBP_InsertStart (Ani_Loop_INST)
+Credits: CREDIT(S) 3 (Z Z Z manual input)
+
+USER DATA CHECK
+---------------
+ACPP_UserDataCheckMain::BeginPlay reads $IsTutorialProgress = 0
+Tutorial required: YES
+
+BATTLE SEQUENCE
+---------------
+Start: 12:02:04 E_StartHudPl -> E_BattlePlayer
+World: Tutorial.Tutorial
+NetMode: NM_Standalone
+UserId: -1
+SetTutorialStep[5]
+
+End: 12:10:59 Result_Withdrawal
+E_BattlePlayer -> E_NoContinue (BattleTimer: 265.315948, JointTime: 420.000000)
+RequestEndBattle not called (game idle timeout)
+
+Post-battle:
+12:11:00 E_NoContinueBattleResult
+12:11:02 LeaveMindWayBattle -> LeavedBattle
+12:11:02 Logout from Battle (UserId:-1)
+12:11:03 E_BattleResult
+12:11:04 NoContinueBattleResult sequence timeout
+12:11:05 E_Logout
+12:11:11 PlayerLogout HTTP
+12:11:12 TerminatedBattle -> Title
+
+HTTP REQUESTS (COMPLETE LOG)
+-----------------------------
+1. 11:59:22 POST http://dev.starwing.jp/mock/matching/server
+   API-ID[1], content[]
+   -> Response 200 (from catch-all handler)
+   -> OnReceiveResponseMatchingServer / _IsSuccess[1] IPAddress[127.0.0.1:6666]
+   -> MatchingServer : 127.0.0.1:6666 (UseConfigMatchingServer : 1)
+
+2. 12:00:24 POST http://dev.starwing.jp/mock/matching/server
+   API-ID[1], content[]
+   -> Response 200 (from catch-all handler)
+   -> OnReceiveResponseMatchingServer / _IsSuccess[1] IPAddress[127.0.0.1:6666]
+
+3. 12:11:11 POST http://dev.starwing.jp/mock/player/logout
+   *** URL REWRITTEN: -> http://api.example.com:8080/offline ***
+   API-ID[1], content[player_id=18446744073709551615&greetings=[]&buddy_greetings=[]]
+   -> http:unknown(timeout / network off) error
+   -> NEVER REACHED OUR PROXY
+
+4. 12:11:12 POST http://dev.starwing.jp/mock/matching/server
+   API-ID[1], content[]
+   -> Response 200 (from catch-all handler)
+   -> OnReceiveResponseMatchingServer / _IsSuccess[1] IPAddress[127.0.0.1:6666]
+
+LIVE CAPTURE (our middleware)
+-----------------------------
+Entries: 0
+(All matching/server requests didn't match old capture prefixes)
+(All player/logout was URL-rewritten before reaching our server)
+
+CRITICAL DISCOVERY: URL REWRITE
+--------------------------------
+The game's UCPP_HttpRequester::GetRequestUrl function rewrites:
+  http://dev.starwing.jp/mock/player/logout -> http://api.example.com:8080/offline
+
+This means /player/logout NEVER reaches our proxy in offline mode.
+The game sends logout to api.example.com:8080 which doesn't exist locally.
+
+The request content was:
+  player_id=18446744073709551615  (unsigned -1)
+  greetings=[]
+  buddy_greetings=[]
+
+ROUTE CLASSIFICATION
+---------------------
+/matching/server      LIVE_REQUEST_OBSERVED (3 requests, all to catch-all)
+                      Response: {"result":1} status=200
+                      Game parses: IPAddress[127.0.0.1:6666] TCP connect
+
+/player/logout        URL_REWRITTEN by game client
+                      Never reaches proxy
+                      Rewritten to api.example.com:8080/offline
+
+/tutorial/record      NOT_TRIGGERED (never sent during tutorial flow)
+/tutorial/skip_record NOT_TRIGGERED (never sent during tutorial flow)
+/game_data/save       NOT_TRIGGERED (never sent during tutorial flow)
+/game_data/load       NOT_TRIGGERED (never sent during tutorial flow)
+/game_data/load/mission NOT_TRIGGERED (never sent during tutorial flow)
+
+KEY FINDING: The game does NOT send /tutorial/record after tutorial battle.
+The battle ended with Result_Withdrawal (not Result_Timeover_Lose).
+The game simply returned to title without sending any tutorial record.
+
+IMPORTANT: /tutorial/record may only be triggered when:
+1. Tutorial is completed with Result_Win (not withdrawal)
+2. The game transitions from tutorial to normal gameplay
+3. A specific post-tutorial event occurs
+
+The URL rewrite for /player/logout means the game handles offline logout
+internally via api.example.com:8080/offline, bypassing our server entirely.
+
+SERVER OBSERVATION
+------------------
+The catch-all handler for /matching/server correctly returned {"result":1}
+which the game parsed to find TCP address 127.0.0.1:6666.
+This is evidence-complete for the matching/server route.
+
+However, /matching/server is NOT a persistence route - it's a discovery route.
+The game uses it to find the TCP matching server address.

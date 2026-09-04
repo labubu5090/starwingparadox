@@ -17,6 +17,7 @@ from app.api.mission import router as mission_router
 from app.api.player import router as player_router
 from app.api.ranking import router as ranking_router
 from app.api.resource import router as resource_router
+from app.api.swdata import router as swdata_router
 from app.api.tutorial import router as tutorial_router
 from app.api.version import router as version_router
 from app.config import settings
@@ -63,6 +64,7 @@ app.add_middleware(RequestIDMiddleware)
 app.include_router(health_router)
 app.include_router(version_router)
 app.include_router(resource_router)
+app.include_router(swdata_router)
 app.include_router(player_router)
 app.include_router(game_data_router)
 app.include_router(matching_router)

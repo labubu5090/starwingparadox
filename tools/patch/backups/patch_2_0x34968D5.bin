@@ -1,0 +1,6 @@
+{
+  "file_offset": 55142613,
+  "original_bytes": "80a340060000fe",
+  "exe_sha256": "ce4c89054bf7c4d833ee8af455a485ac401eead12a80ffc077663a768fd47dc4",
+  "note": "NOP AND clears bit 0"
+}

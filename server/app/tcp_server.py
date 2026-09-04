@@ -38,7 +38,7 @@ from app.protocol.registry import MESSAGE_TYPE_MAP
 logger = logging.getLogger(__name__)
 
 HandlerFunc = Callable[
-    [int, int, str, bytes],
+    [int, int, str, bytes, Any],
     Coroutine[Any, Any, bytes | None],
 ]
 
@@ -174,6 +174,7 @@ async def handle_message(
     message_type: int,
     message_name: str,
     payload: bytes,
+    writer: Any = None,
 ) -> bytes | None:
     """Default handler for unregistered message types.
 
@@ -192,6 +193,7 @@ async def _handle_ping(
     message_type: int,
     message_name: str,
     payload: bytes,
+    writer: Any = None,
 ) -> bytes | None:
     """Handle Ping (0x66): echo back with the same messageType.
 
@@ -215,6 +217,7 @@ async def _handle_ping_response(
     message_type: int,
     message_name: str,
     payload: bytes,
+    writer: Any = None,
 ) -> bytes | None:
     """Handle PingResponse (0x67 / 103): acknowledge and keep connection alive.
 
@@ -234,6 +237,14 @@ async def _handle_ping_response(
 
 
 register_handler(0x67, _handle_ping_response)
+
+
+# Register matching/battle handlers
+try:
+    from app.handlers_matching import register_matching_handlers
+    register_matching_handlers(register_handler)
+except ImportError:
+    logger.warning("Matching handlers not available")
 
 
 async def _handle_client(
@@ -323,7 +334,7 @@ async def _handle_client(
 
                 handler = _handlers.get(message_type, handle_message)
                 try:
-                    response = await handler(packet_id, message_type, message_name, raw_payload)
+                    response = await handler(packet_id, message_type, message_name, raw_payload, writer)
                 except Exception:
                     logger.exception(
                         "Handler error for messageType=%d from %s",

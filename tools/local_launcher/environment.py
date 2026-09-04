@@ -5,7 +5,9 @@ Verifies all prerequisites before launching the server stack or game.
 from __future__ import annotations
 
 import json
+import os
 import socket
+import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -16,10 +18,28 @@ GAME_SHIPPING_EXE = GAME_ROOT / r"WindowsNoEditor\AcrGame\Binaries\Win64\AcrGame
 DEFAULT_GAME_INI = GAME_ROOT / r"WindowsNoEditor\AcrGame\Config\DefaultGame.ini"
 OPEN_KEY_PATH = Path(r"D:\Saved\ACRSaved\SaveData\OpenKey.json")
 D_DRIVE_PATH = Path(r"D:")
+D_DRIVE_SOURCE = r"X:\StarwingParadox\D DRIVE CONTENTS"
 SERVER_DB = PROJECT_ROOT / "server" / "data" / "starwing.db"
 CONTROLLER_MAPPER_DIR = PROJECT_ROOT / "tools" / "controller_mapper"
 CONTROLLER_CONFIG = PROJECT_ROOT / "tools" / "config" / "controller_mapping.json"
 PYTHON_EXE = Path(r"C:\Users\KAHO\AppData\Local\Programs\Python\Python310\python.exe")
+
+
+def _ensure_d_drive() -> None:
+    """Auto-mount D: drive via subst if not already available."""
+    if D_DRIVE_PATH.is_dir():
+        return
+    try:
+        subprocess.run(
+            ["subst", "D:", D_DRIVE_SOURCE],
+            capture_output=True, timeout=5,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        pass
+
+
+_ensure_d_drive()
+
 
 HTTP_PORT = 80
 APP_PORT = 4001

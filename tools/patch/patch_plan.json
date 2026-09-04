@@ -1,0 +1,48 @@
+{
+  "exe_sha256": "ce4c89054bf7c4d833ee8af455a485ac401eead12a80ffc077663a768fd47dc4",
+  "patches": [
+    {
+      "file_offset": 55141664,
+      "original_bytes": "0f84be030000",
+      "patched_bytes": "909090909090",
+      "note": "NOP je - force online path"
+    },
+    {
+      "file_offset": 55142613,
+      "original_bytes": "80a340060000fe",
+      "patched_bytes": "90909090909090",
+      "note": "NOP AND clears bit 0"
+    },
+    {
+      "file_offset": 44452309,
+      "original_bytes": "c6834006000000",
+      "patched_bytes": "90909090909090",
+      "note": "NOP MOV 0 clear #1"
+    },
+    {
+      "file_offset": 44493818,
+      "original_bytes": "c6834006000000",
+      "patched_bytes": "90909090909090",
+      "note": "NOP MOV 0 clear #2"
+    },
+    {
+      "file_offset": 44541755,
+      "original_bytes": "c6834006000000",
+      "patched_bytes": "90909090909090",
+      "note": "NOP MOV 0 clear #3"
+    },
+    {
+      "file_offset": 68364542,
+      "original_bytes": "c6874006000000",
+      "patched_bytes": "90909090909090",
+      "note": "NOP MOV 0 clear #4"
+    },
+    {
+      "file_offset": 69487954,
+      "original_bytes": "c6834006000002",
+      "patched_bytes": "90909090909090",
+      "note": "NOP MOV 0x02 clear bit 0"
+    }
+  ],
+  "note": "7-site NOP: prevent ALL paths from clearing bNesysServerLive to 0. Early init sets it to 1."
+}

@@ -24,7 +24,7 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
             upstream_path = upstream_path[5:]  # strip "/mock"
         
         target_url = f"{TARGET_BASE}{upstream_path}"
-        logger.info("[%s] PROXY %s %s -> %s (%d bytes)", correlation_id, self.command, self.path, target_url, len(body))
+        logger.info("[%s] PROXY %s %s -> %s (%d bytes) body=%r", correlation_id, self.command, self.path, target_url, len(body), body[:256])
         
         headers = {k: v for k, v in self.headers.items() if k.lower() not in ('host', 'transfer-encoding')}
         headers['Host'] = '127.0.0.1:4001'
@@ -61,5 +61,7 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     logger.info("G30 proxy starting on port %d", PROXY_PORT)
-    with socketserver.TCPServer(("127.0.0.1", PROXY_PORT), ProxyHandler) as httpd:
+    # Bind all interfaces so the game can reach the relay via its LAN IP
+    # (relay_addr in CERT_INIT_NOTICE). Proxy still forwards to loopback :4001.
+    with socketserver.TCPServer(("0.0.0.0", PROXY_PORT), ProxyHandler) as httpd:
         httpd.serve_forever()

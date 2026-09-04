@@ -38,7 +38,9 @@ async def battle_record_2on2(
     x_galaxy_api_id: str = Header(default=""),
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
-    return _not_implemented("/battle/record_2on2", headers)
+    if not settings.legacy_compatibility_mode:
+        return _not_implemented("/battle/record_2on2", headers)
+    return JSONResponse(content={"result": 1}, headers=headers)
 
 
 @router.post("/{path:path}")

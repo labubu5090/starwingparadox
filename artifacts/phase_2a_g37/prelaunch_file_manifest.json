@@ -1,0 +1,578 @@
+﻿[
+    {
+        "RelativePath":  "SaveData\\OpenKey.json",
+        "FullPath":  "D:\\Saved\\ACRSaved\\SaveData\\OpenKey.json",
+        "Size":  96,
+        "CreationTime":  "2026-08-27T11:48:52.3728482+08:00",
+        "LastWriteTime":  "2018-11-21T07:34:08.3514063+08:00",
+        "SHA256":  "B166054FD8CFAC828A9BF72F97663A311F7C5B9A4A23AEE3189B959241D64AE2"
+    },
+    {
+        "RelativePath":  "SaveData\\SaveData.json",
+        "FullPath":  "D:\\Saved\\ACRSaved\\SaveData\\SaveData.json",
+        "Size":  3771,
+        "CreationTime":  "2026-08-27T11:48:52.4378648+08:00",
+        "LastWriteTime":  "2020-10-08T08:40:59.1536228+08:00",
+        "SHA256":  "93F8D79D1D1B43EC7CC2E5EBDB1792F7AA8FA149CC359AC59F8338C27C935345"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-071540F44D00CAA014F33AB1A0FCBE80\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-071540F44D00CAA014F33AB1A0FCBE80\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T12:05:55.6462311+08:00",
+        "LastWriteTime":  "2026-08-29T12:05:55.6472322+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-0E13CDDD426A021F90498495F573749A\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-0E13CDDD426A021F90498495F573749A\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T18:37:54.4233323+08:00",
+        "LastWriteTime":  "2026-08-29T18:37:54.4233323+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-158D3D45464A51C71C4898A5A000FBB7\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-158D3D45464A51C71C4898A5A000FBB7\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T20:12:30.7884938+08:00",
+        "LastWriteTime":  "2026-08-29T20:12:30.7884938+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-1FD2F6A2469DC3D6EF92AB9604689155\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-1FD2F6A2469DC3D6EF92AB9604689155\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-30T02:03:09.5914390+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:09.5914390+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-268AF5DC423392320A612E9BC78E2406\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-268AF5DC423392320A612E9BC78E2406\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T20:32:01.7301838+08:00",
+        "LastWriteTime":  "2026-08-29T20:32:01.7301838+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-432F7C7949DEADF72EDAF88A4F18B0CF\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-432F7C7949DEADF72EDAF88A4F18B0CF\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T18:19:38.4230278+08:00",
+        "LastWriteTime":  "2026-08-29T18:19:38.4230278+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-56C3C48646DD96D711E94F9A96EA7F68\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-56C3C48646DD96D711E94F9A96EA7F68\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-30T01:31:11.7344985+08:00",
+        "LastWriteTime":  "2026-08-30T01:31:11.7344985+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-58B4FC154906C898608A238CF4109E9B\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-58B4FC154906C898608A238CF4109E9B\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T19:50:18.1767777+08:00",
+        "LastWriteTime":  "2026-08-29T19:50:18.1767777+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-652E416F4EB86A211D0D7895B6578758\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-652E416F4EB86A211D0D7895B6578758\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T21:50:15.1177183+08:00",
+        "LastWriteTime":  "2026-08-29T21:50:15.1177183+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-6A0D3AC944CDF81937937D8A8DEF7063\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-6A0D3AC944CDF81937937D8A8DEF7063\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T19:41:08.0853712+08:00",
+        "LastWriteTime":  "2026-08-29T19:41:08.0853712+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-6ECEB2D748E0BC49651DAC8BE3ADD5E4\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-6ECEB2D748E0BC49651DAC8BE3ADD5E4\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-30T01:49:14.5477607+08:00",
+        "LastWriteTime":  "2026-08-30T01:49:14.5477607+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-6FFCD8234762972C7471AA858426CA78\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-6FFCD8234762972C7471AA858426CA78\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T21:22:47.7145858+08:00",
+        "LastWriteTime":  "2026-08-29T21:22:47.7145858+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-7A8E0FDB4BE6381E285338B7F785AF21\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-7A8E0FDB4BE6381E285338B7F785AF21\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-28T10:34:30.8682968+08:00",
+        "LastWriteTime":  "2026-08-28T10:34:30.8682968+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-8F437C294E5E6054F6C2A889FA78ED97\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-8F437C294E5E6054F6C2A889FA78ED97\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-30T01:27:12.3814884+08:00",
+        "LastWriteTime":  "2026-08-30T01:27:12.3814884+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-9DB841BA4FD437B082E10A840D399D7E\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-9DB841BA4FD437B082E10A840D399D7E\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T20:50:13.4840554+08:00",
+        "LastWriteTime":  "2026-08-29T20:50:13.4840554+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-9F7AEC874FC81E63914B5088069C2014\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-9F7AEC874FC81E63914B5088069C2014\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T20:07:42.3569656+08:00",
+        "LastWriteTime":  "2026-08-29T20:07:42.3569656+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-A0BE2BA94DBE5E4C27019396B378C269\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-A0BE2BA94DBE5E4C27019396B378C269\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T22:27:02.0488343+08:00",
+        "LastWriteTime":  "2026-08-29T22:27:02.0488343+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-A572F6274DB66D0B83D3E3869DFBE913\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-A572F6274DB66D0B83D3E3869DFBE913\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T17:45:49.8507487+08:00",
+        "LastWriteTime":  "2026-08-29T17:45:49.8507487+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-B491A2544D080FCB0E444E86CE93C938\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-B491A2544D080FCB0E444E86CE93C938\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T16:06:46.4969250+08:00",
+        "LastWriteTime":  "2026-08-29T16:06:46.4969250+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-B8693EBE4C4466EE525E21B407FC7F8A\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-B8693EBE4C4466EE525E21B407FC7F8A\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T16:59:23.7530528+08:00",
+        "LastWriteTime":  "2026-08-29T16:59:23.7530528+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-BB95DBB3494363EEAF1FAC8BD390B17F\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-BB95DBB3494363EEAF1FAC8BD390B17F\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T15:37:48.8652385+08:00",
+        "LastWriteTime":  "2026-08-29T15:37:48.8652385+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-E1C43694420C7963765B658F76661EF5\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-E1C43694420C7963765B658F76661EF5\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T23:15:25.9242034+08:00",
+        "LastWriteTime":  "2026-08-29T23:15:25.9242034+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\CrashReportClient\\UE4CC-Windows-F56E07884EE78DD093805580491A010F\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\CrashReportClient\\UE4CC-Windows-F56E07884EE78DD093805580491A010F\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T17:12:54.0621390+08:00",
+        "LastWriteTime":  "2026-08-29T17:12:54.0621390+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\WindowsNoEditor\\Compat.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Compat.ini",
+        "Size":  2,
+        "CreationTime":  "2026-08-27T12:24:53.9142956+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:09.5864441+08:00",
+        "SHA256":  "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\WindowsNoEditor\\DeviceProfiles.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\WindowsNoEditor\\DeviceProfiles.ini",
+        "Size":  2,
+        "CreationTime":  "2026-08-27T12:24:54.0393784+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:09.7510301+08:00",
+        "SHA256":  "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\WindowsNoEditor\\EditorPerProjectUserSettings.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\WindowsNoEditor\\EditorPerProjectUserSettings.ini",
+        "Size":  2,
+        "CreationTime":  "2026-08-27T12:24:55.1591954+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:10.9028401+08:00",
+        "SHA256":  "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\WindowsNoEditor\\Engine.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Engine.ini",
+        "Size":  518,
+        "CreationTime":  "2026-08-27T12:24:53.9092945+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:09.5814430+08:00",
+        "SHA256":  "4666DA9FC82DE273B21D38C57F2E799A9C0722728D0CE0042E0FCD284599E780"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\WindowsNoEditor\\Game.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Game.ini",
+        "Size":  2,
+        "CreationTime":  "2026-08-27T12:24:53.9102948+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:09.5824374+08:00",
+        "SHA256":  "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\WindowsNoEditor\\GameUserSettings.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\WindowsNoEditor\\GameUserSettings.ini",
+        "Size":  875,
+        "CreationTime":  "2026-08-27T12:24:55.6109377+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:11.3722491+08:00",
+        "SHA256":  "D596BEFCC56DFA29030A8D4A61CB4F253BB882C5A823C2FFD5C506A5DE732126"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\WindowsNoEditor\\Hardware.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Hardware.ini",
+        "Size":  2,
+        "CreationTime":  "2026-08-27T12:24:53.9192951+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:09.5894379+08:00",
+        "SHA256":  "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\WindowsNoEditor\\Input.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Input.ini",
+        "Size":  2,
+        "CreationTime":  "2026-08-27T12:24:53.9122944+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:09.5844386+08:00",
+        "SHA256":  "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\WindowsNoEditor\\Lightmass.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Lightmass.ini",
+        "Size":  2,
+        "CreationTime":  "2026-08-27T12:24:53.9162938+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:09.5874393+08:00",
+        "SHA256":  "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\WindowsNoEditor\\Scalability.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\WindowsNoEditor\\Scalability.ini",
+        "Size":  2,
+        "CreationTime":  "2026-08-27T12:24:53.9182948+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:09.5894379+08:00",
+        "SHA256":  "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Config\\WindowsNoEditor\\G5_Backup\\Engine.ini.bak",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Config\\WindowsNoEditor\\G5_Backup\\Engine.ini.bak",
+        "Size":  324,
+        "CreationTime":  "2026-08-27T14:42:55.1333414+08:00",
+        "LastWriteTime":  "2026-08-27T14:15:05.9873481+08:00",
+        "SHA256":  "8D0004C3BC4A6678D93B02C20D7F2FF5A7C32052DA87806EFF0EFE0F6E723A7D"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-16DC3113457579271DC9E694353E7C01_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-16DC3113457579271DC9E694353E7C01_0000\\AcrGame.log",
+        "Size":  14743160,
+        "CreationTime":  "2026-08-27T16:09:00.4297818+08:00",
+        "LastWriteTime":  "2026-08-27T16:09:00.4363552+08:00",
+        "SHA256":  "5729742EB3FE6404C7A971BF6FAA1ADB2233CB7629CCE1C667E26CA454C26EF6"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-16DC3113457579271DC9E694353E7C01_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-16DC3113457579271DC9E694353E7C01_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-27T16:09:00.4363552+08:00",
+        "LastWriteTime":  "2026-08-27T16:09:00.4363552+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-3491ACEB4ED65645C4C5CA88CCF94EB2_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-3491ACEB4ED65645C4C5CA88CCF94EB2_0000\\AcrGame.log",
+        "Size":  15164350,
+        "CreationTime":  "2026-08-28T01:21:53.5679131+08:00",
+        "LastWriteTime":  "2026-08-28T01:21:53.5779993+08:00",
+        "SHA256":  "7BA7ACB9828B387D47DB4ACFF079D1960783720C653E2430DA38B0DC009C0618"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-3491ACEB4ED65645C4C5CA88CCF94EB2_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-3491ACEB4ED65645C4C5CA88CCF94EB2_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-28T01:21:53.5789926+08:00",
+        "LastWriteTime":  "2026-08-28T01:21:53.5789926+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-5A8581BA471E22D72454888E51215172_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-5A8581BA471E22D72454888E51215172_0000\\AcrGame.log",
+        "Size":  14799043,
+        "CreationTime":  "2026-08-28T01:42:48.5979489+08:00",
+        "LastWriteTime":  "2026-08-28T01:42:48.6064641+08:00",
+        "SHA256":  "FE1B438F02E52E72138F15D670B617DD52D36CD963C19A8622B113157EB16957"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-5A8581BA471E22D72454888E51215172_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-5A8581BA471E22D72454888E51215172_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-28T01:42:48.6074644+08:00",
+        "LastWriteTime":  "2026-08-28T01:42:48.6084645+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-652E416F4EB86A211D0D7895B6578758_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-652E416F4EB86A211D0D7895B6578758_0000\\AcrGame.log",
+        "Size":  16537296,
+        "CreationTime":  "2026-08-29T21:57:03.9090192+08:00",
+        "LastWriteTime":  "2026-08-29T21:57:03.9165443+08:00",
+        "SHA256":  "BBE8359BCE2BA78A019E608848C89A08FB0697463404A5F721E64C0E72C3FD70"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-652E416F4EB86A211D0D7895B6578758_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-652E416F4EB86A211D0D7895B6578758_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T21:57:03.9175382+08:00",
+        "LastWriteTime":  "2026-08-29T21:57:03.9175382+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-6FFCD8234762972C7471AA858426CA78_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-6FFCD8234762972C7471AA858426CA78_0000\\AcrGame.log",
+        "Size":  17237025,
+        "CreationTime":  "2026-08-29T21:33:42.9664263+08:00",
+        "LastWriteTime":  "2026-08-29T21:33:42.9759307+08:00",
+        "SHA256":  "EF33B09519BDAAA3EE8CDE23F898BC671156F21BB0AB91BDDFA22F8107554C49"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-6FFCD8234762972C7471AA858426CA78_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-6FFCD8234762972C7471AA858426CA78_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T21:33:42.9769304+08:00",
+        "LastWriteTime":  "2026-08-29T21:33:42.9769304+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-7A8E0FDB4BE6381E285338B7F785AF21_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-7A8E0FDB4BE6381E285338B7F785AF21_0000\\AcrGame.log",
+        "Size":  14689371,
+        "CreationTime":  "2026-08-28T10:37:33.8319788+08:00",
+        "LastWriteTime":  "2026-08-28T10:37:33.8390243+08:00",
+        "SHA256":  "09491143A9CA9D3CFD7AFD3DD33EE52762485EAFA2F1263D3A1A2971029B2DDF"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-7A8E0FDB4BE6381E285338B7F785AF21_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-7A8E0FDB4BE6381E285338B7F785AF21_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-28T10:37:33.8450240+08:00",
+        "LastWriteTime":  "2026-08-28T10:37:33.8450240+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-7ED4B28D45EF867604D97CA9CD7A600C_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-7ED4B28D45EF867604D97CA9CD7A600C_0000\\AcrGame.log",
+        "Size":  14672926,
+        "CreationTime":  "2026-08-27T16:12:42.1263969+08:00",
+        "LastWriteTime":  "2026-08-27T16:12:42.1323972+08:00",
+        "SHA256":  "69FE73C8DDD6B499C82EBCF9E0FB2E8C02F9F7A069812E2FC17F2D6CAE101DCB"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-7ED4B28D45EF867604D97CA9CD7A600C_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-7ED4B28D45EF867604D97CA9CD7A600C_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-27T16:12:42.1333981+08:00",
+        "LastWriteTime":  "2026-08-27T16:12:42.1333981+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-8483186A49A14CB9D12FD8BADE4AC565_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-8483186A49A14CB9D12FD8BADE4AC565_0000\\AcrGame.log",
+        "Size":  14772687,
+        "CreationTime":  "2026-08-27T15:33:53.2137543+08:00",
+        "LastWriteTime":  "2026-08-27T15:33:53.2202680+08:00",
+        "SHA256":  "5ABE480304536E25915917A5C9FEE5BAA09542FF1B19B0DAADFA97E176DE3D0E"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-8483186A49A14CB9D12FD8BADE4AC565_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-8483186A49A14CB9D12FD8BADE4AC565_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-27T15:33:53.2212668+08:00",
+        "LastWriteTime":  "2026-08-27T15:33:53.2212668+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-A0BE2BA94DBE5E4C27019396B378C269_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-A0BE2BA94DBE5E4C27019396B378C269_0000\\AcrGame.log",
+        "Size":  18188030,
+        "CreationTime":  "2026-08-29T22:42:27.9628683+08:00",
+        "LastWriteTime":  "2026-08-29T22:42:27.9837788+08:00",
+        "SHA256":  "E8659AFB3CBA9E75B4A865E6DB5CF0EC4085B202499B3CDBF3C539008D760C6B"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-A0BE2BA94DBE5E4C27019396B378C269_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-A0BE2BA94DBE5E4C27019396B378C269_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T22:42:27.9837788+08:00",
+        "LastWriteTime":  "2026-08-29T22:42:27.9837788+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-A572F6274DB66D0B83D3E3869DFBE913_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-A572F6274DB66D0B83D3E3869DFBE913_0000\\AcrGame.log",
+        "Size":  14889403,
+        "CreationTime":  "2026-08-29T17:55:20.7706300+08:00",
+        "LastWriteTime":  "2026-08-29T17:55:20.7771375+08:00",
+        "SHA256":  "5CAD3270F4B3FCE7C292664552E83AECEC46D6261963B82E2FA0D2D543E637F6"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-A572F6274DB66D0B83D3E3869DFBE913_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-A572F6274DB66D0B83D3E3869DFBE913_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T17:55:20.7771375+08:00",
+        "LastWriteTime":  "2026-08-29T17:55:20.7771375+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-D3D9B60B43B4523114DC7982CD6CF974_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-D3D9B60B43B4523114DC7982CD6CF974_0000\\AcrGame.log",
+        "Size":  14874054,
+        "CreationTime":  "2026-08-27T15:12:55.1892882+08:00",
+        "LastWriteTime":  "2026-08-27T15:12:55.1952876+08:00",
+        "SHA256":  "4BCB3220CAAB14D4B923A95ED237AEFF1A5561A4BBBACC3F2C38692014BE17A1"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-D3D9B60B43B4523114DC7982CD6CF974_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-D3D9B60B43B4523114DC7982CD6CF974_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-27T15:12:55.1962896+08:00",
+        "LastWriteTime":  "2026-08-27T15:12:55.1962896+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-E1C43694420C7963765B658F76661EF5_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-E1C43694420C7963765B658F76661EF5_0000\\AcrGame.log",
+        "Size":  17995923,
+        "CreationTime":  "2026-08-29T23:29:36.5265846+08:00",
+        "LastWriteTime":  "2026-08-29T23:29:36.5360936+08:00",
+        "SHA256":  "27AC664140DC6AAEA06F4E90C2D9BA1AD94B8E7A504E1690704ABA008BA25E61"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-E1C43694420C7963765B658F76661EF5_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-E1C43694420C7963765B658F76661EF5_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-29T23:29:36.5370937+08:00",
+        "LastWriteTime":  "2026-08-29T23:29:36.5370937+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-F96B45C54EA0E2FCDD3D018633A5CA92_0000\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-F96B45C54EA0E2FCDD3D018633A5CA92_0000\\AcrGame.log",
+        "Size":  14795215,
+        "CreationTime":  "2026-08-27T14:15:01.5987698+08:00",
+        "LastWriteTime":  "2026-08-27T14:15:01.6064195+08:00",
+        "SHA256":  "15DC82F7E614530D3AB4F9DB2D2ADBBC23C3D14FC437A5441845DA984F85AE1F"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Crashes\\UE4CC-Windows-F96B45C54EA0E2FCDD3D018633A5CA92_0000\\CrashReportClient.ini",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Crashes\\UE4CC-Windows-F96B45C54EA0E2FCDD3D018633A5CA92_0000\\CrashReportClient.ini",
+        "Size":  114,
+        "CreationTime":  "2026-08-27T14:15:01.6074166+08:00",
+        "LastWriteTime":  "2026-08-27T14:15:01.6074166+08:00",
+        "SHA256":  "974674634F90340CB0C289AA07FDED7268501D8278E30717127E9F9594C5A522"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Logs\\AcrGame-backup-2026.08.29-21.50.15.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame-backup-2026.08.29-21.50.15.log",
+        "Size":  17250246,
+        "CreationTime":  "2026-08-29T21:50:15.1187172+08:00",
+        "LastWriteTime":  "2026-08-29T21:50:15.1267170+08:00",
+        "SHA256":  "FCFBCE403FBB4193E86159A3585139719A0A66593C78FE2AA764D000ABDBD3AF"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Logs\\AcrGame-backup-2026.08.29-22.27.02.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame-backup-2026.08.29-22.27.02.log",
+        "Size":  16550525,
+        "CreationTime":  "2026-08-29T22:27:02.0498358+08:00",
+        "LastWriteTime":  "2026-08-29T22:27:02.0573473+08:00",
+        "SHA256":  "0ECD07531B4445E2FD1E8C486B6A880CFEF43C5FD8976EAC4D8A04B89431D971"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Logs\\AcrGame-backup-2026.08.29-23.15.25.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame-backup-2026.08.29-23.15.25.log",
+        "Size":  18193993,
+        "CreationTime":  "2026-08-29T23:15:25.9252044+08:00",
+        "LastWriteTime":  "2026-08-29T23:15:25.9337152+08:00",
+        "SHA256":  "C1D41944C9374298D3033EFB904CB0736EAB88A6924425B01DCECD6111EF7F9B"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Logs\\AcrGame-backup-2026.08.30-01.27.12.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame-backup-2026.08.30-01.27.12.log",
+        "Size":  5,
+        "CreationTime":  "2026-08-30T01:27:12.3874852+08:00",
+        "LastWriteTime":  "2026-08-30T01:27:12.3874852+08:00",
+        "SHA256":  "F01A374E9C81E3DB89B3A42940C4D6A5447684986A1296E42BF13F196EED6295"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Logs\\AcrGame-backup-2026.08.30-01.31.11.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame-backup-2026.08.30-01.31.11.log",
+        "Size":  5,
+        "CreationTime":  "2026-08-30T01:31:11.7354975+08:00",
+        "LastWriteTime":  "2026-08-30T01:31:11.7364981+08:00",
+        "SHA256":  "F01A374E9C81E3DB89B3A42940C4D6A5447684986A1296E42BF13F196EED6295"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Logs\\AcrGame-backup-2026.08.30-01.49.14.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame-backup-2026.08.30-01.49.14.log",
+        "Size":  5,
+        "CreationTime":  "2026-08-30T01:49:14.5497618+08:00",
+        "LastWriteTime":  "2026-08-30T01:49:14.5497618+08:00",
+        "SHA256":  "F01A374E9C81E3DB89B3A42940C4D6A5447684986A1296E42BF13F196EED6295"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Logs\\AcrGame-backup-2026.08.30-02.03.09.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame-backup-2026.08.30-02.03.09.log",
+        "Size":  5,
+        "CreationTime":  "2026-08-30T02:03:09.5924379+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:09.5924379+08:00",
+        "SHA256":  "F01A374E9C81E3DB89B3A42940C4D6A5447684986A1296E42BF13F196EED6295"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Logs\\AcrGame.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame.log",
+        "Size":  18024862,
+        "CreationTime":  "2026-08-27T12:24:53.9202943+08:00",
+        "LastWriteTime":  "2026-08-30T02:25:21.9771806+08:00",
+        "SHA256":  "C385CF230438F3AAB74F8C512D821A67B9EB16AFDF5B5B1F23CF0834473F5AFF"
+    },
+    {
+        "RelativePath":  "LocalAppData\\Logs\\AcrGame_post_start.log",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame_post_start.log",
+        "Size":  4860138,
+        "CreationTime":  "2026-08-29T17:13:00.7850901+08:00",
+        "LastWriteTime":  "2026-08-29T17:13:00.7761283+08:00",
+        "SHA256":  "D513AF3A286E1590914040B4A1F50305186F0789B6FF2E63724C962FB972F9D1"
+    },
+    {
+        "RelativePath":  "LocalAppData\\SaveGames\\SlotNumber.sav",
+        "FullPath":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\SaveGames\\SlotNumber.sav",
+        "Size":  717,
+        "CreationTime":  "2026-08-27T12:24:55.5124388+08:00",
+        "LastWriteTime":  "2026-08-30T02:03:11.2732420+08:00",
+        "SHA256":  "B46AD58A3D6A8B410F2A75CA53ADF9667A2017A53C970321E8A1DE6A07A78FBC"
+    }
+]

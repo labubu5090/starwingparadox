@@ -1,9 +1,11 @@
 """Player-related endpoints (login, profile, register, logout, etc.)."""
 
+import json
 import logging
 import uuid
 from datetime import datetime, timezone
 from typing import Any
+from urllib.parse import parse_qs
 
 from fastapi import APIRouter, Depends, Header, Request, Response
 from fastapi.responses import JSONResponse
@@ -41,6 +43,18 @@ def _galaxy_headers(x_galaxy_api_id: str) -> dict[str, str]:
     return headers
 
 
+async def _parse_request_body(request: Request) -> dict:
+    raw = await request.body()
+    content_type = (request.headers.get("content-type") or "").lower()
+    if "json" in content_type:
+        try:
+            return json.loads(raw.decode("utf-8", "replace"))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            return {}
+    fields = parse_qs(raw.decode("utf-8", "replace"))
+    return {k: v[0] if len(v) == 1 else v for k, v in fields.items()}
+
+
 async def _get_active_profile_uuid(db: AsyncSession) -> str | None:
     from app.db.repositories.local_profile_repository import LocalProfileRepository
 
@@ -71,7 +85,17 @@ async def _get_or_create_player(db: AsyncSession, nesys_id: str) -> Player:
     return player
 
 
-def _player_to_profile_dict(p: Player) -> dict[str, Any]:
+async def _get_player_by_id(db: AsyncSession, player_id: Any) -> Player | None:
+    """Resolve an existing player by numeric player_id, else None."""
+    try:
+        pid = int(player_id)
+    except (TypeError, ValueError):
+        return None
+    result = await db.execute(select(Player).where(Player.player_id == pid))
+    return result.scalar_one_or_none()
+
+
+def _player_to_profile_dict(p: Player, progresses: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     """Convert Player model to game-accepted profile response dict."""
     return {
         "player_id": p.player_id,
@@ -103,7 +127,7 @@ def _player_to_profile_dict(p: Player) -> dict[str, Any]:
         "same_day_login_count": 0,
         "total_login_days": 0,
         "consecutive_login_days": 0,
-        "progresses": [],
+        "progresses": progresses or [],
         "last_pref_ranking_order_id": 0,
         "pref_ranking_top_player_count": 0,
         "official_player_type_id": 0,
@@ -121,7 +145,7 @@ async def profile_load(
     if x_galaxy_api_id:
         response.headers["x-galaxy-api-id"] = x_galaxy_api_id
 
-    body = await request.json()
+    body = await _parse_request_body(request)
     nesys_id = body.get("nesys_id")
     if not nesys_id:
         return _ok(result=0)
@@ -130,7 +154,14 @@ async def profile_load(
 
     try:
         player = await _get_or_create_player(db, str(nesys_id))
-        resp_payload = _player_to_profile_dict(player)
+
+        from app.db.repositories.game_data_repository import GameDataRepository
+        repo = GameDataRepository(db)
+        progresses = [
+            {"progress_key": p.progress_key, "status": p.status}
+            for p in await repo.get_progress(player.player_id)
+        ]
+        resp_payload = _player_to_profile_dict(player, progresses=progresses)
         await capture_request_metadata(request, "/player/profile/load", 200, profile_uuid)
         return resp_payload
     except Exception as exc:
@@ -151,7 +182,7 @@ async def player_login(
     if x_galaxy_api_id:
         response.headers["x-galaxy-api-id"] = x_galaxy_api_id
 
-    body = await request.json()
+    body = await _parse_request_body(request)
     player_id = body.get("player_id")
     logger.info("Player login: %s", player_id)
 
@@ -164,9 +195,22 @@ async def player_login(
     except Exception as exc:
         logger.warning("player/login DB insert failed: %s", exc)
 
+    login_progresses: list[dict[str, Any]] = []
+    if player_id:
+        try:
+            from app.db.repositories.game_data_repository import GameDataRepository
+
+            repo = GameDataRepository(db)
+            login_progresses = [
+                {"progress_key": prog.progress_key, "status": prog.status}
+                for prog in await repo.get_progress(int(player_id))
+            ]
+        except Exception as exc:
+            logger.warning("player/login progress load failed: %s", exc)
+
     return _ok(
         player_id=player_id or "",
-        progresses=[],
+        progresses=login_progresses,
         greeting_ids=[1],
         battle_count=0,
         same_day_login_count=1,
@@ -203,7 +247,10 @@ async def player_logout(
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
     profile_uuid = await _get_active_profile_uuid(db)
-    resp = _not_implemented("/player/logout", headers)
+    if not settings.legacy_compatibility_mode:
+        resp = _not_implemented("/player/logout", headers)
+    else:
+        resp = JSONResponse(content=_ok(), headers=headers)
     await capture_request_metadata(request, "/player/logout", resp.status_code, profile_uuid)
     return resp
 
@@ -219,14 +266,16 @@ async def player_register(
     if x_galaxy_api_id:
         response.headers["x-galaxy-api-id"] = x_galaxy_api_id
 
-    body = await request.json()
+    body = await _parse_request_body(request)
     nesys_id = body.get("nesys_id", "")
     name = body.get("name", "")
 
     profile_uuid = await _get_active_profile_uuid(db)
 
     try:
-        player = await _get_or_create_player(db, str(nesys_id))
+        player = await _get_player_by_id(db, body.get("player_id"))
+        if player is None:
+            player = await _get_or_create_player(db, str(nesys_id))
         if name:
             await db.execute(
                 text("UPDATE player SET player_name = :name WHERE player_id = :pid"),

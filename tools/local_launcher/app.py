@@ -37,7 +37,7 @@ from .environment import (
     EnvironmentState,
     run_all_checks,
 )
-from .nesys_pipe import NesysPipeServer
+from .nesys_pipe import NesysPipeServer, profile_id_to_nesys_id
 from .process_manager import ProcessManager
 from .session_log import SessionLog
 from .status import (
@@ -50,6 +50,21 @@ SERVER_URL = "http://127.0.0.1:4001"
 SERVER_SCRIPT = PROJECT_ROOT / "server" / "main.py"
 PROXY_SCRIPT = PROJECT_ROOT / "tools" / "g30_proxy.py"
 CONTROLLER_MAPPER_SCRIPT = PROJECT_ROOT / "tools" / "controller_mapper" / "mapper_app.py"
+
+# Config-path matching server overrides (G34-proven). These are read from the
+# game command line (see NetworkConfig UseConfigMatchingServer) and let the game
+# resolve the matching server from config instead of the NESYS GetNesysInfo path.
+#
+# IMPORTANT (G46 re-test, 2026-09-01): When NESYS is ONLINE (bNesysServerLive[1]),
+# the game HARD-OVERRIDES these config args and selects MatchingServerType[GetNesysInfo],
+# which needs GetNesysGameServerHttpIP (never populated) -> empty host -> HTTP fails ->
+# red icon. UseConfigMatchingServer=1 is IGNORED in the online state. The working
+# [None]/mock path only activates when the NESYS pipe stub is NOT running (NESYS offline).
+GAME_LAUNCH_ARGS = [
+    f"-UseConfigMatchingServer=1",
+    f"-DefaultMatchingServerAddress=127.0.0.1:{TCP_PORT}",
+    f"-HttpServerAddress=127.0.0.1:{APP_PORT}",
+]
 
 COLORS = {
     "bg_dark": "#1a1a2e",
@@ -316,6 +331,11 @@ class LauncherWindow(QMainWindow):
         self._refresh_timer.timeout.connect(self._refresh_status)
         self._refresh_timer.start(3000)
 
+        self._profile_timer = QTimer(self)
+        self._profile_timer.timeout.connect(self._refresh_profile)
+        self._profile_timer.start(5000)
+        self._current_profile_name: str | None = None
+
     def _add_log(self, msg: str) -> None:
         ts = time.strftime("%H:%M:%S")
         line = f"[{ts}] {msg}"
@@ -416,12 +436,25 @@ class LauncherWindow(QMainWindow):
 
         # TCP matching server — start only if port 6666 is free
         if _port_available(TCP_PORT):
-            self._add_log("TCP matching server managed by HTTP server process")
+            try:
+                tcp_log = self._session_log.session_dir / "tcp_server.log"
+                tcp_proc = subprocess.Popen(
+                    [str(PROJECT_ROOT / "server" / ".venv" / "Scripts" / "python.exe"), "-m", "app.tcp_server"],
+                    cwd=str(PROJECT_ROOT / "server"),
+                    stdout=open(tcp_log, "w"),  # noqa: SIM115
+                    stderr=subprocess.STDOUT,
+                )
+                self._processes.register("tcp_match", tcp_proc, expected_port=TCP_PORT, log_path=str(tcp_log))
+                self._add_log(f"TCP matching server started (PID {tcp_proc.pid})")
+                self._session_log.log_server_event("tcp_match", "started", f"PID {tcp_proc.pid}")
+            except (OSError, FileNotFoundError) as exc:
+                self._add_log(f"Failed to start TCP matching server: {exc}")
         else:
             self._add_log("TCP matching :6666 already running (pre-existing) — skipped")
 
         # Start NESYS named pipe stub
         if not self._nesys_pipe.running:
+            self._nesys_pipe.set_log_callback(self._add_log)
             self._nesys_pipe.start()
             self._add_log("NESYS pipe started (\\\\.\\pipe\\nesys_games)")
             self._update_card("nesys_auth", "Available", COLORS["success"])
@@ -433,6 +466,8 @@ class LauncherWindow(QMainWindow):
         self._update_card("http_proxy", "Running", COLORS["success"])
         self._update_card("python_http", "Running", COLORS["success"])
         self._update_card("tcp_match", "Running", COLORS["success"])
+
+        self._refresh_profile()
 
     def _on_stop_server(self) -> None:
         self._add_log("Stopping server stack...")
@@ -480,7 +515,7 @@ class LauncherWindow(QMainWindow):
         self._add_log("Launching game...")
         self._status.state = LauncherState.LAUNCHING_GAME
         try:
-            proc = subprocess.Popen([exe], cwd=str(GAME_EXE.parent))
+            proc = subprocess.Popen([exe] + GAME_LAUNCH_ARGS, cwd=str(GAME_EXE.parent))
             self._processes.register("game", proc, executable=exe)
             self._status.game_pid = proc.pid
             self._add_log(f"Game launched (PID {proc.pid})")
@@ -593,6 +628,34 @@ class LauncherWindow(QMainWindow):
         elif self._status.game_phase == GamePhase.BATTLE:
             self._status.game_phase = GamePhase.CLOSED
             self._update_card("game_conn", "Closed", COLORS["text_muted"])
+
+    def _refresh_profile(self) -> None:
+        try:
+            req = urllib.request.Request(f"{SERVER_URL}/profile/local/list", method="POST")
+            req.add_header("Content-Type", "application/json")
+            with urllib.request.urlopen(req, data=b'{}', timeout=3) as resp:
+                data = json.loads(resp.read())
+                profiles = data.get("profiles", [])
+                active = next((p for p in profiles if p.get("session_active")), None)
+                if active:
+                    name = active.get("display_name", "Unknown")
+                    profile_id = active.get("id", 0)
+                    new_card_id = profile_id_to_nesys_id(profile_id) if profile_id else None
+                    if name != self._current_profile_name:
+                        self._current_profile_name = name
+                        self._update_card("profile", name, COLORS["success"])
+                        self._cards["profile"].set_detail(f"NESYS ID: {new_card_id or 'default'}")
+                        self._add_log(f"Active profile: {name} (NESYS ID: {new_card_id})")
+                    if new_card_id and self._nesys_pipe.card_id != new_card_id:
+                        self._nesys_pipe.card_id = new_card_id
+                        self._add_log(f"NESYS card ID updated: {new_card_id}")
+                else:
+                    if self._current_profile_name is not None:
+                        self._current_profile_name = None
+                        self._update_card("profile", "None Selected", COLORS["text_muted"])
+                        self._cards["profile"].set_detail("")
+        except (OSError, TimeoutError, ValueError):
+            pass
 
     # -----------------------------------------------------------------------
     # Helpers

@@ -1,4 +1,4 @@
-"""Tutorial endpoints (POST /tutorial/*) – 501 with request capture."""
+"""Tutorial endpoints (POST /tutorial/*)."""
 
 import logging
 import uuid
@@ -51,7 +51,10 @@ async def tutorial_record(
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
     profile_uuid = await _get_active_profile_uuid(db)
-    resp = _not_implemented("/tutorial/record", headers)
+    if not settings.legacy_compatibility_mode:
+        resp = _not_implemented("/tutorial/record", headers)
+    else:
+        resp = JSONResponse(content={"result": 1}, headers=headers)
     await capture_request_metadata(request, "/tutorial/record", resp.status_code, profile_uuid)
     return resp
 
@@ -65,7 +68,10 @@ async def tutorial_skip_record(
 ) -> Response:
     headers = _galaxy_headers(x_galaxy_api_id)
     profile_uuid = await _get_active_profile_uuid(db)
-    resp = _not_implemented("/tutorial/skip_record", headers)
+    if not settings.legacy_compatibility_mode:
+        resp = _not_implemented("/tutorial/skip_record", headers)
+    else:
+        resp = JSONResponse(content={"result": 1}, headers=headers)
     await capture_request_metadata(request, "/tutorial/skip_record", resp.status_code, profile_uuid)
     return resp
 

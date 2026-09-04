@@ -120,3 +120,35 @@ tools/config/controller_mapping.json
 server/data/*.db
 server/data/*.db-wal
 server/data/*.db-shm
+
+# ============================================================================
+# Excluded from GitHub push (kept only locally)
+#
+# Proprietary game binary + IDA database/project (do NOT distribute)
+tools/ida_g21/targets/
+tools/ida_g21/*.i64
+tools/ida_g21/*.i64.old
+tools/wireshark_g22/captures/
+tools/wireshark_online/
+*.idb
+*.i64
+
+# All packet captures and network traces (game data; not committed)
+**/*.pcap
+**/*.pcapng
+
+# Live runtime capture logs (network/game protocol traces; not committed)
+docs/generated/*.jsonl
+artifacts/**/live_capture*.jsonl*
+
+# Launcher runtime session logs (operator-specific)
+tools/local_launcher/sessions/
+**/sessions/*.jsonl
+**/sessions/*.json
+
+# HTTP server error log
+server/*.log.err
+
+# Local launcher CLI runtime capture of online matching
+tools/wireshark_online/
+

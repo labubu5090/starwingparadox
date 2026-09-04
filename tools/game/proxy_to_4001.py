@@ -26,7 +26,17 @@ logger = logging.getLogger("proxy")
 requests_log = []
 
 
-def log_request(method, path, headers, body_len, status, resp_headers, resp_body_len):
+def body_bytes_to_text(body):
+    try:
+        return body.decode("utf-8") if body else None
+    except UnicodeDecodeError:
+        try:
+            return body.decode("latin-1")
+        except Exception:
+            return None
+
+
+def log_request(method, path, headers, body, body_len, status, resp_headers, resp_body):
     entry = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "method": method,
@@ -34,8 +44,11 @@ def log_request(method, path, headers, body_len, status, resp_headers, resp_body
         "headers": dict(headers),
         "body_length": body_len,
         "response_status": status,
-        "response_length": resp_body_len,
+        "response_length": len(resp_body) if resp_body else 0,
     }
+    if "profile" in path or "player" in path or "login" in path:
+        entry["request_body_text"] = body_bytes_to_text(body)
+        entry["response_body_text"] = body_bytes_to_text(resp_body)
     requests_log.append(entry)
     try:
         LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -95,10 +108,11 @@ class ProxyHandler(BaseHTTPRequestHandler):
             self.command,
             self.path,
             self.headers,
+            body,
             content_length,
             resp_status,
             resp_headers,
-            len(resp_body),
+            resp_body,
         )
 
         # Send response to client

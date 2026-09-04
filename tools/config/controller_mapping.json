@@ -4,7 +4,7 @@
   "deadzone": 0.15,
   "button_mappings": {
     "foot_pedal": {
-      "button": 2,
+      "button": 0,
       "key": "Space"
     },
     "start": {
@@ -19,9 +19,17 @@
       "button": 5,
       "key": "RMB"
     },
+    "dash": {
+      "button": 6,
+      "key": "Shift"
+    },
     "left_button": {
       "button": 8,
       "key": "Q"
+    },
+    "right_button": {
+      "button": 9,
+      "key": "E"
     },
     "weapon_change": {
       "button": 3,
@@ -34,25 +42,17 @@
     "ar_skill": {
       "button": 1,
       "key": "F"
-    },
-    "dash": {
-      "button": 0,
-      "key": "Shift"
-    },
-    "right_button": {
-      "button": 9,
-      "key": "E"
-    },
-    "forward": {
-      "button": 0,
-      "key": "W"
-    },
-    "left": {
-      "button": 2,
-      "key": "A"
     }
   },
   "axis_mappings": {
+    "forward": {
+      "axis": "lx_pos",
+      "key": "W"
+    },
+    "left": {
+      "axis": "lx_neg",
+      "key": "A"
+    },
     "right": {
       "axis": "rx_pos",
       "key": "D"
@@ -64,6 +64,6 @@
     "cooldown": 0.5,
     "max_per_arm": 2
   },
-  "created": "2026-08-29T22:17:02",
-  "modified": "2026-08-29T23:31:21"
+  "created": "2026-08-30T02:06:54",
+  "modified": "2026-08-30T02:06:54"
 }

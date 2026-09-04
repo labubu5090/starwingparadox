@@ -1,0 +1,11 @@
+﻿{
+    "timestamp":  "2026-08-30T02:31:20Z",
+    "status":  "READY_FOR_LAUNCH",
+    "server_ports":  {
+                         "proxy":  80,
+                         "tcp":  6666,
+                         "http":  4001
+                     },
+    "prelaunch_file_manifest":  "artifacts/phase_2a_g37/prelaunch_file_manifest.json",
+    "game_log":  "C:\\Users\\KAHO\\AppData\\Local\\AcrGame\\Saved\\Logs\\AcrGame.log"
+}
