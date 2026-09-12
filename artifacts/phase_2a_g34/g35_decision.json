@@ -1,6 +1,0 @@
-{
-  "g35_action": "MATCHING_REQUIRES_NESYS_CONTROL_BYPASS_OR_STUB",
-  "reason": "MatchingServer object initialization requires NesysControl IsOnline=1. Config path bypasses address resolution but not the object creation gate. Next steps: investigate NesysControl::IsOnline path, determine if we can stub it or bypass it without affecting game stability.",
-  "controller_action": "MAPPER_IMPLEMENTED_NEEDS_OPERATOR_TESTING",
-  "controller_reason": "Controller mapper implemented and tested. Operator needs to run mapper_app.py to verify live input, assign buttons, and test with game."
-}

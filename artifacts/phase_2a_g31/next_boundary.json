@@ -1,7 +1,0 @@
-﻿{
-  "phase": "G31",
-  "next_boundary": "NESYS initialization",
-  "error_message": "Error No MatchingServer so initialize Nesys before",
-  "game_state": "TCP connected, Ping working, waiting for NESYS init",
-  "classification": "TCP_MATCHING_FIRST_FRAME_CAPTURED"
-}

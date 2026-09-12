@@ -138,6 +138,15 @@ class GameDataRepository:
         )
         return list(result.scalars().all())
 
+    async def get_mission(self, player_id: int, mission_id: int) -> PlayerMission | None:
+        result = await self.session.execute(
+            select(PlayerMission).where(
+                PlayerMission.player_id == player_id,
+                PlayerMission.mission_id == mission_id,
+            )
+        )
+        return result.scalar_one_or_none()
+
     async def upsert_mission(
         self,
         player_id: int,
@@ -279,14 +288,12 @@ class GameDataRepository:
         return list(result.scalars().all())
 
     async def get_mecha_set_parts(
-        self, player_id: int, mecha_set_id: int
+        self, player_id: int, mecha_set_id: int | None = None
     ) -> list[PlayerMechaSetPart]:
-        result = await self.session.execute(
-            select(PlayerMechaSetPart).where(
-                PlayerMechaSetPart.player_id == player_id,
-                PlayerMechaSetPart.mecha_set_id == mecha_set_id,
-            )
-        )
+        stmt = select(PlayerMechaSetPart).where(PlayerMechaSetPart.player_id == player_id)
+        if mecha_set_id is not None:
+            stmt = stmt.where(PlayerMechaSetPart.mecha_set_id == mecha_set_id)
+        result = await self.session.execute(stmt)
         return list(result.scalars().all())
 
     async def upsert_mecha_set_part(

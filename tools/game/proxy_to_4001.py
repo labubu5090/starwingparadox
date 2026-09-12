@@ -46,7 +46,7 @@ def log_request(method, path, headers, body, body_len, status, resp_headers, res
         "response_status": status,
         "response_length": len(resp_body) if resp_body else 0,
     }
-    if "profile" in path or "player" in path or "login" in path:
+    if "profile" in path or "player" in path or "login" in path or "offline" in path:
         entry["request_body_text"] = body_bytes_to_text(body)
         entry["response_body_text"] = body_bytes_to_text(resp_body)
     requests_log.append(entry)

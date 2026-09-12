@@ -13,10 +13,10 @@ PROXY_PORT = 80
 TARGET_BASE = "http://127.0.0.1:4001"
 
 class ProxyHandler(http.server.BaseHTTPRequestHandler):
-    def do_POST(self):
+    def _forward(self, method):
         correlation_id = str(uuid.uuid4())[:8]
         content_length = int(self.headers.get('Content-Length', 0))
-        body = self.rfile.read(content_length)
+        body = self.rfile.read(content_length) if method == 'POST' else None
         
         # Strip /mock prefix: game sends /mock/matching/server -> /matching/server
         upstream_path = self.path
@@ -24,12 +24,12 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
             upstream_path = upstream_path[5:]  # strip "/mock"
         
         target_url = f"{TARGET_BASE}{upstream_path}"
-        logger.info("[%s] PROXY %s %s -> %s (%d bytes) body=%r", correlation_id, self.command, self.path, target_url, len(body), body[:256])
+        logger.info("[%s] PROXY %s %s -> %s (%s bytes) body=%r", correlation_id, method, self.path, target_url, len(body) if body else 0, (body or b"")[:256])
         
-        headers = {k: v for k, v in self.headers.items() if k.lower() not in ('host', 'transfer-encoding')}
+        headers = {k: v for k, v in self.headers.items() if k.lower() not in ('host', 'transfer-encoding', 'content-length')}
         headers['Host'] = '127.0.0.1:4001'
         
-        req = urllib.request.Request(target_url, data=body, headers=headers, method='POST')
+        req = urllib.request.Request(target_url, data=body, headers=headers, method=method)
         logger.info("[%s] Upstream request: %s %s", correlation_id, req.method, req.full_url)
         
         try:
@@ -54,7 +54,10 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(error_body)
     
     def do_GET(self):
-        self.do_POST()
+        self._forward('GET')
+    
+    def do_POST(self):
+        self._forward('POST')
     
     def log_message(self, format, *args):
         logger.info(format, *args)

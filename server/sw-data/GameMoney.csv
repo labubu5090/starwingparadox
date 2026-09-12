@@ -1,0 +1,3 @@
+---,GameMoneyId,Name,TexturePath,Text
+0,0,-,,
+1,1,CP,Texture2D'/Game/GUI/Common/Tex/ItemIcon/Tex_Com_CP_Icon.Tex_Com_CP_Icon',ゲーム内通貨

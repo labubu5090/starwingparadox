@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 780" font-family="'Segoe UI', system-ui, sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#555"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#22c55e"/>
+    </marker>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="780" rx="12" fill="#f8fafc"/>
+
+  <!-- Title -->
+  <text x="550" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">Starwing Paradox — 網絡架構圖 (2on2 Real Network)</text>
+  <text x="550" y="58" text-anchor="middle" font-size="12" fill="#94a3b8">基於 exe 反向分析重構 — 未修改任何系統</text>
+
+  <!-- ==================== VPN Cloud ==================== -->
+  <rect x="20" y="80" width="1060" height="680" rx="14" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5" stroke-dasharray="8,4"/>
+  <text x="56" y="104" font-size="11" fill="#0284c7" font-weight="600">☁  LAN / VPN Cloud (Tailscale / ZeroTier / Hamachi)</text>
+
+  <!-- ==================== Clients ==================== -->
+  <!-- Client boxes -->
+  <g filter="url(#shadow)">
+    <rect x="40"  y="130" width="160" height="80" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1.2"/>
+    <text x="120" y="162" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">🎮 Client 1</text>
+    <text x="120" y="180" text-anchor="middle" font-size="10.5" fill="#64748b">Host (你)</text>
+    <text x="120" y="198" text-anchor="middle" font-size="9.5" fill="#94a3b8">UAcrProtocol client</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40"  y="230" width="160" height="80" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1.2"/>
+    <text x="120" y="262" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">🎮 Client 2</text>
+    <text x="120" y="280" text-anchor="middle" font-size="10.5" fill="#64748b">Friend 1</text>
+    <text x="120" y="298" text-anchor="middle" font-size="9.5" fill="#94a3b8">UAcrProtocol client</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40"  y="330" width="160" height="80" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1.2"/>
+    <text x="120" y="362" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">🎮 Client 3</text>
+    <text x="120" y="380" text-anchor="middle" font-size="10.5" fill="#64748b">Friend 2</text>
+    <text x="120" y="398" text-anchor="middle" font-size="9.5" fill="#94a3b8">UAcrProtocol client</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40"  y="430" width="160" height="80" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1.2"/>
+    <text x="120" y="462" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">🎮 Client 4</text>
+    <text x="120" y="480" text-anchor="middle" font-size="10.5" fill="#64748b">Friend 3</text>
+    <text x="120" y="498" text-anchor="middle" font-size="9.5" fill="#94a3b8">UAcrProtocol client</text>
+  </g>
+
+  <!-- Config labels -->
+  <text x="120" y="530" text-anchor="middle" font-size="9" fill="#0284c7">config INI / NESYS / commandline</text>
+  <text x="120" y="544" text-anchor="middle" font-size="9" fill="#0284c7">→ matching address = host:6666</text>
+
+  <!-- ==================== Matching Server ==================== -->
+  <g filter="url(#shadow)">
+    <rect x="340" y="130" width="240" height="180" rx="10" fill="#fff" stroke="#3b82f6" stroke-width="1.8"/>
+    <rect x="340" y="130" width="240" height="30" rx="10" fill="#3b82f6"/>
+    <rect x="340" y="150" width="240" height="10" fill="#3b82f6"/>
+    <text x="460" y="151" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Matching Server (NESYS)</text>
+    <text x="460" y="182" text-anchor="middle" font-size="11" fill="#1e293b">UAcrProtocol — TCP 6666</text>
+    <text x="460" y="200" text-anchor="middle" font-size="10" fill="#64748b">Python / GameServer</text>
+    <line x1="360" y1="212" x2="560" y2="212" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="365" y="228" font-size="9.5" fill="#475569">Accept RequestEntryMatching (200)</text>
+    <text x="365" y="243" font-size="9.5" fill="#475569">Send NotifyMatchMade (302) + DS</text>
+    <text x="365" y="258" font-size="9.5" fill="#475569">Send NotifyMatchBegin (304)</text>
+    <text x="365" y="273" font-size="9.5" fill="#475569">Accept RequestRegisterDS (500)</text>
+    <text x="365" y="288" font-size="9.5" fill="#475569">Send NotifyMatchOpen (601) → DS</text>
+  </g>
+
+  <!-- ==================== HTTP API ==================== -->
+  <g filter="url(#shadow)">
+    <rect x="340" y="340" width="240" height="120" rx="10" fill="#fff" stroke="#f59e0b" stroke-width="1.5"/>
+    <rect x="340" y="340" width="240" height="28" rx="10" fill="#f59e0b"/>
+    <rect x="340" y="355" width="240" height="10" fill="#f59e0b"/>
+    <text x="460" y="360" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">HTTP API Server</text>
+    <text x="460" y="390" text-anchor="middle" font-size="11" fill="#1e293b">Python — port 4001 (via 80)</text>
+    <text x="460" y="408" text-anchor="middle" font-size="10" fill="#64748b">dev.starwing.jp → 127.0.0.1</text>
+    <text x="460" y="430" text-anchor="middle" font-size="9.5" fill="#475569">Mission / Gacha / Reward / Shop</text>
+    <text x="460" y="445" text-anchor="middle" font-size="9.5" fill="#475569">REST JSON — hosts override</text>
+  </g>
+
+  <!-- ==================== Dedicated Server ==================== -->
+  <g filter="url(#shadow)">
+    <rect x="740" y="130" width="290" height="200" rx="10" fill="#fff" stroke="#ef4444" stroke-width="1.8"/>
+    <rect x="740" y="130" width="290" height="30" rx="10" fill="#ef4444"/>
+    <rect x="740" y="150" width="290" height="10" fill="#ef4444"/>
+    <text x="885" y="151" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Dedicated Server (DS)</text>
+    <text x="885" y="182" text-anchor="middle" font-size="11" fill="#1e293b">AcrGame.exe —server (UE4 NM_DedicatedServer)</text>
+    <text x="885" y="199" text-anchor="middle" font-size="10" fill="#64748b">TCP 6666 — UAcrProtocol + UE4 net</text>
+    <line x1="760" y1="210" x2="1010" y2="210" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="765" y="226" font-size="9.5" fill="#475569">RequestRegisterDS (500) → 向 matching server 註冊</text>
+    <text x="765" y="241" font-size="9.5" fill="#475569">收到 NotifyMatchOpen (601) → 準備 host</text>
+    <text x="765" y="256" font-size="9.5" fill="#475569">收到 RequestAssignMatch (700)</text>
+    <text x="765" y="271" font-size="9.5" fill="#475569">等候 RequestEnterMatch (704) ×4 clients</text>
+    <text x="765" y="286" font-size="9.5" fill="#475569">State: Idle→Applying→Loading→Battle→Closing</text>
+    <text x="885" y="312" text-anchor="middle" font-size="9" fill="#ef4444">⚔ UE4 Server-Authoritative Battle (2on2)</text>
+  </g>
+
+  <!-- ==================== Card Reader ==================== -->
+  <g filter="url(#shadow)">
+    <rect x="740" y="360" width="290" height="80" rx="10" fill="#fff" stroke="#a78bfa" stroke-width="1.2"/>
+    <rect x="740" y="360" width="290" height="24" rx="10" fill="#a78bfa"/>
+    <rect x="740" y="372" width="290" height="8" fill="#a78bfa"/>
+    <text x="885" y="378" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff">NesiCa Card Reader</text>
+    <text x="885" y="402" text-anchor="middle" font-size="10" fill="#1e293b">\\.\pipe\nesys_games (Named Pipe)</text>
+    <text x="885" y="418" text-anchor="middle" font-size="9.5" fill="#64748b">本地 only — 每台 client 自己讀卡</text>
+  </g>
+
+  <!-- ==================== Arrows: Clients → Matching ==================== -->
+  <line x1="200" y1="168" x2="338" y2="195" stroke="#3b82f6" stroke-width="1.4" marker-end="url(#arrowBlue)"/>
+  <line x1="200" y1="268" x2="338" y2="210" stroke="#3b82f6" stroke-width="1.4" marker-end="url(#arrowBlue)"/>
+  <line x1="200" y1="368" x2="338" y2="220" stroke="#3b82f6" stroke-width="1.4" marker-end="url(#arrowBlue)"/>
+  <line x1="200" y1="468" x2="338" y2="225" stroke="#3b82f6" stroke-width="1.4" marker-end="url(#arrowBlue)"/>
+
+  <!-- Arrow labels -->
+  <text x="255" y="185" font-size="8.5" fill="#3b82f6" font-weight="600">TCP 6666</text>
+  <text x="248" y="198" font-size="8" fill="#3b82f6">RequestEntryMatching</text>
+
+  <!-- ==================== Arrow: Matching → DS (register) ==================== -->
+  <path d="M580,175 L738,175" stroke="#555" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="620" y="168" font-size="8" fill="#555">NotifyMatchMade</text>
+  <text x="620" y="180" font-size="8" fill="#555">→ ds.address</text>
+
+  <!-- ==================== Arrow: DS → Matching (register) ==================== -->
+  <path d="M740,200 L582,200" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  <text x="608" y="213" font-size="8" fill="#ef4444">RequestRegisterDS (500)</text>
+
+  <!-- ==================== Arrow: Clients → DS ==================== -->
+  <line x1="200" y1="155" x2="460" y2="155" stroke="#555" stroke-width="0" />
+  <path d="M200,172 Q260,172 260,120 L740,120" stroke="none" fill="none"/>
+  <path d="M200,155 C300,110 500,90 740,155" stroke="#22c55e" stroke-width="1.5" fill="none" marker-end="url(#arrowGreen)"/>
+  <path d="M200,175 C350,135 550,110 740,185" stroke="#22c55e" stroke-width="1.5" fill="none" marker-end="url(#arrowGreen)"/>
+  <path d="M200,270 C400,175 600,150 740,215" stroke="#22c55e" stroke-width="1.5" fill="none" marker-end="url(#arrowGreen)"/>
+  <path d="M200,370 C450,230 620,190 740,245" stroke="#22c55e" stroke-width="1.5" fill="none" marker-end="url(#arrowGreen)"/>
+  <path d="M200,470 C480,280 640,230 740,270" stroke="#22c55e" stroke-width="1.5" fill="none" marker-end="url(#arrowGreen)"/>
+
+  <text x="510" y="100" text-anchor="middle" font-size="9" fill="#22c55e" font-weight="600">TCP 6666 — RequestEnterMatch (704) → Battle</text>
+
+  <!-- ==================== Host Machine Label ==================== -->
+  <rect x="30" y="80" width="180" height="480" rx="12" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="120" y="568" text-anchor="middle" font-size="10" fill="#64748b" font-weight="600">▼ Host (你) 嘅機 ▼</text>
+  <text x="120" y="582" text-anchor="middle" font-size="9" fill="#94a3b8">AcrGame.exe + matching server</text>
+
+  <!-- ==================== Summary box ==================== -->
+  <rect x="30" y="610" width="1040" height="140" rx="10" fill="#fff" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="50" y="636" font-size="13" font-weight="700" fill="#1e293b">連線步驟（每個人要做嘅嘢）</text>
+  <line x1="50" y1="646" x2="1060" y2="646" stroke="#e2e8f0" stroke-width="1"/>
+
+  <text x="50" y="668" font-size="10.5" fill="#1e293b" font-weight="600">Host（你）:</text>
+  <text x="140" y="668" font-size="10.5" fill="#475569">開 matching server (:6666) + HTTP proxy (:80→4001) + DS 進程 (:6666)</text>
+
+  <text x="50" y="690" font-size="10.5" fill="#1e293b" font-weight="600">Friend 1~3:</text>
+  <text x="140" y="690" font-size="10.5" fill="#475569">hosts 檔加 host IP → dev.starwing.jp  |  config INI 設 matching address</text>
+
+  <text x="50" y="712" font-size="10.5" fill="#1e293b" font-weight="600">跨網絡？</text>
+  <text x="140" y="712" font-size="10.5" fill="#475569">裝 Tailscale → 全員同一虛擬 LAN → 用 Tailscale IP 做 hosts + config</text>
+
+  <text x="50" y="736" font-size="10.5" fill="#1e293b" font-weight="600">自動流程：</text>
+  <text x="140" y="736" font-size="10.5" fill="#475569">Client → matching (:6666) → 匹配成功 → 收到 ds.address → 連 DS (:6666) → RequestEnterMatch → 2on2 Battle 開始 ✅</text>
+</svg>

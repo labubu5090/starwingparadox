@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     pb_port: int = 6666
     database_url: str = "sqlite+aiosqlite:///./data/starwing.db"
     redis_url: str = "redis://localhost:6379/0"
-    pb_timeout: float = 30.0
+    pb_timeout: float = 600.0
     log_level: str = "INFO"
     protocol_raw_logging: bool = False
     protocol_hash_logging: bool = True

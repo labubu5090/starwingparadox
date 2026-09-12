@@ -10,6 +10,7 @@ MESSAGE_TYPE_MAP: dict[int, str] = {
     0xCC: "NotifyMatchFailure",  # 204
     205: "ResponseEntryReMatching",
     206: "RequestJoinMatching",
+     207: "ResponseJoinMatching",
     302: "NotifyMatchMade",
     304: "NotifyMatchBegin",
     601: "NotifyMatchOpen",

@@ -1,8 +1,0 @@
-{
-  "classification": "KEYBOARD_INPUT_ACTIVE",
-  "gamepad_detected_by_ue4": false,
-  "keyboard_controls_verified": true,
-  "usbio_controls_present": true,
-  "native_gamepad_eligible": false,
-  "remediation": "OPTION_B_PROJECT_OWNED_MAPPER"
-}

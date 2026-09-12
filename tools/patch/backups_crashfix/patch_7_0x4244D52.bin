@@ -1,0 +1,6 @@
+{
+  "file_offset": "0x4244d52",
+  "original_bytes": "c6834006000002",
+  "exe_sha256": "ce4c89054bf7c4d833ee8af455a485ac401eead12a80ffc077663a768fd47dc4",
+  "note": "NOP MOV 0x02 clear bit 0"
+}

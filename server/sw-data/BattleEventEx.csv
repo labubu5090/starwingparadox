@@ -1,0 +1,5 @@
+---,Id,Name,BattleEventTypeId,EventDate,RewardGiveDate,AggregateFileName
+1,1,ラウンドワントーナメント #1,3,2019-06-29,2019-07-05,roundone01.json
+2,2,ラウンドワントーナメント #2,3,2019-06-30,2019-07-05,roundone02.json
+3,3,ラウンドワントーナメント #3,3,2019-07-06,2019-07-18,roundone_03.json
+4,4,ラウンドワントーナメント #4,3,2019-07-07,2019-07-18,roundone_04.json

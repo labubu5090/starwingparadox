@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import random
 from typing import Any
 
 from app.protocol.codec import encode_length_prefix
@@ -28,6 +29,10 @@ except ImportError:
 
 _match_counter = 10000
 
+# Normal-mode stages present in StageTable.csv (ModeID=0) whose assets exist
+# on disk. The client always asks for 10000, but we rotate so matches vary.
+_NORMAL_STAGE_IDS = [10000, 10100, 10102, 10202, 11100, 11200, 12100, 12200, 13100]
+
 
 def _next_match_id() -> int:
     global _match_counter
@@ -35,22 +40,33 @@ def _next_match_id() -> int:
     return _match_counter
 
 
-def _build_player(player_id: int = 10010, buddy_id: int = 5) -> Any:
+def _build_player(
+    player_id: int = 10010,
+    buddy_id: int = 5,
+    card_id: int = 7020392000000000,
+    mac_address: int = 247207015480323,
+    player_name: str = "ArcadeMachinist",
+    location_id: int = 77,
+    location_name: str = "ZenGarden",
+) -> Any:
     """Build a Player matching the proven working legacy payload.
 
     The player's own team is the ONLY team in the match. With VsCPU=true the
     game generates the CPU opponents itself, so we only need to describe the
     human player's side (mirrors legacy-js/js/starwing.js NotifyMatchMade).
+
+    IMPORTANT: PlayerId MUST echo the requesting player's UserId, otherwise the
+    client logs "Not existence matching team my ID[...]" and fails the match.
     """
     p = pb.Player()
     p.PlayerId = player_id
-    p.MacAddress = 247207015480323
-    p.CardId = 7020392000000000
-    p.PlayerName = "ArcadeMachinist"
+    p.MacAddress = mac_address
+    p.CardId = card_id
+    p.PlayerName = player_name
     p.PlayerRank = 20
     p.BuddyId = buddy_id
-    p.LocationId = 77
-    p.LocationName = "ZenGarden"
+    p.LocationId = location_id
+    p.LocationName = location_name
     p.Intrude = False
     p.OfficialType = 0
     p.BurstGroupId = 0
@@ -91,17 +107,23 @@ def _make_entry_matching_response(packet_id: int, timeout: int = 30) -> bytes:
 def _make_notify_match_made(
     packet_id: int,
     match_id: int,
-    stage_id: int = 20001,
+    stage_id: int = 10000,
     game_mode: int = 0,
     match_mode: int = 0,
     num_cpu: int = 2,
     play_mode: int = 101,
+    player_id: int = 10010,
+    card_id: int = 7020392000000000,
+    mac_address: int = 247207015480323,
+    player_name: str = "ArcadeMachinist",
+    location_id: int = 77,
+    location_name: str = "ZenGarden",
 ) -> bytes:
     """Build NotifyMatchMade (302) reflecting the proven working VsCPU flow.
 
     Mirrors legacy-js/js/starwing.js: a single Team listing the human player
     (plus a buddy); VsCPU=true lets the client spawn CPU opponents. PlayMode
-    101, StageId 20001, StartState 1, MatchType 1.
+    101, StageId 10000, StartState 1, MatchType 1.
     """
     msg = pb.PbMessage()
     msg.packetId = packet_id
@@ -130,13 +152,20 @@ def _make_notify_match_made(
     player_team.PlayerCount = num_cpu
     player_team.PinchLevel = 0
     player_team.Force = 0
-    player_team.Player.append(_build_player())
+    player_team.Player.append(_build_player(
+        player_id=player_id,
+        card_id=card_id,
+        mac_address=mac_address,
+        player_name=player_name,
+        location_id=location_id,
+        location_name=location_name,
+    ))
     if num_cpu > 1:
         player_team.Player.append(_build_buddy())
 
     nmm.ds.ServerId = 6789
     nmm.ds.State = 1
-    nmm.ds.address = "192.168.0.55"
+    nmm.ds.address = ""
     nmm.ds.version = "70571"
     nmm.ds.language = "0"
 
@@ -156,12 +185,21 @@ def _make_notify_match_begin(packet_id: int, match_id: int) -> bytes:
     return encode_length_prefix(msg.SerializeToString())
 
 
-def _make_notify_match_open(packet_id: int, match_id: int) -> bytes:
-    """Build NotifyMatchOpen (601) frame."""
+def _make_response_join_matching(packet_id: int, result: int = 0) -> bytes:
+    """Build ResponseJoinMatching (207) frame.
+
+    Mirrors the game binary schema:
+        message ResponseJoinMatching {
+            int64 messageId = 1;
+            int32 result = 2; // 0 OK_Joined, 1 NG_EndBattle, 2 NG_ServerError
+        }
+    """
     msg = pb.PbMessage()
     msg.packetId = packet_id
-    msg.messageType = 601
-    msg.NotifyMatchOpen.MatchId = match_id
+    msg.messageType = 207
+    resp = msg.ResponseJoinMatching
+    resp.messageId = packet_id
+    resp.result = result
     return encode_length_prefix(msg.SerializeToString())
 
 
@@ -183,18 +221,28 @@ async def handle_entry_matching(
         logger.error("Cannot handle matching: protobuf not available")
         return None
 
-    request = pb.RequestEntryMatching()
     try:
-        request.ParseFromString(raw_payload)
+        envelope = pb.PbMessage()
+        envelope.ParseFromString(raw_payload)
     except Exception as e:
-        logger.warning("Failed to parse RequestEntryMatching: %s", e)
+        logger.warning("Failed to parse RequestEntryMatching envelope: %s", e)
+        envelope = pb.PbMessage()
 
-    stage_id = getattr(request, "StageId", 0) or 20001
+    request = envelope.RequestEntryMatching
+
+    stage_id = getattr(request, "StageId", 0) or 10000
+    # Rotate maps: when the client asks for the default stage (10000), pick a
+    # random normal stage so the user does not play the same map every match.
+    if stage_id == 10000:
+        stage_id = random.choice(_NORMAL_STAGE_IDS)
     game_mode = getattr(request, "GameMode", 0) or 0
     match_mode = getattr(request, "MatchMode", 0) or 0
     play_mode = getattr(request, "PlayMode", 0) or 101
     user_id = getattr(request, "UserId", 0)
     card_id = getattr(request, "CardId", 0)
+    mac_address = getattr(request, "MacAddress", 0)
+    location_id = getattr(request, "LocationId", 0) or 77
+    location_name = getattr(request, "LocationName", "") or "ZenGarden"
 
     logger.info(
         "RequestEntryMatching: userId=%d cardId=%d stageId=%d gameMode=%d matchMode=%d",
@@ -223,6 +271,12 @@ async def handle_entry_matching(
                 match_mode=match_mode,
                 num_cpu=1,
                 play_mode=play_mode,
+                player_id=user_id or 10010,
+                card_id=card_id,
+                mac_address=mac_address,
+                player_name="Player%d" % user_id if user_id else "ArcadeMachinist",
+                location_id=location_id,
+                location_name=location_name,
             )
             writer.write(made_frame)
             await writer.drain()
@@ -261,6 +315,30 @@ async def handle_join_matching(
 ) -> bytes | None:
     """Handle RequestJoinMatching (206)."""
     logger.info("RequestJoinMatching received")
+    if not HAS_PB:
+        return None
+
+    envelope = pb.PbMessage()
+    try:
+        envelope.ParseFromString(raw_payload)
+    except Exception as e:
+        logger.warning("Failed to parse RequestJoinMatching envelope: %s", e)
+        return None
+
+    request = envelope.RequestJoinMatching
+    # RequestJoinMatching schema (per game binary): id=1, matchId=2
+    match_id = getattr(request, "matchId", 0) or _next_match_id()
+    logger.info("RequestJoinMatching: MatchId=%d", match_id)
+
+    if writer is not None:
+        try:
+            open_frame = _make_response_join_matching(packet_id, result=0)
+            writer.write(open_frame)
+            await writer.drain()
+            logger.info("Sent ResponseJoinMatching (207) matchId=%d result=0(OK_Joined)", match_id)
+        except Exception as e:
+            logger.error("Error sending ResponseJoinMatching: %s", e)
+
     return None
 
 
@@ -304,7 +382,7 @@ async def handle_change_burst_group_mode(
     resp = msg.ResponseChangeBurstGroupMode
     resp.messageId = packet_id
     resp.Result = 0
-    resp.StageId = 200000
+    resp.StageId = 10000
     return encode_length_prefix(msg.SerializeToString())
 
 

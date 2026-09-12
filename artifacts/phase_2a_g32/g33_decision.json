@@ -1,6 +1,0 @@
-﻿{
-  "phase": "G32",
-  "g33_decision": "SAFE_MATCHING_INITIALIZATION_FOUNDATION",
-  "reason": "MatchingServer object requires NesysControl initialization. IsOnline[0] indicates NESYS not ready. Need to understand what initializes the MatchingServer object.",
-  "recommended_action": "Investigate MatchingServer object initialization path in IDA"
-}

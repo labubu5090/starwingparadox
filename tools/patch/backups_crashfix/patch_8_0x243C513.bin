@@ -1,0 +1,6 @@
+{
+  "file_offset": "0x243c513",
+  "original_bytes": "7460",
+  "exe_sha256": "ce4c89054bf7c4d833ee8af455a485ac401eead12a80ffc077663a768fd47dc4",
+  "note": "Relay outer SP-pack jz (CF13): target loc_14243CF75 -> CF78 (post-patch skip point)"
+}

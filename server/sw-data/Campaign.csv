@@ -1,3 +1,2 @@
----,CampaignId,CampaignName,CampaignTypeId,CampaignItemId,BeginAt,EndAt
-1,CampaignNormal,1,1,2020-01-01 00:00:00,2039-01-01 06:00:00
-2,CampaignLogin,2,2,2020-01-01 00:00:00,2039-01-01 06:00:00
+---,CampaignId,CampaignName,BeginAt,EndAt,CampaignTypeId,CampaignItemId
+1,1,ナギの誕生日キャンペーン,2019-12-24 08:00:00,2019-12-27 06:00:00,1,5

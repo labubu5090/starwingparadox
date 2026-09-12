@@ -14,6 +14,7 @@ from app.api.health import router as health_router
 from app.api.local_profile import router as local_profile_router
 from app.api.matching import router as matching_router
 from app.api.mission import router as mission_router
+from app.api.offline import router as offline_router
 from app.api.player import router as player_router
 from app.api.ranking import router as ranking_router
 from app.api.resource import router as resource_router
@@ -74,3 +75,10 @@ app.include_router(credit_router)
 app.include_router(tutorial_router)
 app.include_router(battle_router)
 app.include_router(local_profile_router)
+app.include_router(offline_router)
+
+
+@app.post("/{path:path}")
+async def fallback_post(path: str):
+    """Return empty JSON for any unimplemented POST endpoint."""
+    return {}

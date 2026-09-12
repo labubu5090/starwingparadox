@@ -1,9 +1,0 @@
-﻿{
-  "phase": "G26",
-  "timestamp": "2026-08-29T17:49:30.000+08:00",
-  "initial_credits": 0,
-  "required_credits": 2,
-  "credit_type": "NONE",
-  "source": "UMachineDataWork::ResetCredit / all[0]",
-  "note": "G25 did not press Z - credits were zero"
-}

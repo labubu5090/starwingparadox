@@ -1,0 +1,133 @@
+---,LowRankId,HighRankId,TitleText,TexturePath,InfoText,Condition,ModeId,GameModeId,ActiveFlag,TypeId
+0,0,0,-,,,0,1,0,False,0
+1,1,0,チームゲージの減らし方,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_01.Tex_Tips_01',チームゲージは敵コアへの直接攻撃、敵ＡＲの撃破で減少する。\nコアの破壊は、コアへの直接攻撃でのみできる。,0,1,0,True,0
+2,1,0,占拠ゲージの上昇,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_02.Tex_Tips_02',占拠ゲージはポート内の味方ＡＲが多いほど早く上昇する。\n敵ＡＲ、味方ＡＲの数が拮抗していると変動しない。,0,1,0,True,0
+3,2,0,アサルトの性能（１）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_03.Tex_Tips_03',フルドライブの継続時間が長くなり、速度も上がる。\nまた、ロックオン距離延長が付与される。,0,1,0,True,3
+4,2,0,アサルトの性能（２）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_79.Tex_Tips_79',敵チームに制圧されているポートを、中立に戻す速度が早い。,0,1,0,True,3
+5,2,0,ヴァンガードの性能,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_04.Tex_Tips_04',ポート占拠力が高くなり、拮抗状態でも占拠ができる。\nまた、回避のブースト消費量減少が付与される。,0,1,0,True,3
+6,2,0,サポートの性能（１）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_05.Tex_Tips_05',マップ上で瀕死状態の味方ＡＲが点滅するようになる。\nまた、ロックオンエリア拡大と帰還時間短縮が付与される。,0,1,0,True,3
+7,2,0,サポートの性能（２）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_80.Tex_Tips_80',味方ＡＲと共にポートにいる際、占拠速度が早くなる。,0,1,0,True,3
+8,2,0,アーマー値と耐久値,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_06.Tex_Tips_06',アーマー値は攻撃されると耐久値の代わりに減る。０の状態で\n攻撃されると耐久値が減り、耐久値が０になると撃破される。,0,1,0,True,0
+9,3,0,エンブレム,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_07.Tex_Tips_07',カスタマイズ可能なプレイヤーのシンボル。\n占拠したポートにエンブレムのフラッグが出現する。,0,1,0,True,3
+10,1,0,願掛け,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_08.Tex_Tips_08',出撃時、サブモニターでアズワンと願掛けをすることができる。,0,1,0,True,3
+11,2,0,マグ,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_09.Tex_Tips_09',常にフィールドに存在する小型エア・リアル。\nポートに突撃し占拠ゲージを上昇させる。また、敵コアも攻撃する。,0,1,0,True,0
+12,3,0,Sマグ,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_10.Tex_Tips_10',フェーズ２のチームに加勢する大型マグ。\nポートを経由し、敵ＡＲを攻撃する。また、敵コアも攻撃する。,0,1,0,True,0
+13,2,0,サブモニターの画面切り替え,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_11.Tex_Tips_11',対戦中、サブモニターに表示されている情報を変更したい時\nタブを選択すると、マップやスコア一覧等の情報に変更できる。,0,1,0,True,1
+14,3,0,DePS,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_12.Tex_Tips_12',共に戦うことで上昇するアズワンとの共感度。\n深くなるに連れてアズワンの意外な一面を見ることができる。,0,1,0,True,3
+15,2,0,エア・グランデ（1）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_13.Tex_Tips_13',フェーズ３のチームに加勢する巨大エア・リアル。\n進行中にいる敵を攻撃し、敵コアに辿り着くとコアを攻撃する。,0,1,0,True,0
+16,2,0,エア・グランデ（2）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_14.Tex_Tips_14',エア・グランデの耐久値を25％減らすたびに\nコアへの攻撃力が減少するので、諦めずに攻撃しよう。,0,1,0,True,0
+17,2,0,ポートの占拠数,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_15.Tex_Tips_15',ポートを３つ占拠する事が、勝利の鍵。\n敵のいないポートは占拠チャンスなので、マップを意識しよう。,0,30,0,True,0
+18,2,0,タワー,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_16.Tex_Tips_16',コアやポートの近くに防衛砲台として存在。\n近づいた敵を攻撃する。,0,1,0,True,0
+19,2,0,ナイスプレイ,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_17.Tex_Tips_17',対戦中、勝利につながる行動、上手いプレイをすると獲得できる。\n獲得した分はスコアに加算され、ランクポイントアップに繋がる。,0,30,0,True,0
+20,1,0,ブーストゲージ,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_18.Tex_Tips_18',ブーストダッシュやジャンプなどで消費するゲージ。\n一定時間経過で回復する。行動によって消費するゲージ量が異なる。,0,1,0,True,1
+21,1,0,フルドライブゲージ,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_19.Tex_Tips_19',フルドライブ中、減少するゲージ。一定時間経過で回復する。\nゲージが最大でないとフルドライブできない。,0,1,0,True,1
+22,2,0,オーバーヒート,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_20.Tex_Tips_20',ブーストゲージが０の状態。\n一定時間ブーストゲージを消費する行動ができなくなる。,0,1,0,True,1
+23,2,0,ターゲットライン,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_21.Tex_Tips_21',ロックオンされると表示される矢印。状況によって色が変化する。,0,1,0,True,0
+24,2,0,ロックオンカーソルの種類,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_22.Tex_Tips_22',自分の攻撃範囲内に標的を捉えたら、表示されるようになる。\nロックオンした武器や対象によって形が変化する。,0,1,0,True,0
+25,2,0,リロードタイプ,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_23.Tex_Tips_23',武器によってリロードの性質が異なる。\n弾切れでリロード、常時リロードの２種類がある。,0,1,0,True,0
+26,1,0,操作モードの変更,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_24.Tex_Tips_24',簡単操作のスタンダードか、操作の幅が広いテクニカル\nどちらかをオプションで選択できる。,0,1,0,True,1
+27,2,0,アシスト表示,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_25.Tex_Tips_25',敵コアに攻撃できる状態になると表示される矢印。\nオプションで表示非表示を切り替えられる。,0,1,0,True,3
+28,1,0,操作方法,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_26.Tex_Tips_26',※スタンダードモードの操作ガイドを表示,1,1,0,True,1
+29,1,0,操作方法,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_27.Tex_Tips_27',※テクニカルモードの操作ガイドを表示,2,1,0,True,1
+30,4,0,チームレベルと上げ方,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_28.Tex_Tips_28',敵ＡＲやマグの撃破によって上昇するチームのレベル。\nレベルによって、チームメンバーの攻撃力が上昇する。,0,30,0,True,0
+31,3,0,アズワンスキル,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_29.Tex_Tips_29',アズワン毎に持つ特殊なスキル。\n規定のチームレベルに達すると発動し、自機に能力を付与する。,0,1,0,True,3
+32,2,0,帰還中の注意,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_30.Tex_Tips_30',帰還中は無防備になり攻撃されやすい。安全な場所で帰還しよう。,0,1,0,True,1
+33,2,0,効果的な武器,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_31.Tex_Tips_31',ビーム武器は貫通効果があり、マグやタワーに対して効果的。\nまた、格闘武器はシールドで防がれない。,0,1,0,True,0
+34,2,0,クリティカルロックオン,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_32.Tex_Tips_32',敵ＡＲをクリティカルエリアに捉えて攻撃すると\n誘導性能が上がり、ＨＩＴがＣＲＩＴＩＣＡＬと表示される。,0,1,0,True,1
+35,2,0,ホーミングアラート,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_33.Tex_Tips_33',誘導性能が高い弾に狙われるとアラートが表示される。\n落ち着いて「回避」で避けよう。,0,1,0,True,1
+36,3,0,王冠アイコン,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_34.Tex_Tips_34',その対戦で現在スコアが高い上位３名に表示されるアイコン。,0,1,0,True,3
+37,3,0,チャット,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_35.Tex_Tips_35',チャットボタンをタッチして味方とコミュニケーションを取ろう。,0,1,0,True,3
+38,3,0,シンボルチャット,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_36.Tex_Tips_36',特定のマップアイコンをタッチするとシンボルチャットができる。\nフリック操作もでき、素早く戦術を伝えられる。,0,1,0,True,3
+39,2,0,マップアイコンの種類,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_37.Tex_Tips_37',マップアイコンは色によって敵味方を見分けられる。\nまた、ロールアイコンは各プレイヤーが使用中のロールを示す。,0,1,0,True,0
+40,2,0,フルドライブ中にできること,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_38.Tex_Tips_38',フルドライブ中でも武器切り替えができる。\nまた、特定の武器では攻撃もできる。,0,1,0,True,1
+41,2,0,ドリフト,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_39.Tex_Tips_39',フルドライブ中に左ペダルを踏みレバーを左右どちらかに倒すと\n急旋回できる。,0,1,0,True,1
+42,2,0,壁蹴り（テクニカル）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_40.Tex_Tips_40',壁付近で左ペダルを踏むと壁を蹴り、普段より速くジャンプする。\n壁を背にした時はできない。テクニカルモードでのみ操作できる。,2,1,0,True,1
+43,2,0,ホバリング（テクニカル）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_41.Tex_Tips_41',空中で左ボタンを押している間、その場で空中停滞する。\nテクニカルモードでのみ操作可能。,2,1,0,True,1
+44,2,0,ブースト操作の継続,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_42.Tex_Tips_42',ブーストダッシュとジャンプの操作後、ペダルを踏み続けると\nブーストゲージを消費せず移動操作を継続できる。,0,1,0,True,1
+45,2,0,高速旋回,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_43.Tex_Tips_43',左右のレバーを内側に倒し続けると左に、外側に倒し続けると右に\n高速で旋回できる。,0,1,0,True,1
+46,2,0,回避方向,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_44.Tex_Tips_44',左レバーを倒しながら回避操作をすると、その方向に回避する。\n回避はもちろん、敵との距離を詰めるなどにも使える。,0,1,0,True,1
+47,2,0,武器切り替え,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_45.Tex_Tips_45',ホイールを回すと、１ｓｔと２ｎｄの武器を切り替えられる。\n弾切れになったら武器を切り替えよう。,0,1,0,True,1
+48,3,0,エンブレム貼り付け,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_46.Tex_Tips_46',ロールカスタマイズのアーム選択で\nエア・リアルに自分のエンブレムを貼ることができる。,0,1,0,True,3
+49,4,0,状態異常 ジャミング,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_47.Tex_Tips_47',一定時間　一切ロックオンができなくなり、\nマップも見ることができなくなる。,0,1,0,True,3
+50,4,0,状態異常 炎上,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_48.Tex_Tips_48',一定時間　ダメージを受け続ける。\nこのダメージはアーマーで防ぐことができない。,0,1,0,True,3
+51,2,0,アズワンストーリー,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_49.Tex_Tips_49',「星翼ナビ」でアズワンとのストーリーを見ることができる。\nクエストクリアやＤｅＰＳを高めることで解放される。,0,1,0,True,3
+52,1,0,プレイングマニュアル,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_50.Tex_Tips_50',オフィシャルサイトでプレイングマニュアルを公開中！,0,1,0,True,3
+53,3,0,ポートを守ろう,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_51.Tex_Tips_51',コアを攻撃しても、ポートを取り返されていると無効になる。\n味方と連携し、自分はポートを守るという判断も大切だ。,0,1,0,True,0
+54,99,99,新武器：ボンバルド,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_52.Tex_Tips_52',アサルトの左手武器。\n火柱を順次発生させる投擲爆弾。,0,1,0,False,0
+55,99,99,新武器：ブーメラング,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_53.Tex_Tips_53',ヴァンガードの左手武器。\nブーメランを飛ばし、相手をひるませる事ができる。,0,1,0,False,0
+56,99,99,新武器：エレクトリット,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_54.Tex_Tips_54',サポートの左手武器。\n巨大なネットを張り、敵を一定時間動けなくする,0,1,0,False,0
+57,99,99,新武器：ファイアサイス,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_63.Tex_Tips_63',アサルトの両手武器。\n銃による射撃と、鎌による斬撃ができる。,0,1,0,False,0
+58,99,99,新武器：ブラックスミス,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_64.Tex_Tips_64',ヴァンガードの両手武器。\n爆風を伴う榴弾を撃て、強力なハンマー攻撃ができる。,0,1,0,False,0
+59,99,99,新武器：エステジオン・ボム,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_65.Tex_Tips_65',サポートの両手武器。\nサブモニターから指定箇所に範囲爆撃を行う事ができる。,0,1,0,False,0
+60,99,99,新武器：O.G グングニル,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_66.Tex_Tips_66',アサルトの両手武器。\n超大型のレーザービームを照射する。,0,1,0,False,0
+61,99,99,新武器：機関砲 騎神,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_67.Tex_Tips_67',アサルトの両手武器。\n弾数が多く、連射性能の高い実弾を撃つ。,0,1,0,False,0
+62,99,99,新武器：インパルスショット,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_68.Tex_Tips_68',アサルトの左手武器。\n怯み効果のある弾を撃つ。,0,1,0,False,0
+63,99,99,新武器：飛翔拳　双天,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_69.Tex_Tips_69',ヴァンガードの両手武器。\n左右から 誘導性能が高いパンチを撃つ。,0,1,0,False,0
+64,99,99,新武器：マーノムガン,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_70.Tex_Tips_70',ヴァンガードの左手武器。\n連射性能の高いビーム銃。,0,1,0,False,0
+65,99,99,新武器：火炎砲　散華,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_71.Tex_Tips_71',ヴァンガードの右手武器。\n炎上効果のある炎を放射する。,0,1,0,False,0
+66,99,99,新武器：テレ・ヴ二ール,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_72.Tex_Tips_72',サポートの右手武器。\nテレポート先を設置し、そこへ瞬間移動できるようにする。,0,1,0,False,0
+67,99,99,新武器：メディク,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_73.Tex_Tips_73',サポートの左手武器。\nアーマー回復効果のある回復弾を発射する。,0,1,0,False,0
+68,99,99,新武器：インパルスシュート,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_74.Tex_Tips_74',サポートの左手武器。\n怯み効果のある弾を撃つ。,0,1,0,False,0
+69,3,0,公式プレイヤー,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_75.Tex_Tips_75',公式プレイヤーと遭遇するといいことがあるかも？\n（詳細は公式サイトをチェックしよう）,0,1,0,True,3
+70,1,0,キザナ共闘戦線　遊び方１,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_90.Tex_Tips_90',敵フェーズ１・２ではポートを３つ占拠し、\n敵コアにダメージを与えて、フェーズ３を目指す。,0,20,0,True,0
+71,1,0,キザナ共闘戦線　遊び方２,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_91.Tex_Tips_91',敵フェーズ３では、敵エースとの対決になる。\n敵エースを倒すことで、敵コアへ攻撃することができる。,0,20,0,True,0
+72,1,0,敵エース（フェーズ２）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_92.Tex_Tips_92',キザナ共闘戦線の敵フェーズ２から登場する。\n通常のARより高い攻撃力と耐久力を持つ。,0,20,0,True,0
+73,1,0,敵エース（フェーズ３）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_93.Tex_Tips_93',敵エースは、味方コアに甚大なダメージを与える攻撃をする。\n敵エースにダメージを与えて、コアへの攻撃を阻止しよう。,0,20,0,True,0
+74,1,0,Xマグ,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_94.Tex_Tips_94',フェーズ３で敵エースが一定のダメージを受けると呼び出す。\n様々な攻撃で妨害してくるので、味方と連携しよう。,0,20,0,True,0
+75,1,0,敵エースの特性（フェーズ３）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_95.Tex_Tips_95',格闘などの近距離攻撃は敵エースへの有効打になる。\nすきを見て、大ダメージを狙おう。,0,20,0,True,0
+76,1,0,勝敗について,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0076.Tex_Tips_2on2_0076',チームゲージは敵ARを撃破することで減少する。\nチームゲージの多いほうが勝利となる。,0,1,1,True,0
+77,1,0,エンブレム,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0077.Tex_Tips_2on2_0077',カスタマイズ可能なプレイヤーのシンボル。\n勝利した際にエンブレムのフラッグが出現する。,0,1,1,True,3
+78,1,0,願掛け,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_08.Tex_Tips_08',出撃時、サブモニターでアズワンと願掛けをすることができる。,0,1,1,True,3
+79,1,0,サブモニターの画面切り替え,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0079.Tex_Tips_2on2_0079',対戦中、サブモニターに表示されている情報を変更したい時タブを\n選択すると、プレイヤーやスペシャルウェポンの情報に変更できる。,0,1,1,True,3
+80,1,0,DePS,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0080.Tex_Tips_2on2_0080',共に戦うことで上昇するアズワンとの共感度。\n深くなるに連れてアズワンの意外な一面を見ることができる。,0,1,1,True,3
+81,1,0,ブーストゲージ,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_18.Tex_Tips_18',ブーストダッシュやジャンプなどで消費するゲージ。\n一定時間経過で回復する。行動によって消費するゲージ量が異なる。,0,1,1,True,1
+82,1,0,フルドライブゲージ,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_19.Tex_Tips_19',フルドライブ中、減少するゲージ。一定時間経過で回復する。\nゲージが最大でないとフルドライブできない。,0,1,1,True,1
+83,1,0,オーバーヒート,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_20.Tex_Tips_20',ブーストゲージが0の状態。\n一定時間ブーストゲージを消費する行動ができなくなる。,0,1,1,True,1
+84,1,0,ターゲットライン,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_21.Tex_Tips_21',ロックオンされると表示される矢印。状況によって色が変化する。,0,1,1,True,0
+85,1,0,ロックオンカーソルの種類,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0085.Tex_Tips_2on2_0085',自分の攻撃範囲内に標的を捉えたら、表示されるようになる。\nロックオンした武器や状態によって形が変化する。,0,1,1,True,0
+86,1,0,操作モードの変更,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0086.Tex_Tips_2on2_0086',簡単操作のスタンダードか、操作の幅が広いテクニカル\nどちらかをオプションで選択できる。,0,1,1,True,1
+87,1,0,操作方法,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_26.Tex_Tips_26',※スタンダードモードの操作ガイドを表示,1,1,1,True,1
+88,1,0,操作方法,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_27.Tex_Tips_27',※テクニカルモードの操作ガイドを表示,2,1,1,True,1
+89,1,0,クリティカルロックオン,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_32.Tex_Tips_32',敵ARをクリティカルエリアに捉えて攻撃すると\n誘導性能が上がり、HITがCRITICALと表示される。,0,1,1,True,1
+90,1,0,ホーミングアラート,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_33.Tex_Tips_33',誘導性能が高い弾に狙われるとアラートが表示される。\n落ち着いて「回避」で避けよう。,0,1,1,True,1
+91,1,0,チャット,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0091.Tex_Tips_2on2_0091',チャットボタンをタッチして味方とコミュニケーションを取ろう。,0,1,1,True,3
+92,1,0,マップアイコンの種類,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0092.Tex_Tips_2on2_0092',マップアイコンは色によって敵味方を見分けられる。,0,1,1,True,0
+93,1,0,フルドライブ中にできること,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_38.Tex_Tips_38',フルドライブ中でも武器切り替えができる。\nまた、特定の武器では攻撃もできる。,0,1,1,True,1
+94,1,0,ドリフト,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_39.Tex_Tips_39',フルドライブ中に左ペダルを踏みレバーを左右どちらかに倒すと\n急旋回できる。,0,1,1,True,1
+95,1,0,壁蹴り（テクニカル）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_40.Tex_Tips_40',壁付近で左ペダルを踏むと壁を蹴り、普段より速くジャンプする。\n壁を背にした時はできない。テクニカルモードでのみ操作できる。,2,1,1,True,1
+96,1,0,ホバリング（テクニカル）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_41.Tex_Tips_41',空中で左ボタンを押している間、その場で空中停滞する。\nテクニカルモードでのみ操作可能。,2,1,1,True,1
+97,1,0,ブースト操作の継続,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_42.Tex_Tips_42',ブーストダッシュとジャンプの操作後、ペダルを踏み続けると\nブーストゲージを消費して移動操作を継続する。,0,1,1,True,1
+98,1,0,高速旋回,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_43.Tex_Tips_43',左右のレバーを内側に倒し続けると左に、外側に倒し続けると右に\n高速で旋回できる。,0,1,1,True,1
+99,1,0,回避方向,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_44.Tex_Tips_44',左レバーを倒しながら回避操作をすると、その方向に回避する。\n回避はもちろん、敵との距離を詰めるなどにも使える。,0,1,1,True,1
+100,1,0,武器切り替え,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_45.Tex_Tips_45',ホイールを回すと、1stと2ndの武器を切り替えられる。\n弾切れになったら武器を切り替えよう。,0,1,1,True,1
+101,1,0,エンブレム貼り付け,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0101.Tex_Tips_2on2_0101',エア・リアルカスタマイズのエンブレムで\nエア・リアルに自分のエンブレムを貼ることができる。,0,1,1,True,3
+102,1,0,状態異常 ジャミング,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0102.Tex_Tips_2on2_0102',一定時間　一切ロックオンができなくなり、\nマップも見ることができなくなる。,0,1,1,True,3
+103,1,0,状態異常 炎上,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0103.Tex_Tips_2on2_0103',一定時間　ダメージを受け続ける。炎上によるダメージでは\n耐久値が1残り撃墜されない。回避行動で軽減できる。,0,1,1,True,3
+104,1,0,プレイングマニュアル,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_50.Tex_Tips_50',オフィシャルサイトでプレイングマニュアルを公開中！,0,1,1,True,3
+105,1,0,公式プレイヤー,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0105.Tex_Tips_2on2_0105',公式プレイヤーと遭遇するといいことがあるかも？\n（詳細は公式サイトをチェックしよう）,0,1,1,True,3
+106,1,0,クロスバースト,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0106.Tex_Tips_2on2_0106',バースト状態の敵を撃ち落とすことで大ダメージを\n与えられる。積極的に狙っていこう。,0,1,1,True,0
+107,1,0,耐久値とバーストゲージ,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0107.Tex_Tips_2on2_0107',被弾によってゲージが減少する。バーストゲージは\n時間経過によって徐々に回復する。,0,1,1,True,0
+108,1,0,バースト状態,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0108.Tex_Tips_2on2_0108',バーストゲージが0になると、バースト状態になり上空に\n撃ち上がる。耐久値が低い機体はバースト状態になりやすい。,0,1,1,True,0
+109,1,0,効果的な武器（１）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0109.Tex_Tips_2on2_0109',バースト武器は敵をバースト状態にしやすい。\nクロスバースト武器はクロスバーストダメージが高い。,0,1,1,True,0
+110,1,0,効果的な武器（２）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0110.Tex_Tips_2on2_0110',近ければ近いほどダメージが増幅する（上限有り）,0,1,1,True,0
+111,1,0,ウェポンパック,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0111.Tex_Tips_2on2_0111',1つの機体が複数のウェポンパックを使用可能で、\nブリーフィングで1つ選択する。,0,1,1,True,0
+112,1,0,スペシャルウェポン（１）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0112.Tex_Tips_2on2_0112',時間経過によってリロードされ、\nSPボタンを押すことでSPウェポンを使用できる。,0,1,1,True,2
+113,1,0,スペシャルウェポン（２）,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0113.Tex_Tips_2on2_0113',チームゲージが50%以下でLv.2になり、\n25%以下で、Lv.3になる。,0,1,1,True,2
+114,1,0,状態異常 氷結,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0114.Tex_Tips_2on2_0114',一定時間　回避行動を行うことができず、\n移動性能が制限される。,0,1,1,True,3
+115,1,0,リロードタイプ,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0115.Tex_Tips_2on2_0115',攻撃するとリロードがリセットされるタイプと\n常時リロードされるタイプの2種類がある。,0,1,1,True,0
+116,1,0,フルドライブホーミング,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0116.Tex_Tips_2on2_0116',フルドライブ中ロックオンしている敵に対して\n追尾し、敵を中央に捉えられる。,0,1,1,True,1
+117,1,0,フルドライブ中の格闘攻撃,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0117.Tex_Tips_2on2_0117',フルドライブ中に格闘武器で攻撃を行うと\n高速移動から格闘攻撃に移行できる。,0,1,1,True,1
+118,1,0,機体効果,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0118.Tex_Tips_2on2_0118',各機体にはそれぞれ専用の機体効果がある。\n機体効果が発動すると、アイコンが点灯する。,0,1,1,True,0
+119,1,0,高度の維持,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0119.Tex_Tips_2on2_0119',ダッシュ中はブーストゲージが減り続ける。\n高度を維持することが重要となる。,0,1,1,True,1
+120,1,0,ダブルロックオン,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0121.Tex_Tips_2on2_0121',味方が自分と同じ敵を狙っている表示。矢印の向きによって\n味方がどこから狙っているか把握できる。,0,1,1,True,0
+121,1,0,ミッション,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0120.Tex_Tips_2on2_0120',クリア条件を達成することで、称号やエンブレムなど\nカスタマイズアイテムを獲得することができます。,0,1,1,True,3
+122,1,0,状態異常 氷結,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0114.Tex_Tips_2on2_0114',一定時間　回避行動を行うことができず、\n移動性能が制限される。,0,1,0,True,3
+123,1,0,ミッション,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0120.Tex_Tips_2on2_0120',クリア条件を達成することで、称号やエンブレムなど\nカスタマイズアイテムを獲得することができます。,0,1,0,True,3
+124,1,0,レヴォルフィア,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0125.Tex_Tips_2on2_0125',ダウン性能を持つ、巨大なビーム弾を発射する。\n接近してくる敵や、バースト状態の敵に大ダメージを与えよう。,0,1,1,True,2
+125,1,0,シエライトレーザー,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0123.Tex_Tips_2on2_0123',敵の上空からレーザー砲を発射する。\n敵が動きを止める瞬間を見極め、攻撃しよう。,0,1,1,True,2
+126,1,0,繚乱爆弾 泡沫,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0122.Tex_Tips_2on2_0122',怯み性能を持つ、泡状の弾を発射する。\n長時間停滞するため、敵の足止めや罠として活用しよう。,0,1,1,True,2
+127,1,0,テンペスト・リヴァ,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0126.Tex_Tips_2on2_0126',前方に進む竜巻を発生させヒットした敵の移動速度を低下させる。\n敵の移動性能を落として、他の武器とのコンボを狙おう。,0,1,1,True,2
+128,1,0,レイスレイヴXt-Z,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0129.Tex_Tips_2on2_0129',攻撃と回復を行う、自動射撃装置を展開する。\n味方の付近で戦闘し、効果を最大限活かそう。,0,1,1,True,2
+129,1,0,イヴフィールド,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0124.Tex_Tips_2on2_0124',衝撃波を展開し、ヒットした敵を吹き飛ばす。\n格闘武器や、近距離で戦闘を仕掛けてくる敵に有効。,0,1,1,True,2
+130,1,0,シールドヴァイト-X,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0128.Tex_Tips_2on2_0128',全方位シールドを展開する。\n展開時間が短いため、敵の攻撃を見極めて使おう。,0,1,1,True,2
+131,1,0,デウステルス,Texture2D'/Game/GUI/OutGame/Tips/Tex/Tex_Tips_2on2_0127.Tex_Tips_2on2_0127',一定時間透明化し、敵に機体情報が表示されない。\n敵に奇襲をかけたり、遠距離からの攻撃を狙おう。,0,1,1,True,2

@@ -1,0 +1,12 @@
+---,Id,ItemName,ItemText,Asset,Texture,IsPutItem,ReactionId,DePSPoint,AnnualEventId,EffectId,Release
+0,0,,,None,None,0,SELECT,20,0,0,999
+1,1,うさぎ,うさぎのぬいぐるみ,None,None,0,SELECT,20,0,0,90
+2,2,アイテム名,アイテムの説明文,None,None,0,SELECT,20,0,0,90
+3,3,アイテム名,アイテムの説明文,None,None,0,SELECT,20,0,0,90
+4,4,アイテム名,アイテムの説明文,None,None,0,SELECT,20,0,0,90
+5,5,アイテム名,アイテムの説明文,None,None,0,SELECT,20,0,0,999
+6,6,アイテム名,アイテムの説明文,None,None,0,SELECT,20,0,0,999
+7,7,アイテム名,アイテムの説明文,None,None,0,SELECT,20,0,0,999
+8,8,アイテム名,アイテムの説明文,None,None,0,SELECT,20,0,0,999
+9,9,アイテム名,アイテムの説明文,None,None,0,SELECT,20,0,0,999
+10,10,アイテム名,アイテムの説明文,None,None,0,SELECT,20,0,0,999

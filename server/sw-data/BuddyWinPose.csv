@@ -1,0 +1,97 @@
+---,BuddyWinPoseId,BuddyWinPoseName,BuddyId,WinPoseId,Texture,Description,IsDefault,MotionName,HasFlag,RotY,RotZ,GameModeId
+1,1001,共通　旗あり,1,1,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common02.Tex_ARCustomize_WinPose_Common02',共通勝利ポーズ,True,81540,1,0,180,0
+2,1002,共通　旗なし,1,2,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common01.Tex_ARCustomize_WinPose_Common01',共通勝利ポーズ,True,81550,0,0,180,0
+3,1003,一番星！　旗なし,1,3,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_hikari01.Tex_ARCustomize_WinPose_hikari01',ヒカリ用勝利ポーズ,False,81000,0,0,180,0
+4,1004,一番星！　旗あり,1,4,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_hikari02.Tex_ARCustomize_WinPose_hikari02',ヒカリ用勝利ポーズ,False,81010,1,0,180,0
+5,1005,ジャンプ！,1,5,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_hikari03.Tex_ARCustomize_WinPose_hikari03',ヒカリ用勝利ポーズ,False,81020,0,0,180,0
+6,1006,大歓喜,1,6,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_hikari04.Tex_ARCustomize_WinPose_hikari04',ヒカリ用勝利ポーズ,False,81030,1,180,180,0
+7,1007,ロボフラッグ,1,7,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_hikari05.Tex_ARCustomize_WinPose_hikari05',ヒカリ用勝利ポーズ,False,81040,1,180,180,0
+8,1008,ダブルピース！,1,8,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_hikari06.Tex_ARCustomize_WinPose_hikari06',ヒカリ用勝利ポーズ,False,81050,0,0,180,0
+9,2001,共通　旗あり,2,1,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common02.Tex_ARCustomize_WinPose_Common02',共通勝利ポーズ,True,81540,1,0,180,0
+10,2002,共通　旗なし,2,2,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common01.Tex_ARCustomize_WinPose_Common01',共通勝利ポーズ,True,81550,0,0,180,0
+11,2003,華麗,2,3,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_reika01.Tex_ARCustomize_WinPose_reika01',レイカ用勝利ポーズ,False,81060,0,0,180,0
+12,2004,敬礼,2,4,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_reika02.Tex_ARCustomize_WinPose_reika02',レイカ用勝利ポーズ,False,81070,1,0,180,0
+13,2005,優雅に翻す,2,5,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_reika03.Tex_ARCustomize_WinPose_reika03',レイカ用勝利ポーズ,False,81080,0,0,180,0
+14,2006,ジャンプ！,2,6,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_reika04.Tex_ARCustomize_WinPose_reika04',レイカ用勝利ポーズ,False,81090,1,0,180,0
+15,2007,大・勝利,2,7,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_reika05.Tex_ARCustomize_WinPose_reika05',レイカ用勝利ポーズ,False,81100,1,0,180,0
+16,2008,最の高！,2,8,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_reika06.Tex_ARCustomize_WinPose_reika06',レイカ用勝利ポーズ,False,81110,0,0,180,0
+17,3001,共通　旗あり,3,1,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common02.Tex_ARCustomize_WinPose_Common02',共通勝利ポーズ,True,81540,1,0,180,0
+18,3002,共通　旗なし,3,2,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common01.Tex_ARCustomize_WinPose_Common01',共通勝利ポーズ,True,81550,0,0,180,0
+19,3003,私が一番！,3,3,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_shirley01.Tex_ARCustomize_WinPose_shirley01',シャーリー用勝利ポーズ,False,81180,0,180,180,0
+20,3004,出直してきなさい,3,4,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_shirley02.Tex_ARCustomize_WinPose_shirley02',シャーリー用勝利ポーズ,False,81190,2,0,0,0
+21,3005,まだまだね,3,5,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_shirley03.Tex_ARCustomize_WinPose_shirley03',シャーリー用勝利ポーズ,False,81200,0,0,180,0
+22,3006,大勝利！,3,6,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_shirley04.Tex_ARCustomize_WinPose_shirley04',シャーリー用勝利ポーズ,False,81210,2,0,0,0
+23,3007,めっちゃ嬉しいべ,3,7,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_shirley05.Tex_ARCustomize_WinPose_shirley05',シャーリー用勝利ポーズ,False,81220,1,0,180,0
+24,3008,負ける気がしねぇべ,3,8,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_shirley06.Tex_ARCustomize_WinPose_shirley06',シャーリー用勝利ポーズ,False,81230,0,0,180,0
+25,4001,共通　旗あり,4,1,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common02.Tex_ARCustomize_WinPose_Common02',共通勝利ポーズ,True,81540,1,0,180,0
+26,4002,共通　旗なし,4,2,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common01.Tex_ARCustomize_WinPose_Common01',共通勝利ポーズ,True,81550,0,0,180,0
+27,4003,余裕　旗なし,4,3,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_isadora01.Tex_ARCustomize_WinPose_isadora01',イサドラ用勝利ポーズ,False,81120,0,0,180,0
+28,4004,余裕　旗あり,4,4,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_isadora02.Tex_ARCustomize_WinPose_isadora02',イサドラ用勝利ポーズ,False,81130,1,0,180,0
+29,4005,妖艶,4,5,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_isadora03.Tex_ARCustomize_WinPose_isadora03',イサドラ用勝利ポーズ,False,81140,0,0,180,0
+30,4006,開放的,4,6,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_isadora04.Tex_ARCustomize_WinPose_isadora04',イサドラ用勝利ポーズ,False,81150,0,0,180,0
+31,4007,最高！,4,7,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_isadora05.Tex_ARCustomize_WinPose_isadora05',イサドラ用勝利ポーズ,False,81160,1,270,180,0
+32,4008,ミステリアス,4,8,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_isadora06.Tex_ARCustomize_WinPose_isadora06',イサドラ用勝利ポーズ,False,81170,0,0,180,0
+33,5001,共通　旗あり,5,1,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common02.Tex_ARCustomize_WinPose_Common02',共通勝利ポーズ,True,81540,1,0,180,0
+34,5002,共通　旗なし,5,2,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common01.Tex_ARCustomize_WinPose_Common01',共通勝利ポーズ,True,81550,0,0,180,0
+35,5003,当然の勝利　旗なし,5,3,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_nagi01.Tex_ARCustomize_WinPose_nagi01',ナギ用勝利ポーズ,False,81300,0,0,180,0
+36,5004,当然の勝利　旗あり,5,4,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_nagi02.Tex_ARCustomize_WinPose_nagi02',ナギ用勝利ポーズ,False,81310,1,0,180,0
+37,5005,もっと上を！,5,5,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_nagi03.Tex_ARCustomize_WinPose_nagi03',ナギ用勝利ポーズ,False,81320,0,0,180,0
+38,5006,確信,5,6,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_nagi04.Tex_ARCustomize_WinPose_nagi04',ナギ用勝利ポーズ,False,81330,2,0,0,0
+39,5007,ただ真っすぐに,5,7,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_nagi05.Tex_ARCustomize_WinPose_nagi05',ナギ用勝利ポーズ,False,81340,0,0,180,0
+40,5008,敬礼,5,8,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_nagi06.Tex_ARCustomize_WinPose_nagi06',ナギ用勝利ポーズ,False,81350,0,0,180,0
+41,6001,共通　旗あり,6,1,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common02.Tex_ARCustomize_WinPose_Common02',共通勝利ポーズ,True,81540,1,0,180,0
+42,6002,共通　旗なし,6,2,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common01.Tex_ARCustomize_WinPose_Common01',共通勝利ポーズ,True,81550,0,0,180,0
+43,6003,歓喜,6,3,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_kazuma01.Tex_ARCustomize_WinPose_kazuma01',カズマ用勝利ポーズ,False,81240,0,0,180,0
+44,6004,負ける気がしねぇ！,6,4,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_kazuma02.Tex_ARCustomize_WinPose_kazuma02',カズマ用勝利ポーズ,False,81250,1,0,180,0
+45,6005,余裕,6,5,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_kazuma03.Tex_ARCustomize_WinPose_kazuma03',カズマ用勝利ポーズ,False,81260,0,0,180,0
+46,6006,辛勝,6,6,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_kazuma04.Tex_ARCustomize_WinPose_kazuma04',カズマ用勝利ポーズ,False,81270,1,0,180,0
+47,6007,ザ・フラッグ,6,7,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_kazuma05.Tex_ARCustomize_WinPose_kazuma05',カズマ用勝利ポーズ,False,81280,1,0,180,0
+48,6008,テッペン獲るぜ！,6,8,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_kazuma06.Tex_ARCustomize_WinPose_kazuma06',カズマ用勝利ポーズ,False,81290,0,0,180,0
+49,1011,共通　旗あり,1,11,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common02.Tex_ARCustomize_WinPose_Common02',2on2_共通勝利ポーズ,True,81540,1,0,180,1
+50,1012,共通　旗なし,1,12,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common01.Tex_ARCustomize_WinPose_Common01',2on2_共通勝利ポーズ,True,81550,0,0,180,1
+51,1013,一番星！　旗なし,1,13,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_hikari01.Tex_ARCustomize_WinPose_hikari01',2on2_ヒカリ用勝利ポーズ,False,81000,0,0,180,1
+52,1014,一番星！　旗あり,1,14,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_hikari02.Tex_ARCustomize_WinPose_hikari02',2on2_ヒカリ用勝利ポーズ,False,81010,1,0,180,1
+53,1015,ジャンプ！,1,15,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_hikari03.Tex_ARCustomize_WinPose_hikari03',2on2_ヒカリ用勝利ポーズ,False,81020,0,0,180,1
+54,1016,大歓喜,1,16,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_hikari04.Tex_ARCustomize_WinPose_hikari04',2on2_ヒカリ用勝利ポーズ,False,81030,1,180,180,1
+55,1017,ロボフラッグ,1,17,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_hikari05.Tex_ARCustomize_WinPose_hikari05',2on2_ヒカリ用勝利ポーズ,False,81040,1,180,180,1
+56,1018,ダブルピース！,1,18,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_hikari06.Tex_ARCustomize_WinPose_hikari06',2on2_ヒカリ用勝利ポーズ,False,81050,0,0,180,1
+57,2011,共通　旗あり,2,11,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common02.Tex_ARCustomize_WinPose_Common02',2on2_共通勝利ポーズ,True,81540,1,0,180,1
+58,2012,共通　旗なし,2,12,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common01.Tex_ARCustomize_WinPose_Common01',2on2_共通勝利ポーズ,True,81550,0,0,180,1
+59,2013,華麗,2,13,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_reika01.Tex_ARCustomize_WinPose_reika01',2on2_レイカ用勝利ポーズ,False,81060,0,0,180,1
+60,2014,敬礼,2,14,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_reika02.Tex_ARCustomize_WinPose_reika02',2on2_レイカ用勝利ポーズ,False,81070,1,0,180,1
+61,2015,優雅に翻す,2,15,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_reika03.Tex_ARCustomize_WinPose_reika03',2on2_レイカ用勝利ポーズ,False,81080,0,0,180,1
+62,2016,ジャンプ！,2,16,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_reika04.Tex_ARCustomize_WinPose_reika04',2on2_レイカ用勝利ポーズ,False,81090,1,0,180,1
+63,2017,大・勝利,2,17,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_reika05.Tex_ARCustomize_WinPose_reika05',2on2_レイカ用勝利ポーズ,False,81100,1,0,180,1
+64,2018,最の高！,2,18,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_reika06.Tex_ARCustomize_WinPose_reika06',2on2_レイカ用勝利ポーズ,False,81110,0,0,180,1
+65,3011,共通　旗あり,3,11,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common02.Tex_ARCustomize_WinPose_Common02',2on2_共通勝利ポーズ,True,81540,1,0,180,1
+66,3012,共通　旗なし,3,12,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common01.Tex_ARCustomize_WinPose_Common01',2on2_共通勝利ポーズ,True,81550,0,0,180,1
+67,3013,私が一番！,3,13,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_shirley01.Tex_ARCustomize_WinPose_shirley01',2on2_シャーリー用勝利ポーズ,False,81180,0,180,180,1
+68,3014,出直してきなさい,3,14,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_shirley02.Tex_ARCustomize_WinPose_shirley02',2on2_シャーリー用勝利ポーズ,False,81190,2,0,0,1
+69,3015,まだまだね,3,15,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_shirley03.Tex_ARCustomize_WinPose_shirley03',2on2_シャーリー用勝利ポーズ,False,81200,0,0,180,1
+70,3016,大勝利！,3,16,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_shirley04.Tex_ARCustomize_WinPose_shirley04',2on2_シャーリー用勝利ポーズ,False,81210,2,0,0,1
+71,3017,めっちゃ嬉しいべ,3,17,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_shirley05.Tex_ARCustomize_WinPose_shirley05',2on2_シャーリー用勝利ポーズ,False,81220,1,0,180,1
+72,3018,負ける気がしねぇべ,3,18,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_shirley06.Tex_ARCustomize_WinPose_shirley06',2on2_シャーリー用勝利ポーズ,False,81230,0,0,180,1
+73,4011,共通　旗あり,4,11,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common02.Tex_ARCustomize_WinPose_Common02',2on2_共通勝利ポーズ,True,81540,1,0,180,1
+74,4012,共通　旗なし,4,12,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common01.Tex_ARCustomize_WinPose_Common01',2on2_共通勝利ポーズ,True,81550,0,0,180,1
+75,4013,余裕　旗なし,4,13,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_isadora01.Tex_ARCustomize_WinPose_isadora01',2on2_イサドラ用勝利ポーズ,False,81120,0,0,180,1
+76,4014,余裕　旗あり,4,14,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_isadora02.Tex_ARCustomize_WinPose_isadora02',2on2_イサドラ用勝利ポーズ,False,81130,1,0,180,1
+77,4015,妖艶,4,15,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_isadora03.Tex_ARCustomize_WinPose_isadora03',2on2_イサドラ用勝利ポーズ,False,81140,0,0,180,1
+78,4016,開放的,4,16,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_isadora04.Tex_ARCustomize_WinPose_isadora04',2on2_イサドラ用勝利ポーズ,False,81150,0,0,180,1
+79,4017,最高！,4,17,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_isadora05.Tex_ARCustomize_WinPose_isadora05',2on2_イサドラ用勝利ポーズ,False,81160,1,270,180,1
+80,4018,ミステリアス,4,18,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_isadora06.Tex_ARCustomize_WinPose_isadora06',2on2_イサドラ用勝利ポーズ,False,81170,0,0,180,1
+81,5011,共通　旗あり,5,11,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common02.Tex_ARCustomize_WinPose_Common02',2on2_共通勝利ポーズ,True,81540,1,0,180,1
+82,5012,共通　旗なし,5,12,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common01.Tex_ARCustomize_WinPose_Common01',2on2_共通勝利ポーズ,True,81550,0,0,180,1
+83,5013,当然の勝利　旗なし,5,13,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_nagi01.Tex_ARCustomize_WinPose_nagi01',2on2_ナギ用勝利ポーズ,False,81300,0,0,180,1
+84,5014,当然の勝利　旗あり,5,14,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_nagi02.Tex_ARCustomize_WinPose_nagi02',2on2_ナギ用勝利ポーズ,False,81310,1,0,180,1
+85,5015,もっと上を！,5,15,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_nagi03.Tex_ARCustomize_WinPose_nagi03',2on2_ナギ用勝利ポーズ,False,81320,0,0,180,1
+86,5016,確信,5,16,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_nagi04.Tex_ARCustomize_WinPose_nagi04',2on2_ナギ用勝利ポーズ,False,81330,2,0,0,1
+87,5017,ただ真っすぐに,5,17,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_nagi05.Tex_ARCustomize_WinPose_nagi05',2on2_ナギ用勝利ポーズ,False,81340,0,0,180,1
+88,5018,敬礼,5,18,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_nagi06.Tex_ARCustomize_WinPose_nagi06',2on2_ナギ用勝利ポーズ,False,81350,0,0,180,1
+89,6011,共通　旗あり,6,11,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common02.Tex_ARCustomize_WinPose_Common02',2on2_共通勝利ポーズ,True,81540,1,0,180,1
+90,6012,共通　旗なし,6,12,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_Common01.Tex_ARCustomize_WinPose_Common01',2on2_共通勝利ポーズ,True,81550,0,0,180,1
+91,6013,歓喜,6,13,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_kazuma01.Tex_ARCustomize_WinPose_kazuma01',2on2_カズマ用勝利ポーズ,False,81240,0,0,180,1
+92,6014,負ける気がしねぇ！,6,14,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_kazuma02.Tex_ARCustomize_WinPose_kazuma02',2on2_カズマ用勝利ポーズ,False,81250,1,0,180,1
+93,6015,余裕,6,15,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_kazuma03.Tex_ARCustomize_WinPose_kazuma03',2on2_カズマ用勝利ポーズ,False,81260,0,0,180,1
+94,6016,辛勝,6,16,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_kazuma04.Tex_ARCustomize_WinPose_kazuma04',2on2_カズマ用勝利ポーズ,False,81270,1,0,180,1
+95,6017,ザ・フラッグ,6,17,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_kazuma05.Tex_ARCustomize_WinPose_kazuma05',2on2_カズマ用勝利ポーズ,False,81280,1,0,180,1
+96,6018,テッペン獲るぜ！,6,18,Texture2D'/Game/GUI/OutGame/Customize/texture/RoboCustomize/VictoryPose/Tex_ARCustomize_WinPose_kazuma06.Tex_ARCustomize_WinPose_kazuma06',2on2_カズマ用勝利ポーズ,False,81290,0,0,180,1

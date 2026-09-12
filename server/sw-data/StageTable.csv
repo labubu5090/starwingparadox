@@ -1,2 +1,25 @@
----,StageId,ModeID,StageName,StageMapName,FolderName,TexturePath
-200000,200000,EGameMode::ModeNormal,St111,St111,St111,/Game/GUI/OutGame/MainMenu/Tex/Tex_Title_BG_MainSt111.Tex_Title_BG_MainSt111
+---,StageID,FolderName,StageMapName,StageName,TexturePath,ModeID
+0,10000,St100,St100,アナトミア平静峡谷　峡谷地域,Texture2D'/Game/GUI/OutGame/MainMenu/Tex/St100_BG.St100_BG',0
+1,10100,St101,St101,アナトミア平静峡谷　平原地域,Texture2D'/Game/GUI/OutGame/MainMenu/Tex/Tex_Title_BG_Main.Tex_Title_BG_Main',0
+2,10102,St101_2,St101_2,アナトミア平静峡谷　平原地域,Texture2D'/Game/GUI/OutGame/MainMenu/Tex/Tex_Title_BG_Main.Tex_Title_BG_Main',0
+3,10202,St102_2,St102_2,アナトミア平静峡谷　台地地域,Texture2D'/Game/GUI/OutGame/MainMenu/Tex/Tex_Title_BG_MainSt102.Tex_Title_BG_MainSt102',0
+4,11100,St111,St111,シーボルト分泌海　シーボルト諸島,Texture2D'/Game/GUI/OutGame/MainMenu/Tex/Tex_Title_BG_MainSt111.Tex_Title_BG_MainSt111',0
+5,11200,St112,St112,シーボルト分泌海　シーボルト海台,Texture2D'/Game/GUI/OutGame/MainMenu/Tex/Tex_Title_BG_MainSt112.Tex_Title_BG_MainSt112',0
+6,12100,St121,St121,ゲンタン膚下空洞　砂漠区域,Texture2D'/Game/GUI/OutGame/MainMenu/Tex/Tex_Title_BG_MainSt121.Tex_Title_BG_MainSt121',0
+7,12200,St122,St122,ゲンタン膚下空洞　氷原区域,Texture2D'/Game/GUI/OutGame/MainMenu/Tex/Tex_Title_BG_MainSt122.Tex_Title_BG_MainSt122',0
+8,13100,St131,St131,カ・ダ老岩昇華帯　老岩遺跡,Texture2D'/Game/GUI/OutGame/MainMenu/Tex/Tex_Title_BG_MainSt131.Tex_Title_BG_MainSt131',0
+9,200000,Tutorial,Tutorial,チュートリアル,,0
+10,300001,boss,boss,第一次共闘戦  アナトミア平静峡谷　峡谷地域,,0
+11,300002,boss_stages/boss02,boss02,第二次共闘戦  アナトミア平静峡谷　峡谷地域,,0
+12,300003,boss_stages/boss03,boss03,第三次共闘戦  アナトミア平静峡谷　峡谷地域,,0
+13,300004,boss_stages/boss04,boss04,第四次共闘戦  アナトミア平静峡谷　峡谷地域,,0
+14,300005,boss_stages/boss05,boss05,第五次共闘戦  アナトミア平静峡谷　峡谷地域,,0
+15,300006,boss_stages/boss06,boss06,第六次共闘戦  アナトミア平静峡谷　峡谷地域,,0
+16,300007,boss_stages/boss07,boss07,第七次共闘戦  アナトミア平静峡谷　峡谷地域,,0
+17,300008,boss_stages/boss08,boss08,第八次共闘戦  アナトミア平静峡谷　峡谷地域,,0
+18,20000,2on,St2on,アナトミア平静峡谷　峡谷地域,,1
+19,20001,2On_St101,St2on101,アナトミア平静峡谷　平原地域,,1
+20,20002,2On_St102,St2on102,アナトミア平静峡谷　台地地域,,1
+21,20003,2On_St111,St2on111,（未使用）シーボルト分泌海　シーボルト諸島,,1
+22,20004,2On_St112,St2on112,シーボルト分泌海　シーボルト海台,,1
+23,20005,2On_St131,St2on131,（未使用）カ・ダ老岩昇華帯　老岩遺跡,,1

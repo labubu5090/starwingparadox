@@ -213,19 +213,30 @@ def build_globaladdr_reply() -> bytes:
 CARD_ID = DEFAULT_CARD_ID
 
 
-def handle_client(conn: socket.socket, addr: tuple) -> None:
+class _TraceSocket:
+    """Wraps a socket so every sendall() is traced, without mutating the
+    underlying socket (Python >= 3.10 forbids assigning instance attributes)."""
+
+    def __init__(self, sock: socket.socket, conn_id: int) -> None:
+        self._sock = sock
+        self._conn_id = conn_id
+
+    def sendall(self, data: bytes, *a, **kw) -> None:
+        try:
+            _trace.tx(self._conn_id, data)
+        except Exception:
+            pass
+        self._sock.sendall(data, *a, **kw)
+
+    def __getattr__(self, name):
+        return getattr(self._sock, name)
+
+
+def handle_client(raw_conn: socket.socket, addr: tuple) -> None:
     global CARD_ID
     log.info("Client connected: %s:%d", addr[0], addr[1])
     conn_id = _trace.conn_open()
-
-    _orig_sendall = conn.sendall
-    def _traced_sendall(data: bytes, *a, **kw):
-        try:
-            _trace.tx(conn_id, data)
-        except Exception:
-            pass
-        return _orig_sendall(data, *a, **kw)
-    conn.sendall = _traced_sendall  # type: ignore[assignment]
+    conn = _TraceSocket(raw_conn, conn_id)
 
     try:
         while True:
@@ -524,7 +535,7 @@ def https_server_thread() -> None:
         try:
             client_sock, client_addr = raw_srv.accept()
             client_sock.settimeout(5.0)
-            first_bytes = client_sock.recv(6, socket.MSG_PEEK)
+            first_bytes = client_sock.recv(16, socket.MSG_PEEK)
             client_sock.settimeout(None)
 
             if first_bytes.startswith(b"CONNECT"):

@@ -1,7 +1,0 @@
-﻿{
-  "phase": "G26",
-  "pre_start_credits": 2,
-  "post_start_credits": "UNKNOWN",
-  "consumption_evidence": "NOT_OBSERVED",
-  "note": "Credits may have been consumed during SystemDataCheck but game returned to Title before credit state was logged"
-}

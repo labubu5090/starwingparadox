@@ -82,8 +82,11 @@ def _write_capture(entry: dict[str, Any]) -> None:
     if _CAPTURE_LOG is None:
         _CAPTURE_DIR.mkdir(parents=True, exist_ok=True)
         _CAPTURE_LOG = _CAPTURE_DIR / "live_capture.jsonl"
-    with open(_CAPTURE_LOG, "a", encoding="utf-8") as f:
-        f.write(json.dumps(entry, default=str) + "\n")
+    try:
+        with open(_CAPTURE_LOG, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry, default=str) + "\n")
+    except OSError as exc:
+        logger.warning("live_capture write failed (capture disabled for this request): %s", exc)
 
 
 class LiveCaptureMiddleware(BaseHTTPMiddleware):

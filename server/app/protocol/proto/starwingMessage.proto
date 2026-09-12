@@ -16,7 +16,8 @@ message PbMessage {
          // 203 ResponseCancelBurstGroup
          NotifyMatchFailure NotifyMatchFailure = 0xcc;          // 204
          ResponseEntryMatching ResponseEntryReMatching = 205;   // 205 ResponseEntryReMatching
-         NotifyMatchEscape RequestJoinMatching = 206;           // 206 RequestJoinMatching 0xcf
+         RequestJoinMatching RequestJoinMatching = 206;              // 206 RequestJoinMatching 0xcf
+         ResponseJoinMatching ResponseJoinMatching = 207;       // 207 ResponseJoinMatching 0xcf
          NotifyMatchMade NotifyMatchMade = 302;
          NotifyMatchBegin NotifyMatchBegin = 304;               // 0x130
          NotifyMatchOpen NotifyMatchOpen = 601;                 // 0x259
@@ -93,6 +94,14 @@ message ResponseEntryMatching {
 message NotifyMatchEscape {
     int64 matchId = 1;
     int64 PlayerId = 2;
+}
+message RequestJoinMatching {
+    int64 id = 1;
+    int64 matchId = 2;
+}
+message ResponseJoinMatching {
+    int64 messageId = 1;
+    int32 result = 2; // Result: 0 OK_Joined, 1 NG_EndBattle, 2 NG_ServerError
 }
 message NotifyMatchUpdated {
     Match Match = 1;

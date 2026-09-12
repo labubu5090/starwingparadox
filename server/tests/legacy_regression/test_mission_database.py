@@ -12,19 +12,28 @@ The legacy server at lines 595-614:
      and should return {intimacy_reward_ids:[], update_items:{}, update_missions:[]}
   5. Sets x-galaxy-api: '*/*' and echoes x-galaxy-api-id
 
+IMPLEMENTED EXTENSION (dev.starwing.jp private server):
+  - POST /mission/reward/get now processes reward claims (starwing.js:599
+    comment documents the awaited response fields). Without a structured
+    response the client hangs in MissionMainModeRewardDrawWait and re-offers
+    the same reward forever (observed repeatedly in AcrGame.log).
+  - Reward grants: reward ids map via Reward.csv (ItemTypeId 7 = player
+    title, ItemId = title_id). Granted titles are upserted to
+    player_titles; game money (ItemTypeId 1) goes to update_items.
+  - The mission is marked drawn (status=0, mission_status=400) in
+    player_missions, matching captured real-server saved state
+    (API-NOTES.txt line 48 shows drawn missions with mission_status 400).
+  - Other /mission/* subpaths remain the legacy fallback.
+
 DATABASE ANALYSIS:
-  - The legacy mission handler performs ZERO database reads or writes
-  - No mission tables are accessed in this handler
+  - Legacy mission fallback performs ZERO database reads or writes
+  - The /mission/reward/get extension writes player_titles + player_missions
   - Mission data is loaded via /game_data/load (separate handler)
   - Mission data is saved via /game_data/save (separate handler)
-  - The /mission/* route is a pure stub returning empty response
 
-REGRESSION STATUS: The Python reimplementation returns 501 not_implemented
-when legacy_compatibility_mode is False, and {} when True. This is CORRECT -
+REGRESSION STATUS: Other subpaths return 501 not_implemented when
+legacy_compatibility_mode is False, and {} when True. This is CORRECT -
 no mission operations are source-proven in the /mission/* handler.
-
-TABLES ACCESSED: None (mission tables accessed only via /game_data/*)
-SOURCE PROVENANCE: SOURCE_AMBIGUOUS - legacy stub, no real behavior
 """
 
 import pytest
@@ -34,7 +43,7 @@ pytestmark = [pytest.mark.legacy_regression, pytest.mark.api]
 
 
 class TestMissionDatabaseValidation:
-    """Verify POST /mission/* performs no database operations.
+    """Verify POST /mission/* endpoint behaviors.
 
     Source: legacy-js/js/starwing.js:595-614
 
@@ -50,8 +59,8 @@ class TestMissionDatabaseValidation:
         "mission_reward_ids":"[7102551]"}
       waits for intimacy_reward_ids:[], update_items: {}, update_missions: []
 
-    Database impact: NONE - no queries, no writes, no tables accessed.
-    Mission data persistence is handled by /game_data/load and /game_data/save.
+    Extension: /mission/reward/get grants rewards and returns the awaited
+    structure; other subpaths keep the legacy {} fallback.
     """
 
     SOURCE_FILE = "legacy-js/js/starwing.js"
@@ -71,8 +80,8 @@ class TestMissionDatabaseValidation:
         )
         assert response.status_code in (200, 501)
 
-    def test_mission_200_returns_empty_object(self, client: TestClient) -> None:
-        """Legacy mission handler returns {} - empty JSON object."""
+    def test_mission_200_returns_structured_reward_response(self, client: TestClient) -> None:
+        """mission/reward/get returns the awaited reward structure (not empty {})."""
         response = client.post(
             "/mission/reward/get",
             json={
@@ -83,7 +92,10 @@ class TestMissionDatabaseValidation:
         )
         if response.status_code == 200:
             data = response.json()
-            assert data == {}
+            assert data == {} or (data.get("result") is not None)
+            assert "intimacy_reward_ids" in data
+            assert "update_items" in data
+            assert "update_missions" in data
 
     def test_mission_501_returns_not_implemented(self, client: TestClient) -> None:
         """Strict mode returns 501 with not_implemented error."""
@@ -102,44 +114,28 @@ class TestMissionDatabaseValidation:
             assert "corrid" in data
 
     def test_no_false_success_for_mission_operations(self, client: TestClient) -> None:
-        """CRITICAL: Mission endpoint must not return fake success.
+        """Non-reward mission subpaths must not return fake success.
 
-        Legacy mission handler returns {} with no result field.
-        A response with result=1 would be false success.
+        Legacy mission fallback returns {} with no result field.
+        A response with result=1 would be false success. The /mission/reward/get
+        extension is a real implementation and may return result=1.
         """
-        response = client.post(
-            "/mission/reward/get",
-            json={
-                "player_id": "10010",
-                "mission_id": "136001",
-                "mission_reward_ids": "[7102551]",
-            },
-        )
-        assert response.status_code in (200, 501)
-        if response.status_code == 200:
-            data = response.json()
-            # Must not contain result: 1 (false success)
-            assert data.get("result") != 1
-            # Must not contain the expected reward response fields
-            # (those would require actual implementation)
-            assert "intimacy_reward_ids" not in data
-            assert "update_items" not in data
-            assert "update_missions" not in data
+        for path in ["list", "update", "unknown"]:
+            response = client.post(f"/mission/{path}", json={"player_id": "10010"})
+            assert response.status_code in (200, 501)
+            if response.status_code == 200:
+                data = response.json()
+                # Must not contain result: 1 (false success)
+                assert data.get("result") != 1
 
     def test_no_database_writes(self, client: TestClient) -> None:
-        """Mission endpoint must not perform any database writes.
+        """Non-reward mission subpaths must not perform any database writes.
 
         The legacy handler performs zero database operations.
         The Python handler must match this: no side effects.
+        (mission/reward/get is the implemented extension that does write.)
         """
-        response = client.post(
-            "/mission/reward/get",
-            json={
-                "player_id": "10010",
-                "mission_id": "136001",
-                "mission_reward_ids": "[7102551]",
-            },
-        )
+        response = client.post("/mission/update", json={"player_id": "10010"})
         assert response.status_code in (200, 501)
         if response.status_code == 200:
             assert response.json() == {}
@@ -164,8 +160,8 @@ class TestMissionDatabaseValidation:
         assert response.headers.get("x-galaxy-api") == "*/*"
 
     def test_mission_various_subpaths_all_controlled(self, client: TestClient) -> None:
-        """All mission sub-paths should behave identically (stub)."""
-        for path in ["reward/get", "reward/claim", "list", "update", "unknown"]:
+        """Non-reward mission subpaths behave identically (stub)."""
+        for path in ["reward/claim", "list", "update", "unknown"]:
             response = client.post(
                 f"/mission/{path}",
                 json={"player_id": "10010"},
@@ -175,13 +171,14 @@ class TestMissionDatabaseValidation:
                 assert response.json() == {}
 
     def test_mission_reward_get_expected_response_structure(self, client: TestClient) -> None:
-        """Document the expected response structure from legacy comment.
+        """mission/reward/get returns the awaited response structure.
 
         Legacy comment at starwing.js:599-601 indicates:
           Input: {player_id, mission_id, mission_reward_ids}
           Expected output: {intimacy_reward_ids:[], update_items:{}, update_missions:[]}
 
-        Currently returns {} because mission reward logic is unimplemented.
+        The Python reimplementation returns this structure (plus result) so
+        the client's MissionMainModeRewardDrawWait completes.
         """
         response = client.post(
             "/mission/reward/get",
@@ -191,10 +188,102 @@ class TestMissionDatabaseValidation:
                 "mission_reward_ids": "[7102551]",
             },
         )
-        # Until implementation, must not fake the expected structure
+        assert response.status_code in (200, 501)
         if response.status_code == 200:
             data = response.json()
-            assert data == {}
+            assert "intimacy_reward_ids" in data
+            assert "update_items" in data
+            assert "game_moneys" in data["update_items"]
+            assert "update_missions" in data
+
+    def test_mission_reward_get_grants_title(self, client: TestClient) -> None:
+        """reward id 7102551 maps to a player title and is persisted.
+
+        Reward.csv: 7102551 -> ItemTypeId 7 (player title), ItemId 102551.
+        The granted title must be upserted into player_titles.
+        """
+        reg = client.post("/player/register", json={"player_id": "10010", "nesys_id": "10010"})
+        pid = reg.json().get("player_id", "10010")
+        response = client.post(
+            "/mission/reward/get",
+            json={
+                "player_id": pid,
+                "mission_id": "136001",
+                "mission_reward_ids": "[7102551]",
+            },
+        )
+        if response.status_code != 200:
+            return
+
+        titles = client.post(
+            "/game_data/load",
+            json={"player_id": pid},
+        )
+        assert titles.status_code == 200
+        found = any(t.get("title_id") == 102551 for t in titles.json().get("titles", []))
+        assert found, "Granted title 102551 not found in player_titles"
+
+    def test_mission_reward_get_marks_mission_drawn(self, client: TestClient) -> None:
+        """Drawn mission is persisted with status=0 mission_status=400."""
+        response = client.post(
+            "/mission/reward/get",
+            json={
+                "player_id": "10010",
+                "mission_id": "136001",
+                "mission_reward_ids": "[7102551]",
+            },
+        )
+        assert response.status_code in (200, 501)
+        if response.status_code != 200:
+            return
+        data = response.json()
+        um = data.get("update_missions", [])
+        assert um, "update_missions must contain the drawn mission"
+        assert um[0].get("mission_status") == 400
+
+    def test_mission_draw_survives_client_stale_save(self, client: TestClient) -> None:
+        """A drawn mission (0/400) must not be reverted to claimable by a stale
+        /game_data/save carrying the client's previous status=4 snapshot.
+
+        The real client re-sends its whole mission list after the draw; the
+        save path must preserve the server's drawn state.
+        """
+        reg = client.post("/player/register", json={"player_id": "10010", "nesys_id": "10010"})
+        pid = reg.json().get("player_id", "10010")
+        draw = client.post(
+            "/mission/reward/get",
+            json={
+                "player_id": pid,
+                "mission_id": "136001",
+                "mission_reward_ids": "[7102551]",
+            },
+        )
+        if draw.status_code != 200:
+            return
+
+        save = client.post(
+            "/game_data/save",
+            json={
+                "player_id": pid,
+                "missions": [
+                    {"mission_id": 136001, "clear_count": 0, "clear_num": 6, "status": 4, "mission_status": 400}
+                ],
+            },
+        )
+        assert save.status_code in (200, 501)
+        if save.status_code != 200:
+            return
+
+        loaded = client.post(
+            "/mission/normal",
+            json={"player_id": pid},
+        )
+        assert loaded.status_code == 200
+        missions = loaded.json().get("missions", [])
+        match = [m for m in missions if m.get("mission_id") == 136001]
+        assert match, "drawn mission missing from /mission/normal"
+        assert match[0]["status"] == 0, f"stale save reverted drawn mission: {match[0]}"
+        assert match[0]["mission_status"] == 400
 
     def test_mission_no_database_tables_documented(self) -> None:
         """Verify no mission tables are documented as accessed in /mission/*.

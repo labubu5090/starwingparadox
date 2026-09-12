@@ -1,8 +1,0 @@
-﻿{
-  "phase": "G29",
-  "classification": "PLAYER_SESSION_BOUNDARY_REACHED",
-  "primary_request": "POST http://dev.starwing.jp/mock/matching/server",
-  "g30_decision": "PLAYER_HTTP_ROUTE_REQUIRED",
-  "existing_handler": "HANDLER_NOT_FOUND",
-  "reason": "Game sends POST to /mock/matching/server after Start. No existing handler in Python server."
-}

@@ -37,6 +37,7 @@ from app.db.models import (  # noqa: F401
     PlayerWeaponSetSlot,
 )
 from app.dependencies import set_override_engine
+from sqlalchemy.pool import StaticPool
 
 
 def get_test_settings() -> Settings:
@@ -87,7 +88,12 @@ def db_session() -> Session:
 @pytest.fixture
 def client() -> TestClient:
     """Create a TestClient with an in-memory SQLite database."""
-    test_engine = create_async_engine("sqlite+aiosqlite:///:memory:", echo=False)
+    test_engine = create_async_engine(
+        "sqlite+aiosqlite://",
+        echo=False,
+        connect_args={"check_same_thread": False},
+        poolclass=StaticPool,
+    )
     event.listen(test_engine.sync_engine, "connect", _configure_sqlite_pragmas)
 
     loop = asyncio.new_event_loop()

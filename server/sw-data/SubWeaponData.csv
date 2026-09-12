@@ -1,14 +1,14 @@
----,SubWeaponID,Name,Text,WeaponID,Type,ChargeTime,BuffType_LV2,BuffTime_LV2,BuffValue_LV2,BuffType_LV3,BuffTime_LV3,BuffValue_LV3,InfoText_LV1,InfoText_LV2,InfoText_LV3,IsRelease,IsDefault,SortID
-SUBWP_DEFAULT,0,空き枠,空き枠,0,ESubWeaponType::None,20,ESubWeaponBuffType::None,0,0,ESubWeaponBuffType::None,0,0,説明文を入力,説明文を入力,説明文を入力,0,0,0
-SUBWP_001,1,繚乱爆弾 泡沫,怯み性能を持つ、\n泡状の弾を発射する。,30001,ESubWeaponType::ChangeWeapon,35,ESubWeaponBuffType::None,0,0,ESubWeaponBuffType::None,0,0,怯み性能を持つ泡状の弾を\n3発同時に発射する。,発射数+2,発射数+2,0,0,3
-SUBWP_002,2,シエライトレーザー,ロックオンしている敵に、\n上空からレーザー砲を発射する。,30002,ESubWeaponType::NonChangeWeapon,40,ESubWeaponBuffType::None,0,0,ESubWeaponBuffType::None,0,0,ロックオンしている敵に、\nレーザー砲を1発発射する。,照射回数+1,照射回数+1,0,0,2
-SUBWP_003,3,イヴフィールド,自機から衝撃波を展開し、\nヒットした敵を吹き飛ばす。,30003,ESubWeaponType::NonChangeWeapon,30,ESubWeaponBuffType::None,0,0,ESubWeaponBuffType::None,0,0,敵を吹き飛ばす\n衝撃波を展開する。,バースト値上昇,ヒット時、\n敵をバースト状態にする。,0,0,6
-SUBWP_004,4,空き枠,使用禁止,30004,ESubWeaponType::ChangeWeapon,4,ESubWeaponBuffType::None,0,0,ESubWeaponBuffType::None,0,0,説明文を入力,説明文を入力,説明文を入力,0,0,21
-SUBWP_005,5,レヴォルフィア,ダウン性能を持つ、\n巨大なビーム弾を発射する。,30005,ESubWeaponType::ChangeWeapon,40,ESubWeaponBuffType::None,0,0,ESubWeaponBuffType::None,0,0,ダウン性能を持つ、\n巨大なビーム弾を発射する。,サイズ拡大,サイズ拡大+,0,0,1
-SUBWP_006,6,空き枠,使用禁止,30006,ESubWeaponType::ChangeWeapon,12,ESubWeaponBuffType::None,10,1.5,ESubWeaponBuffType::None,0,0,説明文を入力,説明文を入力,説明文を入力,0,0,22
-SUBWP_007,7,空き枠,使用禁止,30007,ESubWeaponType::ChangeWeapon,4,ESubWeaponBuffType::None,0,0,ESubWeaponBuffType::None,0,0,説明文を入力,説明文を入力,説明文を入力,0,0,23
-SUBWP_008,8,テンペスト・リヴァ,前方に進む竜巻を発生させ、\nヒットした敵の移動速度を\n低下させる。,30008,ESubWeaponType::NonChangeWeapon,35,ESubWeaponBuffType::None,0,0,ESubWeaponBuffType::None,0,0,前方に進む、\n巨大な竜巻を発生させる。,初速上昇\n状態異常強化,初速上昇+\n状態異常強化+,0,0,4
-SUBWP_009,9,デウステルス,自機が透明化し、\n敵に機体情報が表示されない。,30009,ESubWeaponType::Buff,35,ESubWeaponBuffType::BoostSpeedUp,8,1.25,ESubWeaponBuffType::BoostAssist,8,0.66,自機が透明化し、\n敵に機体情報が表示されない。,移動速度上昇,ブースト消費量軽減,0,0,8
-SUBWP_010,10,シールドヴァイト-X,自機に全方位シールドを\n展開する。,30010,ESubWeaponType::Buff,30,ESubWeaponBuffType::None,0,0,ESubWeaponBuffType::None,0,0,自機に全方位シールドを展開する。,シールド 耐久値上昇,味方にも展開する。,0,0,7
-SUBWP_011,11,空き枠,使用禁止,30011,ESubWeaponType::ChangeWeapon,16,ESubWeaponBuffType::None,0,0,ESubWeaponBuffType::None,0,0,説明文を入力,説明文を入力,説明文を入力,0,0,24
-SUBWP_012,12,レイスレイヴ Xt-Z,攻撃と回復を行う、\n自動射撃装置を展開する。,30012,ESubWeaponType::NonChangeWeapon,35,ESubWeaponBuffType::WeaponReloadUp,8,100,ESubWeaponBuffType::WeaponReloadUp,8,300,攻撃と回復を行う\n自動射撃装置を展開する。,1st武器・2nd武器\nリロード速度上昇,1st武器・2nd武器\nリロード速度上昇+,0,0,5
+---,SubWeaponID,Name,Text,Type,WeaponID,ChargeTime,BuffType_LV2,BuffTime_LV2,BuffValue_LV2,BuffType_LV3,BuffTime_LV3,BuffValue_LV3,InfoText_LV1,InfoText_LV2,InfoText_LV3,IsRelease,IsDefault,SortID
+SUBWP_DEFAULT,0,空き枠,空き枠,None,0,20,None,0,0,None,0,0,説明文を入力,説明文を入力,説明文を入力,False,False,0
+SUBWP_001,1,繚乱爆弾 泡沫,怯み性能を持つ、\n泡状の弾を発射する。,ChangeWeapon,30001,35,None,0,0,None,0,0,怯み性能を持つ泡状の弾を\n3発同時に発射する。,発射数+2,発射数+2,True,False,3
+SUBWP_002,2,シエライトレーザー,ロックオンしている敵に、\n上空からレーザー砲を発射する。,NonChangeWeapon,30002,40,None,0,0,None,0,0,ロックオンしている敵に、\nレーザー砲を1発発射する。,照射回数+1,照射回数+1,True,True,2
+SUBWP_003,3,イヴフィールド,自機から衝撃波を展開し、\nヒットした敵を吹き飛ばす。,NonChangeWeapon,30003,30,None,0,0,None,0,0,敵を吹き飛ばす\n衝撃波を展開する。,バースト値上昇,ヒット時、\n敵をバースト状態にする。,True,False,6
+SUBWP_004,4,空き枠,使用禁止,ChangeWeapon,30004,4,None,0,0,None,0,0,説明文を入力,説明文を入力,説明文を入力,False,False,21
+SUBWP_005,5,レヴォルフィア,ダウン性能を持つ、\n巨大なビーム弾を発射する。,ChangeWeapon,30005,40,None,0,0,None,0,0,ダウン性能を持つ、\n巨大なビーム弾を発射する。,サイズ拡大,サイズ拡大+,True,False,1
+SUBWP_006,6,空き枠,使用禁止,ChangeWeapon,30006,12,None,10,1.5,None,0,0,説明文を入力,説明文を入力,説明文を入力,False,False,22
+SUBWP_007,7,空き枠,使用禁止,ChangeWeapon,30007,4,None,0,0,None,0,0,説明文を入力,説明文を入力,説明文を入力,False,False,23
+SUBWP_008,8,テンペスト・リヴァ,前方に進む竜巻を発生させ、\nヒットした敵の移動速度を\n低下させる。,NonChangeWeapon,30008,35,None,0,0,None,0,0,前方に進む、\n巨大な竜巻を発生させる。,初速上昇\n状態異常強化,初速上昇+\n状態異常強化+,True,False,4
+SUBWP_009,9,デウステルス,自機が透明化し、\n敵に機体情報が表示されない。,Buff,30009,35,BoostSpeedUp,8,1.25,BoostAssist,8,0.66,自機が透明化し、\n敵に機体情報が表示されない。,移動速度上昇,ブースト消費量軽減,True,False,8
+SUBWP_010,10,シールドヴァイト-X,自機に全方位シールドを\n展開する。,Buff,30010,30,None,0,0,None,0,0,自機に全方位シールドを展開する。,シールド 耐久値上昇,味方にも展開する。,True,False,7
+SUBWP_011,11,空き枠,使用禁止,ChangeWeapon,30011,16,None,0,0,None,0,0,説明文を入力,説明文を入力,説明文を入力,False,False,24
+SUBWP_012,12,レイスレイヴ Xt-Z,攻撃と回復を行う、\n自動射撃装置を展開する。,NonChangeWeapon,30012,35,WeaponReloadUp,8,100,WeaponReloadUp,8,300,攻撃と回復を行う\n自動射撃装置を展開する。,1st武器・2nd武器\nリロード速度上昇,1st武器・2nd武器\nリロード速度上昇+,True,False,5

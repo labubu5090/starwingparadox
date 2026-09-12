@@ -31,6 +31,19 @@ def _galaxy_headers(x_galaxy_api_id: str) -> dict[str, str]:
     return headers
 
 
+@router.post("/buy")
+async def credit_buy(
+    request: Request,
+    response: Response,
+    x_galaxy_api_id: str = Header(default=""),
+) -> Response:
+    headers = _galaxy_headers(x_galaxy_api_id)
+    return JSONResponse(
+        content={"result": 1, "update_items": {"game_moneys": []}},
+        headers=headers,
+    )
+
+
 @router.post("/{path:path}")
 async def credit_fallback(
     path: str,

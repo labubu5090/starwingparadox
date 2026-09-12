@@ -1,0 +1,9 @@
+---,Key,ValueInt
+1,buddy:intimacy:modeselect-display-value,2
+2,emblem:edit:max-create-count,12
+3,battle:result:normal:max-battle-reward-count,1
+4,battle:result:normal:battle-reward-gacha-type-id,1
+5,announce:menu:new-icon-max-display-day,7
+6,battle:result:rebattle:max-count,2
+7,battle:result:rebattle-2on2:max-count,10
+8,battle:result:normal:change-player-count-rate,0

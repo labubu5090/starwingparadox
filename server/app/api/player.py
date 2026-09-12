@@ -2,6 +2,7 @@
 
 import json
 import logging
+import re
 import uuid
 from datetime import datetime, timezone
 from typing import Any
@@ -63,8 +64,22 @@ async def _get_active_profile_uuid(db: AsyncSession) -> str | None:
     return active.profile_uuid if active else None
 
 
+def _normalize_nesys_id(raw: str) -> str:
+    """Strip trailing garbage from the card-id string the client sends.
+
+    The in-game FString mount writes the clean 17-digit card id, but the
+    client reads a wider buffer, so the value can carry trailing junk
+    (e.g. '11111111111111111oad' / '11111111111111111e').  Keep only the
+    leading run of digits so lookups are stable and we never mint empty
+    players from floating garbage.
+    """
+    m = re.match(r"^\d+", str(raw))
+    return m.group(0) if m else str(raw)
+
+
 async def _get_or_create_player(db: AsyncSession, nesys_id: str) -> Player:
     """Get existing player by nesys_id or create with private-server defaults."""
+    nesys_id = _normalize_nesys_id(nesys_id)
     result = await db.execute(
         select(Player).where(Player.nesys_id == nesys_id)
     )
@@ -131,6 +146,11 @@ def _player_to_profile_dict(p: Player, progresses: list[dict[str, Any]] | None =
         "last_pref_ranking_order_id": 0,
         "pref_ranking_top_player_count": 0,
         "official_player_type_id": 0,
+        "emblem": {
+            "outline": {"part_id": 0, "offset": [0, 0], "scale": [1, 1], "angle": 0},
+            "main_design": {"part_id": 0, "offset": [0, 0], "scale": [1, 1], "angle": 0},
+            "sub_design": {"part_id": 0, "offset": [0, 0], "scale": [1, 1], "angle": 0},
+        },
     }
 
 
@@ -234,7 +254,7 @@ async def player_login_bonus(
     if not settings.legacy_compatibility_mode:
         return _not_implemented("/player/login_bonus", headers)
     return JSONResponse(
-        content={"result": 1, "login_bonuses": [], "update_items": {}}, headers=headers
+        content={"result": 1, "login_bonuses": [], "update_items": {"game_moneys": []}}, headers=headers
     )
 
 

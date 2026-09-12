@@ -1,0 +1,6 @@
+{
+  "file_offset": "0x243c546",
+  "original_bytes": "752d",
+  "exe_sha256": "ce4c89054bf7c4d833ee8af455a485ac401eead12a80ffc077663a768fd47dc4",
+  "note": "Relay object-flag jnz (CF46): target loc_14243CF75 -> CF78"
+}

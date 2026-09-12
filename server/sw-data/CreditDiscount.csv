@@ -1,0 +1,2 @@
+---,Week,Valid,StartDate,EndDate,StartTime,EndTime,StartCredit,ContinueCreditFirst,ContinueCreditNext
+0,8,True,2019-01-01 00:00:00,2099-12-31 23:59:59,00:00:00,23:59:59,2,2,1

@@ -1,7 +1,0 @@
-﻿{
-  "phase": "G26",
-  "named_pipe_evidence": "NOT_OBSERVED",
-  "pipe_activity_after_z": "NONE",
-  "pipe_activity_after_enter": "NONE",
-  "note": "Z triggers local game state change only, no IPC observed"
-}

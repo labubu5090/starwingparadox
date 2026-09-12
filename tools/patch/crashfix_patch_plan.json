@@ -1,0 +1,24 @@
+{
+  "exe_sha256": "ce4c89054bf7c4d833ee8af455a485ac401eead12a80ffc077663a768fd47dc4",
+  "patches": [
+    {
+      "file_offset": "0x243C513",
+      "original_bytes": "7460",
+      "patched_bytes": "7463",
+      "note": "Relay outer SP-pack jz (CF13): target loc_14243CF75 -> CF78 (post-patch skip point)"
+    },
+    {
+      "file_offset": "0x243C546",
+      "original_bytes": "752d",
+      "patched_bytes": "7530",
+      "note": "Relay object-flag jnz (CF46): target loc_14243CF75 -> CF78"
+    },
+    {
+      "file_offset": "0x243C550",
+      "original_bytes": "488bd80fb6483480e90280f9017716498bcee84928f9008b53304533c0488bc8e80bfbffff4885f6",
+      "patched_bytes": "85c074248b78300fb6483480e90280f9017715498bcee84928f90089fa4533c0488bc8e80bfbffff",
+      "note": "Null-guard ARSkillDataPtr in ACPP_WeaponManager::InitalizeWeapon. test eax,eax; jz skip; pre-load WeaponID to edi; movzx Type; sub/cmp/ja skip; InitWeaponPack(pack, WeaponID, 0). Fixes EXCEPTION_ACCESS_VIOLATION @0x34 when GetSubWeaponDataInstancePtr returns nullptr for AR skill index -1"
+    }
+  ],
+  "note": "Crash fix: ACPP_WeaponManager::InitalizeWeapon null-deref on FSubWeaponData (offset 0x34). When the owner has no AR skill (GetSubWeaponDataInstancePtr -> nullptr, index -1), skip the SP-weapon init instead of dereferencing nullptr."
+}

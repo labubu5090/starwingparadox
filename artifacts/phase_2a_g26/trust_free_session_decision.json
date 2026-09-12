@@ -1,9 +1,0 @@
-﻿{
-  "phase": "G26",
-  "decision": "SYSTEMDATACHECK_BLOCKED",
-  "blocking_reason": "OpenKey.json not found + NESYS offline",
-  "credit_works": true,
-  "start_works": true,
-  "session_reached": false,
-  "next_block": "SystemDataCheck requires NESYS online status or valid OpenKey.json"
-}
